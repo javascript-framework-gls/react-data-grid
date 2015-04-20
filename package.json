@@ -9,6 +9,7 @@
     "build-style": "webpack --progress --colors --config build-style.config.js",
     "stats": "./node_modules/.bin/webpack --profile --progress --colors --config dist.config.js --json > stats.json",
     "dist": "./node_modules/.bin/webpack --progress --colors --config dist.config.js",
+    "watch-dist": "./node_modules/.bin/webpack --watch --progress --colors --config dist.config.js",
     "dist.min": "./node_modules/.bin/webpack --progress --colors --optimize-minimize --optimize-occurence-order --optimize-dedupe --config dist.min.config.js",
     "build": "npm run lib && npm run dist && npm run dist.min && npm run build-style",
     "serve": "./node_modules/.bin/http-server -p 9091",
