@@ -1,10 +1,19 @@
 'use strict';
 
 var scrollbarSize = require('scrollbar-size')
+//global.fetch || require('whatwg-fetch')
+//
+//var fetch = global.fetch
 
 module.exports = function(){
     return {
-        loading: false,
+        //fetch: fetch,
+        //defaultPageSize: 5,
+        //defaultPage: 1,
+        //
+        //pagination: true,
+
+        loading: null,
         columnMinWidth: 50,
         cellPadding: '0px 5px',
         headerPadding: '10px 5px',
