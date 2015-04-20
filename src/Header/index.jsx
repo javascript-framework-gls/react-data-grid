@@ -391,6 +391,10 @@ module.exports = React.createClass({
             return
         }
 
+        if (this.state.resizing){
+            return
+        }
+
         if (event && event.nativeEvent && event.nativeEvent.stopSort){
             return
         }
@@ -425,6 +429,9 @@ module.exports = React.createClass({
     },
 
     onResizeDragStart: function(config){
+        this.setState({
+            resizing: true
+        })
         this.props.onColumnResizeDragStart(config)
     },
 
@@ -432,7 +439,11 @@ module.exports = React.createClass({
         this.props.onColumnResizeDrag(config)
     },
 
-    onResizeDrop: function(config, resizeInfo){
+    onResizeDrop: function(config, resizeInfo, event){
+        this.setState({
+            resizing: false
+        })
+
         this.props.onColumnResizeDrop(config, resizeInfo)
     },
 
