@@ -177,7 +177,51 @@ module.exports = React.createClass({
         })
     },
 
-    handleScrollTop: function(scrollTop){
+    handleScrollTop: function(props, scrollTop){
+        props = props || this.props
+        var state = this.state
+
+        scrollTop = scrollTop === undefined? this.state.scrollTop: scrollTop
+        state.menuColumn = null
+
+        if (props.virtualRendering){
+
+            var prevIndex = this.state.renderStartIndex || 0
+            var renderStartIndex = Math.ceil(scrollTop / props.rowHeight)
+
+            state.renderStartIndex = renderStartIndex
+
+            // var data = this.prepareData(props)
+
+            // if (renderStartIndex >= data.length){
+            //     renderStartIndex = 0
+            // }
+
+            // state.renderStartIndex = renderStartIndex
+
+            // var endIndex = this.getRenderEndIndex(props, state)
+
+            // if (endIndex > data.length){
+            //     renderStartIndex -= data.length - endIndex
+            //     renderStartIndex = Math.max(0, renderStartIndex)
+
+            //     state.renderStartIndex = renderStartIndex
+            // }
+
+            // // console.log('scroll!');
+            // var sign = signum(renderStartIndex - prevIndex)
+
+            // state.topOffset = -sign * Math.ceil(scrollTop - state.renderStartIndex * this.props.rowHeight)
+
+            // console.log(scrollTop, sign);
+        } else {
+            state.scrollTop = scrollTop
+        }
+
+        this.setState(state)
+    },
+
+    handleScrollTop_old: function(scrollTop){
         var state = {
             menuColumn: null
         }
@@ -383,6 +427,43 @@ module.exports = React.createClass({
             loadMask = <LoadMask visible={props.loading} />
         }
 
+        var paginationToolbar
+
+        if (props.pagination){
+           var minPage = 1
+           var maxPage = this.getMaxPage(props)
+           var page    = clamp(props.page, minPage, maxPage)
+           var paginationToolbarFactory = props.paginationFactory || PaginationToolbar
+           var paginationProps = {
+               dataSourceCount: props.dataSourceCount,
+               page           : page,
+               pageSize       : props.pageSize,
+               minPage        : minPage,
+               maxPage        : maxPage,
+               reload         : this.reload,
+               onPageChange   : this.gotoPage,
+               onPageSizeChange: this.setPageSize,
+               border: props.style.border
+           }
+
+           paginationToolbar = paginationToolbarFactory(paginationProps)
+
+           if (paginationToolbar === undefined){
+               paginationToolbar = PaginationToolbar(paginationProps)
+           }
+        }
+
+        var topToolbar
+        var bottomToolbar
+
+        if (paginationToolbar){
+           if (paginationToolbar.props.position == 'top'){
+               topToolbar = paginationToolbar
+           } else {
+               bottomToolbar = paginationToolbar
+           }
+        }
+
         var result = (
             <div {...renderProps}>
                 <div className="z-inner">
@@ -445,7 +526,7 @@ module.exports = React.createClass({
             allColumns      : props.columns,
 
             onScrollLeft    : this.handleScrollLeft,
-            onScrollTop     : this.handleScrollTop,
+            onScrollTop     : this.handleScrollTop.bind(this, props),
 
             menu            : state.menu,
             menuColumn      : state.menuColumn,
