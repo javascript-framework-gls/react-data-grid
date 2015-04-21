@@ -69,19 +69,25 @@ datagrid-cell()
         right 0px
         top 0px
         width 1px
+        flex none
         visibility hidden
+        // position absolute
 
     .z-horizontal-scroller
         height 1px
         visibility hidden
 
     .z-vertical-scrollbar
-        overflow auto
-        transform translate3d(0px, 0px, 2px)
-        position relative
-        display block
+        overflow hidden
+        position absolute
+        height 100%
+        right 0px
+        top 0px
+        // display flex
+        // -webkit-overflow-scrolling touch
 
-        .z-inner
+        .inner
+            flex 1
             overflow auto
             size 100%
             position absolute
@@ -152,6 +158,16 @@ datagrid-cell()
     &.z-loading
         .z-mask-wrapper
             display block
+
+    // .z-wrapper
+    //     display table
+    //     .z-table-wrapper
+    //     .z-horizontal-scrollbar
+    //         display table-row
+
+    //     // .z-horizontal-scrollbar
+    //     //     .z-horizontal-scroller
+    //     //         display table-cell
 
 .react-datagrid.z-empty
     .z-table-wrapper

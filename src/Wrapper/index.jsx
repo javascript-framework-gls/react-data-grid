@@ -209,21 +209,26 @@ module.exports = React.createClass({
                                 <div className="z-horizontal-scroller" style={{width: props.minRowWidth}} />
                             </div>
         }
+
+        var verticalScrollbarStyle = {
+            width: props.scrollbarSize
+        }
+
         return (
             <div className="z-wrapper" style={{height: rowsCount * props.rowHeight, overflow: 'auto', position: 'relative'}}>
+
 
                 {loadMask}
 
                 <div ref="tableWrapper" className="z-table-wrapper" style={wrapperStyle} {...events}>
                     {content}
 
-                    <div ref="verticalScrollbar"  className="z-vertical-scrollbar" style={{width: props.scrollbarSize}}
-                        onScroll={this.handleVerticalScroll}>
-                        <div className="inner">
+                    <div className="z-vertical-scrollbar" style={verticalScrollbarStyle}>
+                        <div ref="verticalScrollbar" onScroll={this.handleVerticalScroll} style={{overflow: 'auto', xdisplay: 'flex', width: '100%', height: '100%'}}>
                             <div className="z-vertical-scroller" style={{height: verticalScrollerSize}} />
                         </div>
-                    </div>
 
+                    </div>
                 </div>
 
                 {horizScrollbar}
