@@ -466,6 +466,7 @@ module.exports = React.createClass({
 
         var result = (
             <div {...renderProps}>
+                {topToolbar}
                 <div className="z-inner">
                     {header}
                     {wrapper}
@@ -475,6 +476,7 @@ module.exports = React.createClass({
                     {loadMask}
                 {resizeProxy}
                 {renderMenu(menuProps)}
+                {bottomToolbar}
             </div>
         )
 
@@ -854,20 +856,20 @@ module.exports = React.createClass({
         this.rowCache = {}
         this.groupData(this.props)
 
-        //if (this.props.dataSource){
-        //    this.loadDataSource(this.props.dataSource, this.props)
-        //}
+        if (this.props.dataSource){
+           this.loadDataSource(this.props.dataSource, this.props)
+        }
     },
 
     componentWillReceiveProps: function(nextProps){
         this.rowCache = {}
         this.groupData(nextProps)
-        //
-        //if (nextProps.dataSource && this.preparePagination(nextProps)){
-        //    if (this.props.page != nextProps.page && this.isValidPage(nextProps.page, nextProps)){
-        //        this.loadDataSource(nextProps.dataSource, nextProps)
-        //    }
-        //}
+
+        if (nextProps.dataSource && this.preparePagination(nextProps)){
+           if (this.props.page != nextProps.page && this.isValidPage(nextProps.page, nextProps)){
+               this.loadDataSource(nextProps.dataSource, nextProps)
+           }
+        }
     },
 
     prepareStyle: function(props){
@@ -1007,6 +1009,10 @@ module.exports = React.createClass({
         //
         //}
 
+        // this.refs.resizeProxy.setState({
+        //     active: false
+        // }, function(){
+
         var props   = this.props
         var columns = props.columns
 
@@ -1032,5 +1038,6 @@ module.exports = React.createClass({
         this.setState(config)
 
         onColumnResize(firstCol, firstSize, secondCol, secondSize)
+        // }.bind(this))
     }
 })
