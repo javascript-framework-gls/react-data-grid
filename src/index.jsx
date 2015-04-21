@@ -432,6 +432,7 @@ module.exports = React.createClass({
         }
 
         var wrapperProps = assign({
+            ref             : 'wrapper',
             scrollLeft      : state.scrollLeft,
             scrollTop       : scrollTop,
             topOffset       : state.topOffset,
