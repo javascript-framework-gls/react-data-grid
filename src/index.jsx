@@ -1,13 +1,13 @@
 'use strict';
 
-//require('es6-promise').polyfill()
+require('es6-promise').polyfill()
 
 var React    = require('react')
 var assign   = require('object-assign')
 var LoadMask = require('react-load-mask')
 var Region   = require('region')
 
-//var PaginationToolbar = React.createFactory(require('./PaginationToolbar'))
+var PaginationToolbar = React.createFactory(require('./PaginationToolbar'))
 var Column = require('./models/Column')
 
 var PropTypes      = require('./PropTypes')
@@ -15,6 +15,7 @@ var Wrapper        = require('./Wrapper')
 var Header         = require('./Header')
 var WrapperFactory = React.createFactory(Wrapper)
 var HeaderFactory  = React.createFactory(Header)
+var ResizeProxy = require('./ResizeProxy')
 
 var findIndexByName = require('./utils/findIndexByName')
 var group           = require('./utils/group')
@@ -885,35 +886,27 @@ module.exports = React.createClass({
     },
 
     prepareResizeProxy: function(props, state){
-
-        var style = {}
-
-        if (state.resizing){
-            style.display = 'block'
-            style.left = state.resizeProxyLeft
-        }
-
-        return <div className='z-resize-proxy' style={style}></div>
+        return <ResizeProxy ref="resizeProxy" active={state.resizing}/>
     },
 
     onColumnResizeDragStart: function(config){
 
         var domNode = this.getDOMNode()
         var region  = Region.from(domNode)
-        var state = config
 
-        state.resizeProxyOffset = state.resizeProxyLeft - region.left
-        state.resizeProxyLeft = state.resizeProxyOffset
+        this.resizeProxyLeft = config.resizeProxyLeft - region.left
 
-        this.setState(state)
+        this.setState({
+            resizing: true,
+            resizeOffset: this.resizeProxyLeft
+        })
+
     },
 
     onColumnResizeDrag: function(config){
-        var resizeProxyOffset = this.state.resizeProxyOffset
-
-        config.resizeProxyLeft = resizeProxyOffset + config.resizeProxyDiff
-
-        this.setState(config)
+        this.refs.resizeProxy.setState({
+            offset: this.resizeProxyLeft + config.resizeProxyDiff
+        })
     },
 
     onColumnResizeDrop: function(config, resizeInfo){
