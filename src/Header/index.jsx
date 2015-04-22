@@ -113,7 +113,6 @@ module.exports = React.createClass({
     },
 
     render: function() {
-
         var props = this.prepareProps(this.props)
 
         var cells = props.columns
