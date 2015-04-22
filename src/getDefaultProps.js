@@ -11,7 +11,8 @@ module.exports = function(){
         defaultPageSize: 20,
         defaultPage: 1,
 
-        pagination: true,
+        appendDataSourceQueryParams: true,
+        pagination: null,
 
         loading: null,
         columnMinWidth: 50,

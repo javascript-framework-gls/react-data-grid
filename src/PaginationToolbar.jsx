@@ -364,7 +364,7 @@ module.exports = React.createClass({
 				disabled: disabled
 			}, props.iconProps)
 
-			var iconStyle = iconProps.style = assign({}, defaultStyles[iconName], iconProps.style, props.iconStyle, props[iconName + 'IconStyle'])
+			var iconStyle = iconProps.style = assign({}, iconProps.style, defaultStyles[iconName], props.iconStyle, props[iconName + 'IconStyle'])
 
 			if (mouseOver){
 				iconProps.style = assign({}, iconStyle, iconProps.overStyle, props.overIconStyle)

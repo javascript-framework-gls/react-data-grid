@@ -97,6 +97,7 @@ module.exports = React.createClass({
         withColumnMenu   : React.PropTypes.bool,
         cellEllipsis     : React.PropTypes.bool,
         sortable         : React.PropTypes.bool,
+        loadMaskOverHeader : React.PropTypes.bool,
         idProperty       : React.PropTypes.string.isRequired,
 
         //you can customize the column menu by specifying a factory
@@ -420,7 +421,7 @@ module.exports = React.createClass({
 
         var paginationToolbar
 
-        if (this.isRemoteDataSource(props)){
+        if (props.pagination){
             var minPage = 1
             var maxPage = this.getMaxPage(props)
             var page    = clamp(props.page, minPage, maxPage)
@@ -593,7 +594,9 @@ module.exports = React.createClass({
     },
 
     preparePagination: function(props) {
-        return !!props.pageSize || !!props.paginationFactory || props.pagination
+        return props.pagination === false?
+                false:
+                !!props.pageSize || !!props.paginationFactory || this.isRemoteDataSource(props)
     },
 
     prepareDataSourceCount: function(props) {
@@ -814,10 +817,10 @@ module.exports = React.createClass({
         }
 
         if (typeof dataSource == 'string'){
-            var fetch = this.props.fetch
+            var fetch = this.props.fetch || global.fetch
 
             var keys = Object.keys(dataSourceQuery)
-            if (keys.length){
+            if (props.appendDataSourceQueryParams && keys.length){
                 //dataSource was initially passed as a string
                 //so we append quey params
                 dataSource += '?' + keys.map(function(param){

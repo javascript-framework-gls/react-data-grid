@@ -226,10 +226,12 @@ var App = React.createClass({
                 xpageSize={PAGE_SIZE}
                 onPageSizeChange={this.updatePageSize}
                 xdata={data}
-                defaultPageSize={500}
+                defaultPageSize={50}
                 dataSource={ds}
+                xloadMaskOverHeader={false}
                 paginationToolbarProps={{
-                    xshowRefreshIcon: false
+                    xshowRefreshIcon: false,
+                    xshowPageSize: false
                 }}
                 columns={columns}/>
 
