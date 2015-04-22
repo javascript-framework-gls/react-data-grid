@@ -10,6 +10,10 @@ function preventDefault(e){
 	e.preventDefault()
 }
 
+function sortAsc(a, b){
+	return a - b
+}
+
 function emptyFn(){}
 
 function gotoPrev(props){
@@ -66,6 +70,11 @@ var ICON_MAP = {
 	refresh  : refresh
 }
 
+var defaultStyles = {
+	gotoPrev: { marginRight: 10},
+	gotoNext: { marginLeft: 10}
+}
+
 module.exports = React.createClass({
 
 	displayName: 'PaginationToolbar',
@@ -76,6 +85,16 @@ module.exports = React.createClass({
 			defaultStyle: {
 				border: 0
 			},
+
+			pageSizes: [
+				5,
+				10,
+				20,
+				50,
+				100,
+				500,
+				1000
+			],
 
 			defaultIconProps: {
 				version: '1.2',
@@ -108,9 +127,20 @@ module.exports = React.createClass({
 
 		props.iconProps = this.prepareIconProps(props)
 		props.style = this.prepareStyle(props)
+		props.pageSizes = this.preparePageSizes(props)
 		delete props.defaultStyle
 
 		return props
+	},
+
+	preparePageSizes: function(props) {
+		var sizes = [].concat(props.pageSizes)
+
+		if (sizes.indexOf(props.pageSize) == -1){
+			sizes.push(props.pageSize)
+		}
+
+		return sizes.sort(sortAsc)
 	},
 
 	prepareIconProps: function(props) {
@@ -217,34 +247,83 @@ module.exports = React.createClass({
 		return result
 	},
 
+	renderSelect: function(props) {
+
+		var options = props.pageSizes.map(function(value){
+			return <option value={value}>{value}</option>
+		})
+
+		var selectProps = {
+			onChange: this.onPageSizeChange,
+			value: props.pageSize,
+			style: {marginLeft: 5, marginRight: 5, padding: 2, textAlign: 'right'},
+			children: options
+		}
+
+		var defaultFactory = React.DOM.select
+		var factory = props.pageSizeSelectFactory || defaultFactory
+
+		var result = factory(selectProps)
+
+		if (result === undefined){
+			result = defaultFactory(selectProps)
+		}
+
+		return result
+	},
+
+
+	renderDisplaying: function(props) {
+		var start       = ((props.pageSize * (props.page - 1) || 0) + 1)
+		var end         = Math.min(props.pageSize * props.page, props.dataSourceCount) || 1
+		var refreshIcon = this.icon('refresh', props)
+
+		var factory = props.displayingFactory
+
+		if (factory){
+			return factory({
+				dataSourceCount: props.dataSourceCount,
+				page           : props.page,
+				pageSize       : props.pageSize,
+				minPage        : props.minPage,
+				maxPage        : props.maxPage,
+				reload         : this.reload,
+				gotoPage       : this.gotoPage,
+				refreshIcon    : refreshIcon
+			})
+		}
+
+		return <div style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>
+			Displaying {start} - {end} of {props.dataSourceCount || 1}. {refreshIcon}
+		</div>
+	},
+
 	render: function(){
 
 		var props = this.prepareProps(this.props)
 
 		var input = this.renderInput(props)
+		var pageSizeSelect = this.renderSelect(props)
+
+		var start = props.pageSize * (props.page - 1) + 1
+		var end   = Math.min(props.pageSize * props.page, props.dataSourceCount)
+
+
+		var displaying = this.renderDisplaying(props)
 
 		return <Toolbar {...props}>
-			<Region flex="1 1 auto" style={{display: 'flex', minWidth: 190}}>
+			<Region flex="1 1 auto" style={{display: 'flex', minWidth: 380}}>
 				{this.icon('gotoFirst', props)}
 				{this.icon('gotoPrev', props)}
 
-				Page {input} of{'\u00a0'}{props.maxPage}.
-				{'\u00a0'}Page size{'\u00a0'}<select onChange={this.onPageSizeChange} value={props.pageSize} style={{marginLeft: 5, marginRight: 5, padding: 2, textAlign: 'right'}}>
-					<option value={5}>5</option>
-					<option value={10}>10</option>
-					<option value={20}>20</option>
-					<option value={30}>30</option>
-				</select>
+				Page {input} of{'\u00a0'}{props.maxPage}. Page size {pageSizeSelect}
 
 				{this.icon('gotoNext', props)}
 				{this.icon('gotoLast', props)}
 
 			</Region>
 			<Region  flex="1 1 auto">
-				Showing page {props.page}.{'\u00a0'}
-
-				{this.icon('refresh', props)}
-
+				{displaying}
 			</Region>
 		</Toolbar>
 	},
@@ -271,11 +350,13 @@ module.exports = React.createClass({
 				disabled: disabled
 			}, props.iconProps)
 
+			var iconStyle = iconProps.style = assign({}, iconProps.style, defaultStyles[iconName], props[iconName + 'IconStyle'])
+
 			if (mouseOver){
-				iconProps.style = assign({}, iconProps.style, iconProps.overStyle)
+				iconProps.style = assign({}, iconStyle, iconProps.overStyle)
 			}
 			if (disabled){
-				iconProps.style = assign({}, iconProps.style, iconProps.disabledStyle)
+				iconProps.style = assign({}, iconStyle, iconProps.disabledStyle)
 			} else {
 				iconProps.onClick = this.gotoPage.bind(this, targetPage)
 			}
@@ -334,6 +415,7 @@ module.exports = React.createClass({
 	},
 
 	gotoPage: function(page) {
+
 		this.props.onPageChange(page)
 	}
 })

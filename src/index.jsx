@@ -399,8 +399,46 @@ module.exports = React.createClass({
             loadMask = <LoadMask visible={props.loading} />
         }
 
+        var paginationToolbar
+
+        if (props.pagination){
+           var minPage = 1
+           var maxPage = this.getMaxPage(props)
+           var page    = clamp(props.page, minPage, maxPage)
+           var paginationToolbarFactory = props.paginationFactory || PaginationToolbar
+           var paginationProps = {
+               dataSourceCount: props.dataSourceCount,
+               page           : page,
+               pageSize       : props.pageSize,
+               minPage        : minPage,
+               maxPage        : maxPage,
+               reload         : this.reload,
+               onPageChange   : this.gotoPage,
+               onPageSizeChange: this.setPageSize,
+               border: props.style.border
+           }
+
+           paginationToolbar = paginationToolbarFactory(paginationProps)
+
+           if (paginationToolbar === undefined){
+               paginationToolbar = PaginationToolbar(paginationProps)
+           }
+        }
+
+        var topToolbar
+        var bottomToolbar
+
+        if (paginationToolbar){
+           if (paginationToolbar.props.position == 'top'){
+               topToolbar = paginationToolbar
+           } else {
+               bottomToolbar = paginationToolbar
+           }
+        }
+
         var result = (
             <div {...renderProps}>
+                {topToolbar}
                 <div className="z-inner">
                     {header}
                     {wrapper}
@@ -410,6 +448,7 @@ module.exports = React.createClass({
                     {loadMask}
                 {resizeProxy}
                 {renderMenu(menuProps)}
+                {bottomToolbar}
             </div>
         )
 
