@@ -1,14 +1,10 @@
 'use strict';
 
-var React   = require('react')
-var assign  = require('object-assign')
-var Toolbar = require('react-simple-toolbar')
-var Region  = Toolbar.Region
+var React     = require('react')
+var assign    = require('object-assign')
+var Toolbar   = require('react-simple-toolbar')
+var Region    = Toolbar.Region
 var normalize = require('react-style-normalizer')
-
-function preventDefault(e){
-	e.preventDefault()
-}
 
 function sortAsc(a, b){
 	return a - b
@@ -18,47 +14,47 @@ function emptyFn(){}
 
 function gotoPrev(props){
 	return <svg version="1.1" viewBox="0 0 2 3" {...props}>
-    	<polygon points="2,0 2,3 0,1.5 " />
+		<polygon points="2,0 2,3 0,1.5 " />
 	</svg>
 }
 
 function gotoNext(props){
 	return <svg version="1.1" viewBox="0 0 2 3" {...props}>
-    	<polygon points="0,0 2,1.5 0,3" />
+		<polygon points="0,0 2,1.5 0,3" />
 	</svg>
 }
 
 function gotoFirst(props){
 	return <svg version="1.1" viewBox="0 0 3 3" {...props}>
-    	<polygon points="3,0 3,3 1,1.5" />
-    	<rect height="3" width="0.95" y="0" x="0" />
+		<polygon points="3,0 3,3 1,1.5" />
+		<rect height="3" width="0.95" y="0" x="0" />
 	</svg>
 }
 
 function gotoLast(props){
 	return <svg version="1.1" viewBox="0 0 3 3" {...props}>
-    	<polygon points="0,0 0,3 2,1.5" />
-    	<rect height="3" width="0.95" y="0" x="2" />
+		<polygon points="0,0 0,3 2,1.5" />
+		<rect height="3" width="0.95" y="0" x="2" />
 	</svg>
 }
 
 function refresh(props){
 	return <svg version="1.1" x="0px" y="0px" viewBox="0 0 487.23 487.23" {...props}>
-	    <g>
-	        <path d="M55.323,203.641c15.664,0,29.813-9.405,35.872-23.854c25.017-59.604,83.842-101.61,152.42-101.61
+		<g>
+			<path d="M55.323,203.641c15.664,0,29.813-9.405,35.872-23.854c25.017-59.604,83.842-101.61,152.42-101.61
 	        	c37.797,0,72.449,12.955,100.23,34.442l-21.775,3.371c-7.438,1.153-13.224,7.054-14.232,14.512
 	        	c-1.01,7.454,3.008,14.686,9.867,17.768l119.746,53.872c5.249,2.357,11.33,1.904,16.168-1.205
 	        	c4.83-3.114,7.764-8.458,7.796-14.208l0.621-131.943c0.042-7.506-4.851-14.144-12.024-16.332
 	        	c-7.185-2.188-14.947,0.589-19.104,6.837l-16.505,24.805C370.398,26.778,310.1,0,243.615,0C142.806,0,56.133,61.562,19.167,149.06
 	        	c-5.134,12.128-3.84,26.015,3.429,36.987C29.865,197.023,42.152,203.641,55.323,203.641z"/>
-	        <path d="M464.635,301.184c-7.27-10.977-19.558-17.594-32.728-17.594c-15.664,0-29.813,9.405-35.872,23.854
+			<path d="M464.635,301.184c-7.27-10.977-19.558-17.594-32.728-17.594c-15.664,0-29.813,9.405-35.872,23.854
 	        	c-25.018,59.604-83.843,101.61-152.42,101.61c-37.798,0-72.45-12.955-100.232-34.442l21.776-3.369
 	        	c7.437-1.153,13.223-7.055,14.233-14.514c1.009-7.453-3.008-14.686-9.867-17.768L49.779,285.089
 	        	c-5.25-2.356-11.33-1.905-16.169,1.205c-4.829,3.114-7.764,8.458-7.795,14.207l-0.622,131.943
 	        	c-0.042,7.506,4.85,14.144,12.024,16.332c7.185,2.188,14.948-0.59,19.104-6.839l16.505-24.805
 	        	c44.004,43.32,104.303,70.098,170.788,70.098c100.811,0,187.481-61.561,224.446-149.059
 	        	C473.197,326.043,471.903,312.157,464.635,301.184z"/>
-	    </g>
+		</g>
 	</svg>
 }
 
@@ -82,16 +78,19 @@ module.exports = React.createClass({
 	getDefaultProps: function(){
 		return {
 			iconHeight: 20,
+			showRefreshIcon: true,
+			showPageSize: true,
 			defaultStyle: {
-				border: 0
+				border: 0,
+				color : 'auto'
 			},
 
 			pageSizes: [
-				5,
 				10,
 				20,
 				50,
 				100,
+				200,
 				500,
 				1000
 			],
@@ -102,7 +101,7 @@ module.exports = React.createClass({
 					cursor       : 'pointer',
 					marginLeft   : 3,
 					marginRight  : 3,
-					fill         : '#A8A8A8',
+					fill         : '#8E8E8E',
 					verticalAlign: 'middle'
 				},
 				disabledStyle: {
@@ -125,12 +124,22 @@ module.exports = React.createClass({
 	prepareProps: function(thisProps) {
 		var props = assign({}, thisProps)
 
+		props.className = this.prepareClassName(props)
 		props.iconProps = this.prepareIconProps(props)
 		props.style = this.prepareStyle(props)
 		props.pageSizes = this.preparePageSizes(props)
 		delete props.defaultStyle
 
 		return props
+	},
+
+	prepareClassName: function(props) {
+		var className = props.className || ''
+
+		className += ' react-datagrid-pagination-toolbar'
+
+		return className
+
 	},
 
 	preparePageSizes: function(props) {
@@ -219,21 +228,21 @@ module.exports = React.createClass({
 		}
 
 		var inputProps = assign({
-						ref: 'input',
-						onBlur: this.handleInputBlur,
-						onFocus: this.handleInputFocus,
-						style: normalize({
-							marginLeft : 5,
-							marginRight: 5,
-							padding    : 2,
-							maxWidth   : 60,
-							textAlign  : 'right',
-							flex       : 1,
-							minWidth   : 40
-						}),
-						page: props.page,
-						onChange: this.handleInputChange
-					}, otherProps)
+			ref: 'input',
+			onBlur: this.handleInputBlur,
+			onFocus: this.handleInputFocus,
+			style: normalize({
+				marginLeft : 5,
+				marginRight: 5,
+				padding    : 2,
+				maxWidth   : 60,
+				textAlign  : 'right',
+				flex       : 1,
+				minWidth   : 40
+			}),
+			page: props.page,
+			onChange: this.handleInputChange
+		}, otherProps)
 
 		var defaultFactory = React.DOM.input
 		var factory = props.pageInputFactory || defaultFactory
@@ -272,16 +281,17 @@ module.exports = React.createClass({
 		return result
 	},
 
-
 	renderDisplaying: function(props) {
 		var start       = ((props.pageSize * (props.page - 1) || 0) + 1)
 		var end         = Math.min(props.pageSize * props.page, props.dataSourceCount) || 1
-		var refreshIcon = this.icon('refresh', props)
+		var refreshIcon = props.showRefreshIcon? this.icon('refresh', props): null
 
 		var factory = props.displayingFactory
 
 		if (factory){
 			return factory({
+				start: start,
+				end  : end,
 				dataSourceCount: props.dataSourceCount,
 				page           : props.page,
 				pageSize       : props.pageSize,
@@ -298,12 +308,16 @@ module.exports = React.createClass({
 		</div>
 	},
 
+	renderPageSize: function(props) {
+		if (props.showPageSize){
+			return <div>Page {this.renderInput(props)} of{'\u00a0'}{props.maxPage}. Page size {this.renderSelect(props)}</div>
+		}
+	},
+
 	render: function(){
 
-		var props = this.prepareProps(this.props)
-
-		var input = this.renderInput(props)
-		var pageSizeSelect = this.renderSelect(props)
+		var props    = this.prepareProps(this.props)
+		var pageSize = this.renderPageSize(props)
 
 		var start = props.pageSize * (props.page - 1) + 1
 		var end   = Math.min(props.pageSize * props.page, props.dataSourceCount)
@@ -316,7 +330,7 @@ module.exports = React.createClass({
 				{this.icon('gotoFirst', props)}
 				{this.icon('gotoPrev', props)}
 
-				Page {input} of{'\u00a0'}{props.maxPage}. Page size {pageSizeSelect}
+				{pageSize}
 
 				{this.icon('gotoNext', props)}
 				{this.icon('gotoLast', props)}
@@ -350,18 +364,17 @@ module.exports = React.createClass({
 				disabled: disabled
 			}, props.iconProps)
 
-			var iconStyle = iconProps.style = assign({}, iconProps.style, defaultStyles[iconName], props[iconName + 'IconStyle'])
+			var iconStyle = iconProps.style = assign({}, defaultStyles[iconName], iconProps.style, props.iconStyle, props[iconName + 'IconStyle'])
 
 			if (mouseOver){
-				iconProps.style = assign({}, iconStyle, iconProps.overStyle)
+				iconProps.style = assign({}, iconStyle, iconProps.overStyle, props.overIconStyle)
 			}
 			if (disabled){
-				iconProps.style = assign({}, iconStyle, iconProps.disabledStyle)
+				iconProps.style = assign({}, iconStyle, iconProps.disabledStyle, props.disabledIconStyle)
 			} else {
 				iconProps.onClick = this.gotoPage.bind(this, targetPage)
 			}
 
-			iconProps.onMouseDown = preventDefault
 			iconProps.onMouseEnter = this.onIconMouseEnter.bind(this, props, iconProps)
 			iconProps.onMouseLeave = this.onIconMouseLeave.bind(this, props, iconProps)
 
@@ -398,24 +411,8 @@ module.exports = React.createClass({
 		;(this.props.reload || emptyFn)()
 	},
 
-	anchor: function(callback, children) {
-		var fn = function(event){
-			event.preventDefault()
-			;(callback || emptyFn)(event)
-		}.bind(this)
-
-		return <a onMouseDown={fn}>{children}</a>
-	},
-
-	renderPageLink: function(page) {
-		return this.anchor(
-					this.gotoPage.bind(this, page),
-					page
-				)
-	},
-
 	gotoPage: function(page) {
-
+		console.log(page);
 		this.props.onPageChange(page)
 	}
 })

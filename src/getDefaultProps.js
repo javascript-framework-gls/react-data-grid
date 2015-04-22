@@ -8,7 +8,7 @@ var fetch = global.fetch
 module.exports = function(){
     return {
         fetch: fetch,
-        defaultPageSize: 5,
+        defaultPageSize: 20,
         defaultPage: 1,
 
         pagination: true,

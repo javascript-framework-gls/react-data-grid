@@ -84,9 +84,9 @@ module.exports = React.createClass({
         scrollbarSize   : React.PropTypes.number,
         totalColumnWidth: React.PropTypes.number,
         cellPadding     : React.PropTypes.oneOfType([
-                            React.PropTypes.number,
-                            React.PropTypes.string
-                        ]),
+            React.PropTypes.number,
+            React.PropTypes.string
+        ]),
         rowHeight       : React.PropTypes.any,
 
         data            : React.PropTypes.array,
@@ -186,44 +186,49 @@ module.exports = React.createClass({
         }
 
         var content = props.empty?
-                        emptyText:
-                        //extra div needed for SAFARI V SCROLL
-                        //maxWidth needed for FF - see
-                        //http://stackoverflow.com/questions/27424831/firefox-flexbox-overflow
-                        //http://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
-                        <div className="z-table-wrapper-fix" style={{maxWidth: 'calc(100% - ' + props.scrollbarSize + 'px)'}}>
-                            <div {...tableProps} ref="table"/>
-                        </div>
+            emptyText:
+            //extra div needed for SAFARI V SCROLL
+            //maxWidth needed for FF - see
+            //http://stackoverflow.com/questions/27424831/firefox-flexbox-overflow
+            //http://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
+            <div className="z-table-wrapper-fix" style={{maxWidth: 'calc(100% - ' + props.scrollbarSize + 'px)'}}>
+                <div {...tableProps} ref="table"/>
+            </div>
 
         var horizScrollbar
 
         if (IS_MAC){
             //needed for mac safari
             horizScrollbar = <div style={horizontalScrollbarStyle} className="z-horizontal-scrollbar mac-fix">
-                    <div ref="horizScrollbar" onScroll={this.handleHorizontalScroll} className="z-horizontal-scrollbar-fix">
-                        <div className="z-horizontal-scroller" style={{width: props.minRowWidth}} />
-                    </div>
+                <div ref="horizScrollbar" onScroll={this.handleHorizontalScroll} className="z-horizontal-scrollbar-fix">
+                    <div className="z-horizontal-scroller" style={{width: props.minRowWidth}} />
                 </div>
+            </div>
         } else {
             horizScrollbar = <div ref="horizScrollbar" onScroll={this.handleHorizontalScroll} style={horizontalScrollbarStyle} className="z-horizontal-scrollbar">
-                                <div className="z-horizontal-scroller" style={{width: props.minRowWidth}} />
-                            </div>
+                <div className="z-horizontal-scroller" style={{width: props.minRowWidth}} />
+            </div>
         }
+
+        var verticalScrollbarStyle = {
+            width: props.scrollbarSize
+        }
+
         return (
             <div className="z-wrapper" style={{height: rowsCount * props.rowHeight, overflow: 'auto', position: 'relative'}}>
+
 
                 {loadMask}
 
                 <div ref="tableWrapper" className="z-table-wrapper" style={wrapperStyle} {...events}>
                     {content}
 
-                    <div ref="verticalScrollbar"  className="z-vertical-scrollbar" style={{width: props.scrollbarSize}}
-                        onScroll={this.handleVerticalScroll}>
-                        <div className="inner">
+                    <div className="z-vertical-scrollbar" style={verticalScrollbarStyle}>
+                        <div ref="verticalScrollbar" onScroll={this.handleVerticalScroll} style={{overflow: 'auto', xdisplay: 'flex', width: '100%', height: '100%'}}>
                             <div className="z-vertical-scroller" style={{height: verticalScrollerSize}} />
                         </div>
-                    </div>
 
+                    </div>
                 </div>
 
                 {horizScrollbar}
@@ -377,8 +382,8 @@ module.exports = React.createClass({
     getTableScrollHeight: function(){
         var props  = this.props
         var result = props.virtualRendering?
-                        (props.totalLength + this.groupsCount || 0) * props.rowHeight:
-                        this.refs.table.getDOMNode().offsetHeight
+        (props.totalLength + this.groupsCount || 0) * props.rowHeight:
+            this.refs.table.getDOMNode().offsetHeight
 
         return result
     },
