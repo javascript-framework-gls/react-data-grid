@@ -1,13 +1,13 @@
 'use strict';
 
-//require('es6-promise').polyfill()
+require('es6-promise').polyfill()
 
 var React    = require('react')
 var assign   = require('object-assign')
 var LoadMask = require('react-load-mask')
 var Region   = require('region')
 
-//var PaginationToolbar = React.createFactory(require('./PaginationToolbar'))
+var PaginationToolbar = React.createFactory(require('./PaginationToolbar'))
 var Column = require('./models/Column')
 
 var PropTypes      = require('./PropTypes')
@@ -15,16 +15,19 @@ var Wrapper        = require('./Wrapper')
 var Header         = require('./Header')
 var WrapperFactory = React.createFactory(Wrapper)
 var HeaderFactory  = React.createFactory(Header)
+var ResizeProxy = require('./ResizeProxy')
 
 var findIndexByName = require('./utils/findIndexByName')
 var group           = require('./utils/group')
 
 var slice          = require('./render/slice')
-var getTableProps    = require('./render/getTableProps')
+var getTableProps  = require('./render/getTableProps')
 var getGroupedRows = require('./render/getGroupedRows')
 var renderMenu     = require('./render/renderMenu')
 
 var preventDefault = require('./utils/preventDefault')
+
+var isArray = Array.isArray
 
 var SIZING_ID = '___SIZING___'
 
@@ -106,7 +109,14 @@ module.exports = React.createClass({
         scrollBy         : PropTypes.numeric,
         rowHeight        : PropTypes.numeric,
         sortInfo         : PropTypes.sortInfo,
-        columns          : PropTypes.column
+        columns          : PropTypes.column,
+
+        data: function(props, name){
+            var value = props[name]
+            if (isArray(value)){
+                return new Error('We are deprecating the "data" prop. Use "dataSource" instead!')
+            }
+        }
     },
 
     getDefaultProps: require('./getDefaultProps'),
@@ -153,9 +163,9 @@ module.exports = React.createClass({
         var defaultSelected = props.defaultSelected
 
         return {
+            startIndex: 0,
             scrollLeft: 0,
             scrollTop : 0,
-            renderStartIndex: 0,
             menuColumn: null,
             defaultSelected: defaultSelected,
             visibility: {},
@@ -183,10 +193,10 @@ module.exports = React.createClass({
 
         if (this.props.virtualRendering){
 
-            var prevIndex = this.state.renderStartIndex || 0
+            var prevIndex = this.state.startIndex || 0
 
             var renderStartIndex = Math.ceil(scrollTop / this.props.rowHeight)
-            state.renderStartIndex = renderStartIndex
+            state.startIndex = renderStartIndex
 
             // // console.log('scroll!');
             // var sign = signum(renderStartIndex - prevIndex)
@@ -203,7 +213,7 @@ module.exports = React.createClass({
     },
 
     getRenderEndIndex: function(props, state){
-        var startIndex = state.renderStartIndex
+        var startIndex = state.startIndex
         var rowCount   = props.rowCountBuffer
         var length     = props.data.length
 
@@ -213,11 +223,13 @@ module.exports = React.createClass({
 
         if (!rowCount){
             var maxHeight
+
             if (props.style && typeof props.style.height === 'number'){
                 maxHeight = props.style.height
             } else {
                 maxHeight = window.screen.height
             }
+
             rowCount = Math.floor(maxHeight / props.rowHeight)
         }
 
@@ -364,6 +376,11 @@ module.exports = React.createClass({
 
         var props = this.prepareProps(this.props, this.state)
 
+        this.p = props
+
+        this.data       = props.data
+        this.dataSource = props.dataSource
+
         var header      = this.prepareHeader(props, this.state)
         var wrapper     = this.prepareWrapper(props, this.state)
         var footer      = this.prepareFooter(props, this.state)
@@ -418,7 +435,7 @@ module.exports = React.createClass({
 
         var data       = props.data
         var scrollTop  = state.scrollTop
-        var startIndex = state.renderStartIndex
+        var startIndex = state.startIndex
         var endIndex   = virtualRendering?
                             this.getRenderEndIndex(props, state):
                             0
@@ -432,6 +449,7 @@ module.exports = React.createClass({
         }
 
         var wrapperProps = assign({
+            ref             : 'wrapper',
             scrollLeft      : state.scrollLeft,
             scrollTop       : scrollTop,
             topOffset       : state.topOffset,
@@ -479,7 +497,10 @@ module.exports = React.createClass({
         var props = assign({}, thisProps)
 
         props.loading = this.prepareLoading(props)
-        props.data = this.prepareData(props)
+
+        props.data       = this.prepareData(props)
+        props.dataSource = this.prepareDataSource(props)
+
         props.empty = !props.data.length
         props.rowHeight = this.prepareRowHeight(props)
         props.virtualRendering = this.isVirtualRendering(props)
@@ -530,11 +551,44 @@ module.exports = React.createClass({
                     this.state.defaultPage:
                     props.page
     },
+    /**
+     * Returns true if in the current configuration,
+     * the datagrid should load its data remotely.
+     *
+     * @param  {Object}  [props] Optional. If not given, this.props will be used
+     * @return {Boolean}
+     */
+    isRemoteDataSource: function(props) {
+        props = props || this.props
+
+        return props.dataSource && !isArray(props.dataSource)
+    },
+
+    prepareDataSource: function(props) {
+        var dataSource = props.dataSource
+
+        if (isArray(dataSource)){
+            dataSource = null
+        }
+
+        return dataSource
+    },
 
     prepareData: function(props) {
-        var data = props.data == null? this.state.defaultData: props.data
 
-        if (!Array.isArray(data)){
+        var data = null
+
+        if (isArray(props.data)){
+            data = props.data
+        }
+
+        if (isArray(props.dataSource)){
+            data = props.dataSource
+        }
+
+        data = data == null? this.state.defaultData: data
+
+        if (!isArray(data)){
             data = []
         }
 
@@ -604,8 +658,8 @@ module.exports = React.createClass({
     },
 
     reload: function() {
-        if (this.props.dataSource){
-            this.loadDataSource(this.props.dataSource, this.props)
+        if (this.dataSource){
+            this.loadDataSource(this.dataSource, this.props)
         }
     },
 
@@ -670,7 +724,7 @@ module.exports = React.createClass({
         props = props || this.props
 
         if (!arguments.length){
-            dataSource = props.dataSource
+            dataSource = this.dataSource
         }
 
         var dataSourceQuery = {}
@@ -771,20 +825,23 @@ module.exports = React.createClass({
         this.rowCache = {}
         this.groupData(this.props)
 
-        //if (this.props.dataSource){
-        //    this.loadDataSource(this.props.dataSource, this.props)
-        //}
+        if (this.isRemoteDataSource(this.props)){
+           this.loadDataSource(this.props.dataSource, this.props)
+        }
     },
 
     componentWillReceiveProps: function(nextProps){
         this.rowCache = {}
         this.groupData(nextProps)
-        //
-        //if (nextProps.dataSource && this.preparePagination(nextProps)){
-        //    if (this.props.page != nextProps.page && this.isValidPage(nextProps.page, nextProps)){
-        //        this.loadDataSource(nextProps.dataSource, nextProps)
-        //    }
-        //}
+
+        if (this.isRemoteDataSource(nextProps)){
+            var otherPage     = this.props.page != nextProps.page
+            var otherPageSize = this.props.pageSize != nextProps.pageSize
+
+            if (nextProps.reload || otherPage || otherPageSize){
+                this.loadDataSource(nextProps.dataSource, nextProps)
+            }
+        }
     },
 
     prepareStyle: function(props){
@@ -885,14 +942,7 @@ module.exports = React.createClass({
 
     prepareResizeProxy: function(props, state){
 
-        var style = {}
-
-        if (state.resizing){
-            style.display = 'block'
-            style.left = state.resizeProxyLeft
-        }
-
-        return <div className='z-resize-proxy' style={style}></div>
+        return <ResizeProxy ref="resizeProxy" active={state.resizing}/>
     },
 
     onColumnResizeDragStart: function(config){
@@ -901,18 +951,20 @@ module.exports = React.createClass({
         var region  = Region.from(domNode)
         var state = config
 
-        state.resizeProxyOffset = state.resizeProxyLeft - region.left
+        this.resizeProxyLeft = config.resizeProxyLeft - region.left
         state.resizeProxyLeft = state.resizeProxyOffset
 
-        this.setState(state)
+        this.setState({
+            resizing: true,
+            resizeOffset: this.resizeProxyLeft
+        })
+
     },
 
     onColumnResizeDrag: function(config){
-        var resizeProxyOffset = this.state.resizeProxyOffset
-
-        config.resizeProxyLeft = resizeProxyOffset + config.resizeProxyDiff
-
-        this.setState(config)
+        this.refs.resizeProxy.setState({
+            offset: this.resizeProxyLeft + config.resizeProxyDiff
+        })
     },
 
     onColumnResizeDrop: function(config, resizeInfo){
