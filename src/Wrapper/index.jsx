@@ -6,6 +6,7 @@ var LoadMask   = require('react-load-mask')
 var hasTouch   = require('has-touch')
 var DragHelper = require('drag-helper')
 var buffer     = require('buffer-function')
+var raf        = require('raf')
 
 var tableStyle     = require('../render/tableStyle')
 var preventDefault = require('../utils/preventDefault')
@@ -128,8 +129,11 @@ module.exports = React.createClass({
 
         domNode.scrollTop = scrollTop
 
-        if (domNode.scrollTop != scrollTop){
+        var newScrollTop = domNode.scrollTop
+
+        if (newScrollTop != scrollTop){
             //overflowing either to top, or to bottom
+            this.props.onScrollOverflow && this.props.onScrollOverflow(signum(scrollTop), newScrollTop)
         } else {
             preventDefault(event)
         }
@@ -155,7 +159,8 @@ module.exports = React.createClass({
 
         this.groupsCount = groupsCount
 
-        var verticalScrollerSize   = (props.totalLength + groupsCount) * props.rowHeight
+        // var loadersSize          = props.loadersSize
+        var verticalScrollerSize = (props.totalLength + groupsCount) * props.rowHeight// + loadersSize
 
         var events = {}
 
@@ -224,7 +229,7 @@ module.exports = React.createClass({
                     {content}
 
                     <div className="z-vertical-scrollbar" style={verticalScrollbarStyle}>
-                        <div ref="verticalScrollbar" onScroll={this.handleVerticalScroll} style={{overflow: 'auto', xdisplay: 'flex', width: '100%', height: '100%'}}>
+                        <div ref="verticalScrollbar" onScroll={this.handleVerticalScroll} style={{overflow: 'auto', width: '100%', height: '100%'}}>
                             <div className="z-vertical-scroller" style={{height: verticalScrollerSize}} />
                         </div>
 
@@ -405,18 +410,33 @@ module.exports = React.createClass({
             deltaY = signum(deltaY) * props.scrollBy * props.rowHeight
         }
 
-
         scrollTop += deltaY
         this.verticalScrollAt(scrollTop, event)
     },
     verticalScrollAt: function(scrollTop, event){
+        this.mouseWheelScroll = true
         this.syncVerticalScroller(scrollTop, event)
+        raf(function(){
+            this.mouseWheelScroll = false
+        }.bind(this))
     },
     handleHorizontalScroll: function(event){
         this.props.onScrollLeft(event.target.scrollLeft)
     },
     handleVerticalScroll: function(event){
-        this.onVerticalScroll(event.target.scrollTop)
+
+        var target = event.target
+        var scrollTop = target.scrollTop
+
+        if (!this.mouseWheelScroll && this.props.onScrollOverflow){
+            if (scrollTop == 0){
+                this.props.onScrollOverflow(-1, scrollTop)
+            } else if (scrollTop + target.clientHeight >= target.scrollHeight){
+                this.props.onScrollOverflow(1, scrollTop)
+            }
+        }
+
+        this.onVerticalScroll(scrollTop)
     },
     onVerticalScroll: function(pos){
         this.props.onScrollTop(pos)

@@ -6,6 +6,7 @@ var React    = require('react')
 var assign   = require('object-assign')
 var LoadMask = require('react-load-mask')
 var Region   = require('region')
+var buffer = require('buffer-function')
 
 var PaginationToolbar = React.createFactory(require('./PaginationToolbar'))
 var Column = require('./models/Column')
@@ -195,11 +196,14 @@ module.exports = React.createClass({
         var state = this.state
 
         scrollTop = scrollTop === undefined? this.state.scrollTop: scrollTop
+
         state.menuColumn = null
+
+        this.scrollTop = scrollTop
 
         if (props.virtualRendering){
 
-            var prevIndex = this.state.startIndex || 0
+            var prevIndex        = this.state.startIndex || 0
             var renderStartIndex = Math.ceil(scrollTop / props.rowHeight)
 
             state.startIndex = renderStartIndex
@@ -422,9 +426,9 @@ module.exports = React.createClass({
         var paginationToolbar
 
         if (props.pagination){
-            var minPage = 1
-            var maxPage = this.getMaxPage(props)
-            var page    = clamp(props.page, minPage, maxPage)
+            var page    = props.page
+            var minPage = props.minPage
+            var maxPage = props.maxPage
 
             var paginationToolbarFactory = props.paginationFactory || PaginationToolbar
             var paginationProps = assign({
@@ -490,6 +494,16 @@ module.exports = React.createClass({
         return table
     },
 
+    handleVerticalScrollOverflow: function(sign, scrollTop) {
+
+        var props = this.p
+        var page  = props.page
+
+        if (this.isValidPage(page + sign, props)){
+            this.gotoPage(page + sign)
+        }
+    },
+
     prepareWrapper: function(props, state){
         var virtualRendering = props.virtualRendering
 
@@ -497,16 +511,37 @@ module.exports = React.createClass({
         var scrollTop  = state.scrollTop
         var startIndex = state.startIndex
         var endIndex   = virtualRendering?
-            this.getRenderEndIndex(props, state):
-            0
+                            this.getRenderEndIndex(props, state):
+                            0
 
         var renderCount = virtualRendering?
-        endIndex + 1 - startIndex:
-            data.length
+                            endIndex + 1 - startIndex:
+                            data.length
 
         if (props.virtualRendering){
             scrollTop = startIndex * props.rowHeight
         }
+
+        // var topLoader
+        // var bottomLoader
+        // var loadersSize = 0
+
+        // if (props.virtualPagination){
+
+        //     if (props.page < props.maxPage){
+        //         loadersSize += 2 * props.rowHeight
+        //         bottomLoader = <div style={{height: 2 * props.rowHeight, position: 'relative', width: props.columnFlexCount? 'calc(100% - ' + props.scrollbarSize + ')': props.minRowWidth - props.scrollbarSize}}>
+        //             <LoadMask visible={true} style={{background: 'rgba(128, 128, 128, 0.17)'}}/>
+        //         </div>
+        //     }
+
+        //     if (props.page > props.minPage){
+        //         loadersSize += 2 * props.rowHeight
+        //         topLoader = <div style={{height: 2 * props.rowHeight, position: 'relative', width: props.columnFlexCount? 'calc(100% - ' + props.scrollbarSize + ')': props.minRowWidth - props.scrollbarSize}}>
+        //             <LoadMask visible={true} style={{background: 'rgba(128, 128, 128, 0.17)'}}/>
+        //         </div>
+        //     }
+        // }
 
         var wrapperProps = assign({
             ref             : 'wrapper',
@@ -522,6 +557,7 @@ module.exports = React.createClass({
 
             onScrollLeft    : this.handleScrollLeft,
             onScrollTop     : this.handleScrollTop,
+            // onScrollOverflow: props.virtualPagination? this.handleVerticalScrollOverflow: null,
 
             menu            : state.menu,
             menuColumn      : state.menuColumn,
@@ -531,6 +567,10 @@ module.exports = React.createClass({
             // rowStyle        : props.rowStyle,
             // rowClassName    : props.rowClassName,
             // rowContextMenu  : props.rowContextMenu,
+
+            // topLoader: topLoader,
+            // bottomLoader: bottomLoader,
+            // loadersSize: loadersSize,
 
             onRowClick: this.handleRowClick,
             selected        : props.selected == null?
@@ -580,7 +620,8 @@ module.exports = React.createClass({
     },
 
     prepareLoading: function(props) {
-        return props.loading == null? this.state.defaultLoading: props.loading
+        var showLoadMask = props.showLoadMask || !this.isMounted() //ismounted check for initial load
+        return props.loading == null? showLoadMask && this.state.defaultLoading: props.loading
     },
 
     preparePaging: function(props, state) {
@@ -588,8 +629,11 @@ module.exports = React.createClass({
 
         if (props.pagination){
             props.pageSize = this.preparePageSize(props)
-            props.page     = this.preparePage(props)
             props.dataSourceCount = this.prepareDataSourceCount(props)
+
+            props.minPage = 1
+            props.maxPage = Math.ceil((props.dataSourceCount || 1) / props.pageSize)
+            props.page    = clamp(this.preparePage(props), props.minPage, props.maxPage)
         }
     },
 
@@ -717,7 +761,7 @@ module.exports = React.createClass({
 
     reload: function() {
         if (this.dataSource){
-            this.loadDataSource(this.dataSource, this.props)
+            return this.loadDataSource(this.dataSource, this.props)
         }
     },
 
@@ -767,10 +811,12 @@ module.exports = React.createClass({
             this.props.onPageChange(page)
         } else {
             this.state.defaultPage = page
-            this.reload()
+            var result = this.reload()
             this.setState({
                 defaultPage: page
             })
+
+            return result
         }
     },
 
@@ -840,9 +886,23 @@ module.exports = React.createClass({
                     defaultLoading: true
                 })
 
+                var errorFn = function(err){
+                    if (props.onDataSourceError){
+                        props.onDataSourceError(err)
+                    }
+
+                    this.setState({
+                        defaultLoading: false
+                    })
+                }.bind(this)
+
+                var noCatchFn = dataSource['catch']? null: errorFn
+
                 dataSource = dataSource
                     .then(function(response){
-                        return response.json()
+                        return response && typeof response.json == 'function'?
+                                    response.json():
+                                    response
                     })
                     .then(function(json){
 
@@ -886,17 +946,11 @@ module.exports = React.createClass({
                         }
 
                         this.setState(newState)
-                    }.bind(this))
-                    ['catch'](function(err){
+                    }.bind(this), noCatchFn)
 
-                    if (props.onDataSourceError){
-                        props.onDataSourceError(err)
-                    }
-
-                    this.setState({
-                        defaultLoading: false
-                    })
-                }.bind(this))
+                if (dataSource['catch']){
+                    dataSource['catch'](errorFn)
+                }
             }
         }
 

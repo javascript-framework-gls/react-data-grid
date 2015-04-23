@@ -13,8 +13,10 @@ module.exports = function(){
 
         appendDataSourceQueryParams: true,
         pagination: null,
+        // virtualPagination: false,
 
         loading: null,
+        showLoadMask: true,
         columnMinWidth: 50,
         cellPadding: '0px 5px',
         headerPadding: '10px 5px',

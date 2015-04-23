@@ -192,8 +192,14 @@ var App = React.createClass({
 
         console.log(selected);
 
-        var ds = function(){
-            return'http://5.101.99.47:8090/1000'
+        var ds = function(q){
+            return 'http://5.101.99.47:8090/1000'
+
+            return $.ajax('http://5.101.99.47:8090/1000?' + Object.keys(q).map(function(k){
+                return k + '=' + q[k]
+            }).join('&')).then(function(r){
+                return r
+            })
         }
 
         return <div >
@@ -228,6 +234,7 @@ var App = React.createClass({
                 xdata={data}
                 defaultPageSize={50}
                 dataSource={ds}
+                virtualPagination={true}
                 xloadMaskOverHeader={false}
                 paginationToolbarProps={{
                     xshowRefreshIcon: false,
