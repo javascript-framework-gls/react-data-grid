@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --recursive --reporter spec --require should",
+    "test-w": "./node_modules/.bin/mocha --recursive --reporter spec --require should --watch",
     "lib": "./node_modules/.bin/gulp",
     "build-style": "webpack --progress --colors --config build-style.config.js",
     "stats": "./node_modules/.bin/webpack --profile --progress --colors --config dist.config.js --json > stats.json",
@@ -46,7 +47,7 @@
     "mocha": "^2.2.1",
     "raw-loader": "^0.5.1",
     "react-hot-loader": "^1.2.4",
-    "should": "^5.2.0",
+    "should": "^6.0.1",
     "sorty": "^1.2.0",
     "style-loader": "^0.8.2",
     "stylus-loader": "^0.4.0",
