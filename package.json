@@ -41,7 +41,7 @@
     "gulp": "^3.8.11",
     "gulp-react": "^3.0.0",
     "http-server": "^0.7.3",
-    "jsdom": "^5.0.1",
+    "jsdom": "5.1.0",
     "jsx-loader": "^0.12.2",
     "mocha": "^2.2.1",
     "raw-loader": "^0.5.1",
