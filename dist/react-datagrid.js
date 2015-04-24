@@ -59,10 +59,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(21).polyfill()
 
 	var React    = __webpack_require__(1)
-	var assign   = __webpack_require__(18)
+	var assign   = __webpack_require__(19)
 	var LoadMask = __webpack_require__(22)
-	var Region   = __webpack_require__(19)
-	var buffer = __webpack_require__(20)
+	var Region   = __webpack_require__(20)
+	var buffer = __webpack_require__(18)
 
 	var PaginationToolbar = React.createFactory(__webpack_require__(2))
 	var Column = __webpack_require__(3)
@@ -1211,10 +1211,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React     = __webpack_require__(1)
-	var assign    = __webpack_require__(18)
-	var Toolbar   = __webpack_require__(41)
+	var assign    = __webpack_require__(19)
+	var Toolbar   = __webpack_require__(40)
 	var Region    = Toolbar.Region
-	var normalize = __webpack_require__(42)
+	var normalize = __webpack_require__(41)
 
 	function sortAsc(a, b){
 		return a - b
@@ -1291,8 +1291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				showRefreshIcon: true,
 				showPageSize: true,
 				defaultStyle: {
-					border: 0,
-					color : 'auto'
+					color : 'inherit'
 				},
 
 				pageSizes: [
@@ -1633,7 +1632,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var humanize = __webpack_require__(33).humanize
-	var assign   = __webpack_require__(18)
+	var assign   = __webpack_require__(19)
 
 	function getVisibleInfo(col){
 	    var visible = true
@@ -1786,7 +1785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
+	var assign = __webpack_require__(19)
 
 	module.exports = React.createClass({
 
@@ -1982,7 +1981,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React = __webpack_require__(1)
 	var renderMenu = __webpack_require__(11)
 	var renderRow  = __webpack_require__(24)
-	var tableStyle  = __webpack_require__(25)
+	var tableStyle  = __webpack_require__(26)
 	var slice  = __webpack_require__(8)
 	var LoadMask = __webpack_require__(22)
 
@@ -2133,8 +2132,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var assign = __webpack_require__(18)
-	var getSelected = __webpack_require__(26)
+	var assign = __webpack_require__(19)
+	var getSelected = __webpack_require__(25)
 
 	var hasOwn = function(obj, prop){
 	    return Object.prototype.hasOwnProperty.call(obj, prop)
@@ -2372,8 +2371,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React = __webpack_require__(1)
-	var assign = __webpack_require__(18)
-	var ReactMenu = __webpack_require__(43)
+	var assign = __webpack_require__(19)
+	var ReactMenu = __webpack_require__(45)
 
 	function stopPropagation(event){
 	    event.stopPropagation()
@@ -2557,7 +2556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
-	var scrollbarSize = __webpack_require__(46)
+	var scrollbarSize = __webpack_require__(43)
 
 	if (!global.fetch && global.window){
 	    __webpack_require__(44)
@@ -2627,14 +2626,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */(function(global) {/** @jsx React.DOM */'use strict';
 
 	var React      = __webpack_require__(1)
-	var assign     = __webpack_require__(18)
+	var assign     = __webpack_require__(19)
 	var LoadMask   = __webpack_require__(22)
-	var hasTouch   = __webpack_require__(37)
-	var DragHelper = __webpack_require__(38)
-	var buffer     = __webpack_require__(20)
-	var raf        = __webpack_require__(39)
+	var hasTouch   = __webpack_require__(35)
+	var DragHelper = __webpack_require__(36)
+	var buffer     = __webpack_require__(18)
+	var raf        = __webpack_require__(37)
 
-	var tableStyle     = __webpack_require__(25)
+	var tableStyle     = __webpack_require__(26)
 	var preventDefault = __webpack_require__(12)
 	var horizontalScrollbarStyle = {}
 
@@ -3085,10 +3084,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React   = __webpack_require__(1)
-	var Region  = __webpack_require__(19)
-	var ReactMenu = React.createFactory(__webpack_require__(43))
-	var assign  = __webpack_require__(18)
-	var clone   = __webpack_require__(45)
+	var Region  = __webpack_require__(20)
+	var ReactMenu = React.createFactory(__webpack_require__(45))
+	var assign  = __webpack_require__(19)
+	var clone   = __webpack_require__(46)
 	var asArray = __webpack_require__(27)
 	var findIndexBy = __webpack_require__(23)
 	var findIndexByName = __webpack_require__(6)
@@ -3096,8 +3095,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var setupColumnDrag   = __webpack_require__(28)
 	var setupColumnResize = __webpack_require__(29)
 
-	var normalize   = __webpack_require__(42)
-	var EVENT_NAMES = __webpack_require__(35)
+	var normalize   = __webpack_require__(41)
+	var EVENT_NAMES = __webpack_require__(38)
 
 	function emptyFn(){}
 
@@ -3562,44 +3561,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = Object.keys(Object(from));
-
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-
-		return to;
-	};
-
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(40)
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
 	var setImmediate   = global.setImmediate
@@ -3638,6 +3599,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function ToObject(val) {
+		if (val == null) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var keys;
+		var to = ToObject(target);
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = arguments[s];
+			keys = Object.keys(Object(from));
+
+			for (var i = 0; i < keys.length; i++) {
+				to[keys[i]] = from[keys[i]];
+			}
+		}
+
+		return to;
+	};
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(42)
 
 /***/ },
 /* 21 */
@@ -4589,7 +4588,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    /* global define:true module:true window: true */
-	    if ("function" === 'function' && __webpack_require__(49)['amd']) {
+	    if ("function" === 'function' && __webpack_require__(47)['amd']) {
 	      !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return lib$es6$promise$umd$$ES6Promise; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module !== 'undefined' && module['exports']) {
 	      module['exports'] = lib$es6$promise$umd$$ES6Promise;
@@ -4601,7 +4600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}).call(this);
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(47), __webpack_require__(48).setImmediate, (function() { return this; }()), __webpack_require__(50)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48), __webpack_require__(49).setImmediate, (function() { return this; }()), __webpack_require__(50)(module)))
 
 /***/ },
 /* 22 */
@@ -4610,8 +4609,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict'
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
-	var Loader = __webpack_require__(36)
+	var assign = __webpack_require__(19)
+	var Loader = __webpack_require__(39)
 
 	module.exports = React.createClass({
 
@@ -4687,7 +4686,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/** @jsx React.DOM */'use strict';
 
-	var assign = __webpack_require__(18)
+	var assign = __webpack_require__(19)
 	var React  = __webpack_require__(1)
 
 	var Row        = __webpack_require__(30)
@@ -4811,7 +4810,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var normalize = __webpack_require__(42)
+	module.exports = function(props, state){
+	    var selected = props.selected == null?
+	                        state.defaultSelected
+	                        :
+	                        props.selected
+
+	    return selected
+	}
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var normalize = __webpack_require__(41)
 
 	var colors = [
 		'blue',
@@ -4828,21 +4842,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    })
 	}
 
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function(props, state){
-	    var selected = props.selected == null?
-	                        state.defaultSelected
-	                        :
-	                        props.selected
-
-	    return selected
-	}
 
 /***/ },
 /* 27 */
@@ -4868,8 +4867,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region     = __webpack_require__(19)
-	var DragHelper = __webpack_require__(38)
+	var Region     = __webpack_require__(20)
+	var DragHelper = __webpack_require__(36)
 
 	function range(start, end){
 	    var res = []
@@ -5008,8 +5007,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region     = __webpack_require__(19)
-	var DragHelper = __webpack_require__(38)
+	var Region     = __webpack_require__(20)
+	var DragHelper = __webpack_require__(36)
 
 	var findIndexByName = __webpack_require__(6)
 
@@ -5108,11 +5107,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React       = __webpack_require__(1)
-	var Region      = __webpack_require__(19)
-	var assign      = __webpack_require__(18)
+	var Region      = __webpack_require__(20)
+	var assign      = __webpack_require__(19)
 	var Cell        = __webpack_require__(31)
 	var CellFactory = React.createFactory(Cell)
-	var ReactMenu = __webpack_require__(43)
+	var ReactMenu = __webpack_require__(45)
 	var ReactMenuFactory = React.createFactory(ReactMenu)
 
 	module.exports = React.createClass({
@@ -5319,9 +5318,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
+	var assign = __webpack_require__(19)
 
-	var EVENT_NAMES = __webpack_require__(35)
+	var EVENT_NAMES = __webpack_require__(38)
 
 	var TEXT_ALIGN_2_JUSTIFY = {
 	    right : 'flex-end',
@@ -5443,17 +5442,17 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	    toLowerFirst     : __webpack_require__(55),
-	    toUpperFirst     : __webpack_require__(56),
-	    separate         : __webpack_require__(57),
-	    stripWhitespace  : __webpack_require__(58),
-	    compactWhitespace: __webpack_require__(59),
-	    camelize         : __webpack_require__(60),
-	    humanize         : __webpack_require__(61),
-	    hyphenate        : __webpack_require__(62),
-	    endsWith         : __webpack_require__(63),
+	    toLowerFirst     : __webpack_require__(52),
+	    toUpperFirst     : __webpack_require__(53),
+	    separate         : __webpack_require__(54),
+	    stripWhitespace  : __webpack_require__(55),
+	    compactWhitespace: __webpack_require__(56),
+	    camelize         : __webpack_require__(57),
+	    humanize         : __webpack_require__(58),
+	    hyphenate        : __webpack_require__(59),
+	    endsWith         : __webpack_require__(60),
 
-	    is: __webpack_require__(64)
+	    is: __webpack_require__(61)
 	}
 
 /***/ },
@@ -5503,19 +5502,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	module.exports = __webpack_require__(37)?
-		{
-			onMouseDown: 'onTouchStart',
-			onMouseUp  : 'onTouchEnd',
-			onMouseMove: 'onTouchMove'
-		}:
-		{
-			onMouseDown: 'onMouseDown',
-			onMouseUp  : 'onMouseUp',
-			onMouseMove: 'onMouseMove'
-		}
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 36 */
@@ -5523,82 +5511,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
-
-	module.exports = React.createClass({
-
-	    displayName: 'Loader',
-
-	    getDefaultProps: function(){
-	        return {
-	            defaultStyle: {
-	                margin: 'auto',
-	                position: 'absolute',
-	                top: 0,
-	                left: 0,
-	                bottom: 0,
-	                right: 0,
-	            },
-	            defaultClassName: 'loader',
-	            size: 40,
-	        }
-	    },
-
-	    render: function() {
-	        var props = assign({}, this.props)
-
-	        this.prepareStyle(props)
-
-	        props.className = props.className || ''
-	        props.className += ' ' + props.defaultClassName
-
-	        return React.DOM.div(props,
-	            React.createElement("div", {className: "loadbar loadbar-1"}),
-	            React.createElement("div", {className: "loadbar loadbar-2"}),
-	            React.createElement("div", {className: "loadbar loadbar-3"}),
-	            React.createElement("div", {className: "loadbar loadbar-4"}),
-	            React.createElement("div", {className: "loadbar loadbar-5"}),
-	            React.createElement("div", {className: "loadbar loadbar-6"}),
-	            React.createElement("div", {className: "loadbar loadbar-7"}),
-	            React.createElement("div", {className: "loadbar loadbar-8"}),
-	            React.createElement("div", {className: "loadbar loadbar-9"}),
-	            React.createElement("div", {className: "loadbar loadbar-10"}),
-	            React.createElement("div", {className: "loadbar loadbar-11"}),
-	            React.createElement("div", {className: "loadbar loadbar-12"})
-	        )
-	    },
-
-	    prepareStyle: function(props){
-
-	        var style = {}
-
-	        assign(style, props.defaultStyle)
-	        assign(style, props.style)
-
-	        style.width = props.size
-	        style.height = props.size
-
-	        props.style = style
-	    }
-	})
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var assign = __webpack_require__(18)
-	var Region = __webpack_require__(74)
-	var hasTouch = __webpack_require__(37)
+	var assign = __webpack_require__(19)
+	var Region = __webpack_require__(70)
+	var hasTouch = __webpack_require__(35)
 	var once   = __webpack_require__(51)
 
 	var Helper = function(config){
@@ -5792,10 +5707,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 39 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var now = __webpack_require__(80)
+	var now = __webpack_require__(79)
 	  , global = typeof window === 'undefined' ? {} : window
 	  , vendors = ['moz', 'webkit']
 	  , suffix = 'AnimationFrame'
@@ -5878,7 +5793,346 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(35)?
+		{
+			onMouseDown: 'onTouchStart',
+			onMouseUp  : 'onTouchEnd',
+			onMouseMove: 'onTouchMove'
+		}:
+		{
+			onMouseDown: 'onMouseDown',
+			onMouseUp  : 'onMouseUp',
+			onMouseMove: 'onMouseMove'
+		}
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React  = __webpack_require__(1)
+	var assign = __webpack_require__(19)
+
+	module.exports = React.createClass({
+
+	    displayName: 'Loader',
+
+	    getDefaultProps: function(){
+	        return {
+	            defaultStyle: {
+	                margin: 'auto',
+	                position: 'absolute',
+	                top: 0,
+	                left: 0,
+	                bottom: 0,
+	                right: 0,
+	            },
+	            defaultClassName: 'loader',
+	            size: 40,
+	        }
+	    },
+
+	    render: function() {
+	        var props = assign({}, this.props)
+
+	        this.prepareStyle(props)
+
+	        props.className = props.className || ''
+	        props.className += ' ' + props.defaultClassName
+
+	        return React.DOM.div(props,
+	            React.createElement("div", {className: "loadbar loadbar-1"}),
+	            React.createElement("div", {className: "loadbar loadbar-2"}),
+	            React.createElement("div", {className: "loadbar loadbar-3"}),
+	            React.createElement("div", {className: "loadbar loadbar-4"}),
+	            React.createElement("div", {className: "loadbar loadbar-5"}),
+	            React.createElement("div", {className: "loadbar loadbar-6"}),
+	            React.createElement("div", {className: "loadbar loadbar-7"}),
+	            React.createElement("div", {className: "loadbar loadbar-8"}),
+	            React.createElement("div", {className: "loadbar loadbar-9"}),
+	            React.createElement("div", {className: "loadbar loadbar-10"}),
+	            React.createElement("div", {className: "loadbar loadbar-11"}),
+	            React.createElement("div", {className: "loadbar loadbar-12"})
+	        )
+	    },
+
+	    prepareStyle: function(props){
+
+	        var style = {}
+
+	        assign(style, props.defaultStyle)
+	        assign(style, props.style)
+
+	        style.width = props.size
+	        style.height = props.size
+
+	        props.style = style
+	    }
+	})
+
+/***/ },
 /* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React     = __webpack_require__(1)
+	var normalize = __webpack_require__(41)
+	var assign    = __webpack_require__(19)
+	var clone = React.cloneElement || __webpack_require__(77)
+	var emptyFn = function(){}
+
+	var DISPLAY_NAME = 'ReactToolbar'
+
+	function isRegion(child){
+		return child && child.props && child.props.isToolbarRegion
+	}
+
+	function toAlign(index, regions){
+		if (index == 0){
+			return 'left'
+		}
+
+		if (index == regions.length - 1){
+			return 'right'
+		}
+
+		return 'center'
+	}
+
+	var Toolbar = React.createClass({
+
+		displayName: DISPLAY_NAME,
+
+		getDefaultProps: function() {
+			return {
+				'data-display-name': DISPLAY_NAME,
+				isReactToolbar: true,
+
+				padding: 2,
+
+				defaultStyle  : {
+					display  : 'inline-flex',
+					boxSizing: 'border-box',
+
+					overflow: 'hidden',
+					whiteSpace: 'nowrap',
+					textOverflow: 'ellipsis',
+
+					//theme styles
+					color  : 'rgb(120, 120, 120)',
+					border : '1px solid rgb(218, 218, 218)',
+					padding: 2,
+				},
+
+				defaultHorizontalStyle: {
+					width       : '100%',
+					flexFlow    : 'row',
+					alignItems  : 'center', //so items are centered vertically
+					alignContent: 'stretch'
+				},
+
+				defaultVerticalStyle: {
+					height      : '100%',
+					flexFlow    : 'column',
+					alignItems  : 'stretch',
+					alignContent: 'center'
+				}
+			}
+		},
+
+		getInitialState: function(){
+			return {}
+		},
+
+		render: function(){
+
+			var state = this.state
+			var props = this.prepareProps(this.props, state)
+
+			// this.prepareContent(props)
+
+			return React.createElement("div", React.__spread({},  props))
+		},
+
+		prepareContent: function(props){
+
+			// var style = {
+			// 	display : 'inline-flex',
+			// 	position: 'relative',
+			// 	overflow: 'hidden',
+			// 	flex    : '1 0 0',
+			// 	padding : props.style.padding
+			// }
+
+			// props.style.padding = 0
+		},
+
+		prepareProps: function(thisProps, state) {
+			var props = assign({}, thisProps)
+
+			props.vertical = props.orientation == 'vertical'
+			props.style    = this.prepareStyle(props, state)
+			props.children = this.prepareChildren(props, state)
+
+			return props
+		},
+
+		prepareStyle: function(props, state) {
+
+			var defaultOrientationStyle = props.defaultHorizontalStyle
+			var orientationStyle = props.horizontalStyle
+
+			if (props.vertical){
+				defaultOrientationStyle = props.defaultVerticalStyle
+				orientationStyle = props.verticalStyle
+			}
+
+			var style = assign({}, props.defaultStyle, defaultOrientationStyle, props.style, orientationStyle)
+
+			return normalize(style)
+		},
+
+		prepareChildren: function(props) {
+
+			var regionCount = 0
+
+			var children = []
+			var regions  = []
+
+			React.Children.forEach(props.children, function(child){
+				if (isRegion(child)){
+					regions.push(child)
+					regionCount++
+				}
+			}, this)
+
+
+			var regionIndex = -1
+			React.Children.forEach(props.children, function(child){
+				if (isRegion(child)){
+					regionIndex++
+					child = this.prepareRegion(child, regionIndex, regions)
+				}
+
+				children.push(child)
+			}, this)
+
+			if (!regionCount){
+				return this.prepareRegion(
+					React.createElement(Toolbar.Region, null, 
+						children
+					)
+				)
+			}
+
+			return children
+		},
+
+		prepareRegion: function(region, index, regions) {
+			index   = index   || 0
+			regions = regions || []
+
+			var props = this.props
+			var regionStyle = assign({}, props.defaultRegionStyle, props.regionStyle)
+
+			if (props.padding){
+				regionStyle.padding = props.padding
+			}
+
+			var style = assign({}, regionStyle, region.props.style)
+			var align = region.props.align || toAlign(index, regions)
+
+
+			return clone(region, {
+				style: style,
+				align: align
+			})
+		}
+	})
+
+	Toolbar.Region = __webpack_require__(69)
+
+	module.exports = Toolbar
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var hasOwn      = __webpack_require__(65)
+	var getPrefixed = __webpack_require__(66)
+
+	var map      = __webpack_require__(67)
+	var plugable = __webpack_require__(68)
+
+	function plugins(key, value){
+
+		var result = {
+			key  : key,
+			value: value
+		}
+
+		;(RESULT.plugins || []).forEach(function(fn){
+
+			var tmp = map(function(res){
+				return fn(key, value, res)
+			}, result)
+
+			if (tmp){
+				result = tmp
+			}
+		})
+
+		return result
+	}
+
+	function normalize(key, value){
+
+		var result = plugins(key, value)
+
+		return map(function(result){
+			return {
+				key  : getPrefixed(result.key, result.value),
+				value: result.value
+			}
+		}, result)
+
+		return result
+	}
+
+	var RESULT = function(style){
+
+		var k
+		var item
+		var result = {}
+
+		for (k in style) if (hasOwn(style, k)){
+			item = normalize(k, style[k])
+
+			if (!item){
+				continue
+			}
+
+			map(function(item){
+				result[item.key] = item.value
+			}, item)
+		}
+
+		return result
+	}
+
+	module.exports = plugable(RESULT)
+
+/***/ },
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5886,11 +6140,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var hasOwn    = __webpack_require__(34)
 	var newify    = __webpack_require__(75)
 
-	var assign      = __webpack_require__(18);
+	var assign      = __webpack_require__(19);
 	var EventEmitter = __webpack_require__(76).EventEmitter
 
-	var inherits = __webpack_require__(52)
-	var VALIDATE = __webpack_require__(53)
+	var inherits = __webpack_require__(62)
+	var VALIDATE = __webpack_require__(63)
 
 	var objectToString = Object.prototype.toString
 
@@ -6929,283 +7183,52 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	})
 
-	__webpack_require__(54)(REGION)
+	__webpack_require__(64)(REGION)
 
 	module.exports = REGION
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React     = __webpack_require__(1)
-	var normalize = __webpack_require__(42)
-	var assign    = __webpack_require__(18)
-	var clone = React.cloneElement || __webpack_require__(77)
-	var emptyFn = function(){}
-
-	var DISPLAY_NAME = 'ReactToolbar'
-
-	function isRegion(child){
-		return child && child.props && child.props.isToolbarRegion
-	}
-
-	function toAlign(index, regions){
-		if (index == 0){
-			return 'left'
-		}
-
-		if (index == regions.length - 1){
-			return 'right'
-		}
-
-		return 'center'
-	}
-
-	var Toolbar = React.createClass({
-
-		displayName: DISPLAY_NAME,
-
-		getDefaultProps: function() {
-			return {
-				'data-display-name': DISPLAY_NAME,
-				isReactToolbar: true,
-
-				padding: 2,
-
-				defaultStyle  : {
-					display  : 'inline-flex',
-					boxSizing: 'border-box',
-
-					overflow: 'hidden',
-					whiteSpace: 'nowrap',
-					textOverflow: 'ellipsis',
-
-					//theme styles
-					color  : 'rgb(120, 120, 120)',
-					border : '1px solid rgb(218, 218, 218)',
-					padding: 2,
-				},
-
-				defaultHorizontalStyle: {
-					width       : '100%',
-					flexFlow    : 'row',
-					alignItems  : 'center', //so items are centered vertically
-					alignContent: 'stretch'
-				},
-
-				defaultVerticalStyle: {
-					height      : '100%',
-					flexFlow    : 'column',
-					alignItems  : 'stretch',
-					alignContent: 'center'
-				}
-			}
-		},
-
-		getInitialState: function(){
-			return {}
-		},
-
-		render: function(){
-
-			var state = this.state
-			var props = this.prepareProps(this.props, state)
-
-			// this.prepareContent(props)
-
-			return React.createElement("div", React.__spread({},  props))
-		},
-
-		prepareContent: function(props){
-
-			// var style = {
-			// 	display : 'inline-flex',
-			// 	position: 'relative',
-			// 	overflow: 'hidden',
-			// 	flex    : '1 0 0',
-			// 	padding : props.style.padding
-			// }
-
-			// props.style.padding = 0
-		},
-
-		prepareProps: function(thisProps, state) {
-			var props = assign({}, thisProps)
-
-			props.vertical = props.orientation == 'vertical'
-			props.style    = this.prepareStyle(props, state)
-			props.children = this.prepareChildren(props, state)
-
-			return props
-		},
-
-		prepareStyle: function(props, state) {
-
-			var defaultOrientationStyle = props.defaultHorizontalStyle
-			var orientationStyle = props.horizontalStyle
-
-			if (props.vertical){
-				defaultOrientationStyle = props.defaultVerticalStyle
-				orientationStyle = props.verticalStyle
-			}
-
-			var style = assign({}, props.defaultStyle, defaultOrientationStyle, props.style, orientationStyle)
-
-			return normalize(style)
-		},
-
-		prepareChildren: function(props) {
-
-			var regionCount = 0
-
-			var children = []
-			var regions  = []
-
-			React.Children.forEach(props.children, function(child){
-				if (isRegion(child)){
-					regions.push(child)
-					regionCount++
-				}
-			}, this)
-
-
-			var regionIndex = -1
-			React.Children.forEach(props.children, function(child){
-				if (isRegion(child)){
-					regionIndex++
-					child = this.prepareRegion(child, regionIndex, regions)
-				}
-
-				children.push(child)
-			}, this)
-
-			if (!regionCount){
-				return this.prepareRegion(
-					React.createElement(Toolbar.Region, null, 
-						children
-					)
-				)
-			}
-
-			return children
-		},
-
-		prepareRegion: function(region, index, regions) {
-			index   = index   || 0
-			regions = regions || []
-
-			var props = this.props
-			var regionStyle = assign({}, props.defaultRegionStyle, props.regionStyle)
-
-			if (props.padding){
-				regionStyle.padding = props.padding
-			}
-
-			var style = assign({}, regionStyle, region.props.style)
-			var align = region.props.align || toAlign(index, regions)
-
-
-			return clone(region, {
-				style: style,
-				align: align
-			})
-		}
-	})
-
-	Toolbar.Region = __webpack_require__(69)
-
-	module.exports = Toolbar
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hasOwn      = __webpack_require__(65)
-	var getPrefixed = __webpack_require__(66)
-
-	var map      = __webpack_require__(67)
-	var plugable = __webpack_require__(68)
-
-	function plugins(key, value){
-
-		var result = {
-			key  : key,
-			value: value
-		}
-
-		;(RESULT.plugins || []).forEach(function(fn){
-
-			var tmp = map(function(res){
-				return fn(key, value, res)
-			}, result)
-
-			if (tmp){
-				result = tmp
-			}
-		})
-
-		return result
-	}
-
-	function normalize(key, value){
-
-		var result = plugins(key, value)
-
-		return map(function(result){
-			return {
-				key  : getPrefixed(result.key, result.value),
-				value: result.value
-			}
-		}, result)
-
-		return result
-	}
-
-	var RESULT = function(style){
-
-		var k
-		var item
-		var result = {}
-
-		for (k in style) if (hasOwn(style, k)){
-			item = normalize(k, style[k])
-
-			if (!item){
-				continue
-			}
-
-			map(function(item){
-				result[item.key] = item.value
-			}, item)
-		}
-
-		return result
-	}
-
-	module.exports = plugable(RESULT)
 
 /***/ },
 /* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
+	    if (true) {
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof exports === 'object') {
+	        module.exports = factory();
+	    } else {
+	        root.scrollbarSize = factory();
+	    }
+	}(this, function() {
+	    var scrollbarSize = null;
 
-	var MenuClass = __webpack_require__(70)
+	    return function() {
+	        if (scrollbarSize !== null)
+	            return scrollbarSize;
 
-	var MenuItem      = __webpack_require__(73)
-	var MenuItemCell  = __webpack_require__(71)
-	var MenuSeparator = __webpack_require__(72)
+	        if (window.document.readyState === "loading")
+	            return void 0;
 
-	MenuClass.Item      = MenuItem
-	MenuClass.Item.Cell = MenuItemCell
-	MenuClass.ItemCell  = MenuItemCell
-	MenuClass.Separator = MenuSeparator
+	        var div1, div2;
 
-	module.exports = MenuClass
+	        div1 = window.document.createElement('div');
+	        div2 = window.document.createElement('div');
+
+	        div1.style.width = '100px';
+	        div1.style.overflowX = 'scroll';
+	        div2.style.width = '100px';
+
+	        window.document.body.appendChild(div1);
+	        window.document.body.appendChild(div2);
+
+	        scrollbarSize = div1.offsetHeight - div2.offsetHeight;
+
+	        window.document.body.removeChild(div1);
+	        window.document.body.removeChild(div2);
+
+	        return scrollbarSize;
+	    }
+	}));
 
 /***/ },
 /* 44 */
@@ -7541,6 +7564,25 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var MenuClass = __webpack_require__(71)
+
+	var MenuItem      = __webpack_require__(74)
+	var MenuItemCell  = __webpack_require__(72)
+	var MenuSeparator = __webpack_require__(73)
+
+	MenuClass.Item      = MenuItem
+	MenuClass.Item.Cell = MenuItemCell
+	MenuClass.ItemCell  = MenuItemCell
+	MenuClass.Separator = MenuSeparator
+
+	module.exports = MenuClass
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
 	function objectToString(o) {
@@ -7689,50 +7731,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(78).Buffer))
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
-	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	    } else if (typeof exports === 'object') {
-	        module.exports = factory();
-	    } else {
-	        root.scrollbarSize = factory();
-	    }
-	}(this, function() {
-	    var scrollbarSize = null;
+	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
-	    return function() {
-	        if (scrollbarSize !== null)
-	            return scrollbarSize;
-
-	        if (window.document.readyState === "loading")
-	            return void 0;
-
-	        var div1, div2;
-
-	        div1 = window.document.createElement('div');
-	        div2 = window.document.createElement('div');
-
-	        div1.style.width = '100px';
-	        div1.style.overflowX = 'scroll';
-	        div2.style.width = '100px';
-
-	        window.document.body.appendChild(div1);
-	        window.document.body.appendChild(div2);
-
-	        scrollbarSize = div1.offsetHeight - div2.offsetHeight;
-
-	        window.document.body.removeChild(div1);
-	        window.document.body.removeChild(div2);
-
-	        return scrollbarSize;
-	    }
-	}));
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// shim for using process in browser
@@ -7796,10 +7802,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(47).nextTick;
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(48).nextTick;
 	var apply = Function.prototype.apply;
 	var slice = Array.prototype.slice;
 	var immediateIds = {};
@@ -7875,14 +7881,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48).setImmediate, __webpack_require__(48).clearImmediate))
-
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function() { throw new Error("define cannot be used indirect"); };
-
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49).setImmediate, __webpack_require__(49).clearImmediate))
 
 /***/ },
 /* 50 */
@@ -7926,6 +7925,170 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(str){
+	    return str.length?
+	            str.charAt(0).toLowerCase() + str.substring(1):
+	            str
+	}
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = function(value){
+	    return value.length?
+	                value.charAt(0).toUpperCase() + value.substring(1):
+	                value
+	}
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var doubleColonRe      = /::/g
+	var upperToLowerRe     = /([A-Z]+)([A-Z][a-z])/g
+	var lowerToUpperRe     = /([a-z\d])([A-Z])/g
+	var underscoreToDashRe = /_/g
+
+	module.exports = function(name, separator){
+
+	   return name?
+	           name.replace(doubleColonRe, '/')
+	                .replace(upperToLowerRe, '$1_$2')
+	                .replace(lowerToUpperRe, '$1_$2')
+	                .replace(underscoreToDashRe, separator || '-')
+	            :
+	            ''
+	}
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var RE = /\s/g
+
+	module.exports = function(str){
+	    if (!str){
+	        return ''
+	    }
+
+	    return str.replace(RE, '')
+	}
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var RE = /\s+/g
+
+	module.exports = function(str){
+	    if (!str){
+	        return ''
+	    }
+
+	    return str.trim().replace(RE, ' ')
+	}
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var toCamelFn = function(str, letter){
+	       return letter ? letter.toUpperCase(): ''
+	   }
+
+	var hyphenRe = __webpack_require__(80)
+
+	module.exports = function(str){
+	   return str?
+	          str.replace(hyphenRe, toCamelFn):
+	          ''
+	}
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var separate     = __webpack_require__(54)
+	var camelize     = __webpack_require__(57)
+	var toUpperFirst = __webpack_require__(53)
+	var hyphenRe     = __webpack_require__(80)
+
+	function toLowerAndSpace(str, letter){
+	    return letter? ' ' + letter.toLowerCase(): ' '
+	}
+
+	module.exports = function(name, config){
+
+	    var str = config && config.capitalize?
+	                    separate(camelize(name), ' '):
+	                    separate(name, ' ').replace(hyphenRe, toLowerAndSpace)
+
+	    return toUpperFirst(str.trim())
+	}
+
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var separate = __webpack_require__(54)
+
+	module.exports = function(name){
+	   return separate(name).toLowerCase()
+	}
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = function(str, endsWith){
+
+	    str += ''
+
+	    if (!str){
+	        return typeof endsWith == 'string'?
+	                    !endsWith:
+	                    false
+	    }
+
+	    endsWith += ''
+
+	    if (str.length < endsWith.length){
+	        return false
+	    }
+
+	    return str.lastIndexOf(endsWith) == str.length - endsWith.length
+	}
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	    alphanum: __webpack_require__(81),
+	    match   : __webpack_require__(82),
+	    guid   : __webpack_require__(83),
+	    // email   : require('./email'),
+	    numeric   : __webpack_require__(84)
+	}
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	module.exports = function(ctor, superCtor) {
@@ -7941,7 +8104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 53 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7973,13 +8136,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 54 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var hasOwn   = __webpack_require__(34)
-	var VALIDATE = __webpack_require__(53)
+	var VALIDATE = __webpack_require__(63)
 
 	module.exports = function(REGION){
 
@@ -8192,170 +8355,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(str){
-	    return str.length?
-	            str.charAt(0).toLowerCase() + str.substring(1):
-	            str
-	}
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = function(value){
-	    return value.length?
-	                value.charAt(0).toUpperCase() + value.substring(1):
-	                value
-	}
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var doubleColonRe      = /::/g
-	var upperToLowerRe     = /([A-Z]+)([A-Z][a-z])/g
-	var lowerToUpperRe     = /([a-z\d])([A-Z])/g
-	var underscoreToDashRe = /_/g
-
-	module.exports = function(name, separator){
-
-	   return name?
-	           name.replace(doubleColonRe, '/')
-	                .replace(upperToLowerRe, '$1_$2')
-	                .replace(lowerToUpperRe, '$1_$2')
-	                .replace(underscoreToDashRe, separator || '-')
-	            :
-	            ''
-	}
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RE = /\s/g
-
-	module.exports = function(str){
-	    if (!str){
-	        return ''
-	    }
-
-	    return str.replace(RE, '')
-	}
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RE = /\s+/g
-
-	module.exports = function(str){
-	    if (!str){
-	        return ''
-	    }
-
-	    return str.trim().replace(RE, ' ')
-	}
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var toCamelFn = function(str, letter){
-	       return letter ? letter.toUpperCase(): ''
-	   }
-
-	var hyphenRe = __webpack_require__(79)
-
-	module.exports = function(str){
-	   return str?
-	          str.replace(hyphenRe, toCamelFn):
-	          ''
-	}
-
-/***/ },
-/* 61 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var separate     = __webpack_require__(57)
-	var camelize     = __webpack_require__(60)
-	var toUpperFirst = __webpack_require__(56)
-	var hyphenRe     = __webpack_require__(79)
-
-	function toLowerAndSpace(str, letter){
-	    return letter? ' ' + letter.toLowerCase(): ' '
-	}
-
-	module.exports = function(name, config){
-
-	    var str = config && config.capitalize?
-	                    separate(camelize(name), ' '):
-	                    separate(name, ' ').replace(hyphenRe, toLowerAndSpace)
-
-	    return toUpperFirst(str.trim())
-	}
-
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var separate = __webpack_require__(57)
-
-	module.exports = function(name){
-	   return separate(name).toLowerCase()
-	}
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = function(str, endsWith){
-
-	    str += ''
-
-	    if (!str){
-	        return typeof endsWith == 'string'?
-	                    !endsWith:
-	                    false
-	    }
-
-	    endsWith += ''
-
-	    if (str.length < endsWith.length){
-	        return false
-	    }
-
-	    return str.lastIndexOf(endsWith) == str.length - endsWith.length
-	}
-
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	    alphanum: __webpack_require__(84),
-	    match   : __webpack_require__(85),
-	    guid   : __webpack_require__(86),
-	    // email   : require('./email'),
-	    numeric   : __webpack_require__(87)
-	}
-
-/***/ },
 /* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -8372,8 +8371,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getStylePrefixed = __webpack_require__(81)
-	var properties       = __webpack_require__(82)
+	var getStylePrefixed = __webpack_require__(86)
+	var properties       = __webpack_require__(87)
 
 	module.exports = function(key, value){
 
@@ -8411,7 +8410,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getCssPrefixedValue = __webpack_require__(83)
+	var getCssPrefixedValue = __webpack_require__(85)
 
 	module.exports = function(target){
 		target.plugins = target.plugins || [
@@ -8448,8 +8447,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React     = __webpack_require__(1)
-	var normalize = __webpack_require__(42)
-	var assign    = __webpack_require__(18)
+	var normalize = __webpack_require__(41)
+	var assign    = __webpack_require__(19)
 
 	var cloneWithProps = React.cloneElement || __webpack_require__(77)
 	var DISPLAY_NAME   = 'ReactToolbarRegion'
@@ -8574,27 +8573,213 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var Region = __webpack_require__(20)
+
+	__webpack_require__(88)
+	__webpack_require__(89)
+
+	var COMPUTE_ALIGN_REGION = __webpack_require__(90)
+
+	/**
+	 * region-align module exposes methods for aligning {@link Element} and {@link Region} instances
+	 *
+	 * The #alignTo method aligns this to the target element/region using the specified positions. See #alignTo for a graphical example.
+	 *
+	 *
+	 *      var div = Element.select('div.first')
+	 *
+	 *      div.alignTo(Element.select('body') , 'br-br')
+	 *
+	 *      //aligns the div to be in the bottom-right corner of the body
+	 *
+	 * Other useful methods
+	 *
+	 *  * {@link #alignRegions} - aligns a given source region to a target region
+	 *  * {@link #COMPUTE_ALIGN_REGION} - given a source region and a target region, and alignment positions, returns a clone of the source region, but aligned to satisfy the given alignments
+	 */
+
+
+	/**
+	 * Aligns sourceRegion to targetRegion. It modifies the sourceRegion in order to perform the correct alignment.
+	 * See #COMPUTE_ALIGN_REGION for details and examples.
+	 *
+	 * This method calls #COMPUTE_ALIGN_REGION passing to it all its arguments. The #COMPUTE_ALIGN_REGION method returns a region that is properly aligned.
+	 * If this returned region position/size differs from sourceRegion, then the sourceRegion is modified to be an exact copy of the aligned region.
+	 *
+	 * @inheritdoc #COMPUTE_ALIGN_REGION
+	 * @return {String} the position used for alignment
+	 */
+	Region.alignRegions = function(sourceRegion, targetRegion, positions, config){
+
+	    var result        = COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config)
+	    var alignedRegion = result.region
+
+	    if ( !alignedRegion.equals(sourceRegion) ) {
+	        sourceRegion.setRegion(alignedRegion)
+	    }
+
+	    return result.position
+
+	}
+
+	    /**
+	     *
+	     * The #alignTo method aligns this to the given target region, using the specified alignment position(s).
+	     * You can also specify a constrain for the alignment.
+	     *
+	     * Example
+	     *
+	     *      BIG
+	     *      ________________________
+	     *      |  _______              |
+	     *      | |       |             |
+	     *      | |   A   |             |
+	     *      | |       |      _____  |
+	     *      | |_______|     |     | |
+	     *      |               |  B  | |
+	     *      |               |     | |
+	     *      |_______________|_____|_|
+	     *
+	     * Assume the *BIG* outside rectangle is our constrain region, and you want to align the *A* rectangle
+	     * to the *B* rectangle. Ideally, you'll want their tops to be aligned, and *A* to be placed at the right side of *B*
+	     *
+	     *
+	     *      //so we would align them using
+	     *
+	     *      A.alignTo(B, 'tl-tr', { constrain: BIG })
+	     *
+	     * But this would result in
+	     *
+	     *       BIG
+	     *      ________________________
+	     *      |                       |
+	     *      |                       |
+	     *      |                       |
+	     *      |                _____ _|_____
+	     *      |               |     | .     |
+	     *      |               |  B  | . A   |
+	     *      |               |     | .     |
+	     *      |_______________|_____|_._____|
+	     *
+	     *
+	     * Which is not what we want. So we specify an array of options to try
+	     *
+	     *      A.alignTo(B, ['tl-tr', 'tr-tl'], { constrain: BIG })
+	     *
+	     * So by this we mean: try to align A(top,left) with B(top,right) and stick to the BIG constrain. If this is not possible,
+	     * try the next option: align A(top,right) with B(top,left)
+	     *
+	     * So this is what we end up with
+	     *
+	     *      BIG
+	     *      ________________________
+	     *      |                       |
+	     *      |                       |
+	     *      |                       |
+	     *      |        _______ _____  |
+	     *      |       |       |     | |
+	     *      |       |   A   |  B  | |
+	     *      |       |       |     | |
+	     *      |_______|_______|_____|_|
+	     *
+	     *
+	     * Which is a lot better!
+	     *
+	     * @param {Element/Region} target The target to which to align this alignable.
+	     *
+	     * @param {String[]/String} positions The positions for the alignment.
+	     *
+	     * Example:
+	     *
+	     *      'br-tl'
+	     *      ['br-tl','br-tr','cx-tc']
+	     *
+	     * This method will try to align using the first position. But if there is a constrain region, that position might not satisfy the constrain.
+	     * If this is the case, the next positions will be tried. If one of them satifies the constrain, it will be used for aligning and it will be returned from this method.
+	     *
+	     * If no position matches the contrain, the one with the largest intersection of the source region with the constrain will be used, and this alignable will be resized to fit the constrain region.
+	     *
+	     * @param {Object} config A config object with other configuration for this method
+	     *
+	     * @param {Array[]/Object[]/Object} config.offset The offset to use for aligning. If more that one offset is specified, then offset at a given index is used with the position at the same index.
+	     *
+	     * An offset can have the following form:
+	     *
+	     *      [left_offset, top_offset]
+	     *      {left: left_offset, top: top_offset}
+	     *      {x: left_offset, y: top_offset}
+	     *
+	     * You can pass one offset or an array of offsets. In case you pass just one offset,
+	     * it cannot have the array form, so you cannot call
+	     *
+	     *      this.alignTo(target, positions, [10, 20])
+	     *
+	     * If you do, it will not be considered. Instead, please use
+	     *
+	     *      this.alignTo(target, positions, {x: 10, y: 20})
+	     *
+	     * Or
+	     *
+	     *      this.alignTo(target, positions, [[10, 20]] )
+	     *
+	     * @param {Boolean/Element/Region} config.constrain If boolean, target will be constrained to the document region, otherwise,
+	     * getRegion will be called on this argument to determine the region we need to constrain to.
+	     *
+	     * @param {Boolean/Object} config.sync Either boolean or an object with {width, height}. If it is boolean,
+	     * both width and height will be synced. If directions are specified, will only sync the direction which is specified as true
+	     *
+	     * @return {String}
+	     *
+	     */
+	Region.prototype.alignTo = function(target, positions, config){
+
+	    config = config || {}
+
+	    var sourceRegion = this
+	    var targetRegion = Region.from(target)
+
+	    var result = COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config)
+	    var resultRegion = result.region
+
+	    if (!resultRegion.equalsSize(sourceRegion)){
+	        this.setSize(resultRegion.getSize())
+	    }
+	    if (!resultRegion.equalsPosition(sourceRegion)){
+	        this.setPosition(resultRegion.getPosition(), { absolute: !!config.absolute })
+	    }
+
+	    return result.position
+	}
+
+	module.exports = Region
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	function emptyFn(){}
 
 	var React      = __webpack_require__(1)
-	var assign     = __webpack_require__(18)
-	var Region     = __webpack_require__(74)
+	var assign     = __webpack_require__(19)
+	var Region     = __webpack_require__(70)
 	var inTriangle = __webpack_require__(102)
-	var hasTouch = __webpack_require__(37)
+	var hasTouch = __webpack_require__(35)
 
-	var normalize = __webpack_require__(42)
+	var normalize = __webpack_require__(41)
 
-	var getMenuOffset = __webpack_require__(88)
-	var getConstrainRegion = __webpack_require__(89)
-	var getItemStyleProps = __webpack_require__(90)
-	var renderSubMenu     = __webpack_require__(91)
-	var renderChildren    = __webpack_require__(92)
-	var prepareItem       = __webpack_require__(93)
+	var getMenuOffset = __webpack_require__(91)
+	var getConstrainRegion = __webpack_require__(92)
+	var getItemStyleProps = __webpack_require__(93)
+	var renderSubMenu     = __webpack_require__(94)
+	var renderChildren    = __webpack_require__(95)
+	var prepareItem       = __webpack_require__(96)
 
-	var propTypes = __webpack_require__(94)
-	var ScrollContainer = __webpack_require__(95)
+	var propTypes = __webpack_require__(97)
+	var ScrollContainer = __webpack_require__(98)
 
-	var MenuItem = __webpack_require__(73)
+	var MenuItem = __webpack_require__(74)
 
 	var MenuClass = React.createClass({
 
@@ -9135,18 +9320,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	})
 
-	MenuClass.themes = __webpack_require__(96)
+	MenuClass.themes = __webpack_require__(99)
 
 	module.exports = MenuClass
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign =__webpack_require__(18)
+	var assign =__webpack_require__(19)
 
 	var MenuItemCell = React.createClass({
 
@@ -9202,13 +9387,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = MenuItemCell
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
+	var assign = __webpack_require__(19)
 
 	var emptyFn = function(){}
 
@@ -9273,22 +9458,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = MenuSeparator
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React         = __webpack_require__(1)
-	var assign        = __webpack_require__(18)
-	var normalize     = __webpack_require__(42)
-	var EVENT_NAMES   = __webpack_require__(35)
+	var assign        = __webpack_require__(19)
+	var normalize     = __webpack_require__(41)
+	var EVENT_NAMES   = __webpack_require__(38)
 
-	var getMenuOffset = __webpack_require__(88)
+	var getMenuOffset = __webpack_require__(91)
 
 	var prepareChildren = __webpack_require__(100)
 
-	var Menu = __webpack_require__(70)
-	var MenuItemCell = __webpack_require__(71)
+	var Menu = __webpack_require__(71)
+	var MenuItemCell = __webpack_require__(72)
 
 	var emptyFn = function(){}
 
@@ -9590,192 +9775,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	})
 
 	module.exports = MenuItem
-
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(19)
-
-	__webpack_require__(97)
-	__webpack_require__(98)
-
-	var COMPUTE_ALIGN_REGION = __webpack_require__(99)
-
-	/**
-	 * region-align module exposes methods for aligning {@link Element} and {@link Region} instances
-	 *
-	 * The #alignTo method aligns this to the target element/region using the specified positions. See #alignTo for a graphical example.
-	 *
-	 *
-	 *      var div = Element.select('div.first')
-	 *
-	 *      div.alignTo(Element.select('body') , 'br-br')
-	 *
-	 *      //aligns the div to be in the bottom-right corner of the body
-	 *
-	 * Other useful methods
-	 *
-	 *  * {@link #alignRegions} - aligns a given source region to a target region
-	 *  * {@link #COMPUTE_ALIGN_REGION} - given a source region and a target region, and alignment positions, returns a clone of the source region, but aligned to satisfy the given alignments
-	 */
-
-
-	/**
-	 * Aligns sourceRegion to targetRegion. It modifies the sourceRegion in order to perform the correct alignment.
-	 * See #COMPUTE_ALIGN_REGION for details and examples.
-	 *
-	 * This method calls #COMPUTE_ALIGN_REGION passing to it all its arguments. The #COMPUTE_ALIGN_REGION method returns a region that is properly aligned.
-	 * If this returned region position/size differs from sourceRegion, then the sourceRegion is modified to be an exact copy of the aligned region.
-	 *
-	 * @inheritdoc #COMPUTE_ALIGN_REGION
-	 * @return {String} the position used for alignment
-	 */
-	Region.alignRegions = function(sourceRegion, targetRegion, positions, config){
-
-	    var result        = COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config)
-	    var alignedRegion = result.region
-
-	    if ( !alignedRegion.equals(sourceRegion) ) {
-	        sourceRegion.setRegion(alignedRegion)
-	    }
-
-	    return result.position
-
-	}
-
-	    /**
-	     *
-	     * The #alignTo method aligns this to the given target region, using the specified alignment position(s).
-	     * You can also specify a constrain for the alignment.
-	     *
-	     * Example
-	     *
-	     *      BIG
-	     *      ________________________
-	     *      |  _______              |
-	     *      | |       |             |
-	     *      | |   A   |             |
-	     *      | |       |      _____  |
-	     *      | |_______|     |     | |
-	     *      |               |  B  | |
-	     *      |               |     | |
-	     *      |_______________|_____|_|
-	     *
-	     * Assume the *BIG* outside rectangle is our constrain region, and you want to align the *A* rectangle
-	     * to the *B* rectangle. Ideally, you'll want their tops to be aligned, and *A* to be placed at the right side of *B*
-	     *
-	     *
-	     *      //so we would align them using
-	     *
-	     *      A.alignTo(B, 'tl-tr', { constrain: BIG })
-	     *
-	     * But this would result in
-	     *
-	     *       BIG
-	     *      ________________________
-	     *      |                       |
-	     *      |                       |
-	     *      |                       |
-	     *      |                _____ _|_____
-	     *      |               |     | .     |
-	     *      |               |  B  | . A   |
-	     *      |               |     | .     |
-	     *      |_______________|_____|_._____|
-	     *
-	     *
-	     * Which is not what we want. So we specify an array of options to try
-	     *
-	     *      A.alignTo(B, ['tl-tr', 'tr-tl'], { constrain: BIG })
-	     *
-	     * So by this we mean: try to align A(top,left) with B(top,right) and stick to the BIG constrain. If this is not possible,
-	     * try the next option: align A(top,right) with B(top,left)
-	     *
-	     * So this is what we end up with
-	     *
-	     *      BIG
-	     *      ________________________
-	     *      |                       |
-	     *      |                       |
-	     *      |                       |
-	     *      |        _______ _____  |
-	     *      |       |       |     | |
-	     *      |       |   A   |  B  | |
-	     *      |       |       |     | |
-	     *      |_______|_______|_____|_|
-	     *
-	     *
-	     * Which is a lot better!
-	     *
-	     * @param {Element/Region} target The target to which to align this alignable.
-	     *
-	     * @param {String[]/String} positions The positions for the alignment.
-	     *
-	     * Example:
-	     *
-	     *      'br-tl'
-	     *      ['br-tl','br-tr','cx-tc']
-	     *
-	     * This method will try to align using the first position. But if there is a constrain region, that position might not satisfy the constrain.
-	     * If this is the case, the next positions will be tried. If one of them satifies the constrain, it will be used for aligning and it will be returned from this method.
-	     *
-	     * If no position matches the contrain, the one with the largest intersection of the source region with the constrain will be used, and this alignable will be resized to fit the constrain region.
-	     *
-	     * @param {Object} config A config object with other configuration for this method
-	     *
-	     * @param {Array[]/Object[]/Object} config.offset The offset to use for aligning. If more that one offset is specified, then offset at a given index is used with the position at the same index.
-	     *
-	     * An offset can have the following form:
-	     *
-	     *      [left_offset, top_offset]
-	     *      {left: left_offset, top: top_offset}
-	     *      {x: left_offset, y: top_offset}
-	     *
-	     * You can pass one offset or an array of offsets. In case you pass just one offset,
-	     * it cannot have the array form, so you cannot call
-	     *
-	     *      this.alignTo(target, positions, [10, 20])
-	     *
-	     * If you do, it will not be considered. Instead, please use
-	     *
-	     *      this.alignTo(target, positions, {x: 10, y: 20})
-	     *
-	     * Or
-	     *
-	     *      this.alignTo(target, positions, [[10, 20]] )
-	     *
-	     * @param {Boolean/Element/Region} config.constrain If boolean, target will be constrained to the document region, otherwise,
-	     * getRegion will be called on this argument to determine the region we need to constrain to.
-	     *
-	     * @param {Boolean/Object} config.sync Either boolean or an object with {width, height}. If it is boolean,
-	     * both width and height will be synced. If directions are specified, will only sync the direction which is specified as true
-	     *
-	     * @return {String}
-	     *
-	     */
-	Region.prototype.alignTo = function(target, positions, config){
-
-	    config = config || {}
-
-	    var sourceRegion = this
-	    var targetRegion = Region.from(target)
-
-	    var result = COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config)
-	    var resultRegion = result.region
-
-	    if (!resultRegion.equalsSize(sourceRegion)){
-	        this.setSize(resultRegion.getSize())
-	    }
-	    if (!resultRegion.equalsPosition(sourceRegion)){
-	        this.setPosition(resultRegion.getPosition(), { absolute: !!config.absolute })
-	    }
-
-	    return result.position
-	}
-
-	module.exports = Region
 
 /***/ },
 /* 75 */
@@ -11595,12 +11594,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = /[-\s]+(.)?/g
-
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(process) {// Generated by CoffeeScript 1.6.3
 	(function() {
 	  var getNanoSeconds, hrtime, loadTime;
@@ -11638,10 +11631,113 @@ return /******/ (function(modules) { // webpackBootstrap
 	//@ sourceMappingURL=performance-now.map
 	*/
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(47)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)))
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = /[-\s]+(.)?/g
 
 /***/ },
 /* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = __webpack_require__(82)(/^[a-zA-Z0-9]+$/)
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var F = __webpack_require__(114)
+
+	module.exports = F.curry(function(re, value){
+	    return !!re.test(value)
+	})
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var regex = /^[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}$/i
+	var regex2 = /^\{[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}\}$/i
+
+	module.exports = function(value){
+	    return regex.test(value) || regex2.test(value)
+	}
+
+
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = __webpack_require__(115).numeric
+
+/***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var getPrefix     = __webpack_require__(104)
+	var forcePrefixed = __webpack_require__(106)
+	var el            = __webpack_require__(105)
+
+	var MEMORY = {}
+	var STYLE
+	var ELEMENT
+
+	module.exports = function(key, value, force){
+
+	    ELEMENT = ELEMENT || el()
+	    STYLE   = STYLE   ||  ELEMENT.style
+
+	    var k = key + ': ' + value
+
+	    if (MEMORY[k]){
+	        return MEMORY[k]
+	    }
+
+	    var prefix
+	    var prefixed
+	    var prefixedValue
+
+	    if (force || !(key in STYLE)){
+
+	        prefix = getPrefix('appearance')
+
+	        if (prefix){
+	            prefixed = forcePrefixed(key, value)
+
+	            prefixedValue = '-' + prefix.toLowerCase() + '-' + value
+
+	            if (prefixed in STYLE){
+	                ELEMENT.style[prefixed] = ''
+	                ELEMENT.style[prefixed] = prefixedValue
+
+	                if (ELEMENT.style[prefixed] !== ''){
+	                    value = prefixedValue
+	                }
+	            }
+	        }
+	    }
+
+	    MEMORY[k] = value
+
+	    return value
+	}
+
+/***/ },
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11697,7 +11793,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 82 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11738,109 +11834,256 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var getPrefix     = __webpack_require__(104)
-	var forcePrefixed = __webpack_require__(106)
-	var el            = __webpack_require__(105)
-
-	var MEMORY = {}
-	var STYLE
-	var ELEMENT
-
-	module.exports = function(key, value, force){
-
-	    ELEMENT = ELEMENT || el()
-	    STYLE   = STYLE   ||  ELEMENT.style
-
-	    var k = key + ': ' + value
-
-	    if (MEMORY[k]){
-	        return MEMORY[k]
-	    }
-
-	    var prefix
-	    var prefixed
-	    var prefixedValue
-
-	    if (force || !(key in STYLE)){
-
-	        prefix = getPrefix('appearance')
-
-	        if (prefix){
-	            prefixed = forcePrefixed(key, value)
-
-	            prefixedValue = '-' + prefix.toLowerCase() + '-' + value
-
-	            if (prefixed in STYLE){
-	                ELEMENT.style[prefixed] = ''
-	                ELEMENT.style[prefixed] = prefixedValue
-
-	                if (ELEMENT.style[prefixed] !== ''){
-	                    value = prefixedValue
-	                }
-	            }
-	        }
-	    }
-
-	    MEMORY[k] = value
-
-	    return value
-	}
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = __webpack_require__(85)(/^[a-zA-Z0-9]+$/)
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var F = __webpack_require__(114)
-
-	module.exports = F.curry(function(re, value){
-	    return !!re.test(value)
-	})
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var regex = /^[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}$/i
-	var regex2 = /^\{[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}\}$/i
-
-	module.exports = function(value){
-	    return regex.test(value) || regex2.test(value)
-	}
-
-
-
-/***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = __webpack_require__(115).numeric
-
-/***/ },
 /* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict'
+
+	var Region = __webpack_require__(20)
+
+	/**
+	 * @static
+	 * Aligns the source region to the target region, so as to correspond to the given alignment.
+	 *
+	 * NOTE that this method makes changes on the sourceRegion in order for it to be aligned as specified.
+	 *
+	 * @param {Region} sourceRegion
+	 * @param {Region} targetRegion
+	 *
+	 * @param {String} align A string with 2 valid align positions, eg: 'tr-bl'.
+	 * For valid positions, see {@link Region#getPoint}
+	 *
+	 * Having 2 regions, we need to be able to align them as we wish:
+	 *
+	 * for example, if we have
+	 *
+	 *       source    target
+	 *       ________________
+	 *       ____
+	 *      |    |     ________
+	 *      |____|    |        |
+	 *                |        |
+	 *                |________|
+	 *
+	 * and we align 't-t', we get:
+	 *
+	 *       source    target
+	 *       _________________
+	 *
+	 *       ____      ________
+	 *      |    |    |        |
+	 *      |____|    |        |
+	 *                |________|
+	 *
+	 *  In this case, the source was moved down to be aligned to the top of the target
+	 *
+	 *
+	 * and if we align 'tc-tc' we get
+	 *
+	 *       source     target
+	 *       __________________
+	 *
+	 *                 ________
+	 *                | |    | |
+	 *                | |____| |
+	 *                |________|
+	 *
+	 *  Since the source was moved to have the top-center point to be the same with target top-center
+	 *
+	 *
+	 *
+	 * @return {RegionClass} The Region class
+	 */
+	Region.align = function(sourceRegion, targetRegion, align){
+
+	    targetRegion = Region.from(targetRegion)
+
+	    align = (align || 'c-c').split('-')
+
+	    //<debug>
+	    if (align.length != 2){
+	        console.warn('Incorrect region alignment! The align parameter need to be in the form \'br-c\', that is, a - separated string!', align)
+	    }
+	    //</debug>
+
+	    return Region.alignToPoint(sourceRegion, targetRegion.getPoint(align[1]), align[0])
+	}
+
+	/**
+	 * Modifies the given region to be aligned to the point, as specified by anchor
+	 *
+	 * @param {Region} region The region to align to the point
+	 * @param {Object} point The point to be used as a reference
+	 * @param {Number} point.x
+	 * @param {Number} point.y
+	 * @param {String} anchor The position where to anchor the region to the point. See {@link #getPoint} for available options/
+	 *
+	 * @return {Region} the given region
+	 */
+	Region.alignToPoint = function(region, point, anchor){
+
+	    region = Region.from(region)
+
+	    var sourcePoint = region.getPoint(anchor)
+	    var count       = 0
+	    var shiftObj    = {}
+
+	    if (
+	            sourcePoint.x != null &&
+	            point.x != null
+	        ){
+
+	            count++
+	            shiftObj.left = point.x - sourcePoint.x
+	    }
+
+	    if (
+	            sourcePoint.y != null &&
+	            point.y != null
+	        ){
+	            count++
+	            shiftObj.top = point.y - sourcePoint.y
+	    }
+
+	    if (count){
+
+	        region.shift(shiftObj)
+
+	    }
+
+	    return region
+	}
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
-	var Region       = __webpack_require__(74)
+	var Region = __webpack_require__(20)
+
+	/**
+	 *
+	 * Aligns this region to the given region
+	 * @param {Region} region
+	 * @param {String} alignPositions For available positions, see {@link #getPoint}
+	 *
+	 *     eg: 'tr-bl'
+	 *
+	 * @return this
+	 */
+	Region.prototype.alignToRegion = function(region, alignPositions){
+	    Region.align(this, region, alignPositions)
+
+	    return this
+	}
+
+	/**
+	 * Aligns this region to the given point, in the anchor position
+	 * @param {Object} point eg: {x: 20, y: 600}
+	 * @param {Number} point.x
+	 * @param {Number} point.y
+	 *
+	 * @param {String} anchor For available positions, see {@link #getPoint}
+	 *
+	 *     eg: 'bl'
+	 *
+	 * @return this
+	 */
+	 Region.prototype.alignToPoint = function(point, anchor){
+	    Region.alignToPoint(this, point, anchor)
+
+	    return this
+	}
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var ALIGN_TO_NORMALIZED = __webpack_require__(107)
+
+	var Region = __webpack_require__(20)
+
+	/**
+	 * @localdoc Given source and target regions, and the given alignments required, returns a region that is the resulting allignment.
+	 * Does not modify the sourceRegion.
+	 *
+	 * Example
+	 *
+	 *      var sourceRegion = zippy.getInstance({
+	 *          alias  : 'z.region',
+	 *          top    : 10,
+	 *          left   : 10,
+	 *          bottom : 40,
+	 *          right  : 100
+	 *      })
+	 *
+	 *      var targetRegion = zippy.getInstance({
+	 *          alias  : 'z.region',
+	 *          top    : 10,
+	 *          left   : 10,
+	 *          bottom : 40,
+	 *          right  : 100
+	 *      })
+	 *      //has top-left at (10,10)
+	 *      //and bottom-right at (40, 100)
+	 *
+	 *      var alignRegion = alignable.COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, 'tl-br')
+	 *
+	 *      //alignRegion will be a clone of sourceRegion, but will have the
+	 *      //top-left corner aligned with bottom-right of targetRegion
+	 *
+	 *      alignRegion.get() // => { top: 40, left: 100, bottom: 70, right: 190 }
+	 *
+	 * @param  {Region} sourceRegion The source region to align to targetRegion
+	 * @param  {Region} targetRegion The target region to which to align the sourceRegion
+	 * @param  {String/String[]} positions    A string ( delimited by "-" characters ) or an array of strings with the position to try, in the order of their priority.
+	 * See Region#getPoint for a list of available positions. They can be combined in any way.
+	 * @param  {Object} config      A config object with other configuration for the alignment
+	 * @param  {Object/Object[]} config.offset      Optional offsets. Either an object or an array with a different offset for each position
+	 * @param  {Element/Region/Boolean} config.constrain  The constrain to region or element. If the boolean true, Region.getDocRegion() will be used
+	 * @param  {Object/Boolean} config.sync   A boolean object that indicates whether to sync sourceRegion and targetRegion sizes (width/height or both). Can be
+	 *
+	 *  * true - in order to sync both width and height
+	 *  * { width: true }  - to only sync width
+	 *  * { height: true } - to only sync height
+	 *  * { size: true }   - to sync both width and height
+	 *
+	 * @return {Object} an object with the following keys:
+	 *
+	 *  * position - the position where the alignment was made. One of the given positions
+	 *  * region   - the region where the alignment is in place
+	 *  * positionChanged - boolean value indicating if the position of the returned region is different from the position of sourceRegion
+	 *  * widthChanged    - boolean value indicating if the width of the returned region is different from the width of sourceRegion
+	 *  * heightChanged   - boolean value indicating if the height of the returned region is different from the height of sourceRegion
+	 */
+	function COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config){
+	    sourceRegion = Region.from(sourceRegion)
+
+	    var sourceClone = sourceRegion.clone()
+	    var position    = ALIGN_TO_NORMALIZED(sourceClone, targetRegion, positions, config)
+
+	    return {
+	        position        : position,
+	        region          : sourceClone,
+	        widthChanged    : sourceClone.getWidth() != sourceRegion.getWidth(),
+	        heightChanged   : sourceClone.getHeight() != sourceRegion.getHeight(),
+	        positionChanged : sourceClone.equalsPosition(sourceRegion)
+	    }
+	}
+
+
+	module.exports = COMPUTE_ALIGN_REGION
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Region       = __webpack_require__(70)
 	var selectParent = __webpack_require__(117)
 
 	module.exports = function(domNode){
@@ -11860,12 +12103,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 89 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Region = __webpack_require__(74)
+	var Region = __webpack_require__(70)
 	var selectParent = __webpack_require__(117)
 
 	module.exports = function(constrainTo){
@@ -11888,12 +12131,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 90 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var assign = __webpack_require__(18)
+	var assign = __webpack_require__(19)
 
 	module.exports = function(props, state){
 
@@ -11915,15 +12158,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 91 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Region           = __webpack_require__(74)
-	var assign           = __webpack_require__(18)
+	var Region           = __webpack_require__(70)
+	var assign           = __webpack_require__(19)
 	var cloneWithProps   = __webpack_require__(118)
-	var getPositionStyle = __webpack_require__(107)
+	var getPositionStyle = __webpack_require__(108)
 
 	module.exports = function(props, state) {
 	    var menu = state.menu
@@ -11954,16 +12197,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 92 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1)
-	var MenuItemCell = __webpack_require__(71)
+	var MenuItemCell = __webpack_require__(72)
 
 	var cloneWithProps = __webpack_require__(118)
-	var assign         = __webpack_require__(18)
+	var assign         = __webpack_require__(19)
 
 	function emptyFn(){}
 
@@ -12051,18 +12294,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 93 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
+	var assign = __webpack_require__(19)
 
-	var renderCells     = __webpack_require__(108)
-	var MenuItem        = __webpack_require__(73)
+	var renderCells     = __webpack_require__(110)
+	var MenuItem        = __webpack_require__(74)
 	var MenuItemFactory = React.createFactory(MenuItem)
-	var MenuSeparator   = __webpack_require__(72)
+	var MenuSeparator   = __webpack_require__(73)
 
 	module.exports = function(props, state, item, index) {
 
@@ -12091,7 +12334,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    itemProps.children = renderCells(itemProps)
 
 	    if (item.items){
-	        var Menu = __webpack_require__(70)
+	        var Menu = __webpack_require__(71)
 	        itemProps.children.push(React.createElement(Menu, {items: item.items}))
 	    }
 
@@ -12099,7 +12342,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 94 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12123,14 +12366,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 95 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 
 	var React    = __webpack_require__(1)
-	var assign   = __webpack_require__(18)
-	var buffer   = __webpack_require__(20)
+	var assign   = __webpack_require__(19)
+	var buffer   = __webpack_require__(18)
 
 	var Scroller = __webpack_require__(109)
 
@@ -12371,7 +12614,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	})
 
 /***/ },
-/* 96 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12404,258 +12647,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 97 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var Region = __webpack_require__(19)
-
-	/**
-	 * @static
-	 * Aligns the source region to the target region, so as to correspond to the given alignment.
-	 *
-	 * NOTE that this method makes changes on the sourceRegion in order for it to be aligned as specified.
-	 *
-	 * @param {Region} sourceRegion
-	 * @param {Region} targetRegion
-	 *
-	 * @param {String} align A string with 2 valid align positions, eg: 'tr-bl'.
-	 * For valid positions, see {@link Region#getPoint}
-	 *
-	 * Having 2 regions, we need to be able to align them as we wish:
-	 *
-	 * for example, if we have
-	 *
-	 *       source    target
-	 *       ________________
-	 *       ____
-	 *      |    |     ________
-	 *      |____|    |        |
-	 *                |        |
-	 *                |________|
-	 *
-	 * and we align 't-t', we get:
-	 *
-	 *       source    target
-	 *       _________________
-	 *
-	 *       ____      ________
-	 *      |    |    |        |
-	 *      |____|    |        |
-	 *                |________|
-	 *
-	 *  In this case, the source was moved down to be aligned to the top of the target
-	 *
-	 *
-	 * and if we align 'tc-tc' we get
-	 *
-	 *       source     target
-	 *       __________________
-	 *
-	 *                 ________
-	 *                | |    | |
-	 *                | |____| |
-	 *                |________|
-	 *
-	 *  Since the source was moved to have the top-center point to be the same with target top-center
-	 *
-	 *
-	 *
-	 * @return {RegionClass} The Region class
-	 */
-	Region.align = function(sourceRegion, targetRegion, align){
-
-	    targetRegion = Region.from(targetRegion)
-
-	    align = (align || 'c-c').split('-')
-
-	    //<debug>
-	    if (align.length != 2){
-	        console.warn('Incorrect region alignment! The align parameter need to be in the form \'br-c\', that is, a - separated string!', align)
-	    }
-	    //</debug>
-
-	    return Region.alignToPoint(sourceRegion, targetRegion.getPoint(align[1]), align[0])
-	}
-
-	/**
-	 * Modifies the given region to be aligned to the point, as specified by anchor
-	 *
-	 * @param {Region} region The region to align to the point
-	 * @param {Object} point The point to be used as a reference
-	 * @param {Number} point.x
-	 * @param {Number} point.y
-	 * @param {String} anchor The position where to anchor the region to the point. See {@link #getPoint} for available options/
-	 *
-	 * @return {Region} the given region
-	 */
-	Region.alignToPoint = function(region, point, anchor){
-
-	    region = Region.from(region)
-
-	    var sourcePoint = region.getPoint(anchor)
-	    var count       = 0
-	    var shiftObj    = {}
-
-	    if (
-	            sourcePoint.x != null &&
-	            point.x != null
-	        ){
-
-	            count++
-	            shiftObj.left = point.x - sourcePoint.x
-	    }
-
-	    if (
-	            sourcePoint.y != null &&
-	            point.y != null
-	        ){
-	            count++
-	            shiftObj.top = point.y - sourcePoint.y
-	    }
-
-	    if (count){
-
-	        region.shift(shiftObj)
-
-	    }
-
-	    return region
-	}
-
-/***/ },
-/* 98 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(19)
-
-	/**
-	 *
-	 * Aligns this region to the given region
-	 * @param {Region} region
-	 * @param {String} alignPositions For available positions, see {@link #getPoint}
-	 *
-	 *     eg: 'tr-bl'
-	 *
-	 * @return this
-	 */
-	Region.prototype.alignToRegion = function(region, alignPositions){
-	    Region.align(this, region, alignPositions)
-
-	    return this
-	}
-
-	/**
-	 * Aligns this region to the given point, in the anchor position
-	 * @param {Object} point eg: {x: 20, y: 600}
-	 * @param {Number} point.x
-	 * @param {Number} point.y
-	 *
-	 * @param {String} anchor For available positions, see {@link #getPoint}
-	 *
-	 *     eg: 'bl'
-	 *
-	 * @return this
-	 */
-	 Region.prototype.alignToPoint = function(point, anchor){
-	    Region.alignToPoint(this, point, anchor)
-
-	    return this
-	}
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var ALIGN_TO_NORMALIZED = __webpack_require__(110)
-
-	var Region = __webpack_require__(19)
-
-	/**
-	 * @localdoc Given source and target regions, and the given alignments required, returns a region that is the resulting allignment.
-	 * Does not modify the sourceRegion.
-	 *
-	 * Example
-	 *
-	 *      var sourceRegion = zippy.getInstance({
-	 *          alias  : 'z.region',
-	 *          top    : 10,
-	 *          left   : 10,
-	 *          bottom : 40,
-	 *          right  : 100
-	 *      })
-	 *
-	 *      var targetRegion = zippy.getInstance({
-	 *          alias  : 'z.region',
-	 *          top    : 10,
-	 *          left   : 10,
-	 *          bottom : 40,
-	 *          right  : 100
-	 *      })
-	 *      //has top-left at (10,10)
-	 *      //and bottom-right at (40, 100)
-	 *
-	 *      var alignRegion = alignable.COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, 'tl-br')
-	 *
-	 *      //alignRegion will be a clone of sourceRegion, but will have the
-	 *      //top-left corner aligned with bottom-right of targetRegion
-	 *
-	 *      alignRegion.get() // => { top: 40, left: 100, bottom: 70, right: 190 }
-	 *
-	 * @param  {Region} sourceRegion The source region to align to targetRegion
-	 * @param  {Region} targetRegion The target region to which to align the sourceRegion
-	 * @param  {String/String[]} positions    A string ( delimited by "-" characters ) or an array of strings with the position to try, in the order of their priority.
-	 * See Region#getPoint for a list of available positions. They can be combined in any way.
-	 * @param  {Object} config      A config object with other configuration for the alignment
-	 * @param  {Object/Object[]} config.offset      Optional offsets. Either an object or an array with a different offset for each position
-	 * @param  {Element/Region/Boolean} config.constrain  The constrain to region or element. If the boolean true, Region.getDocRegion() will be used
-	 * @param  {Object/Boolean} config.sync   A boolean object that indicates whether to sync sourceRegion and targetRegion sizes (width/height or both). Can be
-	 *
-	 *  * true - in order to sync both width and height
-	 *  * { width: true }  - to only sync width
-	 *  * { height: true } - to only sync height
-	 *  * { size: true }   - to sync both width and height
-	 *
-	 * @return {Object} an object with the following keys:
-	 *
-	 *  * position - the position where the alignment was made. One of the given positions
-	 *  * region   - the region where the alignment is in place
-	 *  * positionChanged - boolean value indicating if the position of the returned region is different from the position of sourceRegion
-	 *  * widthChanged    - boolean value indicating if the width of the returned region is different from the width of sourceRegion
-	 *  * heightChanged   - boolean value indicating if the height of the returned region is different from the height of sourceRegion
-	 */
-	function COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config){
-	    sourceRegion = Region.from(sourceRegion)
-
-	    var sourceClone = sourceRegion.clone()
-	    var position    = ALIGN_TO_NORMALIZED(sourceClone, targetRegion, positions, config)
-
-	    return {
-	        position        : position,
-	        region          : sourceClone,
-	        widthChanged    : sourceClone.getWidth() != sourceRegion.getWidth(),
-	        heightChanged   : sourceClone.getHeight() != sourceRegion.getHeight(),
-	        positionChanged : sourceClone.equalsPosition(sourceRegion)
-	    }
-	}
-
-
-	module.exports = COMPUTE_ALIGN_REGION
-
-/***/ },
 /* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React        = __webpack_require__(1)
-	var Menu         = __webpack_require__(70)
-	var MenuItemCell = __webpack_require__(71)
+	var Menu         = __webpack_require__(71)
+	var MenuItemCell = __webpack_require__(72)
 	var renderCell   = __webpack_require__(111)
 	var cloneWithProps = __webpack_require__(118)
 
@@ -12840,7 +12839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var toUpperFirst = __webpack_require__(103)
 	var getPrefix    = __webpack_require__(104)
-	var properties   = __webpack_require__(82)
+	var properties   = __webpack_require__(87)
 
 	/**
 	 * Returns the given key prefixed, if the property is found in the prefixProps map.
@@ -12865,10 +12864,192 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict'
+
+	var Region = __webpack_require__(20)
+
+	/**
+	 *
+	 * This method is trying to align the sourceRegion to the targetRegion, given the alignment positions
+	 * and the offsets. It only modifies the sourceRegion
+	 *
+	 * This is all well and easy, but if there is a constrainTo region, the algorithm has to take it into account.
+	 * In this case, it works as follows.
+	 *
+	 *  * start with the first alignment position. Aligns the region, adds the offset and then check for the constraint.
+	 *  * if the constraint condition is ok, return the position.
+	 *  * otherwise, remember the intersection area, if the regions are intersecting.
+	 *  * then go to the next specified align position, and so on, computing the maximum intersection area.
+	 *
+	 * If no alignment fits the constrainRegion, the sourceRegion will be resized to match it,
+	 * using the position with the maximum intersection area.
+	 *
+	 * Since we have computed the index of the position with the max intersection area, take that position,
+	 * and align the sourceRegion accordingly. Then resize the sourceRegion to the intersection, and reposition
+	 * it again, since resizing it might have destroyed the alignment.
+	 *
+	 * Return the position.
+	 *
+	 * @param {Region} sourceRegion
+	 * @param {Region} targetRegion
+	 * @param {String[]} positions
+	 * @param {Object} config
+	 * @param {Array} config.offset
+	 * @param {Region} config.constrain
+	 * @param {Boolean/Object} config.sync
+	 *
+	 * @return {String/Undefined} the chosen position for the alignment, or undefined if no position found
+	 */
+	function ALIGN_TO_NORMALIZED(sourceRegion, targetRegion, positions, config){
+
+	    targetRegion = Region.from(targetRegion)
+
+	    config = config  || {}
+
+	    var constrainTo = config.constrain,
+	        syncOption  = config.sync,
+	        offsets     = config.offset || [],
+	        syncWidth   = false,
+	        syncHeight  = false,
+	        sourceClone = sourceRegion.clone()
+
+	    /*
+	     * Prepare the method arguments: positions, offsets, constrain and sync options
+	     */
+	    if (!Array.isArray(positions)){
+	        positions = positions? [positions]: []
+	    }
+
+	    if (!Array.isArray(offsets)){
+	        offsets = offsets? [offsets]: []
+	    }
+
+	    if (constrainTo){
+	        constrainTo = constrainTo === true?
+	                                Region.getDocRegion():
+	                                constrainTo.getRegion()
+	    }
+
+	    if (syncOption){
+
+	        if (syncOption.size){
+	            syncWidth  = true
+	            syncHeight = true
+	        } else {
+	            syncWidth  = syncOption === true?
+	                            true:
+	                            syncOption.width || false
+
+	            syncHeight = syncOption === true?
+	                            true:
+	                            syncOption.height || false
+	        }
+	    }
+
+	    if (syncWidth){
+	        sourceClone.setWidth(targetRegion.getWidth())
+	    }
+	    if (syncHeight){
+	        sourceClone.setHeight(targetRegion.getHeight())
+
+	    }
+
+	    var offset,
+	        i = 0,
+	        len = positions.length,
+	        pos,
+	        intersection,
+	        itArea,
+	        maxArea = -1,
+	        maxAreaIndex = -1
+
+	    for (; i < len; i++){
+	        pos     = positions[i]
+	        offset  = offsets[i]
+
+	        sourceClone.alignToRegion(targetRegion, pos)
+
+	        if (offset){
+	            if (!Array.isArray(offset)){
+	                offset = offsets[i] = [offset.x || offset.left, offset.y || offset.top]
+	            }
+
+	            sourceClone.shift({
+	                left: offset[0],
+	                top : offset[1]
+	            })
+	        }
+
+	        //the source region is already aligned in the correct position
+
+	        if (constrainTo){
+	            //if we have a constrain region, test for the constrain
+	            intersection = sourceClone.getIntersection(constrainTo)
+
+	            if ( intersection && intersection.equals(sourceClone) ) {
+	                //constrain respected, so return (the aligned position)
+
+	                sourceRegion.set(sourceClone)
+	                return pos
+	            } else {
+
+	                //the constrain was not respected, so continue trying
+	                if (intersection && ((itArea = intersection.getArea()) > maxArea)){
+	                    maxArea      = itArea
+	                    maxAreaIndex = i
+	                }
+	            }
+
+	        } else {
+	            sourceRegion.set(sourceClone)
+	            return pos
+	        }
+	    }
+
+	    //no alignment respected the constraints
+	    if (~maxAreaIndex){
+	        pos     = positions[maxAreaIndex]
+	        offset  = offsets[maxAreaIndex]
+
+	        sourceClone.alignToRegion(targetRegion, pos)
+
+	        if (offset){
+	            sourceClone.shift({
+	                left: offset[0],
+	                top : offset[1]
+	            })
+	        }
+
+	        //we are sure an intersection exists, because of the way the maxAreaIndex was computed
+	        intersection = sourceClone.getIntersection(constrainTo)
+
+	        sourceClone.setRegion(intersection)
+	        sourceClone.alignToRegion(targetRegion, pos)
+
+	        if (offset){
+	            sourceClone.shift({
+	                left: offset[0],
+	                top : offset[1]
+	            })
+	        }
+
+	        sourceRegion.set(sourceClone)
+
+	        return pos
+	    }
+
+	}
+
+	module.exports = ALIGN_TO_NORMALIZED
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
-	var Region = __webpack_require__(74)
-	var assign = __webpack_require__(18)
+	var Region = __webpack_require__(70)
+	var assign = __webpack_require__(19)
 	var align  = __webpack_require__(119)
 
 	module.exports = function getPositionStyle(props, state){
@@ -12976,25 +13157,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 108 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var renderCell = __webpack_require__(111)
-
-	module.exports = function(props) {
-	    return props.columns.map(renderCell.bind(null, props))
-	}
-
-/***/ },
 /* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React         = __webpack_require__(1)
-	var assign        = __webpack_require__(18)
+	var assign        = __webpack_require__(19)
 	var getArrowStyle = __webpack_require__(120)
 
 	function emptyFn(){}
@@ -13196,183 +13365,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	var Region = __webpack_require__(19)
+	var renderCell = __webpack_require__(111)
 
-	/**
-	 *
-	 * This method is trying to align the sourceRegion to the targetRegion, given the alignment positions
-	 * and the offsets. It only modifies the sourceRegion
-	 *
-	 * This is all well and easy, but if there is a constrainTo region, the algorithm has to take it into account.
-	 * In this case, it works as follows.
-	 *
-	 *  * start with the first alignment position. Aligns the region, adds the offset and then check for the constraint.
-	 *  * if the constraint condition is ok, return the position.
-	 *  * otherwise, remember the intersection area, if the regions are intersecting.
-	 *  * then go to the next specified align position, and so on, computing the maximum intersection area.
-	 *
-	 * If no alignment fits the constrainRegion, the sourceRegion will be resized to match it,
-	 * using the position with the maximum intersection area.
-	 *
-	 * Since we have computed the index of the position with the max intersection area, take that position,
-	 * and align the sourceRegion accordingly. Then resize the sourceRegion to the intersection, and reposition
-	 * it again, since resizing it might have destroyed the alignment.
-	 *
-	 * Return the position.
-	 *
-	 * @param {Region} sourceRegion
-	 * @param {Region} targetRegion
-	 * @param {String[]} positions
-	 * @param {Object} config
-	 * @param {Array} config.offset
-	 * @param {Region} config.constrain
-	 * @param {Boolean/Object} config.sync
-	 *
-	 * @return {String/Undefined} the chosen position for the alignment, or undefined if no position found
-	 */
-	function ALIGN_TO_NORMALIZED(sourceRegion, targetRegion, positions, config){
-
-	    targetRegion = Region.from(targetRegion)
-
-	    config = config  || {}
-
-	    var constrainTo = config.constrain,
-	        syncOption  = config.sync,
-	        offsets     = config.offset || [],
-	        syncWidth   = false,
-	        syncHeight  = false,
-	        sourceClone = sourceRegion.clone()
-
-	    /*
-	     * Prepare the method arguments: positions, offsets, constrain and sync options
-	     */
-	    if (!Array.isArray(positions)){
-	        positions = positions? [positions]: []
-	    }
-
-	    if (!Array.isArray(offsets)){
-	        offsets = offsets? [offsets]: []
-	    }
-
-	    if (constrainTo){
-	        constrainTo = constrainTo === true?
-	                                Region.getDocRegion():
-	                                constrainTo.getRegion()
-	    }
-
-	    if (syncOption){
-
-	        if (syncOption.size){
-	            syncWidth  = true
-	            syncHeight = true
-	        } else {
-	            syncWidth  = syncOption === true?
-	                            true:
-	                            syncOption.width || false
-
-	            syncHeight = syncOption === true?
-	                            true:
-	                            syncOption.height || false
-	        }
-	    }
-
-	    if (syncWidth){
-	        sourceClone.setWidth(targetRegion.getWidth())
-	    }
-	    if (syncHeight){
-	        sourceClone.setHeight(targetRegion.getHeight())
-
-	    }
-
-	    var offset,
-	        i = 0,
-	        len = positions.length,
-	        pos,
-	        intersection,
-	        itArea,
-	        maxArea = -1,
-	        maxAreaIndex = -1
-
-	    for (; i < len; i++){
-	        pos     = positions[i]
-	        offset  = offsets[i]
-
-	        sourceClone.alignToRegion(targetRegion, pos)
-
-	        if (offset){
-	            if (!Array.isArray(offset)){
-	                offset = offsets[i] = [offset.x || offset.left, offset.y || offset.top]
-	            }
-
-	            sourceClone.shift({
-	                left: offset[0],
-	                top : offset[1]
-	            })
-	        }
-
-	        //the source region is already aligned in the correct position
-
-	        if (constrainTo){
-	            //if we have a constrain region, test for the constrain
-	            intersection = sourceClone.getIntersection(constrainTo)
-
-	            if ( intersection && intersection.equals(sourceClone) ) {
-	                //constrain respected, so return (the aligned position)
-
-	                sourceRegion.set(sourceClone)
-	                return pos
-	            } else {
-
-	                //the constrain was not respected, so continue trying
-	                if (intersection && ((itArea = intersection.getArea()) > maxArea)){
-	                    maxArea      = itArea
-	                    maxAreaIndex = i
-	                }
-	            }
-
-	        } else {
-	            sourceRegion.set(sourceClone)
-	            return pos
-	        }
-	    }
-
-	    //no alignment respected the constraints
-	    if (~maxAreaIndex){
-	        pos     = positions[maxAreaIndex]
-	        offset  = offsets[maxAreaIndex]
-
-	        sourceClone.alignToRegion(targetRegion, pos)
-
-	        if (offset){
-	            sourceClone.shift({
-	                left: offset[0],
-	                top : offset[1]
-	            })
-	        }
-
-	        //we are sure an intersection exists, because of the way the maxAreaIndex was computed
-	        intersection = sourceClone.getIntersection(constrainTo)
-
-	        sourceClone.setRegion(intersection)
-	        sourceClone.alignToRegion(targetRegion, pos)
-
-	        if (offset){
-	            sourceClone.shift({
-	                left: offset[0],
-	                top : offset[1]
-	            })
-	        }
-
-	        sourceRegion.set(sourceClone)
-
-	        return pos
-	    }
-
+	module.exports = function(props) {
+	    return props.columns.map(renderCell.bind(null, props))
 	}
-
-	module.exports = ALIGN_TO_NORMALIZED
 
 /***/ },
 /* 111 */
@@ -13381,8 +13380,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React        = __webpack_require__(1)
-	var assign       = __webpack_require__(18)
-	var MenuItemCell = __webpack_require__(71)
+	var assign       = __webpack_require__(19)
+	var MenuItemCell = __webpack_require__(72)
 
 	module.exports = function(props, column) {
 	    var style = assign({}, props.defaultCellStyle, props.cellStyle)
@@ -13600,7 +13599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var SLICE = Array.prototype.slice
 
-	    var curry = __webpack_require__(121),
+	    var curry = __webpack_require__(124),
 
 	        findFn = function(fn, target, onFound){
 	            // if (typeof target.find == 'function'){
@@ -13671,19 +13670,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	         *
 	         * @return the result of the first function in the enumeration
 	         */
-	        compose = __webpack_require__(122),
+	        compose = __webpack_require__(125),
 
-	        chain = __webpack_require__(123),
+	        chain = __webpack_require__(126),
 
-	        once = __webpack_require__(124),
+	        once = __webpack_require__(127),
 
-	        bindArgsArray = __webpack_require__(125),
+	        bindArgsArray = __webpack_require__(128),
 
-	        bindArgs = __webpack_require__(126),
+	        bindArgs = __webpack_require__(129),
 
-	        lockArgsArray = __webpack_require__(127),
+	        lockArgsArray = __webpack_require__(130),
 
-	        lockArgs = __webpack_require__(128),
+	        lockArgs = __webpack_require__(131),
 
 	        skipArgs = function(fn, count){
 	            return function(){
@@ -14041,11 +14040,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 
-	    map: __webpack_require__(129),
+	    map: __webpack_require__(132),
 
-	    dot: __webpack_require__(130),
+	    dot: __webpack_require__(133),
 
-	    maxArgs: __webpack_require__(131),
+	    maxArgs: __webpack_require__(134),
 
 	    /**
 	     * @method compose
@@ -14164,14 +14163,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    findIndex: findIndex,
 
-	    newify: __webpack_require__(132)
+	    newify: __webpack_require__(135)
 	}
 
 /***/ },
 /* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(133)
+	module.exports = __webpack_require__(123)
 
 /***/ },
 /* 116 */
@@ -14309,12 +14308,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var curry   = __webpack_require__(134)
+	var curry   = __webpack_require__(121)
 	var matches
 
 	module.exports = curry(function(selector, node){
 
-		matches = matches || __webpack_require__(135)
+		matches = matches || __webpack_require__(122)
 
 	    while (node = node.parentElement){
 	        if (matches.call(node, selector)){
@@ -14405,8 +14404,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region = __webpack_require__(74)
-	var getConstrainRegion = __webpack_require__(89)
+	var Region = __webpack_require__(70)
+	var getConstrainRegion = __webpack_require__(92)
 
 	module.exports = function(props, subMenuRegion, targetAlignRegion, constrainTo){
 	    var constrainRegion = getConstrainRegion.call(this, constrainTo)
@@ -14492,7 +14491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
 	function curry(fn, n){
 
@@ -14530,203 +14529,21 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	function composeTwo(f, g) {
-	    return function () {
-	        return f(g.apply(this, arguments))
-	    }
-	}
+	var proto = Element.prototype
 
-	/*
-	 * @param {Function...} an enumeration of functions, each consuming the result of the following function.
-	 *
-	 * For example: compose(c, b, a)(1,4) == c(b(a(1,4)))
-	 *
-	 * @return the result of the first function in the enumeration
-	 */
-	module.exports = function(){
+	var nativeMatches = proto.matches ||
+	  proto.mozMatchesSelector ||
+	  proto.msMatchesSelector ||
+	  proto.oMatchesSelector ||
+	  proto.webkitMatchesSelector
 
-	    var args = arguments
-	    var len  = args.length
-	    var i    = 0
-	    var f    = args[0]
+	module.exports = nativeMatches
 
-	    while (++i < len) {
-	        f = composeTwo(f, args[i])
-	    }
-
-	    return f
-	}
 
 /***/ },
 /* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	function chain(where, fn, secondFn){
-
-	    return function(){
-	        if (where === 'before'){
-	            secondFn.apply(this, arguments)
-	        }
-
-	        var result = fn.apply(this, arguments)
-
-	        if (where !== 'before'){
-	            secondFn.apply(this, arguments)
-	        }
-
-	        return result
-	    }
-	}
-
-	module.exports = chain
-
-/***/ },
-/* 124 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use once'
-
-	function once(fn, scope){
-
-	    var called
-	    var result
-
-	    return function(){
-	        if (called){
-	            return result
-	        }
-
-	        called = true
-
-	        return result = fn.apply(scope || this, arguments)
-	    }
-	}
-
-	module.exports = once
-
-/***/ },
-/* 125 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-
-	module.exports = function(fn, args){
-	    return function(){
-	        var thisArgs = SLICE.call(args || [])
-
-	        if (arguments.length){
-	            thisArgs.push.apply(thisArgs, arguments)
-	        }
-
-	        return fn.apply(this, thisArgs)
-	    }
-	}
-
-/***/ },
-/* 126 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var bindArgsArray = __webpack_require__(125)
-
-	module.exports = function(fn){
-	    return bindArgsArray(fn, SLICE.call(arguments,1))
-	}
-
-/***/ },
-/* 127 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-
-	module.exports = function(fn, args){
-
-	    return function(){
-	        if (!Array.isArray(args)){
-	            args = SLICE.call(args || [])
-	        }
-
-	        return fn.apply(this, args)
-	    }
-	}
-
-/***/ },
-/* 128 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var lockArgsArray = __webpack_require__(127)
-
-	module.exports = function(fn){
-	    return lockArgsArray(fn, SLICE.call(arguments, 1))
-	}
-
-/***/ },
-/* 129 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var curry = __webpack_require__(121)
-
-	module.exports = curry(function(fn, value){
-	    return value != undefined && typeof value.map?
-	            value.map(fn):
-	            fn(value)
-	})
-
-/***/ },
-/* 130 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var curry = __webpack_require__(121)
-
-	module.exports = curry(function(prop, value){
-	    return value != undefined? value[prop]: undefined
-	})
-
-/***/ },
-/* 131 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var curry = __webpack_require__(121)
-
-	module.exports = function(fn, count){
-	    return function(){
-	        return fn.apply(this, SLICE.call(arguments, 0, count))
-	    }
-	}
-
-/***/ },
-/* 132 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var newify = __webpack_require__(148)
-	var curry  = __webpack_require__(121)
-
-	module.exports = curry(newify)
-
-/***/ },
-/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
@@ -14747,10 +14564,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 134 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	'use strict'
 
 	function curry(fn, n){
 
@@ -14785,21 +14602,203 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = curry
 
 /***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	function composeTwo(f, g) {
+	    return function () {
+	        return f(g.apply(this, arguments))
+	    }
+	}
+
+	/*
+	 * @param {Function...} an enumeration of functions, each consuming the result of the following function.
+	 *
+	 * For example: compose(c, b, a)(1,4) == c(b(a(1,4)))
+	 *
+	 * @return the result of the first function in the enumeration
+	 */
+	module.exports = function(){
+
+	    var args = arguments
+	    var len  = args.length
+	    var i    = 0
+	    var f    = args[0]
+
+	    while (++i < len) {
+	        f = composeTwo(f, args[i])
+	    }
+
+	    return f
+	}
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	function chain(where, fn, secondFn){
+
+	    return function(){
+	        if (where === 'before'){
+	            secondFn.apply(this, arguments)
+	        }
+
+	        var result = fn.apply(this, arguments)
+
+	        if (where !== 'before'){
+	            secondFn.apply(this, arguments)
+	        }
+
+	        return result
+	    }
+	}
+
+	module.exports = chain
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use once'
+
+	function once(fn, scope){
+
+	    var called
+	    var result
+
+	    return function(){
+	        if (called){
+	            return result
+	        }
+
+	        called = true
+
+	        return result = fn.apply(scope || this, arguments)
+	    }
+	}
+
+	module.exports = once
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+
+	module.exports = function(fn, args){
+	    return function(){
+	        var thisArgs = SLICE.call(args || [])
+
+	        if (arguments.length){
+	            thisArgs.push.apply(thisArgs, arguments)
+	        }
+
+	        return fn.apply(this, thisArgs)
+	    }
+	}
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var bindArgsArray = __webpack_require__(128)
+
+	module.exports = function(fn){
+	    return bindArgsArray(fn, SLICE.call(arguments,1))
+	}
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+
+	module.exports = function(fn, args){
+
+	    return function(){
+	        if (!Array.isArray(args)){
+	            args = SLICE.call(args || [])
+	        }
+
+	        return fn.apply(this, args)
+	    }
+	}
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var lockArgsArray = __webpack_require__(130)
+
+	module.exports = function(fn){
+	    return lockArgsArray(fn, SLICE.call(arguments, 1))
+	}
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var curry = __webpack_require__(124)
+
+	module.exports = curry(function(fn, value){
+	    return value != undefined && typeof value.map?
+	            value.map(fn):
+	            fn(value)
+	})
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var curry = __webpack_require__(124)
+
+	module.exports = curry(function(prop, value){
+	    return value != undefined? value[prop]: undefined
+	})
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var curry = __webpack_require__(124)
+
+	module.exports = function(fn, count){
+	    return function(){
+	        return fn.apply(this, SLICE.call(arguments, 0, count))
+	    }
+	}
+
+/***/ },
 /* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	'use strict'
 
-	var proto = Element.prototype
+	var newify = __webpack_require__(148)
+	var curry  = __webpack_require__(124)
 
-	var nativeMatches = proto.matches ||
-	  proto.mozMatchesSelector ||
-	  proto.msMatchesSelector ||
-	  proto.oMatchesSelector ||
-	  proto.webkitMatchesSelector
-
-	module.exports = nativeMatches
-
+	module.exports = curry(newify)
 
 /***/ },
 /* 136 */
