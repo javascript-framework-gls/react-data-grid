@@ -15,6 +15,7 @@ module.exports = {
         'react': 'React'
     },
     plugins: [
+        //needed to supress vertx warning in es6-promise (Promise polyfill)
         new webpack.IgnorePlugin(/vertx/)
     ],
     resolve: {
