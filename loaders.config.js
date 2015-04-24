@@ -1,15 +1,19 @@
 module.exports = [
     {
         test: /\.jsx$/,
+        exclude: /node_modules/,
         loaders: [
             // 'react-hot',
-            'jsx-loader?insertPragma=React.DOM&harmony']
+            'babel-loader'
+        ]
     },
     {
         test: /\.js$/,
+        exclude: /node_modules/,
         loaders: [
             // 'react-hot',
-            'jsx-loader?harmony']
+            'babel-loader'
+        ]
     },
     {
         test: /\.styl$/,
