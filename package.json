@@ -4,7 +4,7 @@
   "description": "React DataGrid",
   "main": "lib/index.js",
   "scripts": {
-    "test": "make",
+    "test": "./node_modules/.bin/mocha --recursive --reporter spec --require should",
     "lib": "./node_modules/.bin/gulp",
     "build-style": "webpack --progress --colors --config build-style.config.js",
     "stats": "./node_modules/.bin/webpack --profile --progress --colors --config dist.config.js --json > stats.json",
@@ -41,7 +41,7 @@
     "gulp": "^3.8.11",
     "gulp-react": "^3.0.0",
     "http-server": "^0.7.3",
-    "jsdom": "^4.1.0",
+    "jsdom": "^5.0.1",
     "jsx-loader": "^0.12.2",
     "mocha": "^2.2.1",
     "raw-loader": "^0.5.1",
