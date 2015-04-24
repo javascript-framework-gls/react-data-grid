@@ -59,10 +59,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(21).polyfill()
 
 	var React    = __webpack_require__(1)
-	var assign   = __webpack_require__(19)
+	var assign   = __webpack_require__(18)
 	var LoadMask = __webpack_require__(22)
-	var Region   = __webpack_require__(20)
-	var buffer = __webpack_require__(18)
+	var Region   = __webpack_require__(19)
+	var buffer = __webpack_require__(20)
 
 	var PaginationToolbar = React.createFactory(__webpack_require__(2))
 	var Column = __webpack_require__(3)
@@ -1211,10 +1211,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React     = __webpack_require__(1)
-	var assign    = __webpack_require__(19)
-	var Toolbar   = __webpack_require__(40)
+	var assign    = __webpack_require__(18)
+	var Toolbar   = __webpack_require__(41)
 	var Region    = Toolbar.Region
-	var normalize = __webpack_require__(41)
+	var normalize = __webpack_require__(42)
 
 	function sortAsc(a, b){
 		return a - b
@@ -1303,6 +1303,8 @@ return /******/ (function(modules) { // webpackBootstrap
 					500,
 					1000
 				],
+
+				theme: '',
 
 				defaultIconProps: {
 					version: '1.2',
@@ -1631,8 +1633,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var humanize = __webpack_require__(33).humanize
-	var assign   = __webpack_require__(19)
+	var humanize = __webpack_require__(34).humanize
+	var assign   = __webpack_require__(18)
 
 	function getVisibleInfo(col){
 	    var visible = true
@@ -1785,7 +1787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 
 	module.exports = React.createClass({
 
@@ -1840,7 +1842,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var hasown = __webpack_require__(34)
+	var hasown = __webpack_require__(33)
 
 	function copyIf(source, target){
 	    var hasOwn = hasown(target)
@@ -1981,7 +1983,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React = __webpack_require__(1)
 	var renderMenu = __webpack_require__(11)
 	var renderRow  = __webpack_require__(24)
-	var tableStyle  = __webpack_require__(26)
+	var tableStyle  = __webpack_require__(25)
 	var slice  = __webpack_require__(8)
 	var LoadMask = __webpack_require__(22)
 
@@ -2132,8 +2134,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var assign = __webpack_require__(19)
-	var getSelected = __webpack_require__(25)
+	var assign = __webpack_require__(18)
+	var getSelected = __webpack_require__(26)
 
 	var hasOwn = function(obj, prop){
 	    return Object.prototype.hasOwnProperty.call(obj, prop)
@@ -2371,7 +2373,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React = __webpack_require__(1)
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 	var ReactMenu = __webpack_require__(45)
 
 	function stopPropagation(event){
@@ -2626,14 +2628,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */(function(global) {/** @jsx React.DOM */'use strict';
 
 	var React      = __webpack_require__(1)
-	var assign     = __webpack_require__(19)
+	var assign     = __webpack_require__(18)
 	var LoadMask   = __webpack_require__(22)
-	var hasTouch   = __webpack_require__(35)
-	var DragHelper = __webpack_require__(36)
-	var buffer     = __webpack_require__(18)
-	var raf        = __webpack_require__(37)
+	var hasTouch   = __webpack_require__(37)
+	var DragHelper = __webpack_require__(35)
+	var buffer     = __webpack_require__(20)
+	var raf        = __webpack_require__(36)
 
-	var tableStyle     = __webpack_require__(26)
+	var tableStyle     = __webpack_require__(25)
 	var preventDefault = __webpack_require__(12)
 	var horizontalScrollbarStyle = {}
 
@@ -3084,9 +3086,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React   = __webpack_require__(1)
-	var Region  = __webpack_require__(20)
+	var Region  = __webpack_require__(19)
 	var ReactMenu = React.createFactory(__webpack_require__(45))
-	var assign  = __webpack_require__(19)
+	var assign  = __webpack_require__(18)
 	var clone   = __webpack_require__(46)
 	var asArray = __webpack_require__(27)
 	var findIndexBy = __webpack_require__(23)
@@ -3095,7 +3097,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var setupColumnDrag   = __webpack_require__(28)
 	var setupColumnResize = __webpack_require__(29)
 
-	var normalize   = __webpack_require__(41)
+	var normalize   = __webpack_require__(42)
 	var EVENT_NAMES = __webpack_require__(38)
 
 	function emptyFn(){}
@@ -3561,6 +3563,44 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	function ToObject(val) {
+		if (val == null) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var keys;
+		var to = ToObject(target);
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = arguments[s];
+			keys = Object.keys(Object(from));
+
+			for (var i = 0; i < keys.length; i++) {
+				to[keys[i]] = from[keys[i]];
+			}
+		}
+
+		return to;
+	};
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(40)
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
 	var setImmediate   = global.setImmediate
@@ -3599,44 +3639,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = Object.keys(Object(from));
-
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-
-		return to;
-	};
-
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(42)
 
 /***/ },
 /* 21 */
@@ -4600,7 +4602,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}).call(this);
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48), __webpack_require__(49).setImmediate, (function() { return this; }()), __webpack_require__(50)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49), __webpack_require__(48).setImmediate, (function() { return this; }()), __webpack_require__(50)(module)))
 
 /***/ },
 /* 22 */
@@ -4609,7 +4611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict'
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 	var Loader = __webpack_require__(39)
 
 	module.exports = React.createClass({
@@ -4686,7 +4688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/** @jsx React.DOM */'use strict';
 
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 	var React  = __webpack_require__(1)
 
 	var Row        = __webpack_require__(30)
@@ -4810,22 +4812,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	module.exports = function(props, state){
-	    var selected = props.selected == null?
-	                        state.defaultSelected
-	                        :
-	                        props.selected
-
-	    return selected
-	}
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var normalize = __webpack_require__(41)
+	var normalize = __webpack_require__(42)
 
 	var colors = [
 		'blue',
@@ -4842,6 +4829,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    })
 	}
 
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = function(props, state){
+	    var selected = props.selected == null?
+	                        state.defaultSelected
+	                        :
+	                        props.selected
+
+	    return selected
+	}
 
 /***/ },
 /* 27 */
@@ -4867,8 +4869,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region     = __webpack_require__(20)
-	var DragHelper = __webpack_require__(36)
+	var Region     = __webpack_require__(19)
+	var DragHelper = __webpack_require__(35)
 
 	function range(start, end){
 	    var res = []
@@ -5007,8 +5009,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region     = __webpack_require__(20)
-	var DragHelper = __webpack_require__(36)
+	var Region     = __webpack_require__(19)
+	var DragHelper = __webpack_require__(35)
 
 	var findIndexByName = __webpack_require__(6)
 
@@ -5107,8 +5109,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React       = __webpack_require__(1)
-	var Region      = __webpack_require__(20)
-	var assign      = __webpack_require__(19)
+	var Region      = __webpack_require__(19)
+	var assign      = __webpack_require__(18)
 	var Cell        = __webpack_require__(31)
 	var CellFactory = React.createFactory(Cell)
 	var ReactMenu = __webpack_require__(45)
@@ -5318,7 +5320,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 
 	var EVENT_NAMES = __webpack_require__(38)
 
@@ -5441,24 +5443,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = {
-	    toLowerFirst     : __webpack_require__(52),
-	    toUpperFirst     : __webpack_require__(53),
-	    separate         : __webpack_require__(54),
-	    stripWhitespace  : __webpack_require__(55),
-	    compactWhitespace: __webpack_require__(56),
-	    camelize         : __webpack_require__(57),
-	    humanize         : __webpack_require__(58),
-	    hyphenate        : __webpack_require__(59),
-	    endsWith         : __webpack_require__(60),
-
-	    is: __webpack_require__(61)
-	}
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict'
 
 	var hasOwn = Object.prototype.hasOwnProperty
@@ -5499,21 +5483,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	})
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+	module.exports = {
+	    toLowerFirst     : __webpack_require__(55),
+	    toUpperFirst     : __webpack_require__(56),
+	    separate         : __webpack_require__(57),
+	    stripWhitespace  : __webpack_require__(58),
+	    compactWhitespace: __webpack_require__(59),
+	    camelize         : __webpack_require__(60),
+	    humanize         : __webpack_require__(61),
+	    hyphenate        : __webpack_require__(62),
+	    endsWith         : __webpack_require__(63),
+
+	    is: __webpack_require__(64)
+	}
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 	var Region = __webpack_require__(70)
-	var hasTouch = __webpack_require__(35)
+	var hasTouch = __webpack_require__(37)
 	var once   = __webpack_require__(51)
 
 	var Helper = function(config){
@@ -5707,7 +5702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var now = __webpack_require__(79)
@@ -5793,12 +5788,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(35)?
+	module.exports = __webpack_require__(37)?
 		{
 			onMouseDown: 'onTouchStart',
 			onMouseUp  : 'onTouchEnd',
@@ -5817,7 +5819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 
 	module.exports = React.createClass({
 
@@ -5882,269 +5884,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var React     = __webpack_require__(1)
-	var normalize = __webpack_require__(41)
-	var assign    = __webpack_require__(19)
-	var clone = React.cloneElement || __webpack_require__(77)
-	var emptyFn = function(){}
-
-	var DISPLAY_NAME = 'ReactToolbar'
-
-	function isRegion(child){
-		return child && child.props && child.props.isToolbarRegion
-	}
-
-	function toAlign(index, regions){
-		if (index == 0){
-			return 'left'
-		}
-
-		if (index == regions.length - 1){
-			return 'right'
-		}
-
-		return 'center'
-	}
-
-	var Toolbar = React.createClass({
-
-		displayName: DISPLAY_NAME,
-
-		getDefaultProps: function() {
-			return {
-				'data-display-name': DISPLAY_NAME,
-				isReactToolbar: true,
-
-				padding: 2,
-
-				defaultStyle  : {
-					display  : 'inline-flex',
-					boxSizing: 'border-box',
-
-					overflow: 'hidden',
-					whiteSpace: 'nowrap',
-					textOverflow: 'ellipsis',
-
-					//theme styles
-					color  : 'rgb(120, 120, 120)',
-					border : '1px solid rgb(218, 218, 218)',
-					padding: 2,
-				},
-
-				defaultHorizontalStyle: {
-					width       : '100%',
-					flexFlow    : 'row',
-					alignItems  : 'center', //so items are centered vertically
-					alignContent: 'stretch'
-				},
-
-				defaultVerticalStyle: {
-					height      : '100%',
-					flexFlow    : 'column',
-					alignItems  : 'stretch',
-					alignContent: 'center'
-				}
-			}
-		},
-
-		getInitialState: function(){
-			return {}
-		},
-
-		render: function(){
-
-			var state = this.state
-			var props = this.prepareProps(this.props, state)
-
-			// this.prepareContent(props)
-
-			return React.createElement("div", React.__spread({},  props))
-		},
-
-		prepareContent: function(props){
-
-			// var style = {
-			// 	display : 'inline-flex',
-			// 	position: 'relative',
-			// 	overflow: 'hidden',
-			// 	flex    : '1 0 0',
-			// 	padding : props.style.padding
-			// }
-
-			// props.style.padding = 0
-		},
-
-		prepareProps: function(thisProps, state) {
-			var props = assign({}, thisProps)
-
-			props.vertical = props.orientation == 'vertical'
-			props.style    = this.prepareStyle(props, state)
-			props.children = this.prepareChildren(props, state)
-
-			return props
-		},
-
-		prepareStyle: function(props, state) {
-
-			var defaultOrientationStyle = props.defaultHorizontalStyle
-			var orientationStyle = props.horizontalStyle
-
-			if (props.vertical){
-				defaultOrientationStyle = props.defaultVerticalStyle
-				orientationStyle = props.verticalStyle
-			}
-
-			var style = assign({}, props.defaultStyle, defaultOrientationStyle, props.style, orientationStyle)
-
-			return normalize(style)
-		},
-
-		prepareChildren: function(props) {
-
-			var regionCount = 0
-
-			var children = []
-			var regions  = []
-
-			React.Children.forEach(props.children, function(child){
-				if (isRegion(child)){
-					regions.push(child)
-					regionCount++
-				}
-			}, this)
-
-
-			var regionIndex = -1
-			React.Children.forEach(props.children, function(child){
-				if (isRegion(child)){
-					regionIndex++
-					child = this.prepareRegion(child, regionIndex, regions)
-				}
-
-				children.push(child)
-			}, this)
-
-			if (!regionCount){
-				return this.prepareRegion(
-					React.createElement(Toolbar.Region, null, 
-						children
-					)
-				)
-			}
-
-			return children
-		},
-
-		prepareRegion: function(region, index, regions) {
-			index   = index   || 0
-			regions = regions || []
-
-			var props = this.props
-			var regionStyle = assign({}, props.defaultRegionStyle, props.regionStyle)
-
-			if (props.padding){
-				regionStyle.padding = props.padding
-			}
-
-			var style = assign({}, regionStyle, region.props.style)
-			var align = region.props.align || toAlign(index, regions)
-
-
-			return clone(region, {
-				style: style,
-				align: align
-			})
-		}
-	})
-
-	Toolbar.Region = __webpack_require__(69)
-
-	module.exports = Toolbar
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hasOwn      = __webpack_require__(65)
-	var getPrefixed = __webpack_require__(66)
-
-	var map      = __webpack_require__(67)
-	var plugable = __webpack_require__(68)
-
-	function plugins(key, value){
-
-		var result = {
-			key  : key,
-			value: value
-		}
-
-		;(RESULT.plugins || []).forEach(function(fn){
-
-			var tmp = map(function(res){
-				return fn(key, value, res)
-			}, result)
-
-			if (tmp){
-				result = tmp
-			}
-		})
-
-		return result
-	}
-
-	function normalize(key, value){
-
-		var result = plugins(key, value)
-
-		return map(function(result){
-			return {
-				key  : getPrefixed(result.key, result.value),
-				value: result.value
-			}
-		}, result)
-
-		return result
-	}
-
-	var RESULT = function(style){
-
-		var k
-		var item
-		var result = {}
-
-		for (k in style) if (hasOwn(style, k)){
-			item = normalize(k, style[k])
-
-			if (!item){
-				continue
-			}
-
-			map(function(item){
-				result[item.key] = item.value
-			}, item)
-		}
-
-		return result
-	}
-
-	module.exports = plugable(RESULT)
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hasOwn    = __webpack_require__(34)
+	var hasOwn    = __webpack_require__(33)
 	var newify    = __webpack_require__(75)
 
-	var assign      = __webpack_require__(19);
+	var assign      = __webpack_require__(18);
 	var EventEmitter = __webpack_require__(76).EventEmitter
 
-	var inherits = __webpack_require__(62)
-	var VALIDATE = __webpack_require__(63)
+	var inherits = __webpack_require__(52)
+	var VALIDATE = __webpack_require__(53)
 
 	var objectToString = Object.prototype.toString
 
@@ -7183,9 +6930,276 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	})
 
-	__webpack_require__(64)(REGION)
+	__webpack_require__(54)(REGION)
 
 	module.exports = REGION
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React     = __webpack_require__(1)
+	var normalize = __webpack_require__(42)
+	var assign    = __webpack_require__(18)
+	var clone = React.cloneElement || __webpack_require__(77)
+	var emptyFn = function(){}
+
+	var DISPLAY_NAME = 'ReactToolbar'
+
+	function isRegion(child){
+		return child && child.props && child.props.isToolbarRegion
+	}
+
+	function toAlign(index, regions){
+		if (index == 0){
+			return 'left'
+		}
+
+		if (index == regions.length - 1){
+			return 'right'
+		}
+
+		return 'center'
+	}
+
+	var THEMES = {
+		default: {
+			style: {
+				//theme styles
+				color  : 'rgb(120, 120, 120)',
+				border : '1px solid rgb(218, 218, 218)'
+			}
+		}
+	}
+
+	var Toolbar = React.createClass({
+
+		displayName: DISPLAY_NAME,
+
+		getDefaultProps: function() {
+			return {
+				'data-display-name': DISPLAY_NAME,
+				isReactToolbar: true,
+
+				padding: 2,
+				theme: 'default',
+
+				defaultStyle  : {
+					display  : 'inline-flex',
+					boxSizing: 'border-box',
+					overflow: 'hidden',
+					whiteSpace: 'nowrap',
+					textOverflow: 'ellipsis',
+
+					padding: 2
+				},
+
+				defaultHorizontalStyle: {
+					width       : '100%',
+					flexFlow    : 'row',
+					alignItems  : 'center', //so items are centered vertically
+					alignContent: 'stretch'
+				},
+
+				defaultVerticalStyle: {
+					height      : '100%',
+					flexFlow    : 'column',
+					alignItems  : 'stretch',
+					alignContent: 'center'
+				}
+			}
+		},
+
+		getInitialState: function(){
+			return {}
+		},
+
+		render: function(){
+
+			var state = this.state
+			var props = this.prepareProps(this.props, state)
+
+			// this.prepareContent(props)
+
+			return React.createElement("div", React.__spread({},  props))
+		},
+
+		prepareContent: function(props){
+
+			// var style = {
+			// 	display : 'inline-flex',
+			// 	position: 'relative',
+			// 	overflow: 'hidden',
+			// 	flex    : '1 0 0',
+			// 	padding : props.style.padding
+			// }
+
+			// props.style.padding = 0
+		},
+
+		prepareProps: function(thisProps, state) {
+			var props = assign({}, thisProps)
+
+			props.vertical = props.orientation == 'vertical'
+			props.style    = this.prepareStyle(props, state)
+			props.children = this.prepareChildren(props, state)
+
+			return props
+		},
+
+		prepareStyle: function(props, state) {
+
+			var defaultOrientationStyle = props.defaultHorizontalStyle
+			var orientationStyle = props.horizontalStyle
+
+			if (props.vertical){
+				defaultOrientationStyle = props.defaultVerticalStyle
+				orientationStyle = props.verticalStyle
+			}
+
+			var themes     = Toolbar.themes || {}
+			var theme      = themes[props.theme]
+			var themeStyle = theme? theme.style: null
+
+			var style = assign({}, props.defaultStyle, defaultOrientationStyle, themeStyle, props.style, orientationStyle)
+
+			return normalize(style)
+		},
+
+		prepareChildren: function(props) {
+
+			var regionCount = 0
+
+			var children = []
+			var regions  = []
+
+			React.Children.forEach(props.children, function(child){
+				if (isRegion(child)){
+					regions.push(child)
+					regionCount++
+				}
+			}, this)
+
+
+			var regionIndex = -1
+			React.Children.forEach(props.children, function(child){
+				if (isRegion(child)){
+					regionIndex++
+					child = this.prepareRegion(child, regionIndex, regions)
+				}
+
+				children.push(child)
+			}, this)
+
+			if (!regionCount){
+				return this.prepareRegion(
+					React.createElement(Toolbar.Region, null, 
+						children
+					)
+				)
+			}
+
+			return children
+		},
+
+		prepareRegion: function(region, index, regions) {
+			index   = index   || 0
+			regions = regions || []
+
+			var props = this.props
+			var regionStyle = assign({}, props.defaultRegionStyle, props.regionStyle)
+
+			if (props.padding){
+				regionStyle.padding = props.padding
+			}
+
+			var style = assign({}, regionStyle, region.props.style)
+			var align = region.props.align || toAlign(index, regions)
+
+
+			return clone(region, {
+				style: style,
+				align: align
+			})
+		}
+	})
+
+	Toolbar.Region = __webpack_require__(69)
+	Toolbar.themes = THEMES
+
+	module.exports = Toolbar
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var hasOwn      = __webpack_require__(65)
+	var getPrefixed = __webpack_require__(66)
+
+	var map      = __webpack_require__(67)
+	var plugable = __webpack_require__(68)
+
+	function plugins(key, value){
+
+		var result = {
+			key  : key,
+			value: value
+		}
+
+		;(RESULT.plugins || []).forEach(function(fn){
+
+			var tmp = map(function(res){
+				return fn(key, value, res)
+			}, result)
+
+			if (tmp){
+				result = tmp
+			}
+		})
+
+		return result
+	}
+
+	function normalize(key, value){
+
+		var result = plugins(key, value)
+
+		return map(function(result){
+			return {
+				key  : getPrefixed(result.key, result.value),
+				value: result.value
+			}
+		}, result)
+
+		return result
+	}
+
+	var RESULT = function(style){
+
+		var k
+		var item
+		var result = {}
+
+		for (k in style) if (hasOwn(style, k)){
+			item = normalize(k, style[k])
+
+			if (!item){
+				continue
+			}
+
+			map(function(item){
+				result[item.key] = item.value
+			}, item)
+		}
+
+		return result
+	}
+
+	module.exports = plugable(RESULT)
 
 /***/ },
 /* 43 */
@@ -7741,71 +7755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// shim for using process in browser
-
-	var process = module.exports = {};
-	var queue = [];
-	var draining = false;
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    draining = true;
-	    var currentQueue;
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        var i = -1;
-	        while (++i < len) {
-	            currentQueue[i]();
-	        }
-	        len = queue.length;
-	    }
-	    draining = false;
-	}
-	process.nextTick = function (fun) {
-	    queue.push(fun);
-	    if (!draining) {
-	        setTimeout(drainQueue, 0);
-	    }
-	};
-
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	// TODO(shtylman)
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(48).nextTick;
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(49).nextTick;
 	var apply = Function.prototype.apply;
 	var slice = Array.prototype.slice;
 	var immediateIds = {};
@@ -7881,7 +7831,71 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49).setImmediate, __webpack_require__(49).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48).setImmediate, __webpack_require__(48).clearImmediate))
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    draining = true;
+	    var currentQueue;
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        var i = -1;
+	        while (++i < len) {
+	            currentQueue[i]();
+	        }
+	        len = queue.length;
+	    }
+	    draining = false;
+	}
+	process.nextTick = function (fun) {
+	    queue.push(fun);
+	    if (!draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	// TODO(shtylman)
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
 
 /***/ },
 /* 50 */
@@ -7925,170 +7939,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(str){
-	    return str.length?
-	            str.charAt(0).toLowerCase() + str.substring(1):
-	            str
-	}
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = function(value){
-	    return value.length?
-	                value.charAt(0).toUpperCase() + value.substring(1):
-	                value
-	}
-
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var doubleColonRe      = /::/g
-	var upperToLowerRe     = /([A-Z]+)([A-Z][a-z])/g
-	var lowerToUpperRe     = /([a-z\d])([A-Z])/g
-	var underscoreToDashRe = /_/g
-
-	module.exports = function(name, separator){
-
-	   return name?
-	           name.replace(doubleColonRe, '/')
-	                .replace(upperToLowerRe, '$1_$2')
-	                .replace(lowerToUpperRe, '$1_$2')
-	                .replace(underscoreToDashRe, separator || '-')
-	            :
-	            ''
-	}
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RE = /\s/g
-
-	module.exports = function(str){
-	    if (!str){
-	        return ''
-	    }
-
-	    return str.replace(RE, '')
-	}
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RE = /\s+/g
-
-	module.exports = function(str){
-	    if (!str){
-	        return ''
-	    }
-
-	    return str.trim().replace(RE, ' ')
-	}
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var toCamelFn = function(str, letter){
-	       return letter ? letter.toUpperCase(): ''
-	   }
-
-	var hyphenRe = __webpack_require__(80)
-
-	module.exports = function(str){
-	   return str?
-	          str.replace(hyphenRe, toCamelFn):
-	          ''
-	}
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var separate     = __webpack_require__(54)
-	var camelize     = __webpack_require__(57)
-	var toUpperFirst = __webpack_require__(53)
-	var hyphenRe     = __webpack_require__(80)
-
-	function toLowerAndSpace(str, letter){
-	    return letter? ' ' + letter.toLowerCase(): ' '
-	}
-
-	module.exports = function(name, config){
-
-	    var str = config && config.capitalize?
-	                    separate(camelize(name), ' '):
-	                    separate(name, ' ').replace(hyphenRe, toLowerAndSpace)
-
-	    return toUpperFirst(str.trim())
-	}
-
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var separate = __webpack_require__(54)
-
-	module.exports = function(name){
-	   return separate(name).toLowerCase()
-	}
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = function(str, endsWith){
-
-	    str += ''
-
-	    if (!str){
-	        return typeof endsWith == 'string'?
-	                    !endsWith:
-	                    false
-	    }
-
-	    endsWith += ''
-
-	    if (str.length < endsWith.length){
-	        return false
-	    }
-
-	    return str.lastIndexOf(endsWith) == str.length - endsWith.length
-	}
-
-/***/ },
-/* 61 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	    alphanum: __webpack_require__(81),
-	    match   : __webpack_require__(82),
-	    guid   : __webpack_require__(83),
-	    // email   : require('./email'),
-	    numeric   : __webpack_require__(84)
-	}
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	module.exports = function(ctor, superCtor) {
@@ -8104,7 +7954,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 63 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8136,13 +7986,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 64 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var hasOwn   = __webpack_require__(34)
-	var VALIDATE = __webpack_require__(63)
+	var hasOwn   = __webpack_require__(33)
+	var VALIDATE = __webpack_require__(53)
 
 	module.exports = function(REGION){
 
@@ -8355,6 +8205,170 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(str){
+	    return str.length?
+	            str.charAt(0).toLowerCase() + str.substring(1):
+	            str
+	}
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = function(value){
+	    return value.length?
+	                value.charAt(0).toUpperCase() + value.substring(1):
+	                value
+	}
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var doubleColonRe      = /::/g
+	var upperToLowerRe     = /([A-Z]+)([A-Z][a-z])/g
+	var lowerToUpperRe     = /([a-z\d])([A-Z])/g
+	var underscoreToDashRe = /_/g
+
+	module.exports = function(name, separator){
+
+	   return name?
+	           name.replace(doubleColonRe, '/')
+	                .replace(upperToLowerRe, '$1_$2')
+	                .replace(lowerToUpperRe, '$1_$2')
+	                .replace(underscoreToDashRe, separator || '-')
+	            :
+	            ''
+	}
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var RE = /\s/g
+
+	module.exports = function(str){
+	    if (!str){
+	        return ''
+	    }
+
+	    return str.replace(RE, '')
+	}
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var RE = /\s+/g
+
+	module.exports = function(str){
+	    if (!str){
+	        return ''
+	    }
+
+	    return str.trim().replace(RE, ' ')
+	}
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var toCamelFn = function(str, letter){
+	       return letter ? letter.toUpperCase(): ''
+	   }
+
+	var hyphenRe = __webpack_require__(80)
+
+	module.exports = function(str){
+	   return str?
+	          str.replace(hyphenRe, toCamelFn):
+	          ''
+	}
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var separate     = __webpack_require__(57)
+	var camelize     = __webpack_require__(60)
+	var toUpperFirst = __webpack_require__(56)
+	var hyphenRe     = __webpack_require__(80)
+
+	function toLowerAndSpace(str, letter){
+	    return letter? ' ' + letter.toLowerCase(): ' '
+	}
+
+	module.exports = function(name, config){
+
+	    var str = config && config.capitalize?
+	                    separate(camelize(name), ' '):
+	                    separate(name, ' ').replace(hyphenRe, toLowerAndSpace)
+
+	    return toUpperFirst(str.trim())
+	}
+
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var separate = __webpack_require__(57)
+
+	module.exports = function(name){
+	   return separate(name).toLowerCase()
+	}
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = function(str, endsWith){
+
+	    str += ''
+
+	    if (!str){
+	        return typeof endsWith == 'string'?
+	                    !endsWith:
+	                    false
+	    }
+
+	    endsWith += ''
+
+	    if (str.length < endsWith.length){
+	        return false
+	    }
+
+	    return str.lastIndexOf(endsWith) == str.length - endsWith.length
+	}
+
+/***/ },
+/* 64 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	    alphanum: __webpack_require__(87),
+	    match   : __webpack_require__(88),
+	    guid   : __webpack_require__(89),
+	    // email   : require('./email'),
+	    numeric   : __webpack_require__(90)
+	}
+
+/***/ },
 /* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -8371,8 +8385,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getStylePrefixed = __webpack_require__(86)
-	var properties       = __webpack_require__(87)
+	var getStylePrefixed = __webpack_require__(81)
+	var properties       = __webpack_require__(82)
 
 	module.exports = function(key, value){
 
@@ -8410,7 +8424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getCssPrefixedValue = __webpack_require__(85)
+	var getCssPrefixedValue = __webpack_require__(83)
 
 	module.exports = function(target){
 		target.plugins = target.plugins || [
@@ -8447,8 +8461,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React     = __webpack_require__(1)
-	var normalize = __webpack_require__(41)
-	var assign    = __webpack_require__(19)
+	var normalize = __webpack_require__(42)
+	var assign    = __webpack_require__(18)
 
 	var cloneWithProps = React.cloneElement || __webpack_require__(77)
 	var DISPLAY_NAME   = 'ReactToolbarRegion'
@@ -8573,12 +8587,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
-	__webpack_require__(88)
-	__webpack_require__(89)
+	__webpack_require__(84)
+	__webpack_require__(85)
 
-	var COMPUTE_ALIGN_REGION = __webpack_require__(90)
+	var COMPUTE_ALIGN_REGION = __webpack_require__(86)
 
 	/**
 	 * region-align module exposes methods for aligning {@link Element} and {@link Region} instances
@@ -8762,12 +8776,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	function emptyFn(){}
 
 	var React      = __webpack_require__(1)
-	var assign     = __webpack_require__(19)
+	var assign     = __webpack_require__(18)
 	var Region     = __webpack_require__(70)
 	var inTriangle = __webpack_require__(102)
-	var hasTouch = __webpack_require__(35)
+	var hasTouch = __webpack_require__(37)
 
-	var normalize = __webpack_require__(41)
+	var normalize = __webpack_require__(42)
 
 	var getMenuOffset = __webpack_require__(91)
 	var getConstrainRegion = __webpack_require__(92)
@@ -9331,7 +9345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign =__webpack_require__(19)
+	var assign =__webpack_require__(18)
 
 	var MenuItemCell = React.createClass({
 
@@ -9393,7 +9407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 
 	var emptyFn = function(){}
 
@@ -9464,8 +9478,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React         = __webpack_require__(1)
-	var assign        = __webpack_require__(19)
-	var normalize     = __webpack_require__(41)
+	var assign        = __webpack_require__(18)
+	var normalize     = __webpack_require__(42)
 	var EVENT_NAMES   = __webpack_require__(38)
 
 	var getMenuOffset = __webpack_require__(91)
@@ -11631,7 +11645,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//@ sourceMappingURL=performance-now.map
 	*/
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ },
 /* 80 */
@@ -11643,107 +11657,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
-
-	module.exports = __webpack_require__(82)(/^[a-zA-Z0-9]+$/)
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var F = __webpack_require__(114)
-
-	module.exports = F.curry(function(re, value){
-	    return !!re.test(value)
-	})
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var regex = /^[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}$/i
-	var regex2 = /^\{[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}\}$/i
-
-	module.exports = function(value){
-	    return regex.test(value) || regex2.test(value)
-	}
-
-
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = __webpack_require__(115).numeric
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
-	var getPrefix     = __webpack_require__(104)
-	var forcePrefixed = __webpack_require__(106)
-	var el            = __webpack_require__(105)
-
-	var MEMORY = {}
-	var STYLE
-	var ELEMENT
-
-	module.exports = function(key, value, force){
-
-	    ELEMENT = ELEMENT || el()
-	    STYLE   = STYLE   ||  ELEMENT.style
-
-	    var k = key + ': ' + value
-
-	    if (MEMORY[k]){
-	        return MEMORY[k]
-	    }
-
-	    var prefix
-	    var prefixed
-	    var prefixedValue
-
-	    if (force || !(key in STYLE)){
-
-	        prefix = getPrefix('appearance')
-
-	        if (prefix){
-	            prefixed = forcePrefixed(key, value)
-
-	            prefixedValue = '-' + prefix.toLowerCase() + '-' + value
-
-	            if (prefixed in STYLE){
-	                ELEMENT.style[prefixed] = ''
-	                ELEMENT.style[prefixed] = prefixedValue
-
-	                if (ELEMENT.style[prefixed] !== ''){
-	                    value = prefixedValue
-	                }
-	            }
-	        }
-	    }
-
-	    MEMORY[k] = value
-
-	    return value
-	}
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(103)
-	var getPrefix    = __webpack_require__(104)
+	var toUpperFirst = __webpack_require__(106)
+	var getPrefix    = __webpack_require__(103)
 	var el           = __webpack_require__(105)
 
 	var MEMORY = {}
@@ -11793,7 +11710,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 87 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11834,12 +11751,66 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 88 */
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var getPrefix     = __webpack_require__(103)
+	var forcePrefixed = __webpack_require__(104)
+	var el            = __webpack_require__(105)
+
+	var MEMORY = {}
+	var STYLE
+	var ELEMENT
+
+	module.exports = function(key, value, force){
+
+	    ELEMENT = ELEMENT || el()
+	    STYLE   = STYLE   ||  ELEMENT.style
+
+	    var k = key + ': ' + value
+
+	    if (MEMORY[k]){
+	        return MEMORY[k]
+	    }
+
+	    var prefix
+	    var prefixed
+	    var prefixedValue
+
+	    if (force || !(key in STYLE)){
+
+	        prefix = getPrefix('appearance')
+
+	        if (prefix){
+	            prefixed = forcePrefixed(key, value)
+
+	            prefixedValue = '-' + prefix.toLowerCase() + '-' + value
+
+	            if (prefixed in STYLE){
+	                ELEMENT.style[prefixed] = ''
+	                ELEMENT.style[prefixed] = prefixedValue
+
+	                if (ELEMENT.style[prefixed] !== ''){
+	                    value = prefixedValue
+	                }
+	            }
+	        }
+	    }
+
+	    MEMORY[k] = value
+
+	    return value
+	}
+
+/***/ },
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	/**
 	 * @static
@@ -11955,12 +11926,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 89 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	/**
 	 *
@@ -11997,14 +11968,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 90 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 
 	var ALIGN_TO_NORMALIZED = __webpack_require__(107)
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	/**
 	 * @localdoc Given source and target regions, and the given alignments required, returns a region that is the resulting allignment.
@@ -12078,13 +12049,56 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = COMPUTE_ALIGN_REGION
 
 /***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = __webpack_require__(88)(/^[a-zA-Z0-9]+$/)
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var F = __webpack_require__(114)
+
+	module.exports = F.curry(function(re, value){
+	    return !!re.test(value)
+	})
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var regex = /^[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}$/i
+	var regex2 = /^\{[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}\}$/i
+
+	module.exports = function(value){
+	    return regex.test(value) || regex2.test(value)
+	}
+
+
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = __webpack_require__(115).numeric
+
+/***/ },
 /* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var Region       = __webpack_require__(70)
-	var selectParent = __webpack_require__(117)
+	var selectParent = __webpack_require__(118)
 
 	module.exports = function(domNode){
 
@@ -12109,7 +12123,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var Region = __webpack_require__(70)
-	var selectParent = __webpack_require__(117)
+	var selectParent = __webpack_require__(118)
 
 	module.exports = function(constrainTo){
 	    var constrainRegion
@@ -12136,7 +12150,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 
 	module.exports = function(props, state){
 
@@ -12164,8 +12178,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var Region           = __webpack_require__(70)
-	var assign           = __webpack_require__(19)
-	var cloneWithProps   = __webpack_require__(118)
+	var assign           = __webpack_require__(18)
+	var cloneWithProps   = __webpack_require__(117)
 	var getPositionStyle = __webpack_require__(108)
 
 	module.exports = function(props, state) {
@@ -12205,8 +12219,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React = __webpack_require__(1)
 	var MenuItemCell = __webpack_require__(72)
 
-	var cloneWithProps = __webpack_require__(118)
-	var assign         = __webpack_require__(19)
+	var cloneWithProps = __webpack_require__(117)
+	var assign         = __webpack_require__(18)
 
 	function emptyFn(){}
 
@@ -12300,9 +12314,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 
-	var renderCells     = __webpack_require__(110)
+	var renderCells     = __webpack_require__(109)
 	var MenuItem        = __webpack_require__(74)
 	var MenuItemFactory = React.createFactory(MenuItem)
 	var MenuSeparator   = __webpack_require__(73)
@@ -12372,10 +12386,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict'
 
 	var React    = __webpack_require__(1)
-	var assign   = __webpack_require__(19)
-	var buffer   = __webpack_require__(18)
+	var assign   = __webpack_require__(18)
+	var buffer   = __webpack_require__(20)
 
-	var Scroller = __webpack_require__(109)
+	var Scroller = __webpack_require__(110)
 
 	function stop(event){
 	    event.preventDefault()
@@ -12656,7 +12670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Menu         = __webpack_require__(71)
 	var MenuItemCell = __webpack_require__(72)
 	var renderCell   = __webpack_require__(111)
-	var cloneWithProps = __webpack_require__(118)
+	var cloneWithProps = __webpack_require__(117)
 
 	module.exports = function(props) {
 
@@ -12764,19 +12778,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	module.exports = function(str){
-		return str?
-				str.charAt(0).toUpperCase() + str.slice(1):
-				''
-	}
-
-/***/ },
-/* 104 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(103)
+	var toUpperFirst = __webpack_require__(106)
 	var prefixes     = ["ms", "Moz", "Webkit", "O"]
 
 	var el = __webpack_require__(105)
@@ -12810,6 +12812,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var toUpperFirst = __webpack_require__(106)
+	var getPrefix    = __webpack_require__(103)
+	var properties   = __webpack_require__(82)
+
+	/**
+	 * Returns the given key prefixed, if the property is found in the prefixProps map.
+	 *
+	 * Does not test if the property supports the given value unprefixed.
+	 * If you need this, use './getPrefixed' instead
+	 */
+	module.exports = function(key, value){
+
+		if (!properties[key]){
+			return key
+		}
+
+		var prefix = getPrefix(key)
+
+		return prefix?
+					prefix + toUpperFirst(key):
+					key
+	}
+
+/***/ },
 /* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -12837,27 +12868,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var toUpperFirst = __webpack_require__(103)
-	var getPrefix    = __webpack_require__(104)
-	var properties   = __webpack_require__(87)
-
-	/**
-	 * Returns the given key prefixed, if the property is found in the prefixProps map.
-	 *
-	 * Does not test if the property supports the given value unprefixed.
-	 * If you need this, use './getPrefixed' instead
-	 */
-	module.exports = function(key, value){
-
-		if (!properties[key]){
-			return key
-		}
-
-		var prefix = getPrefix(key)
-
-		return prefix?
-					prefix + toUpperFirst(key):
-					key
+	module.exports = function(str){
+		return str?
+				str.charAt(0).toUpperCase() + str.slice(1):
+				''
 	}
 
 /***/ },
@@ -12866,7 +12880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	/**
 	 *
@@ -13049,7 +13063,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var Region = __webpack_require__(70)
-	var assign = __webpack_require__(19)
+	var assign = __webpack_require__(18)
 	var align  = __webpack_require__(119)
 
 	module.exports = function getPositionStyle(props, state){
@@ -13162,8 +13176,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var renderCell = __webpack_require__(111)
+
+	module.exports = function(props) {
+	    return props.columns.map(renderCell.bind(null, props))
+	}
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var React         = __webpack_require__(1)
-	var assign        = __webpack_require__(19)
+	var assign        = __webpack_require__(18)
 	var getArrowStyle = __webpack_require__(120)
 
 	function emptyFn(){}
@@ -13362,25 +13388,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Scroller
 
 /***/ },
-/* 110 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var renderCell = __webpack_require__(111)
-
-	module.exports = function(props) {
-	    return props.columns.map(renderCell.bind(null, props))
-	}
-
-/***/ },
 /* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React        = __webpack_require__(1)
-	var assign       = __webpack_require__(19)
+	var assign       = __webpack_require__(18)
 	var MenuItemCell = __webpack_require__(72)
 
 	module.exports = function(props, column) {
@@ -14307,26 +14321,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
-	var curry   = __webpack_require__(121)
-	var matches
-
-	module.exports = curry(function(selector, node){
-
-		matches = matches || __webpack_require__(122)
-
-	    while (node = node.parentElement){
-	        if (matches.call(node, selector)){
-	            return node
-	        }
-	    }
-	})
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
 	var React    = __webpack_require__(1)
 	  , hasOwn   = Object.prototype.hasOwnProperty
 	  , version  = React.version.split('.').map(parseFloat)
@@ -14397,6 +14391,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	      target[key] = arguments[i][key]   
 	  return target
 	}
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var curry   = __webpack_require__(121)
+	var matches
+
+	module.exports = curry(function(selector, node){
+
+		matches = matches || __webpack_require__(122)
+
+	    while (node = node.parentElement){
+	        if (matches.call(node, selector)){
+	            return node
+	        }
+	    }
+	})
 
 /***/ },
 /* 119 */
