@@ -13,7 +13,7 @@ var preventDefault = require('../utils/preventDefault')
 var horizontalScrollbarStyle = {}
 
 var IS_MAC
-if (global && global.navigator.appVersion.indexOf("Mac") != -1){
+if (global && global.navigator && global.navigator.appVersion.indexOf("Mac") != -1){
     IS_MAC = true
     //on a MAC
     horizontalScrollbarStyle.position = 'absolute'
