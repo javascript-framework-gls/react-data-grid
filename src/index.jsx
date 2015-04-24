@@ -776,7 +776,7 @@ module.exports = React.createClass({
         var newState = {}
 
         if (typeof this.props.onPageSizeChange == 'function'){
-            this.props.onPageSizeChange(pageSize)
+            this.props.onPageSizeChange(pageSize, this.p)
         }
 
         if (this.props.pageSize == null){
@@ -846,10 +846,6 @@ module.exports = React.createClass({
         if (pagination){
             pageSize = this.preparePageSize(props)
             page     = this.preparePage(props)
-
-            if (!this.isValidPage(page, props)){
-                console.warn('Page', page, 'is not in range.' )
-            }
 
             assign(dataSourceQuery, {
                 pageSize: pageSize,

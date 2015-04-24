@@ -412,7 +412,6 @@ module.exports = React.createClass({
 	},
 
 	gotoPage: function(page) {
-		console.log(page);
 		this.props.onPageChange(page)
 	}
 })

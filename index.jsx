@@ -81,6 +81,7 @@ var sort = sorty(SORT_INFO)
 var data = gen(LEN)
 var origData = [].concat(data)
 var PAGE_SIZE = 450
+var PAGE = 2
 
 var selected = 1
 var App = React.createClass({
@@ -216,7 +217,7 @@ var App = React.createClass({
                 onColumnOrderChange={this.onColumnOrderChange}
                 onColumnResize={this.onColumnResize}
                 sortInfo={SORT_INFO}
-                groupBy={groupBy}
+                xgroupBy={groupBy}
                 rowStyle={rowStyle}
                 rowClassName={blue}
                 xrowFactory={f}
@@ -230,12 +231,12 @@ var App = React.createClass({
                 xemptyText='testing'
                 cellPadding={'0px 5px'}
                 xpageSize={PAGE_SIZE}
-                onPageSizeChange={this.updatePageSize}
                 xdata={data}
-                defaultPageSize={50}
-                dataSource={data}
-                virtualPagination={true}
-                xloadMaskOverHeader={false}
+                pageSize={PAGE_SIZE}
+                dataSource='http://5.101.99.47:8090/5000'
+                page={PAGE}
+                onPageSizeChange={this.onPageSizeChange}
+                onPageChange={this.onPageChange}
                 paginationToolbarProps={{
                     xshowRefreshIcon: false,
                     xshowPageSize: false
@@ -245,7 +246,17 @@ var App = React.createClass({
         </div>
     },
 
-    updatePageSize: function(value) {
+    onPageChange: function(value) {
+        PAGE = value
+        this.setState({})
+    },
+
+    onPageSizeChange: function(value, props) {
+        if (value > PAGE_SIZE){
+            //when page size gets bigger, the page may not exist
+            //so make sure you update that as well
+            PAGE = Math.min(PAGE, Math.ceil(props.dataSourceCount / value))
+        }
         PAGE_SIZE = value
         this.setState({})
     }
