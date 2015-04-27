@@ -948,6 +948,10 @@ module.exports = React.createClass({
                     dataSource['catch'](errorFn)
                 }
             }
+
+            if (props.onDataSourceLoaded){
+                dataSource.then(props.onDataSourceLoaded)
+            }
         }
 
         return dataSource

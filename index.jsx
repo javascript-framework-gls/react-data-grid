@@ -41,6 +41,8 @@ var gen = (function(){
     }
 })()
 
+var RELOAD = true
+
 var columns = [
     {
         name: 'country',
@@ -118,7 +120,7 @@ var App = React.createClass({
     },
 
     clear: function() {
-        data = []
+        // data = []
         this.setState({})
     },
 
@@ -237,15 +239,22 @@ var App = React.createClass({
                 page={PAGE}
                 onPageSizeChange={this.onPageSizeChange}
                 onPageChange={this.onPageChange}
+                reload={RELOAD}
                 pagination={true}
                 paginationToolbarProps={{
-                    showRefreshIcon: false,
+                    xshowRefreshIcon: false,
                     xshowPageSize: false,
                     xshowSeparators: false
                 }}
+                onDataSourceLoaded={this.onLoaded}
                 columns={columns}/>
 
         </div>
+    },
+
+    onLoaded: function() {
+        RELOAD = false
+        this.setState({})
     },
 
     onPageChange: function(value) {
