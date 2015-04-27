@@ -127,6 +127,8 @@ module.exports = React.createClass({
 
         var domNode = this.refs.verticalScrollbar.getDOMNode()
 
+        scrollTop = Math.round(scrollTop) //needed for IE
+
         domNode.scrollTop = scrollTop
 
         var newScrollTop = domNode.scrollTop

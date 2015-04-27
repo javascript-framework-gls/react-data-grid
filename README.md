@@ -21,12 +21,26 @@ See [changelog](./CHANGELOG.md)
 
 See [roadmap](./ROADMAP.md)
 
+## Features
+
+ * renders huge amounts of data
+ * resizable columns
+ * reorderable columns
+ * remote data support
+ * custom row/cell/column rendering
+ * multiple/single selection
+ * sorting
+ * filtering
+ * pagination
+ * hideable columns
+ * works on mobile
+
 ## Usage
 
 Please include the stylesheet `index.css` in your project. If you are using `webpack` with `css-loader`, you can require it: `require('react-datagrid/index.css')`
 
 #### NOTE:
-For optimal performance, make sure you use `react-datagrid` with the *production version of React*, not the `dev` version. The `dev` version contains a lot of checks, which slow down grid scrolling/rendering quite a bit.
+For optimal performance, make sure you use `react-datagrid` with the **production version of React**, not the `dev` version. The `dev` version contains a lot of checks, which slow down grid scrolling/rendering quite a bit.
 
 Of course for development, you can use React `dev` version, but this is just a warning so you won't be put off if you see some jank in `dev` mode. It will dissapear when you switch to `production` (minified) version. We are working on this, to make the datagrid usage experience as optimal as possible even in development.
 
@@ -45,7 +59,7 @@ var columns = [
 	{ name: 'lastName'}
 ]
 
-<DataGrid idProperty="id" data={data} columns={columns} />
+<DataGrid idProperty="id" dataSource={data} columns={columns} />
 
 ```
 
@@ -57,7 +71,7 @@ There are a lot of props that can be configured for the datagrid. We'll try to c
 
 #### Basic
 
- * `data`: Array - an array of object to render in the grid.
+ * `dataSource`: Array/String/Function/Promise - for local data, an array of object to render in the grid. For remote data, a string url, or a function that returns a promise.
  * `idProperty`: String - the name of the property where the id is found for each object in the data array
  * `columns`: Array - an array of columns that are going to be rendered in the grid
 
@@ -72,6 +86,7 @@ There are a lot of props that can be configured for the datagrid. We'll try to c
  			{ name: 'index', render: function(v){return 'Index ' + v} }
  		]
  		```
+
 	* `style`: Object - if you want cells in this column to be have a custom style
 	* `textAlign`: String - one of 'left', 'right', 'center'
 
@@ -104,7 +119,7 @@ Sorting the data array is not done by the grid. You can however pass in sort inf
  	<DataGrid
  		sortInfo={sortInfo}
  		onSortChange={onSortChange}
- 		data={data} idProperty='id' columns={columns} />
+ 		dataSource={data} idProperty='id' columns={columns} />
  	```
 
 #### Column reordering
@@ -124,6 +139,23 @@ Sorting the data array is not done by the grid. You can however pass in sort inf
 
  	<DataGrid onColumnOrderChange={handleColumnOrderChange} />
  	```
+
+#### Remote data
+
+ * dataSource: String/Function/Promise if you specify a url to load remote data from, by default, pagination props are appended to the url as query params (pageSize, skip).
+
+#### Pagination
+
+ When you have remote data, pagination is setup by default. If you want to disable pagination, specify the `pagination` prop with a `false` value.
+
+ * pagination: Boolean
+ * defaultPageSize: Number
+ * pageSize: Number - controlled alternative for `defaultPageSize`. When `pageSize` changes, `onPageSizeChange(pageSize)` is called
+ * defaultPage: Number
+ * page: Number - controlled alternative for `defaultPage`. When `page` changes, `onPageChange(page)` is called
+
+
+
 ## Contributing
 
 Use [Github issues](https://github.com/zippyui/react-datagrid/issues) for feature requests and bug reports.

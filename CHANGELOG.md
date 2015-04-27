@@ -1,6 +1,9 @@
 react-datagrid
 =================
 
+### 1.1.0
+ * add support for remote data loading and pagination
+
 ### 1.0.13
  * add support for Mac meta key on row deselect
 
