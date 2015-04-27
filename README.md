@@ -144,6 +144,8 @@ Sorting the data array is not done by the grid. You can however pass in sort inf
 
  * dataSource: String/Function/Promise if you specify a url to load remote data from, by default, pagination props are appended to the url as query params (pageSize, skip).
 
+For an example, see [examples/restore-grid-state](http://zippyui.github.io/react-datagrid#/examples/restore-grid-state)
+
 #### Pagination
 
  When you have remote data, pagination is setup by default. If you want to disable pagination, specify the `pagination` prop with a `false` value.
