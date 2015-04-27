@@ -61,8 +61,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React    = __webpack_require__(1)
 	var assign   = __webpack_require__(18)
 	var LoadMask = __webpack_require__(22)
-	var Region   = __webpack_require__(20)
-	var buffer = __webpack_require__(19)
+	var Region   = __webpack_require__(19)
+	var buffer = __webpack_require__(20)
 
 	var PaginationToolbar = React.createFactory(__webpack_require__(2))
 	var Column = __webpack_require__(3)
@@ -1693,7 +1693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var humanize = __webpack_require__(34).humanize
+	var humanize = __webpack_require__(33).humanize
 	var assign   = __webpack_require__(18)
 
 	function getVisibleInfo(col){
@@ -1902,7 +1902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var hasown = __webpack_require__(33)
+	var hasown = __webpack_require__(34)
 
 	function copyIf(source, target){
 	    var hasOwn = hasown(target)
@@ -2618,10 +2618,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
-	var scrollbarSize = __webpack_require__(44)
+	var scrollbarSize = __webpack_require__(45)
 
 	if (!global.fetch && global.window){
-	    __webpack_require__(45)
+	    __webpack_require__(46)
 	}
 
 	var fetch = global.fetch
@@ -2692,7 +2692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var LoadMask   = __webpack_require__(22)
 	var hasTouch   = __webpack_require__(35)
 	var DragHelper = __webpack_require__(36)
-	var buffer     = __webpack_require__(19)
+	var buffer     = __webpack_require__(20)
 	var raf        = __webpack_require__(37)
 
 	var tableStyle     = __webpack_require__(25)
@@ -3146,10 +3146,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React   = __webpack_require__(1)
-	var Region  = __webpack_require__(20)
+	var Region  = __webpack_require__(19)
 	var ReactMenu = React.createFactory(__webpack_require__(43))
 	var assign  = __webpack_require__(18)
-	var clone   = __webpack_require__(46)
+	var clone   = __webpack_require__(44)
 	var asArray = __webpack_require__(27)
 	var findIndexBy = __webpack_require__(23)
 	var findIndexByName = __webpack_require__(6)
@@ -3655,6 +3655,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(40)
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
 	var setImmediate   = global.setImmediate
@@ -3693,12 +3699,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(40)
 
 /***/ },
 /* 21 */
@@ -4929,7 +4929,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region     = __webpack_require__(20)
+	var Region     = __webpack_require__(19)
 	var DragHelper = __webpack_require__(36)
 
 	function range(start, end){
@@ -5069,7 +5069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region     = __webpack_require__(20)
+	var Region     = __webpack_require__(19)
 	var DragHelper = __webpack_require__(36)
 
 	var findIndexByName = __webpack_require__(6)
@@ -5169,7 +5169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** @jsx React.DOM */'use strict';
 
 	var React       = __webpack_require__(1)
-	var Region      = __webpack_require__(20)
+	var Region      = __webpack_require__(19)
 	var assign      = __webpack_require__(18)
 	var normalize = __webpack_require__(42)
 	var Cell        = __webpack_require__(31)
@@ -5504,6 +5504,24 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = {
+	    toLowerFirst     : __webpack_require__(55),
+	    toUpperFirst     : __webpack_require__(56),
+	    separate         : __webpack_require__(57),
+	    stripWhitespace  : __webpack_require__(58),
+	    compactWhitespace: __webpack_require__(59),
+	    camelize         : __webpack_require__(60),
+	    humanize         : __webpack_require__(61),
+	    hyphenate        : __webpack_require__(62),
+	    endsWith         : __webpack_require__(63),
+
+	    is: __webpack_require__(64)
+	}
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict'
 
 	var hasOwn = Object.prototype.hasOwnProperty
@@ -5542,24 +5560,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = curry(function(object, property){
 	    return hasOwn.call(object, property)
 	})
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	    toLowerFirst     : __webpack_require__(55),
-	    toUpperFirst     : __webpack_require__(56),
-	    separate         : __webpack_require__(57),
-	    stripWhitespace  : __webpack_require__(58),
-	    compactWhitespace: __webpack_require__(59),
-	    camelize         : __webpack_require__(60),
-	    humanize         : __webpack_require__(61),
-	    hyphenate        : __webpack_require__(62),
-	    endsWith         : __webpack_require__(63),
-
-	    is: __webpack_require__(64)
-	}
 
 /***/ },
 /* 35 */
@@ -5945,7 +5945,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var hasOwn    = __webpack_require__(33)
+	var hasOwn    = __webpack_require__(34)
 	var newify    = __webpack_require__(75)
 
 	var assign      = __webpack_require__(18);
@@ -7285,6 +7285,157 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
+
+	function objectToString(o) {
+	  return Object.prototype.toString.call(o);
+	}
+
+	// shim for Node's 'util' package
+	// DO NOT REMOVE THIS! It is required for compatibility with EnderJS (http://enderjs.com/).
+	var util = {
+	  isArray: function (ar) {
+	    return Array.isArray(ar) || (typeof ar === 'object' && objectToString(ar) === '[object Array]');
+	  },
+	  isDate: function (d) {
+	    return typeof d === 'object' && objectToString(d) === '[object Date]';
+	  },
+	  isRegExp: function (re) {
+	    return typeof re === 'object' && objectToString(re) === '[object RegExp]';
+	  },
+	  getRegExpFlags: function (re) {
+	    var flags = '';
+	    re.global && (flags += 'g');
+	    re.ignoreCase && (flags += 'i');
+	    re.multiline && (flags += 'm');
+	    return flags;
+	  }
+	};
+
+
+	if (true)
+	  module.exports = clone;
+
+	/**
+	 * Clones (copies) an Object using deep copying.
+	 *
+	 * This function supports circular references by default, but if you are certain
+	 * there are no circular references in your object, you can save some CPU time
+	 * by calling clone(obj, false).
+	 *
+	 * Caution: if `circular` is false and `parent` contains circular references,
+	 * your program may enter an infinite loop and crash.
+	 *
+	 * @param `parent` - the object to be cloned
+	 * @param `circular` - set to true if the object to be cloned may contain
+	 *    circular references. (optional - true by default)
+	 * @param `depth` - set to a number if the object is only to be cloned to
+	 *    a particular depth. (optional - defaults to Infinity)
+	 * @param `prototype` - sets the prototype to be used when cloning an object.
+	 *    (optional - defaults to parent prototype).
+	*/
+
+	function clone(parent, circular, depth, prototype) {
+	  // maintain two arrays for circular references, where corresponding parents
+	  // and children have the same index
+	  var allParents = [];
+	  var allChildren = [];
+
+	  var useBuffer = typeof Buffer != 'undefined';
+
+	  if (typeof circular == 'undefined')
+	    circular = true;
+
+	  if (typeof depth == 'undefined')
+	    depth = Infinity;
+
+	  // recurse this function so we don't reset allParents and allChildren
+	  function _clone(parent, depth) {
+	    // cloning null always returns null
+	    if (parent === null)
+	      return null;
+
+	    if (depth == 0)
+	      return parent;
+
+	    var child;
+	    var proto;
+	    if (typeof parent != 'object') {
+	      return parent;
+	    }
+
+	    if (util.isArray(parent)) {
+	      child = [];
+	    } else if (util.isRegExp(parent)) {
+	      child = new RegExp(parent.source, util.getRegExpFlags(parent));
+	      if (parent.lastIndex) child.lastIndex = parent.lastIndex;
+	    } else if (util.isDate(parent)) {
+	      child = new Date(parent.getTime());
+	    } else if (useBuffer && Buffer.isBuffer(parent)) {
+	      child = new Buffer(parent.length);
+	      parent.copy(child);
+	      return child;
+	    } else {
+	      if (typeof prototype == 'undefined') {
+	        proto = Object.getPrototypeOf(parent);
+	        child = Object.create(proto);
+	      }
+	      else {
+	        child = Object.create(prototype);
+	        proto = prototype;
+	      }
+	    }
+
+	    if (circular) {
+	      var index = allParents.indexOf(parent);
+
+	      if (index != -1) {
+	        return allChildren[index];
+	      }
+	      allParents.push(parent);
+	      allChildren.push(child);
+	    }
+
+	    for (var i in parent) {
+	      var attrs;
+	      if (proto) {
+	        attrs = Object.getOwnPropertyDescriptor(proto, i);
+	      }
+	      
+	      if (attrs && attrs.set == null) {
+	        continue;
+	      }
+	      child[i] = _clone(parent[i], depth - 1);
+	    }
+
+	    return child;
+	  }
+
+	  return _clone(parent, depth);
+	}
+
+	/**
+	 * Simple flat clone using prototype, accepts only objects, usefull for property
+	 * override on FLAT configuration object (no nested props).
+	 *
+	 * USE WITH CAUTION! This may not behave as you wish if you do not know how this
+	 * works.
+	 */
+	clone.clonePrototype = function(parent) {
+	  if (parent === null)
+	    return null;
+
+	  var c = function () {};
+	  c.prototype = parent;
+	  return new c();
+	};
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(78).Buffer))
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
 	    if (true) {
 	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -7325,7 +7476,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}));
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function() {
@@ -7655,157 +7806,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
-
-	function objectToString(o) {
-	  return Object.prototype.toString.call(o);
-	}
-
-	// shim for Node's 'util' package
-	// DO NOT REMOVE THIS! It is required for compatibility with EnderJS (http://enderjs.com/).
-	var util = {
-	  isArray: function (ar) {
-	    return Array.isArray(ar) || (typeof ar === 'object' && objectToString(ar) === '[object Array]');
-	  },
-	  isDate: function (d) {
-	    return typeof d === 'object' && objectToString(d) === '[object Date]';
-	  },
-	  isRegExp: function (re) {
-	    return typeof re === 'object' && objectToString(re) === '[object RegExp]';
-	  },
-	  getRegExpFlags: function (re) {
-	    var flags = '';
-	    re.global && (flags += 'g');
-	    re.ignoreCase && (flags += 'i');
-	    re.multiline && (flags += 'm');
-	    return flags;
-	  }
-	};
-
-
-	if (true)
-	  module.exports = clone;
-
-	/**
-	 * Clones (copies) an Object using deep copying.
-	 *
-	 * This function supports circular references by default, but if you are certain
-	 * there are no circular references in your object, you can save some CPU time
-	 * by calling clone(obj, false).
-	 *
-	 * Caution: if `circular` is false and `parent` contains circular references,
-	 * your program may enter an infinite loop and crash.
-	 *
-	 * @param `parent` - the object to be cloned
-	 * @param `circular` - set to true if the object to be cloned may contain
-	 *    circular references. (optional - true by default)
-	 * @param `depth` - set to a number if the object is only to be cloned to
-	 *    a particular depth. (optional - defaults to Infinity)
-	 * @param `prototype` - sets the prototype to be used when cloning an object.
-	 *    (optional - defaults to parent prototype).
-	*/
-
-	function clone(parent, circular, depth, prototype) {
-	  // maintain two arrays for circular references, where corresponding parents
-	  // and children have the same index
-	  var allParents = [];
-	  var allChildren = [];
-
-	  var useBuffer = typeof Buffer != 'undefined';
-
-	  if (typeof circular == 'undefined')
-	    circular = true;
-
-	  if (typeof depth == 'undefined')
-	    depth = Infinity;
-
-	  // recurse this function so we don't reset allParents and allChildren
-	  function _clone(parent, depth) {
-	    // cloning null always returns null
-	    if (parent === null)
-	      return null;
-
-	    if (depth == 0)
-	      return parent;
-
-	    var child;
-	    var proto;
-	    if (typeof parent != 'object') {
-	      return parent;
-	    }
-
-	    if (util.isArray(parent)) {
-	      child = [];
-	    } else if (util.isRegExp(parent)) {
-	      child = new RegExp(parent.source, util.getRegExpFlags(parent));
-	      if (parent.lastIndex) child.lastIndex = parent.lastIndex;
-	    } else if (util.isDate(parent)) {
-	      child = new Date(parent.getTime());
-	    } else if (useBuffer && Buffer.isBuffer(parent)) {
-	      child = new Buffer(parent.length);
-	      parent.copy(child);
-	      return child;
-	    } else {
-	      if (typeof prototype == 'undefined') {
-	        proto = Object.getPrototypeOf(parent);
-	        child = Object.create(proto);
-	      }
-	      else {
-	        child = Object.create(prototype);
-	        proto = prototype;
-	      }
-	    }
-
-	    if (circular) {
-	      var index = allParents.indexOf(parent);
-
-	      if (index != -1) {
-	        return allChildren[index];
-	      }
-	      allParents.push(parent);
-	      allChildren.push(child);
-	    }
-
-	    for (var i in parent) {
-	      var attrs;
-	      if (proto) {
-	        attrs = Object.getOwnPropertyDescriptor(proto, i);
-	      }
-	      
-	      if (attrs && attrs.set == null) {
-	        continue;
-	      }
-	      child[i] = _clone(parent[i], depth - 1);
-	    }
-
-	    return child;
-	  }
-
-	  return _clone(parent, depth);
-	}
-
-	/**
-	 * Simple flat clone using prototype, accepts only objects, usefull for property
-	 * override on FLAT configuration object (no nested props).
-	 *
-	 * USE WITH CAUTION! This may not behave as you wish if you do not know how this
-	 * works.
-	 */
-	clone.clonePrototype = function(parent) {
-	  if (parent === null)
-	    return null;
-
-	  var c = function () {};
-	  c.prototype = parent;
-	  return new c();
-	};
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(78).Buffer))
-
-/***/ },
 /* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -8052,7 +8052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var hasOwn   = __webpack_require__(33)
+	var hasOwn   = __webpack_require__(34)
 	var VALIDATE = __webpack_require__(53)
 
 	module.exports = function(REGION){
@@ -8648,7 +8648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	__webpack_require__(88)
 	__webpack_require__(89)
@@ -11720,8 +11720,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var toUpperFirst = __webpack_require__(106)
-	var getPrefix    = __webpack_require__(103)
+	var toUpperFirst = __webpack_require__(103)
+	var getPrefix    = __webpack_require__(104)
 	var el           = __webpack_require__(105)
 
 	var MEMORY = {}
@@ -11817,8 +11817,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getPrefix     = __webpack_require__(103)
-	var forcePrefixed = __webpack_require__(104)
+	var getPrefix     = __webpack_require__(104)
+	var forcePrefixed = __webpack_require__(106)
 	var el            = __webpack_require__(105)
 
 	var MEMORY = {}
@@ -11914,7 +11914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	/**
 	 * @static
@@ -12035,7 +12035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	/**
 	 *
@@ -12079,7 +12079,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ALIGN_TO_NORMALIZED = __webpack_require__(107)
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	/**
 	 * @localdoc Given source and target regions, and the given alignments required, returns a region that is the resulting allignment.
@@ -12159,7 +12159,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var Region       = __webpack_require__(70)
-	var selectParent = __webpack_require__(118)
+	var selectParent = __webpack_require__(117)
 
 	module.exports = function(domNode){
 
@@ -12184,7 +12184,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var Region = __webpack_require__(70)
-	var selectParent = __webpack_require__(118)
+	var selectParent = __webpack_require__(117)
 
 	module.exports = function(constrainTo){
 	    var constrainRegion
@@ -12240,7 +12240,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Region           = __webpack_require__(70)
 	var assign           = __webpack_require__(18)
-	var cloneWithProps   = __webpack_require__(117)
+	var cloneWithProps   = __webpack_require__(118)
 	var getPositionStyle = __webpack_require__(108)
 
 	module.exports = function(props, state) {
@@ -12280,7 +12280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React = __webpack_require__(1)
 	var MenuItemCell = __webpack_require__(72)
 
-	var cloneWithProps = __webpack_require__(117)
+	var cloneWithProps = __webpack_require__(118)
 	var assign         = __webpack_require__(18)
 
 	function emptyFn(){}
@@ -12448,7 +12448,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React    = __webpack_require__(1)
 	var assign   = __webpack_require__(18)
-	var buffer   = __webpack_require__(19)
+	var buffer   = __webpack_require__(20)
 
 	var Scroller = __webpack_require__(110)
 
@@ -12731,7 +12731,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Menu         = __webpack_require__(71)
 	var MenuItemCell = __webpack_require__(72)
 	var renderCell   = __webpack_require__(111)
-	var cloneWithProps = __webpack_require__(117)
+	var cloneWithProps = __webpack_require__(118)
 
 	module.exports = function(props) {
 
@@ -12839,7 +12839,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var toUpperFirst = __webpack_require__(106)
+	module.exports = function(str){
+		return str?
+				str.charAt(0).toUpperCase() + str.slice(1):
+				''
+	}
+
+/***/ },
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var toUpperFirst = __webpack_require__(103)
 	var prefixes     = ["ms", "Moz", "Webkit", "O"]
 
 	var el = __webpack_require__(105)
@@ -12873,35 +12885,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 104 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(106)
-	var getPrefix    = __webpack_require__(103)
-	var properties   = __webpack_require__(82)
-
-	/**
-	 * Returns the given key prefixed, if the property is found in the prefixProps map.
-	 *
-	 * Does not test if the property supports the given value unprefixed.
-	 * If you need this, use './getPrefixed' instead
-	 */
-	module.exports = function(key, value){
-
-		if (!properties[key]){
-			return key
-		}
-
-		var prefix = getPrefix(key)
-
-		return prefix?
-					prefix + toUpperFirst(key):
-					key
-	}
-
-/***/ },
 /* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -12929,10 +12912,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	module.exports = function(str){
-		return str?
-				str.charAt(0).toUpperCase() + str.slice(1):
-				''
+	var toUpperFirst = __webpack_require__(103)
+	var getPrefix    = __webpack_require__(104)
+	var properties   = __webpack_require__(82)
+
+	/**
+	 * Returns the given key prefixed, if the property is found in the prefixProps map.
+	 *
+	 * Does not test if the property supports the given value unprefixed.
+	 * If you need this, use './getPrefixed' instead
+	 */
+	module.exports = function(key, value){
+
+		if (!properties[key]){
+			return key
+		}
+
+		var prefix = getPrefix(key)
+
+		return prefix?
+					prefix + toUpperFirst(key):
+					key
 	}
 
 /***/ },
@@ -12941,7 +12941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var Region = __webpack_require__(20)
+	var Region = __webpack_require__(19)
 
 	/**
 	 *
@@ -13674,7 +13674,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var SLICE = Array.prototype.slice
 
-	    var curry = __webpack_require__(121),
+	    var curry = __webpack_require__(124),
 
 	        findFn = function(fn, target, onFound){
 	            // if (typeof target.find == 'function'){
@@ -13745,19 +13745,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	         *
 	         * @return the result of the first function in the enumeration
 	         */
-	        compose = __webpack_require__(122),
+	        compose = __webpack_require__(125),
 
-	        chain = __webpack_require__(123),
+	        chain = __webpack_require__(126),
 
-	        once = __webpack_require__(124),
+	        once = __webpack_require__(127),
 
-	        bindArgsArray = __webpack_require__(125),
+	        bindArgsArray = __webpack_require__(128),
 
-	        bindArgs = __webpack_require__(126),
+	        bindArgs = __webpack_require__(129),
 
-	        lockArgsArray = __webpack_require__(127),
+	        lockArgsArray = __webpack_require__(130),
 
-	        lockArgs = __webpack_require__(128),
+	        lockArgs = __webpack_require__(131),
 
 	        skipArgs = function(fn, count){
 	            return function(){
@@ -14115,11 +14115,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 
-	    map: __webpack_require__(129),
+	    map: __webpack_require__(132),
 
-	    dot: __webpack_require__(130),
+	    dot: __webpack_require__(133),
 
-	    maxArgs: __webpack_require__(131),
+	    maxArgs: __webpack_require__(134),
 
 	    /**
 	     * @method compose
@@ -14238,14 +14238,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    findIndex: findIndex,
 
-	    newify: __webpack_require__(132)
+	    newify: __webpack_require__(135)
 	}
 
 /***/ },
 /* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(133)
+	module.exports = __webpack_require__(123)
 
 /***/ },
 /* 116 */
@@ -14382,6 +14382,26 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var curry   = __webpack_require__(121)
+	var matches
+
+	module.exports = curry(function(selector, node){
+
+		matches = matches || __webpack_require__(122)
+
+	    while (node = node.parentElement){
+	        if (matches.call(node, selector)){
+	            return node
+	        }
+	    }
+	})
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	var React    = __webpack_require__(1)
 	  , hasOwn   = Object.prototype.hasOwnProperty
 	  , version  = React.version.split('.').map(parseFloat)
@@ -14452,26 +14472,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      target[key] = arguments[i][key]   
 	  return target
 	}
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var curry   = __webpack_require__(134)
-	var matches
-
-	module.exports = curry(function(selector, node){
-
-		matches = matches || __webpack_require__(135)
-
-	    while (node = node.parentElement){
-	        if (matches.call(node, selector)){
-	            return node
-	        }
-	    }
-	})
 
 /***/ },
 /* 119 */
@@ -14566,7 +14566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
 	function curry(fn, n){
 
@@ -14604,203 +14604,21 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	function composeTwo(f, g) {
-	    return function () {
-	        return f(g.apply(this, arguments))
-	    }
-	}
+	var proto = Element.prototype
 
-	/*
-	 * @param {Function...} an enumeration of functions, each consuming the result of the following function.
-	 *
-	 * For example: compose(c, b, a)(1,4) == c(b(a(1,4)))
-	 *
-	 * @return the result of the first function in the enumeration
-	 */
-	module.exports = function(){
+	var nativeMatches = proto.matches ||
+	  proto.mozMatchesSelector ||
+	  proto.msMatchesSelector ||
+	  proto.oMatchesSelector ||
+	  proto.webkitMatchesSelector
 
-	    var args = arguments
-	    var len  = args.length
-	    var i    = 0
-	    var f    = args[0]
+	module.exports = nativeMatches
 
-	    while (++i < len) {
-	        f = composeTwo(f, args[i])
-	    }
-
-	    return f
-	}
 
 /***/ },
 /* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	function chain(where, fn, secondFn){
-
-	    return function(){
-	        if (where === 'before'){
-	            secondFn.apply(this, arguments)
-	        }
-
-	        var result = fn.apply(this, arguments)
-
-	        if (where !== 'before'){
-	            secondFn.apply(this, arguments)
-	        }
-
-	        return result
-	    }
-	}
-
-	module.exports = chain
-
-/***/ },
-/* 124 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use once'
-
-	function once(fn, scope){
-
-	    var called
-	    var result
-
-	    return function(){
-	        if (called){
-	            return result
-	        }
-
-	        called = true
-
-	        return result = fn.apply(scope || this, arguments)
-	    }
-	}
-
-	module.exports = once
-
-/***/ },
-/* 125 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-
-	module.exports = function(fn, args){
-	    return function(){
-	        var thisArgs = SLICE.call(args || [])
-
-	        if (arguments.length){
-	            thisArgs.push.apply(thisArgs, arguments)
-	        }
-
-	        return fn.apply(this, thisArgs)
-	    }
-	}
-
-/***/ },
-/* 126 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var bindArgsArray = __webpack_require__(125)
-
-	module.exports = function(fn){
-	    return bindArgsArray(fn, SLICE.call(arguments,1))
-	}
-
-/***/ },
-/* 127 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-
-	module.exports = function(fn, args){
-
-	    return function(){
-	        if (!Array.isArray(args)){
-	            args = SLICE.call(args || [])
-	        }
-
-	        return fn.apply(this, args)
-	    }
-	}
-
-/***/ },
-/* 128 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var lockArgsArray = __webpack_require__(127)
-
-	module.exports = function(fn){
-	    return lockArgsArray(fn, SLICE.call(arguments, 1))
-	}
-
-/***/ },
-/* 129 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var curry = __webpack_require__(121)
-
-	module.exports = curry(function(fn, value){
-	    return value != undefined && typeof value.map?
-	            value.map(fn):
-	            fn(value)
-	})
-
-/***/ },
-/* 130 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var curry = __webpack_require__(121)
-
-	module.exports = curry(function(prop, value){
-	    return value != undefined? value[prop]: undefined
-	})
-
-/***/ },
-/* 131 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var curry = __webpack_require__(121)
-
-	module.exports = function(fn, count){
-	    return function(){
-	        return fn.apply(this, SLICE.call(arguments, 0, count))
-	    }
-	}
-
-/***/ },
-/* 132 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var newify = __webpack_require__(148)
-	var curry  = __webpack_require__(121)
-
-	module.exports = curry(newify)
-
-/***/ },
-/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
@@ -14821,10 +14639,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 134 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	'use strict'
 
 	function curry(fn, n){
 
@@ -14859,21 +14677,203 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = curry
 
 /***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	function composeTwo(f, g) {
+	    return function () {
+	        return f(g.apply(this, arguments))
+	    }
+	}
+
+	/*
+	 * @param {Function...} an enumeration of functions, each consuming the result of the following function.
+	 *
+	 * For example: compose(c, b, a)(1,4) == c(b(a(1,4)))
+	 *
+	 * @return the result of the first function in the enumeration
+	 */
+	module.exports = function(){
+
+	    var args = arguments
+	    var len  = args.length
+	    var i    = 0
+	    var f    = args[0]
+
+	    while (++i < len) {
+	        f = composeTwo(f, args[i])
+	    }
+
+	    return f
+	}
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	function chain(where, fn, secondFn){
+
+	    return function(){
+	        if (where === 'before'){
+	            secondFn.apply(this, arguments)
+	        }
+
+	        var result = fn.apply(this, arguments)
+
+	        if (where !== 'before'){
+	            secondFn.apply(this, arguments)
+	        }
+
+	        return result
+	    }
+	}
+
+	module.exports = chain
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use once'
+
+	function once(fn, scope){
+
+	    var called
+	    var result
+
+	    return function(){
+	        if (called){
+	            return result
+	        }
+
+	        called = true
+
+	        return result = fn.apply(scope || this, arguments)
+	    }
+	}
+
+	module.exports = once
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+
+	module.exports = function(fn, args){
+	    return function(){
+	        var thisArgs = SLICE.call(args || [])
+
+	        if (arguments.length){
+	            thisArgs.push.apply(thisArgs, arguments)
+	        }
+
+	        return fn.apply(this, thisArgs)
+	    }
+	}
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var bindArgsArray = __webpack_require__(128)
+
+	module.exports = function(fn){
+	    return bindArgsArray(fn, SLICE.call(arguments,1))
+	}
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+
+	module.exports = function(fn, args){
+
+	    return function(){
+	        if (!Array.isArray(args)){
+	            args = SLICE.call(args || [])
+	        }
+
+	        return fn.apply(this, args)
+	    }
+	}
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var lockArgsArray = __webpack_require__(130)
+
+	module.exports = function(fn){
+	    return lockArgsArray(fn, SLICE.call(arguments, 1))
+	}
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var curry = __webpack_require__(124)
+
+	module.exports = curry(function(fn, value){
+	    return value != undefined && typeof value.map?
+	            value.map(fn):
+	            fn(value)
+	})
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var curry = __webpack_require__(124)
+
+	module.exports = curry(function(prop, value){
+	    return value != undefined? value[prop]: undefined
+	})
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var curry = __webpack_require__(124)
+
+	module.exports = function(fn, count){
+	    return function(){
+	        return fn.apply(this, SLICE.call(arguments, 0, count))
+	    }
+	}
+
+/***/ },
 /* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	'use strict'
 
-	var proto = Element.prototype
+	var newify = __webpack_require__(148)
+	var curry  = __webpack_require__(124)
 
-	var nativeMatches = proto.matches ||
-	  proto.mozMatchesSelector ||
-	  proto.msMatchesSelector ||
-	  proto.oMatchesSelector ||
-	  proto.webkitMatchesSelector
-
-	module.exports = nativeMatches
-
+	module.exports = curry(newify)
 
 /***/ },
 /* 136 */
