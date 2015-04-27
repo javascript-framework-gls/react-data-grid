@@ -25,12 +25,16 @@ See [roadmap](./ROADMAP.md)
 
 Please include the stylesheet `index.css` in your project. If you are using `webpack` with `css-loader`, you can require it: `require('react-datagrid/index.css')`
 
+#### NOTE:
+For optimal performance, make sure you use `react-datagrid` with the *production version of React*, not the `dev` version. The `dev` version contains a lot of checks, which slow down grid scrolling/rendering quite a bit.
+
+Of course for development, you can use React `dev` version, but this is just a warning so you won't be put off if you see some jank in `dev` mode. It will dissapear when you switch to `production` (minified) version. We are working on this, to make the datagrid usage experience as optimal as possible even in development.
+
 #### Example
 ```jsx
 
 var React = require('react')
 var DataGrid = require('react-datagrid')
-
 
 var data = [
 	{ id: '1', firstName: 'John', lastName: 'Bobson'},

@@ -2,6 +2,7 @@
 
 var React  = require('react')
 var assign = require('object-assign')
+var normalize = require('react-style-normalizer')
 
 var EVENT_NAMES = require('react-event-names')
 
@@ -79,8 +80,7 @@ module.exports = React.createClass({
         var sizeStyle = column && column.sizeStyle
         var cellProps = {
             className: className,
-            // style    : normalize(assign({}, props.style, sizeStyle))
-            style    : assign({}, props.style, sizeStyle)
+            style    : normalize(assign({}, props.style, sizeStyle))
         }
 
         copyProps(cellProps, props, [

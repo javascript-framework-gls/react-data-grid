@@ -237,9 +237,11 @@ var App = React.createClass({
                 page={PAGE}
                 onPageSizeChange={this.onPageSizeChange}
                 onPageChange={this.onPageChange}
+                pagination={true}
                 paginationToolbarProps={{
                     xshowRefreshIcon: false,
-                    xshowPageSize: false
+                    xshowPageSize: false,
+                    xshowSeparators: false
                 }}
                 columns={columns}/>
 
