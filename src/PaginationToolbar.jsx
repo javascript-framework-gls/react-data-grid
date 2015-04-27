@@ -6,6 +6,7 @@ var Toolbar   = require('react-simple-toolbar')
 var Region    = Toolbar.Region
 var normalize = require('react-style-normalizer')
 
+var WHITESPACE = '\u00a0'
 function sortAsc(a, b){
 	return a - b
 }
@@ -349,8 +350,11 @@ module.exports = React.createClass({
 			})
 		}
 
-		return <div style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>
-			Displaying {start} - {end} of {props.dataSourceCount || 1}. {refreshIcon}
+		var textStyle = {display: 'inline-block', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}
+
+		return <div style={normalize({display: 'flex', justifyContent: 'flex-end', alignItems: 'center'})}>
+			<span style={textStyle}>Displaying {start} - {end} of {props.dataSourceCount || 1}.</span>
+			{this.separator}{refreshIcon}
 		</div>
 	},
 
@@ -364,7 +368,10 @@ module.exports = React.createClass({
 
 	render: function(){
 
-		var props        = this.prepareProps(this.props)
+		var props = this.prepareProps(this.props)
+
+		this.separator = separator(props)
+
 		var showPageSize = props.showPageSize
 		var pageSize     = showPageSize? this.renderPageSize(props): null
 
@@ -378,24 +385,21 @@ module.exports = React.createClass({
 			minWidth -= 100
 		}
 
-		var sep = separator(props)
+		var sep = this.separator
 
 		return <Toolbar {...props}>
-			<Region flex="1 1 auto" style={{display: 'flex', alignItems: 'center', minWidth: minWidth}}>
+			<Region flex="1 1 auto" style={normalize({display: 'flex', alignItems: 'center', minWidth: minWidth})}>
 				{this.icon('gotoFirst', props)}
 				{this.icon('gotoPrev', props)}
 
 				{sep}
-				Page {this.renderInput(props)} of{'\u00a0'}{props.maxPage}.
+				Page {this.renderInput(props)} of{WHITESPACE}{props.maxPage}.
 				{sep}
 				{this.icon('gotoNext', props)}
 				{this.icon('gotoLast', props)}
 
 				{showPageSize?sep: null}
 				{pageSize}
-
-
-
 			</Region>
 			<Region  flex="1 1 auto">
 				{displaying}
