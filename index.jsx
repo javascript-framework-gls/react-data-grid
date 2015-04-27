@@ -239,7 +239,7 @@ var App = React.createClass({
                 onPageChange={this.onPageChange}
                 pagination={true}
                 paginationToolbarProps={{
-                    xshowRefreshIcon: false,
+                    showRefreshIcon: false,
                     xshowPageSize: false,
                     xshowSeparators: false
                 }}

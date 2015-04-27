@@ -332,6 +332,7 @@ module.exports = React.createClass({
 		var start       = ((props.pageSize * (props.page - 1) || 0) + 1)
 		var end         = Math.min(props.pageSize * props.page, props.dataSourceCount) || 1
 		var refreshIcon = props.showRefreshIcon? this.icon('refresh', props): null
+		var sep = refreshIcon? this.separator: null
 
 		var factory = props.displayingFactory
 
@@ -354,7 +355,7 @@ module.exports = React.createClass({
 
 		return <div style={normalize({display: 'flex', justifyContent: 'flex-end', alignItems: 'center'})}>
 			<span style={textStyle}>Displaying {start} - {end} of {props.dataSourceCount || 1}.</span>
-			{this.separator}{refreshIcon}
+			{sep}{refreshIcon}
 		</div>
 	},
 
