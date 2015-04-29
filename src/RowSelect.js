@@ -23,7 +23,7 @@ var hasOwn = function(obj, prop){
 module.exports = {
 
     findInitialSelectionIndex: function(){
-        var selected = getSelected(this.props, this.state)
+        var selected = getSelected(this.p, this.state)
         var index = undefined
 
         if (!Object.keys(selected).length){
@@ -32,10 +32,10 @@ module.exports = {
 
 
         var i = 0
-        var data = this.props.data
-        var len = data.length
+        var data = this.p.data
+        var len  = data.length
         var id
-        var idProperty = this.props.idProperty
+        var idProperty = this.p.idProperty
 
         for (; i < len; i++){
             id = data[i][idProperty]
@@ -62,7 +62,7 @@ module.exports = {
     },
 
     handleSingleSelection: function(data, event){
-        var props = this.props
+        var props = this.p
 
         var rowSelected = this.isRowSelected(data)
         var newSelected = !rowSelected
@@ -86,7 +86,7 @@ module.exports = {
         var selIndex = config.selIndex
         var prevShiftKeyIndex = config.prevShiftKeyIndex
 
-        var props = this.props
+        var props = this.p
         var map   = selIndex == null?
                         {}:
                         assign({}, getSelected(props, this.state))
@@ -117,11 +117,11 @@ module.exports = {
 
     handleMultiSelectionRowToggle: function(data, event){
 
-        var selected   = getSelected(this.props, this.state)
+        var selected   = getSelected(this.p, this.state)
         var isSelected = this.isRowSelected(data)
 
         var clone = assign({}, selected)
-        var id    = data[this.props.idProperty]
+        var id    = data[this.p.idProperty]
 
         if (isSelected){
             delete clone[id]
@@ -136,7 +136,7 @@ module.exports = {
 
     handleSelection: function(rowProps, event){
 
-        var props = this.props
+        var props = this.p
 
         if (!hasOwn(props, 'selected') && !hasOwn(props, 'defaultSelected')){
             return
@@ -211,13 +211,13 @@ module.exports = {
     },
 
     isMultiSelect: function(){
-        var selected = getSelected(this.props, this.state)
+        var selected = getSelected(this.p, this.state)
 
         return selected && typeof selected == 'object'
     },
 
     getSelectedMap: function(){
-        var selected    = getSelected(this.props, this.state)
+        var selected    = getSelected(this.p, this.state)
         var multiSelect = selected && typeof selected == 'object'
         var map
 

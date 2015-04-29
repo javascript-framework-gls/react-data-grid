@@ -75,7 +75,7 @@ var columns = [
 ]
 
 var ROW_HEIGHT = 31
-var LEN = 1000
+var LEN = 2000
 var SORT_INFO = []//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN)
@@ -216,7 +216,7 @@ var App = React.createClass({
                 onColumnOrderChange={this.onColumnOrderChange}
                 onColumnResize={this.onColumnResize}
                 sortInfo={SORT_INFO}
-                groupBy={groupBy}
+                xgroupBy={groupBy}
                 rowStyle={rowStyle}
                 rowClassName={blue}
                 xrowFactory={f}
