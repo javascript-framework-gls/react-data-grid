@@ -1,7 +1,5 @@
 'use strict';
 
-var scrollbarSize = require('scrollbar-size')
-
 if (!global.fetch && global.window){
     require('whatwg-fetch')
 }
