@@ -4,19 +4,19 @@
   "description": "React DataGrid",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --recursive --reporter spec --require should",
-    "test-w": "./node_modules/.bin/mocha --recursive --reporter spec --require should --watch",
-    "lib": "./node_modules/.bin/gulp",
+    "test": "mocha --recursive --reporter spec --require should",
+    "test-w": "mocha --recursive --reporter spec --require should --watch",
+    "lib": "gulp",
     "build-style": "webpack --progress --colors --config build-style.config.js",
     "build-style-dist": "webpack --progress --colors --config build-style-dist.config.js",
     "build-style-dist-min": "webpack --progress --colors --config build-style-dist-min.config.js",
-    "stats": "./node_modules/.bin/webpack --profile --progress --colors --config dist.config.js --json > stats.json",
-    "dist": "./node_modules/.bin/webpack --progress --colors --config dist.config.js",
-    "watch-dist": "./node_modules/.bin/webpack --watch --progress --colors --config dist.config.js",
-    "dist.min": "./node_modules/.bin/webpack --progress --colors --optimize-minimize --optimize-occurence-order --optimize-dedupe --config dist.min.config.js",
+    "stats": "webpack --profile --progress --colors --config dist.config.js --json > stats.json",
+    "dist": "webpack --progress --colors --config dist.config.js",
+    "watch-dist": "webpack --watch --progress --colors --config dist.config.js",
+    "dist.min": "webpack --progress --colors --optimize-minimize --optimize-occurence-order --optimize-dedupe --config dist.min.config.js",
     "build": "npm run lib && npm run dist && npm run dist.min && npm run build-style && npm run build-style-dist && npm run build-style-dist-min",
-    "serve": "./node_modules/.bin/http-server -p 9091",
-    "dev": "./node_modules/.bin/webpack-dev-server --progress --colors --port 9090"
+    "serve": "http-server -p 9091",
+    "dev": "webpack-dev-server --progress --colors --port 9090"
   },
   "repository": {
     "type": "git",
