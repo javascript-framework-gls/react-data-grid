@@ -45,7 +45,6 @@
     "guid": "0.0.12",
     "gulp": "^3.8.11",
     "gulp-react": "^3.0.0",
-    "http-server": "^0.7.3",
     "jsdom": "5.1.0",
     "mocha": "^2.2.1",
     "raw-loader": "^0.5.1",
@@ -73,7 +72,6 @@
     "react-virtual-scroller": "^1.0.2",
     "region": "^2.1.2",
     "region-align": "^2.1.2",
-    "scrollbar-size": "^1.0.4",
     "ustring": "^1.4.1",
     "whatwg-fetch": "^0.7.0"
   },

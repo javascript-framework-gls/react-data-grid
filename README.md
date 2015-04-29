@@ -164,17 +164,16 @@ Use [Github issues](https://github.com/zippyui/react-datagrid/issues) for featur
 
 We actively welcome pull requests.
 
-For setting up the project locally, use:
+For setting up & starting the project locally, use:
 
 ```sh
 $ git clone https://github.com/zippyui/react-datagrid
 $ cd react-datagrid
 $ npm install
-$ npm serve
 $ npm dev
 ```
 
-Now navigate to [localhost:9091](http://localhost:9091/)
+Now navigate to [localhost:9090](http://localhost:9090/)
 
 Before building a new version, make sure you run
 
