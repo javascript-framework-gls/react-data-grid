@@ -77,7 +77,7 @@ var columns = [
 ]
 
 var ROW_HEIGHT = 31
-var LEN = 1000
+var LEN = 2000
 var SORT_INFO = []//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN)

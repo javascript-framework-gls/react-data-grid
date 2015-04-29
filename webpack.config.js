@@ -21,13 +21,13 @@ module.exports = {
         extensions: ['', '.js', '.jsx']
     },
     plugins: [
+        //needed to supress vertx warning in es6-promise (Promise polyfill)
         new webpack.IgnorePlugin(/vertx/)
         // new webpack.HotModuleReplacementPlugin(),
         // new webpack.NoErrorsPlugin()
     ],
 
     devServer: {
-        contentBase: 'http://localhost:9091',
         info: true,
         quiet: false,
 

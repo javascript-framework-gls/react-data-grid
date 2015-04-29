@@ -1,5 +1,6 @@
 @import '~react-load-mask/style/index.styl'
 @import '~css-utils/index.styl'
+@import '~react-virtual-scroller/index.styl'
 @import './constants.styl'
 
 .z-unselectable
@@ -44,17 +45,10 @@ datagrid-cell()
     .z-header-menu-column
         z-index 100
 
-    table
-        border-collapse separate
-
     @extend .u-flex-column
     align-items stretch
-    //keep overflow hidden since in the body we can also have toolbars
-    //and we don't want to scroll them as well
-    // overflow hidden
 
     & > .z-inner
-
         flex 1
         overflow hidden
         position relative
@@ -66,73 +60,6 @@ datagrid-cell()
             flex-flow column
             flex 1 1 auto
             overflow hidden
-
-    .z-vertical-scroller
-        overflow hidden
-        overflow-y auto
-        right 0px
-        top 0px
-        width 1px
-        flex none
-        visibility hidden
-    // position absolute
-
-    .z-horizontal-scroller
-        height 1px
-        visibility hidden
-
-    .z-vertical-scrollbar
-        overflow hidden
-        position absolute
-        height 100%
-        right 0px
-        top 0px
-        // display flex
-        // -webkit-overflow-scrolling touch
-
-        .inner
-            flex 1
-            overflow auto
-            size 100%
-            position absolute
-
-    .z-horizontal-scrollbar
-        transform translate3d(0px, 0px, 1px)
-        flex 0 0 auto
-        height auto
-        width 100%
-        position relative
-        left 0px
-        bottom 0px
-        overflow auto
-        z-index 100
-
-        &.mac-fix
-            display flex
-            flex-flow row
-            align-items stretch
-            align-content flex-start
-            justify-content stretch
-
-    //needed for mac safari
-    .z-horizontal-scrollbar-fix
-        flex 1
-        overflow auto
-
-    .z-table-wrapper
-        flex 1 1 auto
-        display flex
-        align-items stretch
-        align-content flex-start
-        justify-content flex-start
-        flex-flow row
-        position relative
-        overflow hidden
-        z-index 10
-
-    .z-table-wrapper-fix
-        z-index -1
-        flex 1
 
     .z-header-wrapper
     .z-footer-wrapper
@@ -164,16 +91,21 @@ datagrid-cell()
             display block
 
 .react-datagrid.z-empty
+    .z-content-wrapper-fix
+        display flex
+
     .z-table-wrapper
         @extend .u-flex-column
         justify-content center
         align-items center
-        -webkit-align-items center
 
-        .z-empty-text
-            display inline-block
-            font-style italic
-            color gray
+    .z-empty-text
+        width 100%
+        justify-content center
+        align-items center
+        display flex
+        font-style italic
+        color gray
 
 @import './header.styl'
 @import './contents.styl'
