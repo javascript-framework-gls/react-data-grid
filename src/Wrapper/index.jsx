@@ -44,6 +44,8 @@ module.exports = React.createClass({
 
 
         return <Scroller
+                preventDefaultHorizontal={true}
+
                 loadMask={!props.loadMaskOverHeader}
                 loading={props.loading}
 
@@ -53,7 +55,6 @@ module.exports = React.createClass({
                 scrollTop={props.scrollTop}
                 scrollLeft={props.scrollLeft}
 
-                height={rowsCount * props.rowHeight}
                 scrollHeight={verticalScrollerSize}
                 scrollWidth={props.minRowWidth}
 
