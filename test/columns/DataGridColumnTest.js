@@ -149,6 +149,57 @@ describe('DataGrid Test Suite - Columns', function(){
         done()
     })
 
+    it('check dynamic column visibility by options',function(done) {
+
+        // to make setState work as per http://stackoverflow.com/a/26872245/2861269
+        require('react/lib/ExecutionEnvironment').canUseDOM = true
+
+        var data = [{ id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}];
+        var columns = [
+            { name: 'index', title: '#', width: 50, visible: true },
+            { name: 'firstName', visible: true},
+            { name: 'lastName'  },
+            { name: 'city' },
+            { name: 'email' }
+        ];
+
+        // table with column menu
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns
+            })
+        )
+
+        var headers = []
+
+        tryWithClass(table,COLUMN_HEADER_CLASS)
+            .map(function(header) {
+                headers.push(header.getDOMNode().textContent)
+            })
+
+        var expectedHeaders    = ['#','First name','Last name','City','Email']
+        var expectedHeadersLater    = ['#','Last name','City','Email']
+        headers.should.eql(expectedHeaders)
+
+        // set the visibility of second column false
+        setColumnVisibility(columns,1,false)
+        // call setState to update table component
+        table.setState({})
+
+        //check the headers again
+        var newHeaders = []
+        tryWithClass(table,COLUMN_HEADER_CLASS)
+            .map(function(header) {
+                newHeaders.push(header.getDOMNode().textContent)
+            })
+
+        newHeaders.should.eql(expectedHeadersLater)
+        done()
+
+    })
+
 })
 
 function checkColVisibility(data, columns, expectedHeaders, visible) {
@@ -171,9 +222,7 @@ function checkColVisibility(data, columns, expectedHeaders, visible) {
     headers.should.eql(expectedHeaders)
 
     var tableDom = findWithClass(table,TABLE_CLASS)
-    if(visible) {
-
-    }
+    
     var cellTexts = tryWithClass(tableDom,CELLTEXT_CLASS)
     var cellContents = []
     cellTexts.map(function(cell) {
@@ -184,5 +233,12 @@ function checkColVisibility(data, columns, expectedHeaders, visible) {
         cellContents.should.containEql('John')
     } else {
         cellContents.should.not.containEql('John')
+    }
+}
+
+// set column visibility true / false
+function setColumnVisibility(columns,index,visible) {
+    if(index<columns.length) {
+        columns[index].visible = visible;
     }
 }
