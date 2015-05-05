@@ -21,7 +21,7 @@ var render        = testUtils.render
 var findWithClass = testUtils.findWithClass
 var tryWithClass  = testUtils.tryWithClass
 
-describe('DataGrid Test Suite - Rendering & DataSource', function(){
+describe('DataGrid Test Suite - Rendering', function(){
 
 	it('Check loading controlled prop works as expected',function(done) {
 
