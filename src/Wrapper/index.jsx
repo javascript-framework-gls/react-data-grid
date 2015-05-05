@@ -44,6 +44,7 @@ module.exports = React.createClass({
 
 
         return <Scroller
+                ref="scroller"
                 preventDefaultHorizontal={true}
 
                 loadMask={!props.loadMaskOverHeader}
