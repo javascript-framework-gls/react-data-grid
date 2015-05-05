@@ -31,10 +31,14 @@ There are a number of features that need to be tested. They follow.
 7. Check `page`, `defaultPage`, `onPageChange` work as expected. Check controlled page works (integrate datagrid into another cmp, and have the `page` incremented when button is clicked. Specify the `dataSource` as a function, and see that is it passed the correct page - the `skip` query param)
 
 
-
 ### DataRendering
 
   1. The first thing we should check, since we are doing virtual rendering, is that both the first and the end rows in the grid are rendered when they are in view.
   This means when scrollTop is 0 on the vertical scrollbar, the first record is in the DOM, and when scrollTop is maximum, the last record is in the DOM.
   
   PLEASE do not work on this yet, since we're currently working on pagination, and change the scrolling elements.
+
+### Styling
+
+ 1. Make sure `rowStyle` (both object & function returning an object - see http://zippyui.github.io/react-datagrid/#/examples/custom-row-styling) work as expected
+ 2. Check `column.style` is applied and check `column.textAlign` ('left','right','center') works as expected
