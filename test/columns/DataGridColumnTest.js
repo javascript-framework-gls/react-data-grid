@@ -151,9 +151,6 @@ describe('DataGrid Test Suite - Columns', function(){
 
     it('check dynamic column visibility by options',function(done) {
 
-        // to make setState work as per http://stackoverflow.com/a/26872245/2861269
-        require('react/lib/ExecutionEnvironment').canUseDOM = true
-
         var data = [{ id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}];
         var columns = [
             { name: 'index', title: '#', width: 50, visible: true },
