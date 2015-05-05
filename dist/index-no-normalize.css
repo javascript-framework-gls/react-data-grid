@@ -538,9 +538,6 @@ html.u-app body * {
   align-items: stretch;
   -webkit-align-items: stretch;
 }
-.react-datagrid .z-horizontal-scroller {
-  height: 1px;
-}
 .react-datagrid .z-row,
 .react-datagrid .react-datagrid-pagination-toolbar {
   -webkit-user-select: none;
