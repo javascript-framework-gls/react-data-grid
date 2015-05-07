@@ -2,6 +2,7 @@ react-datagrid
 =================
 
 [![Join the chat at https://gitter.im/zippyui/react-datagrid](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zippyui/react-datagrid?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://circleci.com/gh/zippyui/react-datagrid.svg?style=shield)](https://circleci.com/gh/zippyui/react-datagrid)
 
 > A carefully crafted DataGrid for React
 
