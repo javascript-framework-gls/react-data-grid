@@ -145,7 +145,7 @@ describe('DataGrid Test Suite - DataSource', function(){
         },0)
 	})
 
-	it('check pagination works when dataSource is remote ',function(done) {
+	xit('check pagination works when dataSource is remote ',function(done) {
 
         // flag to test pagination url in fetch
         paginationEnabled = true;
