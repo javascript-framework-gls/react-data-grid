@@ -1,11 +1,8 @@
 'use strict';
 
-//ensure DOM environment
-require('../testdom')()
-
+var DataGrid  = require('../DataGrid')
 var React     = require('react/addons')
 var TestUtils = React.addons.TestUtils
-var DataGrid  = require('../DataGrid')
 
 var TABLE_CLASS         = 'z-table'
 var ROW_CLASS           = 'z-row'
@@ -132,6 +129,10 @@ describe('DataGrid Test Suite - DataSource', function(){
         setTimeout(function() {
             var rows = tryWithClass(table,ROW_CLASS);
             rows.length.should.equal(1);
+            var nextPageButton = TestUtils.findAllInRenderedTree(table,function(node) {
+                return node.props.name == 'gotoNext'; 
+            })[0];
+            TestUtils.Simulate.click(nextPageButton.getDOMNode());
             done();
         },0)
 	})
