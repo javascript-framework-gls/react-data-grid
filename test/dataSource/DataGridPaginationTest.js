@@ -21,6 +21,7 @@ var testUtils = require('../utils')
 var render        = testUtils.render
 var findWithClass = testUtils.findWithClass
 var tryWithClass  = testUtils.tryWithClass
+var generateMockData = testUtils.generateMockData
 
 var paginationEnabled
 var remoteDataOptions = REMOTE_DATA_OPTIONS
@@ -34,12 +35,7 @@ var fetchData = function(url) {
     else
         url.should.be.equal(REMOTE_DATA);
 
-    var data =  {
-        data : [
-            { id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}
-        ],
-        count:1
-    };
+    var data =  generateMockData({type : 'remote',len : 1})
 
     var promise = new Promise(function(resolve,reject) {
 
@@ -117,42 +113,13 @@ describe('DataGrid Test Suite - Pagination', function(){
         // create dataSource
         var dataSource = function(request) {
             
-            var data;
-
-            switch(request.page) {
-                case 1 : data = {
-                            data : [
-                                { id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'},
-                                { id: 1, index: 2, firstName: 'Paul', city: 'London', email: 'jon@gmail.com'}
-                            ],
-                            count:3
-                        };
-                break;
-                case 2 : data = {
-                            data : [
-                                { id: 2, index: 3, firstName: 'Koustuv', city: 'London', email: 'jon@gmail.com'}
-                            ],
-                            count:3
-                        };
-            }
+            var data = generateMockData({type : 'remote', len : 3, request : request});
 
             var promise = new Promise(function(resolve,reject) {
                 resolve(data)
             })
             return promise;
         };
-
-        var columns = [
-            { name: 'index', title: '#', width: 50 },
-            { name: 'firstName'},
-            { name: 'lastName'  },
-            { name: 'city' },
-            { name: 'email' }
-        ];
-
-        // flag to test pagination url in fetch
-        paginationEnabled = true;
-        remoteDataOptions = REMOTE_DATA_OPTIONS2;
 
 		// table first page render
         var table = render(
@@ -161,8 +128,7 @@ describe('DataGrid Test Suite - Pagination', function(){
                 dataSource 		: dataSource,
                 columns   		: columns,
                 style     		: {height:200},
-                fetch     		: fetchData,
-                defaultPageSize : 1
+                defaultPageSize : 2
             })
         );
 
