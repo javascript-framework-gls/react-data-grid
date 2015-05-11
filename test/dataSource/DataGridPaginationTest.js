@@ -1,11 +1,8 @@
 'use strict';
 
-//ensure DOM environment
-require('../testdom')()
-
+var DataGrid  = require('../DataGrid')
 var React     = require('react/addons')
 var TestUtils = React.addons.TestUtils
-var DataGrid  = require('../DataGrid')
 
 var TABLE_CLASS         = 'z-table'
 var ROW_CLASS           = 'z-row'
@@ -24,74 +21,40 @@ var testUtils = require('../utils')
 var render        = testUtils.render
 var findWithClass = testUtils.findWithClass
 var tryWithClass  = testUtils.tryWithClass
+var generateMockData = testUtils.generateMockData
 
-describe('DataGrid Test Suite - DataSource', function(){
+var paginationEnabled
+var remoteDataOptions = REMOTE_DATA_OPTIONS
 
-	var fetchData;
-	var columns;
-	var paginationEnabled;
-	var remoteDataOptions = REMOTE_DATA_OPTIONS;
+// create mock fetchData
 
-    // data segments
-        
-    var data_page1of1 =  {
-        data : [
-            { id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}
-        ],
-        count:1
-    };
+var fetchData = function(url) {
+    // check url request is ok
+    if(paginationEnabled)
+        url.should.be.equal(REMOTE_DATA + remoteDataOptions);
+    else
+        url.should.be.equal(REMOTE_DATA);
 
-    var data_page1of2 = {
-        data : [
-            { id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}
-        ],
-        count:2
-    };
+    var data =  generateMockData({type : 'remote',len : 1})
 
-    var data_page2of2 = {
-        data : [
-            { id: 1, index: 2, firstName: 'Koustuv', city: 'Kolkata', email: 'ks@gmail.com'}
-        ],
-        count:2
-    };
+    var promise = new Promise(function(resolve,reject) {
 
-	beforeEach(function() {
+        resolve(data);
 
-		// create mock fetchData
+    })
+    return promise;
+};
 
-        fetchData = function(url) {
-            // check url request is ok
-            if(paginationEnabled)
-            	url.should.be.equal(REMOTE_DATA + remoteDataOptions);
-          	else
-          		url.should.be.equal(REMOTE_DATA);
+var columns = [
+    { name: 'index', title: '#', width: 50 },
+    { name: 'firstName'},
+    { name: 'lastName'  },
+    { name: 'city' },
+    { name: 'email' }
+];
 
-            var promise = new Promise(function(resolve,reject) {
+describe('DataGrid Test Suite - Pagination', function(){
 
-                if(!remoteDataOptions) {
-                    resolve(data_page1of1)
-                }
-                else {
-                    if(remoteDataOptions === REMOTE_DATA_OPTIONS2) {
-                        resolve(data_page1of2)
-                    }
-                    if(remoteDataOptions === REMOTE_DATA_OPTIONS3) {
-                        resolve(data_page2of2)
-                    }
-                }
-
-            })
-            return promise;
-        }
-
-		columns = [
-            { name: 'index', title: '#', width: 50 },
-            { name: 'firstName'},
-            { name: 'lastName'  },
-            { name: 'city' },
-            { name: 'email' }
-        ];
-	})
 
 	it('check pagination toolbar visible when dataSource is remote ',function(done) {
 
@@ -145,64 +108,64 @@ describe('DataGrid Test Suite - DataSource', function(){
         },0)
 	})
 
-	xit('check pagination works when dataSource is remote ',function(done) {
+	it('check pagination works when dataSource is remote ',function(done) {
 
-        // flag to test pagination url in fetch
-        paginationEnabled = true;
-        remoteDataOptions = REMOTE_DATA_OPTIONS2;
+        // create dataSource
+        var dataSource = function(request) {
+            
+            var data = generateMockData({type : 'remote', len : 3, request : request});
+
+            var promise = new Promise(function(resolve,reject) {
+                resolve(data)
+            })
+            return promise;
+        };
 
 		// table first page render
         var table = render(
             DataGrid({
                 idProperty		: 'id',
-                dataSource 		: REMOTE_DATA,
+                dataSource 		: dataSource,
                 columns   		: columns,
                 style     		: {height:200},
-                fetch     		: fetchData,
-                defaultPageSize : 1
+                defaultPageSize : 2
             })
         );
 
         // set time to resolve promise and render table
         setTimeout(function() {
-        	
+
             var paginationToolbar = tryWithClass(table,PAGINATION_TOOLBAR);
-            paginationToolbar.should.not.be.empty
+            paginationToolbar.should.not.be.empty;
 
-            var nextPageButton = TestUtils.findAllInRenderedTree(table,function(node) {
-            	return node.props.name == PAGINATION_NEXT; 
-            })[0];
-
-            var prevPageButton = TestUtils.findAllInRenderedTree(table,function(node) {
-            	return node.props.name == PAGINATION_PREV; 
-            })[0];
-
-            var firstRow = tryWithClass(table,ROW_CLASS)
-            var firstName = tryWithClass(firstRow[0],CELL_CLASS)[1].getDOMNode().textContent;
-            firstName.should.equal('John')
+            var rows = tryWithClass(table,ROW_CLASS);
+            
+            // check the number of rows
+            
+            rows.length.should.equal(2);
 
             // first, navigate to second page
 
-            // set second page remote data url
-            remoteDataOptions = REMOTE_DATA_OPTIONS3;
+            var nextPageButton = TestUtils.findAllInRenderedTree(table,function(node) {
+                return node.props.name == PAGINATION_NEXT; 
+	        })[0];
 
             // click next page button
-            TestUtils.Simulate.click(nextPageButton.getDOMNode())
+            TestUtils.Simulate.click(nextPageButton.getDOMNode());
 
             // set time to resolve promise and render table
             setTimeout(function() {
 
                 // check next page content
             
-                firstRow = tryWithClass(table,ROW_CLASS)
-                firstName = tryWithClass(firstRow[0],CELL_CLASS)[1].getDOMNode().textContent;
-                firstName.should.equal('Koustuv')
+                rows = tryWithClass(table,ROW_CLASS)
+                rows.length.should.equal(1)
 
                 // then navigate back to first page
-                // set first page remote data url
-
-                remoteDataOptions = REMOTE_DATA_OPTIONS2;
-
+                
+                var prevPageButton = TestUtils.findAllInRenderedTree(table,function(node) {
+                    return node.props.name == PAGINATION_PREV; 
+                })[0];    
                 // click previous page button
                 TestUtils.Simulate.click(prevPageButton.getDOMNode())
 
@@ -211,9 +174,8 @@ describe('DataGrid Test Suite - DataSource', function(){
 
                     // check first page content again
             
-                    firstRow = tryWithClass(table,ROW_CLASS)
-                    firstName = tryWithClass(firstRow[0],CELL_CLASS)[1].getDOMNode().textContent;
-                    firstName.should.equal('John')
+                    rows = tryWithClass(table,ROW_CLASS)
+                	rows.length.should.equal(2)
 
                     done()
 

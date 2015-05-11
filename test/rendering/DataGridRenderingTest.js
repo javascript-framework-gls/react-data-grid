@@ -1,11 +1,8 @@
 'use strict';
 
-//ensure DOM environment
-require('../testdom')()
-
+var DataGrid  = require('../DataGrid')
 var React     = require('react/addons')
 var TestUtils = React.addons.TestUtils
-var DataGrid  = require('../DataGrid')
 
 var TABLE_CLASS         = 'z-table'
 var ROW_CLASS           = 'z-row'
