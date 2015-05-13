@@ -254,7 +254,8 @@ describe('DataGrid Test Suite - Pagination', function(){
         );
 
         setTimeout(function() {
-            var selectPages =  TestUtils.findRenderedDOMComponentWithTag(table, 'select')
+            var paginationToolbar = findWithClass(table,PAGINATION_TOOLBAR)
+            var selectPages =  TestUtils.findRenderedDOMComponentWithTag(paginationToolbar, 'select')
             TestUtils.Simulate.change(selectPages,{target : {value : CHANGED_PAGE_SIZE}})
             done()
         },0)        
