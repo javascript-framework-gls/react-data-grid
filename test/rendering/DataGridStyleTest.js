@@ -8,6 +8,7 @@ var TABLE_CLASS         = 'z-table'
 var ROW_CLASS           = 'z-row'
 var CELL_CLASS			= 'z-cell'
 var CELL_TEXT_CLASS		= 'z-text'
+var ALIGN_RIGHT_CLASS	= 'z-align-right'
 
 var testUtils = require('../utils')
 
@@ -118,5 +119,40 @@ describe('DataGrid Test Suite -  Row Style',function() {
         })
 
 	})
-	
+
+	it('check column textAlign works',function() {
+
+		var TEXT_ALIGN = 'right'
+		var COL_ALIGN_INDEX = 2
+		var data = generateMockData({type : 'local', len : 10})
+
+		columns = [
+		    { name: 'index', title: '#', width: 50 },
+		    { name: 'firstName'},
+		    { name: 'lastName' , textAlign : TEXT_ALIGN },
+		    { name: 'city' },
+		    { name: 'email'}
+		]
+
+		// table
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns,
+                style     : {height:400}
+            })
+        );
+
+		var rows = tryWithClass(table,ROW_CLASS)
+		rows.forEach(function(row) {
+			var cells = tryWithClass(row,CELL_CLASS)
+			cells.forEach(function(cell,index) {
+				if(index == COL_ALIGN_INDEX)
+					cell.props.className.should.containEql(ALIGN_RIGHT_CLASS)
+			})	
+        })
+
+	})
+
 })
