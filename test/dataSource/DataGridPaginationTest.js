@@ -186,4 +186,151 @@ describe('DataGrid Test Suite - Pagination', function(){
         },0)
 
 	})
+
+    it('check pageSize prop ',function(done) {
+
+        var PAGE_SIZE = 3
+
+        // create dataSource
+        var dataSource = function(request) {
+            
+            var data = generateMockData({type : 'remote', len : 4, request : request});
+
+            var promise = new Promise(function(resolve,reject) {
+                resolve(data)
+            })
+            return promise;
+        };
+
+        // table first page render
+        var table = render(
+            DataGrid({
+                idProperty      : 'id',
+                dataSource      : dataSource,
+                columns         : columns,
+                style           : {height:200},
+                pageSize        : PAGE_SIZE
+            })
+        );
+
+        setTimeout(function() {
+            var rows = tryWithClass(table,ROW_CLASS)
+            rows.length.should.equal(PAGE_SIZE)
+            done()
+        },0)        
+
+    })
+
+    it('check pageSizeChanged prop ',function(done) {
+
+        var PAGE_SIZE = 3
+        var CHANGED_PAGE_SIZE = 20
+
+        // create dataSource
+        var dataSource = function(request) {
+            
+            var data = generateMockData({type : 'remote', len : 4, request : request});
+
+            var promise = new Promise(function(resolve,reject) {
+                resolve(data)
+            })
+            return promise;
+        };
+
+        var onPageSizeChangeHandler = function(pageSize,props) {
+            pageSize.should.equal(CHANGED_PAGE_SIZE)
+        }
+
+        // table first page render
+        var table = render(
+            DataGrid({
+                idProperty      : 'id',
+                dataSource      : dataSource,
+                columns         : columns,
+                style           : {height:200},
+                pageSize        : PAGE_SIZE,
+                onPageSizeChange: onPageSizeChangeHandler
+            })
+        );
+
+        setTimeout(function() {
+            var paginationToolbar = findWithClass(table,PAGINATION_TOOLBAR)
+            var selectPages =  TestUtils.findRenderedDOMComponentWithTag(paginationToolbar, 'select')
+            TestUtils.Simulate.change(selectPages,{target : {value : CHANGED_PAGE_SIZE}})
+            done()
+        },0)        
+
+    })
+
+    it('check page and onPageChange work',function(done) {
+
+        var PAGE_SIZE = 3
+        var PAGE = 1
+        // create dataSource
+        var dataSource = function(request) {
+            // check correct page
+            request.page.should.equal(PAGE)
+            // check skip params
+            request.skip.should.equal((PAGE-1)*PAGE_SIZE)
+
+            var data = generateMockData({type : 'remote', len : 9, request : request});
+
+            var promise = new Promise(function(resolve,reject) {
+                resolve(data)
+            })
+            return promise;
+        };
+
+        var component = React.createClass({
+            displayName : "component",
+            increment : function() {
+                // increment page size
+                PAGE = PAGE + 1
+                this.setState({})
+            },
+            onPageChange : function(page) {
+                page.should.equal(3)
+                PAGE = page
+                this.setState({})
+            },
+            render: function(){
+                return React.createElement("div", null,
+                    React.createElement("p", null, 
+                        React.createElement("button", {className : "incrementBtn",onClick: this.increment}, "Increment")
+                    ),
+                    DataGrid(
+                        {
+                            ref: "grid", 
+                            dataSource: dataSource, 
+                            page: PAGE, 
+                            pageSize: PAGE_SIZE,
+                            onPageChange: this.onPageChange, 
+                            idProperty: "id", 
+                            columns: columns, 
+                            style: {height: 500}
+                        }
+                    )
+                );
+            }
+        })
+
+        var componentRendered = render(React.createElement(component,null))
+        
+        setTimeout(function() {
+            var incrementBtn = findWithClass(componentRendered,'incrementBtn')
+            // click increment Button to check controlled page change
+            TestUtils.Simulate.click(incrementBtn.getDOMNode())
+            setTimeout(function() {
+                var nextPageButton = TestUtils.findAllInRenderedTree(componentRendered,function(node) {
+                    return node.props.name == PAGINATION_NEXT; 
+                })[0];
+                // click next button to check onPageChange
+                TestUtils.Simulate.click(nextPageButton.getDOMNode())
+                done()
+            },0)
+        },0)
+        
+
+    })
+
 })
