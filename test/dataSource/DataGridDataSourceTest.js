@@ -1,11 +1,8 @@
 'use strict';
 
-//ensure DOM environment
-require('../testdom')()
-
+var DataGrid  = require('../DataGrid')
 var React     = require('react/addons')
 var TestUtils = React.addons.TestUtils
-var DataGrid  = require('../DataGrid')
 
 var TABLE_CLASS         = 'z-table'
 var ROW_CLASS           = 'z-row'
@@ -17,12 +14,13 @@ var testUtils = require('../utils')
 var render        = testUtils.render
 var findWithClass = testUtils.findWithClass
 var tryWithClass  = testUtils.tryWithClass
+var generateMockData = testUtils.generateMockData
 
 describe('DataGrid Test Suite - DataSource', function(){
 
 	it('check dataSource supported format : array',function(done) {
 
-		var data = [{ id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}];
+		var data = generateMockData({type : 'local',len : 1})
         var columns = [
             { name: 'index', title: '#', width: 50 },
             { name: 'firstName'},
@@ -53,12 +51,7 @@ describe('DataGrid Test Suite - DataSource', function(){
 
         var fetchData = function(url) {
             url.should.be.equal(REMOTE_DATA + REMOTE_DATA_OPTIONS);
-            var data = {
-                data : [
-                    { id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}
-                ],
-                count:1
-            };
+            var data = generateMockData({type : 'remote',len : 1})
             var promise = new Promise(function(resolve,reject) {
                 resolve(data);
             })
@@ -98,12 +91,7 @@ describe('DataGrid Test Suite - DataSource', function(){
         // create mock dataSource function
 
         var dataSource = function() {
-            var data = {
-                data : [
-                    { id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}
-                ],
-                count:1
-            };
+            var data = generateMockData({type : 'remote',len : 1})
             var promise = new Promise(function(resolve,reject) {
                 resolve(data);
             })

@@ -19,12 +19,13 @@ var testUtils = require('../utils')
 var render        = testUtils.render
 var findWithClass = testUtils.findWithClass
 var tryWithClass  = testUtils.tryWithClass
+var generateMockData = testUtils.generateMockData
 
 describe('DataGrid Test Suite - Columns', function(){
 
     it('check column visibility by options',function(done) {
 
-        var data = [{ id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}];
+        var data = generateMockData({type : 'local', len : 1})
 
         // defaultVisible : true
         var columns1 = [
@@ -76,7 +77,7 @@ describe('DataGrid Test Suite - Columns', function(){
 
     it('check column menu accessibility by options',function(done) {
 
-        var data = [{ id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}];
+        var data = generateMockData({type : 'local', len : 1})
         var columns = [
             { name: 'index', title: '#', width: 50 },
             { name: 'firstName'},
@@ -116,7 +117,7 @@ describe('DataGrid Test Suite - Columns', function(){
 
     it('check column width set by props',function(done) {
 
-        var data = [{ id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}];
+        var data = generateMockData({type : 'local', len : 1})
         var columns = [
             { name: 'index', title: '#', width: 50 },
             { name: 'firstName'},
@@ -151,7 +152,7 @@ describe('DataGrid Test Suite - Columns', function(){
 
     it('check dynamic column visibility by options',function(done) {
 
-        var data = [{ id: 0, index: 1, firstName: 'John', city: 'London', email: 'jon@gmail.com'}];
+        var data = generateMockData({type : 'local', len : 1})
         var columns = [
             { name: 'index', title: '#', width: 50, visible: true },
             { name: 'firstName', visible: true},
@@ -227,9 +228,9 @@ function checkColVisibility(data, columns, expectedHeaders, visible) {
     });
 
     if(visible) {
-        cellContents.should.containEql('John')
+        cellContents.should.containEql(data[0].firstName)
     } else {
-        cellContents.should.not.containEql('John')
+        cellContents.should.not.containEql(data[0].firstName)
     }
 }
 
