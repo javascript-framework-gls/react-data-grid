@@ -55,6 +55,7 @@ var columns = [
     {
         name: 'id',
         filterable: false,
+        className: 'blue',
         type: 'number',
         width: 350
     },

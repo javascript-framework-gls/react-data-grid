@@ -31,7 +31,7 @@ describe('DataGrid Test Suite -  Row Style',function() {
 
 		var ROW_COLOR = 'blue'
 		var data = generateMockData({type : 'local', len : 3})
-		
+
 		var rowStyle = {color : ROW_COLOR}
 
 		// table
@@ -53,7 +53,7 @@ describe('DataGrid Test Suite -  Row Style',function() {
 	})
 
 	it('check rowStyle as function works',function() {
-		
+
 		var ROW_COLOR = 'blue'
 		var ROW_COLOR_INDEX = 4
 		var data = generateMockData({type : 'local', len : 10})
@@ -115,7 +115,7 @@ describe('DataGrid Test Suite -  Row Style',function() {
 			cells.forEach(function(cell,index) {
 				if(index == COL_COLOR_INDEX)
 					window.getComputedStyle(cell.getDOMNode()).getPropertyValue('color').should.equal(COL_COLOR)
-			})	
+			})
         })
 
 	})
@@ -150,9 +150,44 @@ describe('DataGrid Test Suite -  Row Style',function() {
 			cells.forEach(function(cell,index) {
 				if(index == COL_ALIGN_INDEX)
 					cell.props.className.should.containEql(ALIGN_RIGHT_CLASS)
-			})	
+			})
         })
 
+	})
+
+	it('check column.className is applied to column cells', function(){
+
+		var data = generateMockData({type : 'local', len : 10})
+
+		columns = [
+		    { name: 'index', title: '#', width: 50 },
+		    { name: 'firstName', className: 'custom-class'},
+		    { name: 'lastName'  },
+		    { name: 'city' }
+		]
+
+		// table
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns,
+                style     : {height:400}
+            })
+        );
+
+        var rows = tryWithClass(table,ROW_CLASS)
+
+
+		rows.forEach(function(row, i) {
+
+			var cells     = tryWithClass(row, CELL_CLASS)
+			var className = React.findDOMNode(cells[1]).className
+
+			className.indexOf('custom-class')
+				.should
+				.not.equal(-1)
+        })
 	})
 
 })

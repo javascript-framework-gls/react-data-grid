@@ -147,13 +147,16 @@ module.exports = React.createClass({
         var columns = props.columns
 
         var cellProps = {
+            style      : column.style,
+            className  : column.className,
+
             key        : column.name,
             name       : column.name,
+
             data       : props.data,
             columns    : columns,
             index      : index,
             rowIndex   : props.index,
-            style      : column.style,
             textPadding: props.cellPadding,
             renderCell : props.renderCell,
             renderText : props.renderText

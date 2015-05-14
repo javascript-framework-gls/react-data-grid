@@ -873,7 +873,7 @@ html.u-app body * {
   visibility: hidden;
 }
 .z-horizontal-scroller {
-  height: 1px;
+  height: 0.1px;
   visibility: hidden;
 }
 .z-vertical-scrollbar {
@@ -1329,6 +1329,9 @@ html.u-app body * {
 }
 .react-datagrid .z-summary .z-cell:not(.z-first) {
   border-left: 1px solid #a8a8a8;
+}
+.blue {
+  color: #00f;
 }
 @-moz-keyframes loader-fade {
   from {
