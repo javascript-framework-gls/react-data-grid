@@ -125,11 +125,51 @@ Sorting the data array is not done by the grid. You can however pass in sort inf
  		dataSource={data} idProperty='id' columns={columns} />
  	```
 
-#### Column reordering
+#### Columns
 
- If you want to enable column reordering, just specify
+##### Column styling
 
- * onColumnOrderChange: Function(index, dropIndex)
+Column customization/styling can be done with different properties on the column object:
+
+* `render`: Function - if you want custom rendering, specify this property
+
+ 		```jsx
+ 		var columns = [
+ 			{ name: 'index', render: function(v){return 'Index ' + v} }
+ 		]
+ 		```
+
+* `style`: Object - a style object to be applied to all cells in this column
+* `textAlign`: String - one of 'left', 'right', 'center'
+* `className`: String - a className to be applied to all cells in this column.
+
+Example:
+
+```jsx
+var data = [...]
+var columns = [
+	{
+		name: 'firstName',
+		className: 'first-column',
+		textAlign: 'center',
+		style: { fontWeight: 'bold' }
+	},
+	{
+		name: 'lastName',
+		render: function(value){
+			return <span>
+				<b>Last name:</b> value
+			</span>
+		}
+]
+<DataGrid idProperty="id" dataSource={data} columns={columns} />
+```
+
+#####  Column reordering
+
+If you want to enable column reordering, just specify the `onColumnOrderChange` prop on the grid:
+
+* onColumnOrderChange: Function(index, dropIndex)
 
  	Example
  	```jsx
