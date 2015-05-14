@@ -1,6 +1,10 @@
 react-datagrid
 =================
 
+### 1.1.13
+ * add support for column.className to be propagated to column cells.
+ * improve testing coverage
+
 ### 1.1.0
  * add support for remote data loading and pagination
 

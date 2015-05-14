@@ -1,15 +1,15 @@
 react-datagrid
 =================
 
-### v2.0.0 - estimated 2015-06-10
+### v2.0.0 - estimated 2015-06-30
 
  * pivot grid
 
-### v1.3.0 - estimated 2015-05-18-05
+### v1.3.0 - estimated 2015-06-05
 
  * add support for frozen columns
 
-### v1.2.0 - estimated 2015-04-30
+### v1.2.0 - estimated 2015-05-30
 
  * add support for column groups!
  * improve rendering peformance even more
