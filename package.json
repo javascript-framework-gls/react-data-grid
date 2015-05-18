@@ -44,6 +44,7 @@
     "file-loader": "^0.8.1",
     "guid": "0.0.12",
     "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
     "gulp-react": "^3.0.0",
     "jsdom": "5.1.0",
     "mocha": "^2.2.1",
