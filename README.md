@@ -165,6 +165,19 @@ var columns = [
 <DataGrid idProperty="id" dataSource={data} columns={columns} />
 ```
 
+##### Column showing/hiding
+
+When a column is shown/hidden, you can be notified using the `onColumnVisibilityChange` callback prop.
+
+ * `onColumnVisibilityChange`: Function(column, visibility)
+
+You can specify a column is visible/hidden with the following props on column objects:
+
+ * defaultVisible: Boolean
+ * visible: Boolean - controlled (which means you have to manually set column visibility when it changes, by using `onColumnVisibilityChange`)
+
+If you prefer to use the "hidden" alternatives, you can use `defaultHidden` and `hidden`.
+
 #####  Column reordering
 
 If you want to enable column reordering, just specify the `onColumnOrderChange` prop on the grid:
