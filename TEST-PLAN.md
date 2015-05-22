@@ -29,6 +29,7 @@ There are a number of features that need to be tested. They follow.
 5. Check pagination works and pagination toolbar is visible when dataSource is remote. Check pagination toolbar not present when `pagination: false`
 6. Check `pageSize`, `defaultPageSize`, `onPageSizeChange`
 7. Check `page`, `defaultPage`, `onPageChange` work as expected. Check controlled page works (integrate datagrid into another cmp, and have the `page` incremented when button is clicked. Specify the `dataSource` as a function, and see that is it passed the correct page - the `skip` query param)
+8. Check `paginationToolbarProps` works as expected
 
 ## Sorting
 
@@ -49,3 +50,14 @@ There are a number of features that need to be tested. They follow.
 
  1. Make sure `rowStyle` (both object & function returning an object - see http://zippyui.github.io/react-datagrid/#/examples/custom-row-styling) work as expected
  2. Check `column.style` is applied and check `column.textAlign` ('left','right','center') works as expected
+ 3. Check `showCellBorders` prop works 
+
+### Functionality
+
+1. Check single selection works
+2. Check multiple selection works
+3. Check grouping works (`groupBy` prop)
+4. Check filtering works
+5. Check `emptyText` prop works
+6. Check `loading` prop works
+7. Check custom column rendering function
