@@ -16,6 +16,7 @@ There are a number of features that need to be tested. They follow.
 
   3. Make sure `withColumnMenu` is working correctly and column menu is accessible or not depending on this flag.
   4. Column sizes - we need to make sure width and flex props work properly. Check both column header and cells have the specified width
+  5. Check custom column rendering function
 
 ## DataSource & rendering
 
@@ -52,12 +53,15 @@ There are a number of features that need to be tested. They follow.
  2. Check `column.style` is applied and check `column.textAlign` ('left','right','center') works as expected
  3. Check `showCellBorders` prop works 
 
-### Functionality
+### Selection
 
-1. Check single selection works
-2. Check multiple selection works
-3. Check grouping works (`groupBy` prop)
-4. Check filtering works
-5. Check `emptyText` prop works
-6. Check `loading` prop works
-7. Check custom column rendering function
+  1. Check single selection works
+  2. Check multiple selection works
+
+### Grouping
+
+  1. Check grouping works (`groupBy` prop)
+
+### Filtering
+
+  1. Check filtering works
