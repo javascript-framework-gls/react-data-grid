@@ -16,6 +16,7 @@ There are a number of features that need to be tested. They follow.
 
   3. Make sure `withColumnMenu` is working correctly and column menu is accessible or not depending on this flag.
   4. Column sizes - we need to make sure width and flex props work properly. Check both column header and cells have the specified width
+  5. Check custom column rendering function
 
 ## DataSource & rendering
 
@@ -29,6 +30,7 @@ There are a number of features that need to be tested. They follow.
 5. Check pagination works and pagination toolbar is visible when dataSource is remote. Check pagination toolbar not present when `pagination: false`
 6. Check `pageSize`, `defaultPageSize`, `onPageSizeChange`
 7. Check `page`, `defaultPage`, `onPageChange` work as expected. Check controlled page works (integrate datagrid into another cmp, and have the `page` incremented when button is clicked. Specify the `dataSource` as a function, and see that is it passed the correct page - the `skip` query param)
+8. Check `paginationToolbarProps` works as expected
 
 ## Sorting
 
@@ -49,3 +51,17 @@ There are a number of features that need to be tested. They follow.
 
  1. Make sure `rowStyle` (both object & function returning an object - see http://zippyui.github.io/react-datagrid/#/examples/custom-row-styling) work as expected
  2. Check `column.style` is applied and check `column.textAlign` ('left','right','center') works as expected
+ 3. Check `showCellBorders` prop works 
+
+### Selection
+
+  1. Check single selection works
+  2. Check multiple selection works
+
+### Grouping
+
+  1. Check grouping works (`groupBy` prop)
+
+### Filtering
+
+  1. Check filtering works
