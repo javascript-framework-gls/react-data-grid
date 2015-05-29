@@ -198,6 +198,35 @@ describe('DataGrid Test Suite - Columns', function(){
 
     })
 
+    it('check custom column rendering function works',function() {
+
+        var data = generateMockData({type : 'local', len : 10})
+        var columns = [
+            { name: 'index', render: function(v){return 'Index ' + v} },
+            { name: 'firstName', visible: true},
+            { name: 'lastName'  },
+            { name: 'city' },
+            { name: 'email' }
+        ];
+
+        // table with column menu
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns,
+                style     : {height: 400}
+            })
+        )
+
+        var rows = tryWithClass(table,ROW_CLASS)
+        rows.map(function(row,index) {
+            var cells = tryWithClass(row,CELL_CLASS)
+            React.findDOMNode(cells[0]).textContent.should.equal('Index ' + (index + 1))
+        })
+
+    })
+
 })
 
 function checkColVisibility(data, columns, expectedHeaders, visible) {
