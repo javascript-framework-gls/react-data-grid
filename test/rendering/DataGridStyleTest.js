@@ -9,6 +9,8 @@ var ROW_CLASS           = 'z-row'
 var CELL_CLASS			= 'z-cell'
 var CELL_TEXT_CLASS		= 'z-text'
 var ALIGN_RIGHT_CLASS	= 'z-align-right'
+var HORIZONTAL_BORDER	= 'z-cell-borders-horizontal'
+var VERTICAL_BORDER		= 'z-cell-borders-vertical'
 
 var testUtils = require('../utils')
 
@@ -188,6 +190,64 @@ describe('DataGrid Test Suite -  Row Style',function() {
 				.should
 				.not.equal(-1)
         })
+	})
+
+	it('check showCellBorders prop works',function() {
+
+		var data = generateMockData({type : 'local', len : 10})
+
+		columns = [
+		    { name: 'index', title: '#', width: 50 },
+		    { name: 'firstName', className: 'custom-class'},
+		    { name: 'lastName'  },
+		    { name: 'city' }
+		]
+
+		// table
+        var table = render(
+            DataGrid({
+                idProperty		: 'id',
+                dataSource		: data,
+                columns   		: columns,
+                style     		: {height:400},
+                showCellBorders : true
+            })
+        );
+
+        var tableNode = React.findDOMNode(table)
+        tableNode.className.includes(HORIZONTAL_BORDER).should.be.true
+        tableNode.className.includes(VERTICAL_BORDER).should.be.true
+
+        // check showCellBorders = 'horizontal' works
+
+        table = render(
+            DataGrid({
+                idProperty		: 'id',
+                dataSource		: data,
+                columns   		: columns,
+                style     		: {height:400},
+                showCellBorders : 'horizontal'
+            })
+        );
+
+        tableNode = React.findDOMNode(table)
+        tableNode.className.includes(HORIZONTAL_BORDER).should.be.true
+
+        // check showCellBorders = 'vertical' works
+
+		table = render(
+            DataGrid({
+                idProperty		: 'id',
+                dataSource		: data,
+                columns   		: columns,
+                style     		: {height:400},
+                showCellBorders : 'vertical'
+            })
+        );
+
+        tableNode = React.findDOMNode(table)
+        tableNode.className.includes(VERTICAL_BORDER).should.be.true        
+
 	})
 
 })
