@@ -4,17 +4,19 @@ var DataGrid  = require('../DataGrid')
 var React     = require('react/addons')
 var TestUtils = React.addons.TestUtils
 
-var TABLE_CLASS         = 'z-table'
-var ROW_CLASS           = 'z-row'
-var CELL_CLASS			= 'z-cell'
-var CELL_TEXT_CLASS		= 'z-text'
-var REMOTE_DATA			= 'http://5.101.99.47:8090/10'
-var REMOTE_DATA_OPTIONS = '?pageSize=20&page=1&skip=0'
+var TABLE_CLASS          = 'z-table'
+var ROW_CLASS            = 'z-row'
+var CELL_CLASS           = 'z-cell'
+var CELL_TEXT_CLASS      = 'z-text'
+
+var REMOTE_DATA          = 'http://localhost:8090/10'
+var REMOTE_DATA_OPTIONS  = '?pageSize=20&page=1&skip=0'
 var REMOTE_DATA_OPTIONS2 = '?pageSize=1&page=1&skip=0'
 var REMOTE_DATA_OPTIONS3 = '?pageSize=1&page=2&skip=1'
-var PAGINATION_TOOLBAR  = 'react-datagrid-pagination-toolbar'
-var PAGINATION_NEXT		= 'gotoNext'
-var PAGINATION_PREV		= 'gotoPrev'
+
+var PAGINATION_TOOLBAR   = 'react-datagrid-pagination-toolbar'
+var PAGINATION_NEXT      = 'gotoNext'
+var PAGINATION_PREV      = 'gotoPrev'
 
 var testUtils = require('../utils')
 
@@ -30,20 +32,18 @@ var remoteDataOptions = REMOTE_DATA_OPTIONS
 
 var fetchData = function(url) {
     // check url request is ok
-    if(paginationEnabled)
+    if(paginationEnabled){
         url.should.be.equal(REMOTE_DATA + remoteDataOptions);
-    else
+    } else {
         url.should.be.equal(REMOTE_DATA);
+    }
 
-    var data =  generateMockData({type : 'remote',len : 1})
+    var data = generateMockData({type : 'remote',len : 1})
 
-    var promise = new Promise(function(resolve,reject) {
-
-        resolve(data);
-
+    return new Promise(function(resolve,reject) {
+        resolve(data)
     })
-    return promise;
-};
+}
 
 var columns = [
     { name: 'index', title: '#', width: 50 },
@@ -51,12 +51,12 @@ var columns = [
     { name: 'lastName'  },
     { name: 'city' },
     { name: 'email' }
-];
+]
 
 describe('DataGrid Test Suite - Pagination', function(){
 
 
-	it('check pagination toolbar visible when dataSource is remote ',function(done) {
+	it('check pagination toolbar visible when dataSource is remote ', function(done) {
 
 
         // flag to test pagination url in fetch
@@ -68,22 +68,22 @@ describe('DataGrid Test Suite - Pagination', function(){
                 idProperty: 'id',
                 dataSource: REMOTE_DATA,
                 columns   : columns,
-                style     : {height:200},
+                style     : {height: 200},
                 fetch     : fetchData
             })
         );
 
         // set time to resolve promise and render table
         setTimeout(function() {
-            var paginationToolbar = findWithClass(table,PAGINATION_TOOLBAR);
-            paginationToolbar.should.not.be.empty
+            findWithClass(table,PAGINATION_TOOLBAR)
+                .should.not.be.empty
             done()
-        },0)
+        }, 0)
 
 	})
 
 	it('check pagination toolbar not visible by options ',function(done) {
-		
+
 
 		// flag to test pagination url in fetch
         paginationEnabled = false;
@@ -94,7 +94,7 @@ describe('DataGrid Test Suite - Pagination', function(){
                 idProperty: 'id',
                 dataSource: REMOTE_DATA,
                 columns   : columns,
-                style     : {height:200},
+                style     : {height: 200},
                 fetch     : fetchData,
                 pagination: false
             })
@@ -102,7 +102,7 @@ describe('DataGrid Test Suite - Pagination', function(){
 
         // set time to resolve promise and render table
         setTimeout(function() {
-            var paginationToolbar = tryWithClass(table,PAGINATION_TOOLBAR);
+            var paginationToolbar = tryWithClass(table, PAGINATION_TOOLBAR)
             paginationToolbar.should.be.empty
             done()
         },0)
@@ -112,14 +112,13 @@ describe('DataGrid Test Suite - Pagination', function(){
 
         // create dataSource
         var dataSource = function(request) {
-            
-            var data = generateMockData({type : 'remote', len : 3, request : request});
 
-            var promise = new Promise(function(resolve,reject) {
+            var data = generateMockData({type : 'remote', len : 3, request : request})
+
+            return new Promise(function(resolve,reject) {
                 resolve(data)
             })
-            return promise;
-        };
+        }
 
 		// table first page render
         var table = render(
@@ -135,19 +134,17 @@ describe('DataGrid Test Suite - Pagination', function(){
         // set time to resolve promise and render table
         setTimeout(function() {
 
-            var paginationToolbar = tryWithClass(table,PAGINATION_TOOLBAR);
-            paginationToolbar.should.not.be.empty;
+            var paginationToolbar = tryWithClass(table,PAGINATION_TOOLBAR)
+            paginationToolbar.should.not.be.empty
 
-            var rows = tryWithClass(table,ROW_CLASS);
-            
+            var rows = tryWithClass(table,ROW_CLASS)
+
             // check the number of rows
-            
-            rows.length.should.equal(2);
+            rows.length.should.equal(2)
 
             // first, navigate to second page
-
             var nextPageButton = TestUtils.findAllInRenderedTree(table,function(node) {
-                return node.props.name == PAGINATION_NEXT; 
+                return node.props.name == PAGINATION_NEXT;
 	        })[0];
 
             // click next page button
@@ -157,15 +154,15 @@ describe('DataGrid Test Suite - Pagination', function(){
             setTimeout(function() {
 
                 // check next page content
-            
+
                 rows = tryWithClass(table,ROW_CLASS)
                 rows.length.should.equal(1)
 
                 // then navigate back to first page
-                
+
                 var prevPageButton = TestUtils.findAllInRenderedTree(table,function(node) {
-                    return node.props.name == PAGINATION_PREV; 
-                })[0];    
+                    return node.props.name == PAGINATION_PREV;
+                })[0];
                 // click previous page button
                 TestUtils.Simulate.click(prevPageButton.getDOMNode())
 
@@ -173,7 +170,7 @@ describe('DataGrid Test Suite - Pagination', function(){
                 setTimeout(function() {
 
                     // check first page content again
-            
+
                     rows = tryWithClass(table,ROW_CLASS)
                 	rows.length.should.equal(2)
 
@@ -193,7 +190,7 @@ describe('DataGrid Test Suite - Pagination', function(){
 
         // create dataSource
         var dataSource = function(request) {
-            
+
             var data = generateMockData({type : 'remote', len : 4, request : request});
 
             var promise = new Promise(function(resolve,reject) {
@@ -217,7 +214,7 @@ describe('DataGrid Test Suite - Pagination', function(){
             var rows = tryWithClass(table,ROW_CLASS)
             rows.length.should.equal(PAGE_SIZE)
             done()
-        },0)        
+        },0)
 
     })
 
@@ -228,7 +225,7 @@ describe('DataGrid Test Suite - Pagination', function(){
 
         // create dataSource
         var dataSource = function(request) {
-            
+
             var data = generateMockData({type : 'remote', len : 4, request : request});
 
             var promise = new Promise(function(resolve,reject) {
@@ -258,7 +255,7 @@ describe('DataGrid Test Suite - Pagination', function(){
             var selectPages =  TestUtils.findRenderedDOMComponentWithTag(paginationToolbar, 'select')
             TestUtils.Simulate.change(selectPages,{target : {value : CHANGED_PAGE_SIZE}})
             done()
-        },0)        
+        },0)
 
     })
 
@@ -267,18 +264,24 @@ describe('DataGrid Test Suite - Pagination', function(){
         var PAGE_SIZE = 3
         var PAGE = 1
         // create dataSource
-        var dataSource = function(request) {
+        var dataSource = function(query) {
             // check correct page
-            request.page.should.equal(PAGE)
+            query.page
+                .should.equal(PAGE)
+
             // check skip params
-            request.skip.should.equal((PAGE-1)*PAGE_SIZE)
+            query.skip
+                .should.equal((PAGE - 1) * PAGE_SIZE)
 
-            var data = generateMockData({type : 'remote', len : 9, request : request});
+            var data = generateMockData({
+                type   : 'remote',
+                len    : 9,
+                request: query
+            })
 
-            var promise = new Promise(function(resolve,reject) {
+            return new Promise(function(resolve, reject) {
                 resolve(data)
             })
-            return promise;
         };
 
         var component = React.createClass({
@@ -295,18 +298,21 @@ describe('DataGrid Test Suite - Pagination', function(){
             },
             render: function(){
                 return React.createElement("div", null,
-                    React.createElement("p", null, 
-                        React.createElement("button", {className : "incrementBtn",onClick: this.increment}, "Increment")
+                    React.createElement("p", null,
+                        React.createElement("button", {
+                            className : "incrementBtn",
+                            onClick: this.increment
+                        }, "Increment")
                     ),
                     DataGrid(
                         {
-                            ref: "grid", 
-                            dataSource: dataSource, 
-                            page: PAGE, 
+                            ref: "grid",
+                            dataSource: dataSource,
+                            page: PAGE,
                             pageSize: PAGE_SIZE,
-                            onPageChange: this.onPageChange, 
-                            idProperty: "id", 
-                            columns: columns, 
+                            onPageChange: this.onPageChange,
+                            idProperty: "id",
+                            columns: columns,
                             style: {height: 500}
                         }
                     )
@@ -315,21 +321,21 @@ describe('DataGrid Test Suite - Pagination', function(){
         })
 
         var componentRendered = render(React.createElement(component,null))
-        
+
         setTimeout(function() {
             var incrementBtn = findWithClass(componentRendered,'incrementBtn')
             // click increment Button to check controlled page change
             TestUtils.Simulate.click(incrementBtn.getDOMNode())
             setTimeout(function() {
                 var nextPageButton = TestUtils.findAllInRenderedTree(componentRendered,function(node) {
-                    return node.props.name == PAGINATION_NEXT; 
+                    return node.props.name == PAGINATION_NEXT;
                 })[0];
                 // click next button to check onPageChange
                 TestUtils.Simulate.click(nextPageButton.getDOMNode())
                 done()
             },0)
         },0)
-        
+
 
     })
 
