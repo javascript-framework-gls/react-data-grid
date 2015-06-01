@@ -206,6 +206,10 @@ var App = React.createClass({
             })
         }
 
+        function rowClick(){
+            console.log('rowClick: ', arguments);
+        }
+
         return <div >
 
             <button onClick={this.clear}>clear</button>
@@ -214,7 +218,7 @@ var App = React.createClass({
             <DataGrid
                 onFilter={filter}
                 liveFilter={true}
-                defaultSelected={{1: true, 2: true}}
+                defaultSelected={{451: true, 452: true}}
                 onSelectionChange={onSelectionChange}
                 xonColumnVisibilityChange={this.onColumnChange}
                 onColumnOrderChange={this.onColumnOrderChange}
@@ -225,6 +229,7 @@ var App = React.createClass({
                 rowClassName={blue}
                 xrowFactory={f}
                 onSortChange={this.handleSortChange}
+                onRowClick={rowClick}
                 xscrollBy={5}
                 idProperty='id'
                 style={{border: '1px solid gray', height: 500, margin: 10}}

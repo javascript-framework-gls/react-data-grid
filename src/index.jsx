@@ -580,7 +580,7 @@ module.exports = React.createClass({
             // bottomLoader: bottomLoader,
             // loadersSize: loadersSize,
 
-            onRowClick: this.handleRowClick,
+            // onRowClick: this.handleRowClick,
             selected        : props.selected == null?
                 state.defaultSelected:
                 props.selected

@@ -59,7 +59,7 @@ module.exports = function renderRow(props, data, index, fn){
         rowContextMenu: props.rowContextMenu,
         showMenu: props.showMenu,
 
-        _onClick: props.onRowClick
+        _onClick: this? this.handleRowClick: null
     }
 
     var style
