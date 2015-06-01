@@ -136,11 +136,11 @@ Column customization/styling can be done with different properties on the column
 * `className`: String - a className to be applied to all cells in this column.
 * `render`: Function(value, data, cellProps) - if you want custom rendering, specify this property
 
- 		```jsx
- 		var columns = [
- 			{ name: 'index', render: function(v){return 'Index ' + v} }
- 		]
- 		```
+```jsx
+	var columns = [
+ 		{ name: 'index', render: function(v){return 'Index ' + v} }
+	]
+```
  		
 The `column.render` function is called with 3 args:
  		
