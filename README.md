@@ -131,13 +131,21 @@ Sorting the data array is not done by the grid. You can however pass in sort inf
 
 Column customization/styling can be done with different properties on the column object:
 
-* `render`: Function - if you want custom rendering, specify this property
+* `render`: Function(value, data, cellProps) - if you want custom rendering, specify this property
 
  		```jsx
  		var columns = [
  			{ name: 'index', render: function(v){return 'Index ' + v} }
  		]
  		```
+ 		The function is called with 3 args:
+ 		* value - the default value to be rendered (equals to `data[column.name]`)
+ 		* data - the corresponding data object for the current row
+ 		* cellProps - an object with props for the current cell - has the following properties:
+ 			* rowIndex - the index of the row
+ 			* index    - the index of the column
+ 			* style    - a style for the cell
+ 			* className - a className for the cell
 
 * `style`: Object - a style object to be applied to all cells in this column
 * `textAlign`: String - one of 'left', 'right', 'center'
