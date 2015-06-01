@@ -81,7 +81,7 @@ There are a lot of props that can be configured for the datagrid. We'll try to c
  	Each column should have a `name` property, and optionally a `title` property. If no `title` property is specified, a humanized version of the column `name` will be used.
 
  	* `name`: String
- 	* `title`: String - a title to show in the header. If not specified, a humanized version of `name` will be used
+ 	* `title`: String/ReactElement - a title to show in the header. If not specified, a humanized version of `name` will be used. Can be a string or anything that React can render, so you can customize it as you please.
  	* `render`: Function - if you want custom rendering, specify this property
 
  		```jsx
