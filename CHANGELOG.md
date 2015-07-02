@@ -1,6 +1,9 @@
 react-datagrid
 =================
 
+### 1.2.12
+ * remove userSelect: none from row inline style to row class
+
 ### 1.2.0
  * fix row background to be actually applied to row, not cell
  * add hot loading (`npm run hot`) to the development process.
