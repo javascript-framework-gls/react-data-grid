@@ -54,12 +54,12 @@ var React = require('react')
 var DataGrid = require('react-datagrid')
 
 var data = [
-	{ id: '1', firstName: 'John', lastName: 'Bobson'},
-	{ id: '2', firstName: 'Bob', lastName: 'Mclaren'}
+  { id: '1', firstName: 'John', lastName: 'Bobson'},
+  { id: '2', firstName: 'Bob', lastName: 'Mclaren'}
 ]
 var columns = [
-	{ name: 'firstName'},
-	{ name: 'lastName'}
+  { name: 'firstName'},
+  { name: 'lastName'}
 ]
 
 <DataGrid idProperty="id" dataSource={data} columns={columns} />
@@ -78,20 +78,20 @@ There are a lot of props that can be configured for the datagrid. We'll try to c
  * `idProperty`: String - the name of the property where the id is found for each object in the data array
  * `columns`: Array - an array of columns that are going to be rendered in the grid
 
- 	Each column should have a `name` property, and optionally a `title` property. If no `title` property is specified, a humanized version of the column `name` will be used.
+  Each column should have a `name` property, and optionally a `title` property. If no `title` property is specified, a humanized version of the column `name` will be used.
 
- 	* `name`: String
- 	* `title`: String/ReactElement - a title to show in the header. If not specified, a humanized version of `name` will be used. Can be a string or anything that React can render, so you can customize it as you please.
- 	* `render`: Function - if you want custom rendering, specify this property
+  * `name`: String
+  * `title`: String/ReactElement - a title to show in the header. If not specified, a humanized version of `name` will be used. Can be a string or anything that React can render, so you can customize it as you please.
+  * `render`: Function - if you want custom rendering, specify this property
 
- 		```jsx
- 		var columns = [
- 			{ name: 'index', render: function(v){return 'Index ' + v} }
- 		]
- 		```
+    ```jsx
+    var columns = [
+      { name: 'index', render: function(v){return 'Index ' + v} }
+    ]
+    ```
 
-	* `style`: Object - if you want cells in this column to be have a custom style
-	* `textAlign`: String - one of 'left', 'right', 'center'
+  * `style`: Object - if you want cells in this column to be have a custom style
+  * `textAlign`: String - one of 'left', 'right', 'center'
 
 #### Sorting
 
@@ -100,30 +100,30 @@ Sorting the data array is not done by the grid. You can however pass in sort inf
  * onSortChange: Function(sortInfo)
  * sortInfo: Array - an array with sorting information
 
- 	Example
- 	```jsx
- 	var sortInfo = [{name: 'firstName', dir: 'asc'}]
- 	var sorty = require('sorty')
- 	//sorty is a package which sorts an array on multiple properties
+  Example
+  ```jsx
+  var sortInfo = [{name: 'firstName', dir: 'asc'}]
+  var sorty = require('sorty')
+  //sorty is a package which sorts an array on multiple properties
 
- 	function sort(arr){
-		return sorty(sortInfo, arr)
- 	}
+  function sort(arr){
+    return sorty(sortInfo, arr)
+  }
 
-	function onSortChange(info){
-		sortInfo = info
-		data = sort(data)
-		//now refresh the grid
-	}
+  function onSortChange(info){
+    sortInfo = info
+    data = sort(data)
+    //now refresh the grid
+  }
 
-	var data = [...]
+  var data = [...]
 
-	data = sort(data)
- 	<DataGrid
- 		sortInfo={sortInfo}
- 		onSortChange={onSortChange}
- 		dataSource={data} idProperty='id' columns={columns} />
- 	```
+  data = sort(data)
+  <DataGrid
+    sortInfo={sortInfo}
+    onSortChange={onSortChange}
+    dataSource={data} idProperty='id' columns={columns} />
+  ```
 
 #### Columns
 
@@ -137,39 +137,39 @@ Column customization/styling can be done with different properties on the column
 * `render`: Function(value, data, cellProps) - if you want custom rendering, specify this property
 
 ```jsx
-	var columns = [
- 		{ name: 'index', render: function(v){return 'Index ' + v} }
-	]
+  var columns = [
+    { name: 'index', render: function(v){return 'Index ' + v} }
+  ]
 ```
- 		
+
 The `column.render` function is called with 3 args:
- 		
+
 * value - the default value to be rendered (equals to `data[column.name]`)
 * data - the corresponding data object for the current row
 * cellProps - an object with props for the current cell - has the following properties:
-	* rowIndex - the index of the row
-	* index    - the index of the column
-	* style    - a style for the cell
-	* className - a className for the cell
+  * rowIndex - the index of the row
+  * index    - the index of the column
+  * style    - a style for the cell
+  * className - a className for the cell
 
 Example:
 
 ```jsx
 var data = [...]
 var columns = [
-	{
-		name: 'firstName',
-		className: 'first-column',
-		textAlign: 'center',
-		style: { fontWeight: 'bold' }
-	},
-	{
-		name: 'lastName',
-		render: function(value){
-			return <span>
-				<b>Last name:</b> value
-			</span>
-		}
+  {
+    name: 'firstName',
+    className: 'first-column',
+    textAlign: 'center',
+    style: { fontWeight: 'bold' }
+  },
+  {
+    name: 'lastName',
+    render: function(value){
+      return <span>
+        <b>Last name:</b> value
+      </span>
+    }
 ]
 <DataGrid idProperty="id" dataSource={data} columns={columns} />
 ```
@@ -193,17 +193,31 @@ If you want to enable column reordering, just specify the `onColumnOrderChange` 
 
 * onColumnOrderChange: Function(index, dropIndex)
 
- 	Example
- 	```jsx
- 	function handleColumnOrderChange(index, dropIndex){
- 		var col = columns[index]
- 		columns.splice(index, 1) //delete from index, 1 item
- 		columns.splice(dropIndex, 0, col)
- 		this.setState({})
- 	}
+  Example
+  ```jsx
+  function handleColumnOrderChange(index, dropIndex){
+    var col = columns[index]
+    columns.splice(index, 1) //delete from index, 1 item
+    columns.splice(dropIndex, 0, col)
+    this.setState({})
+  }
 
- 	<DataGrid onColumnOrderChange={handleColumnOrderChange} />
- 	```
+  <DataGrid onColumnOrderChange={handleColumnOrderChange} />
+  ```
+
+### Rows
+
+#### Styling
+
+ * `rowStyle`: Object/Function - you can specify either a style object to be applied to all rows, or a function. The function is called with `(data, props)` (so you have access to `props.index` for example) and is expected to return a style object.
+
+ * `rowProps`: Object - props to be passed to all rows
+    - `rowProps.overClassName` - a css class name to be applied when mouse is over the row
+    - `rowProps.selectedClassName`
+    - `rowProps.className`
+
+ * `rowFactory`: Function - a factory function for rows. It can return `undefined` if you only want to change the `props` object passed to the function and rely on the default rendering.
+
 
 #### Remote data
 
@@ -235,10 +249,12 @@ For setting up & starting the project locally, use:
 $ git clone https://github.com/zippyui/react-datagrid
 $ cd react-datagrid
 $ npm install
-$ npm dev
+$ npm run dev # or npm run hot
 ```
 
 Now navigate to [localhost:9090](http://localhost:9090/)
+
+If you want to have `react-hot-loader` enabled, and see code changes pushed instantly, without losing page state, use `npm run hot` instead of `npm run dev`.
 
 Before building a new version, make sure you run
 

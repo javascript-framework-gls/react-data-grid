@@ -801,16 +801,18 @@ html.u-app body * {
 .react-datagrid .z-header .z-column-header.z-cell.z-last {
   border-right: 1px solid #a8a8a8;
 }
-.react-datagrid.z-style-alternate .z-odd .z-cell {
+.react-datagrid.z-style-alternate .z-odd.z-row {
   background: #f2f7ff;
 }
 .react-datagrid .z-column-content {
   overflow: visible;
 }
-.react-datagrid .z-row.z-over .z-cell {
+.react-datagrid .z-row.z-over,
+.react-datagrid .z-row.z-over.z-odd {
   background: #d7e7ff;
 }
-.react-datagrid .z-row.z-selected .z-cell {
+.react-datagrid .z-row.z-selected,
+.react-datagrid .z-row.z-selected.z-odd {
   background: #c4dbfc;
 }
 .react-datagrid .z-row .z-cell {
@@ -819,31 +821,17 @@ html.u-app body * {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: default;
-  position: relative;
-}
-.react-datagrid .z-row .z-cell .z-inner {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
   align-items: center;
   -webkit-align-items: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  margin: auto 0;
-  overflow: hidden;
+  cursor: default;
 }
 .react-datagrid .z-row .z-cell .z-text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.react-datagrid .z-group-row.z-over .z-cell {
+.react-datagrid .z-group-row.z-over,
+.react-datagrid .z-group-row.z-over.z-odd {
   background: #cfcfcf;
 }
 .react-datagrid .z-group-cell {
@@ -854,7 +842,7 @@ html.u-app body * {
   -webkit-flex: 1;
   flex: 1;
 }
-.react-datagrid .z-group-row .z-cell {
+.react-datagrid .z-group-row {
   background: #e6e6e6;
 }
 .react-datagrid.z-cell-borders-horizontal .z-cell:not(.z-column-header) {

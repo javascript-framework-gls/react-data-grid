@@ -1,10 +1,9 @@
 .react-datagrid
     &.z-style-alternate
-        .z-odd .z-cell
+        .z-odd.z-row
             background $datagrid-row-odd-background
 
     .z-column-content
-        // position relative
         overflow visible
 
     &.z-cell-ellipsis
@@ -12,18 +11,21 @@
             @extend .u-ellipsis
 
     .z-row
-        &.z-over .z-cell
+        &.z-over
+        &.z-over.z-odd
             background $datagrid-row-over-background
-        &.z-selected .z-cell
+        &.z-selected
+        &.z-selected.z-odd
             background $datagrid-row-selected-background
         .z-cell
             datagrid-cell()
 
-    .z-group-row.z-over .z-cell
-        background $datagrid-group-row-over-background
+    .z-group-row
+        &.z-over
+        &.z-over.z-odd
+            background $datagrid-group-row-over-background
 
     .z-group-cell
         flex 1
     .z-group-row
-        .z-cell
-            background $datagrid-group-row-background
+        background $datagrid-group-row-background

@@ -15,9 +15,7 @@ function renderData(props, data, depth){
         return renderRow(props, data, index, function(config){
             config.cellFactory = function(cellProps){
                 if (cellProps.index === 0){
-                    cellProps.innerStyle = {
-                        paddingLeft: depth * props.groupNestingWidth
-                    }
+                    cellProps.style.paddingLeft = depth * props.groupNestingWidth
                 }
 
                 return CellFactory(cellProps)
@@ -32,21 +30,17 @@ function renderData(props, data, depth){
 
 function renderGroupRow(props, groupData){
 
-    var style = {
-        paddingLeft: (groupData.depth - 1)* props.groupNestingWidth
-    }
 
     var cellStyle = {
-        minWidth: props.totalColumnWidth
-        // ,
-        // maxWidth: props.totalColumnWidth
+        minWidth: props.totalColumnWidth,
+        paddingLeft: (groupData.depth - 1) * props.groupNestingWidth
     }
+
 
     return <Row className='z-group-row' key={'group-'+groupData.valuePath} rowHeight={props.rowHeight}>
         <Cell
             className='z-group-cell'
-            textPadding={props.cellPadding}
-            innerStyle={style}
+            contentPadding={props.cellPadding}
             text={groupData.value}
             style={cellStyle}
         />

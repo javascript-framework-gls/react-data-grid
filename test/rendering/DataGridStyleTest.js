@@ -29,6 +29,43 @@ var columns = [
 
 describe('DataGrid Test Suite -  Row Style',function() {
 
+    it('check rowStyle background works and evenClassName is applied', function(){
+        var data = generateMockData({ type: 'local', len: 5})
+        var rowStyle = {
+            background: 'blue'
+        }
+
+        var grid = render(DataGrid({
+            idProperty: 'id',
+            dataSource: data,
+            columns: columns,
+            rowStyle: rowStyle,
+            rowProps: {
+                evenClassName: 'is-even'
+            },
+            style: {
+                height: 500
+            }
+        }))
+
+        var rows = tryWithClass(grid, ROW_CLASS)
+
+        var firstRow = React.findDOMNode(rows[0])
+        var secondRow = React.findDOMNode(rows[1])
+
+        firstRow.className.indexOf('is-even')
+            .should
+            .not.equal(-1)
+
+        window.getComputedStyle(firstRow).background
+            .should
+            .equal('blue')
+
+        window.getComputedStyle(secondRow).background
+            .should
+            .equal('blue')
+    })
+
 	it('check rowStyle as object works',function() {
 
 		var ROW_COLOR = 'blue'
@@ -246,7 +283,7 @@ describe('DataGrid Test Suite -  Row Style',function() {
         );
 
         tableNode = React.findDOMNode(table)
-        tableNode.className.includes(VERTICAL_BORDER).should.be.true        
+        tableNode.className.includes(VERTICAL_BORDER).should.be.true
 
 	})
 

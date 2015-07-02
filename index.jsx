@@ -1,6 +1,7 @@
 'use strict';
 
 require('./index.styl')
+require('react');
 
 var Guid = require('guid')
 var sorty = require('sorty')
@@ -9,6 +10,7 @@ var DataGrid = require('./src')
 var faker = window.faker = require('faker');
 var preventDefault = require('./src/utils/preventDefault')
 
+console.log('x');
 var gen = (function(){
 
     var cache = {}
@@ -57,13 +59,13 @@ var columns = [
         filterable: false,
         className: 'blue',
         type: 'number',
-        width: 350
+        width: 150
     },
     {
         name: 'grade',
         type: 'number',
         title: <span>a grade</span>,
-        width: 350
+        width: 150
     },
     {
         name: 'email',
@@ -73,7 +75,7 @@ var columns = [
     {
         name: 'lastName',
         minWidth: 100,
-        width: 350
+        width: 150
     }
 ]
 
@@ -144,6 +146,7 @@ var App = React.createClass({
                 style.color = 'blue'
                 // props.selected = true
             }
+            // style.background = 'red'
             return style
         }
 
@@ -217,8 +220,11 @@ var App = React.createClass({
             <input defaultValue="test"/>
             <DataGrid
                 onFilter={filter}
+                rowProps={{
+                    overClassName: 'is-over'
+                }}
                 liveFilter={true}
-                defaultSelected={{451: true, 452: true}}
+                defaultSelected={{451: true, 460: true}}
                 onSelectionChange={onSelectionChange}
                 xonColumnVisibilityChange={this.onColumnChange}
                 onColumnOrderChange={this.onColumnOrderChange}

@@ -22,9 +22,6 @@ module.exports = React.createClass({
     getDefaultProps: function(){
 
         return {
-            defaultClassName  : 'z-row',
-            mouseOverClassName: 'z-over',
-            selectedClassName : 'z-selected',
             defaultStyle: normalize({
                 userSelect: 'none'
             })
@@ -184,14 +181,20 @@ module.exports = React.createClass({
     prepareClassName: function(props, state){
         var className = props.className || ''
 
-        className += ' ' + props.defaultClassName
+        className += ' z-row '
+
+        if (props.index % 2 === 0){
+            className += ' z-even ' + (props.evenClassName || '')
+        } else {
+            className += ' z-odd ' + (props.oddClassName || '')
+        }
 
         if (state.mouseOver){
-            className += ' ' + props.mouseOverClassName
+            className += ' z-over ' + (props.overClassName || '')
         }
 
         if (props.selected){
-            className += ' ' + props.selectedClassName
+            className += ' z-selected ' + (props.selectedClassName || '')
         }
 
         return className

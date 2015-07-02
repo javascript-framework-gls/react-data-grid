@@ -1,6 +1,10 @@
 react-datagrid
 =================
 
+### 1.2.0
+ * fix row background to be actually applied to row, not cell
+ * add hot loading (`npm run hot`) to the development process.
+
 ### 1.1.13
  * add support for column.className to be propagated to column cells.
  * improve testing coverage

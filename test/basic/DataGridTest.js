@@ -7,7 +7,7 @@ var TestUtils = React.addons.TestUtils
 var TABLE_CLASS         = 'z-table'
 var ROW_CLASS           = 'z-row'
 var CELL_CLASS          = 'z-cell'
-var CELLTEXT_CLASS      = 'z-text'
+var CELLTEXT_CLASS      = 'z-content'
 var COLUMN_HEADER_CLASS = 'z-column-header'
 
 var testUtils = require('../utils')
@@ -41,14 +41,16 @@ describe('DataGrid Test Suite - Basic', function(){
 		)
 
         // check whether one row is populated
-        tryWithClass(table, ROW_CLASS)
-            .length
+        var rows = tryWithClass(table, ROW_CLASS)
+        rows.length
             .should
             .equal(1)
 
+        // console.log(rows[0].getDOMNode().innerHTML);
+
         // check the contents of the row
         var tableDom = findWithClass(table, TABLE_CLASS)
-        var cellTexts = tryWithClass(tableDom, CELLTEXT_CLASS)
+        var cellTexts = tryWithClass(rows[0], CELLTEXT_CLASS)
 
         cellTexts[0].getDOMNode()
             .textContent

@@ -10,7 +10,7 @@ var DataGrid  = require('../DataGrid')
 var TABLE_CLASS         = 'z-table'
 var ROW_CLASS           = 'z-row'
 var CELL_CLASS          = 'z-cell'
-var CELLTEXT_CLASS      = 'z-text'
+var CELLTEXT_CLASS      = 'z-content'
 var COLUMN_HEADER_CLASS = 'z-column-header'
 var COL_MENU_BTN        = 'z-show-menu'
 
@@ -249,7 +249,7 @@ function checkColVisibility(data, columns, expectedHeaders, visible) {
     headers.should.eql(expectedHeaders)
 
     var tableDom = findWithClass(table,TABLE_CLASS)
-    
+
     var cellTexts = tryWithClass(tableDom,CELLTEXT_CLASS)
     var cellContents = []
     cellTexts.map(function(cell) {
