@@ -1319,9 +1319,6 @@ html.u-app body * {
 .react-datagrid .z-summary .z-cell:not(.z-first) {
   border-left: 1px solid #a8a8a8;
 }
-.blue {
-  color: #00f;
-}
 @-moz-keyframes loader-fade {
   from {
     opacity: 1;
