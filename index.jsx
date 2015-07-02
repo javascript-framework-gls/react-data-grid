@@ -10,7 +10,7 @@ var DataGrid = require('./src')
 var faker = window.faker = require('faker');
 var preventDefault = require('./src/utils/preventDefault')
 
-console.log('x');
+// console.log('x');
 var gen = (function(){
 
     var cache = {}
@@ -95,7 +95,7 @@ var App = React.createClass({
     handleSortChange: function(sortInfo){
         SORT_INFO = sortInfo
         // debugger
-        console.log('sorting', sortInfo)
+        // console.log('sorting', sortInfo)
         this.setState({})
     },
 
@@ -161,7 +161,7 @@ var App = React.createClass({
         }
 
         var filter = function(column, value, values){
-            console.log('filter for ' + column.name + ' = ', value, values)
+            // console.log('filter for ' + column.name + ' = ', value, values)
 
             value = value.toUpperCase()
 
@@ -187,7 +187,7 @@ var App = React.createClass({
 
         var onSelectionChange = function(sel, data){
             selected = sel
-            console.log(sel);
+            // console.log(sel);
             this.setState({})
         }.bind(this)
 
@@ -197,7 +197,7 @@ var App = React.createClass({
             this.setState({})
         }.bind(this)
 
-        console.log(selected);
+        // console.log(selected);
 
         var ds = function(q){
             return 'http://5.101.99.47:8090/1000'
@@ -210,7 +210,7 @@ var App = React.createClass({
         }
 
         function rowClick(){
-            console.log('rowClick: ', arguments);
+            // console.log('rowClick: ', arguments);
         }
 
         return <div >

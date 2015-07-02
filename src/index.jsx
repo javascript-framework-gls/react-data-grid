@@ -131,6 +131,7 @@ module.exports = React.createClass({
     },
 
     componentWillUnmount: function(){
+        this.scroller = null
         window.removeEventListener('click', this.windowClickListener)
     },
 
@@ -504,12 +505,15 @@ module.exports = React.createClass({
     },
 
     fixHorizontalScrollbar: function() {
-        var wrapper = this.refs.wrapper
+        var scroller = this.scroller
 
-        if (wrapper){
-            var scroller = wrapper.refs.scroller
-            scroller && scroller.fixHorizontalScrollbar()
+        if (scroller){
+            scroller.fixHorizontalScrollbar()
         }
+    },
+
+    onWrapperMount: function(wrapper, scroller){
+        this.scroller = scroller
     },
 
     prepareWrapper: function(props, state){
@@ -553,6 +557,7 @@ module.exports = React.createClass({
 
         var wrapperProps = assign({
             ref             : 'wrapper',
+            onMount         : this.onWrapperMount,
             scrollLeft      : state.scrollLeft,
             scrollTop       : scrollTop,
             topOffset       : state.topOffset,

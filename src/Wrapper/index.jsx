@@ -4,6 +4,8 @@ var React    = require('react')
 var assign   = require('object-assign')
 var Scroller = require('react-virtual-scroller')
 
+function emptyFn(){}
+
 module.exports = React.createClass({
 
     displayName: 'ReactDataGrid.Wrapper',
@@ -21,6 +23,10 @@ module.exports = React.createClass({
             scrollLeft: 0,
             scrollTop : 0
         }
+    },
+
+    onMount: function(scroller){
+        ;(this.props.onMount || emptyFn)(this, scroller)
     },
 
     render: function() {
@@ -44,7 +50,7 @@ module.exports = React.createClass({
 
 
         return <Scroller
-                ref="scroller"
+                onMount={this.onMount}
                 preventDefaultHorizontal={true}
 
                 loadMask={!props.loadMaskOverHeader}

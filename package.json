@@ -15,8 +15,8 @@
     "watch-dist": "webpack --watch --progress --colors --config build/dist.config.js",
     "dist.min": "webpack --progress --colors -p --config build/dist.min.config.js",
     "build": "npm run lib && npm run dist && npm run dist.min && npm run build-style && npm run build-style-dist && npm run build-style-dist-min",
-    "dev": "PORT=9090 webpack-dev-server --progress --colors --config  build/dev.config.js",
-    "hot": "HOT=true PORT=9090 webpack-dev-server --progress --colors --config build/dev.config.js"
+    "dev": "NODE_ENV=production PORT=9090 webpack-dev-server --progress --colors --config  build/dev.config.js",
+    "hot": "NODE_ENV=production HOT=true PORT=9090 webpack-dev-server --progress --colors --config build/dev.config.js"
   },
   "repository": {
     "type": "git",
@@ -73,7 +73,7 @@
     "react-menus": "^1.1.1",
     "react-simple-toolbar": "^1.0.5",
     "react-style-normalizer": "^1.2.8",
-    "react-virtual-scroller": "^1.0.7",
+    "react-virtual-scroller": "^1.1.2",
     "region": "^2.1.2",
     "region-align": "^2.1.2",
     "ustring": "^1.4.1",
