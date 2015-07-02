@@ -349,7 +349,7 @@ html.u-app body {
 .u-ellipsis,
 .react-datagrid .z-column-header .z-content,
 .react-datagrid.z-cell-ellipsis .z-row .z-cell .z-content,
-.react-datagrid .z-summary .z-cell .z-text {
+.react-datagrid .z-summary .z-cell .z-content {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
