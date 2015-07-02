@@ -45,13 +45,13 @@ var gen = (function(){
 
 var RELOAD = true
 
-var columns =[
-    { name: 'index', title: '#', width: 50 },
-    { name: 'firstName', width: 350 },
-    { name: 'lastName', width: 350  },
-    { name: 'email', title: 'Email', width: 300},
+var columns = [
+    { name: 'index', title: '#', width: 50},
     { name: 'country', width: 200},
-    { name: 'catchPhrase', width: 500}
+    { name: 'city', width: 150 },
+    { name: 'firstName' },
+    { name: 'lastName'  },
+    { name: 'email', width: 200 }
 ]
 
 var ROW_HEIGHT = 31
@@ -59,14 +59,6 @@ var LEN = 2000
 var SORT_INFO = []//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN);
-var columns = [
-    { name: 'index', title: '#', width: 50 },
-    { name: 'firstName', width: 350 },
-    { name: 'lastName', width: 350  },
-    { name: 'email', title: 'Email', width: 300},
-    { name: 'country', width: 200},
-    { name: 'catchPhrase', width: 500}
-]
 
 var App = React.createClass({
     onColumnResize: function(firstCol, firstSize, secondCol, secondSize){
