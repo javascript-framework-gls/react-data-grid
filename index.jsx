@@ -52,20 +52,20 @@ var columns = [
             color: 'red',
             textAlign: 'right'
         },
-        width: 150
+        width: 300
     },
     {
         name: 'id',
         filterable: false,
         className: 'blue',
         type: 'number',
-        width: 150
+        width: 300
     },
     {
         name: 'grade',
         type: 'number',
         title: <span>a grade</span>,
-        width: 150
+        width: 300
     },
     {
         name: 'email',
@@ -75,7 +75,7 @@ var columns = [
     {
         name: 'lastName',
         minWidth: 100,
-        width: 150
+        width: 300
     }
 ]
 

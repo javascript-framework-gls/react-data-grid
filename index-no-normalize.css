@@ -347,8 +347,8 @@ html.u-app body {
   box-sizing: border-box;
 }
 .u-ellipsis,
-.react-datagrid .z-column-header .z-text,
-.react-datagrid.z-cell-ellipsis .z-row .z-cell .z-text,
+.react-datagrid .z-column-header .z-content,
+.react-datagrid.z-cell-ellipsis .z-row .z-cell .z-content,
 .react-datagrid .z-summary .z-cell .z-text {
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -753,7 +753,7 @@ html.u-app body * {
   box-orient: horizontal;
   height: 100%;
 }
-.react-datagrid .z-column-header .z-text {
+.react-datagrid .z-column-header .z-content {
   cursor: default;
 }
 .react-datagrid .z-column-header.z-sortable .z-inner {
@@ -825,10 +825,11 @@ html.u-app body * {
   -webkit-align-items: center;
   cursor: default;
 }
-.react-datagrid .z-row .z-cell .z-text {
+.react-datagrid .z-row .z-cell .z-content {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 0px 5px;
 }
 .react-datagrid .z-group-row.z-over,
 .react-datagrid .z-group-row.z-over.z-odd {

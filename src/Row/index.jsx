@@ -205,7 +205,7 @@ module.exports = React.createClass({
         var style = assign({}, props.defaultStyle, props.style)
 
         style.height   = props.rowHeight
-        // style.minWidth = props.minWidth
+        style.minWidth = props.minWidth
 
         return style
     }
