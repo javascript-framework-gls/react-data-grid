@@ -8,7 +8,7 @@ module.exports = {
     'index-no-normalize': './style/index.styl'
   },
   output: {
-    filename: 'index.css'
+    filename: './dist/[name].css'
   },
   module: {
     loaders: [
