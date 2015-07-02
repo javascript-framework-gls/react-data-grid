@@ -14194,7 +14194,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var style = assign({}, props.defaultStyle, props.style);
 
 	        style.height = props.rowHeight;
-	        style.minWidth = props.minWidth;
+	        style.width = props.minWidth;
 
 	        return style;
 	    }
