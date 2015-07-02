@@ -22,13 +22,13 @@ module.exports = React.createClass({
   getDefaultProps: function(){
 
     return {
-        defaultStyle: {}
+      defaultStyle: {}
     }
   },
 
   getInitialState: function(){
     return {
-        mouseOver: false
+      mouseOver: false
     }
   },
 

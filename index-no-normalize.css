@@ -807,6 +807,13 @@ html.u-app body * {
 .react-datagrid .z-column-content {
   overflow: visible;
 }
+.react-datagrid .z-row {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
 .react-datagrid .z-row.z-over,
 .react-datagrid .z-row.z-over.z-odd {
   background: #d7e7ff;
