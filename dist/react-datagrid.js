@@ -7,7 +7,7 @@
 		exports["DataGrid"] = factory(require("React"));
 	else
 		root["DataGrid"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -56,32 +56,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
-	__webpack_require__(20).polyfill();
+	__webpack_require__(1).polyfill();
 
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(18);
-	var LoadMask = __webpack_require__(21);
-	var Region = __webpack_require__(19);
+	var React = __webpack_require__(6);
+	var assign = __webpack_require__(7);
+	var LoadMask = __webpack_require__(8);
+	var Region = __webpack_require__(10);
 
-	var PaginationToolbar = React.createFactory(__webpack_require__(2));
-	var Column = __webpack_require__(3);
+	var PaginationToolbar = React.createFactory(__webpack_require__(19));
+	var Column = __webpack_require__(35);
 
-	var PropTypes = __webpack_require__(4);
-	var Wrapper = __webpack_require__(16);
-	var Header = __webpack_require__(17);
+	var PropTypes = __webpack_require__(81);
+	var Wrapper = __webpack_require__(82);
+	var Header = __webpack_require__(95);
 	var WrapperFactory = React.createFactory(Wrapper);
 	var HeaderFactory = React.createFactory(Header);
-	var ResizeProxy = __webpack_require__(5);
+	var ResizeProxy = __webpack_require__(137);
 
-	var findIndexByName = __webpack_require__(6);
-	var group = __webpack_require__(7);
+	var findIndexByName = __webpack_require__(133);
+	var group = __webpack_require__(138);
 
-	var slice = __webpack_require__(8);
-	var getTableProps = __webpack_require__(9);
-	var getGroupedRows = __webpack_require__(10);
-	var renderMenu = __webpack_require__(11);
+	var slice = __webpack_require__(139);
+	var _getTableProps = __webpack_require__(140);
+	var getGroupedRows = __webpack_require__(145);
+	var renderMenu = __webpack_require__(142);
 
-	var preventDefault = __webpack_require__(12);
+	var preventDefault = __webpack_require__(146);
 
 	var isArray = Array.isArray;
 
@@ -132,7 +132,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    displayName: 'ReactDataGrid',
 
-	    mixins: [__webpack_require__(13), __webpack_require__(14)],
+	    mixins: [__webpack_require__(147), __webpack_require__(149)],
 
 	    propTypes: {
 	        loading: React.PropTypes.bool,
@@ -172,13 +172,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    },
 
-	    getDefaultProps: __webpack_require__(15),
+	    getDefaultProps: __webpack_require__(150),
 
 	    componentDidMount: function componentDidMount() {
 	        window.addEventListener('click', this.windowClickListener = this.onWindowClick);
 	    },
 
 	    componentWillUnmount: function componentWillUnmount() {
+	        this.scroller = null;
 	        window.removeEventListener('click', this.windowClickListener);
 	    },
 
@@ -527,17 +528,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return result;
 	    },
 
-	    getTableProps: (function (_getTableProps) {
-	        function getTableProps(_x, _x2) {
-	            return _getTableProps.apply(this, arguments);
-	        }
-
-	        getTableProps.toString = function () {
-	            return _getTableProps.toString();
-	        };
-
-	        return getTableProps;
-	    })(function (props, state) {
+	    getTableProps: function getTableProps(props, state) {
 	        var table;
 	        var rows;
 
@@ -546,10 +537,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            rows = slice(rows, props);
 	        }
 
-	        table = getTableProps.call(this, props, rows);
+	        table = _getTableProps.call(this, props, rows);
 
 	        return table;
-	    }),
+	    },
 
 	    handleVerticalScrollOverflow: function handleVerticalScrollOverflow(sign, scrollTop) {
 
@@ -562,12 +553,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    fixHorizontalScrollbar: function fixHorizontalScrollbar() {
-	        var wrapper = this.refs.wrapper;
+	        var scroller = this.scroller;
 
-	        if (wrapper) {
-	            var scroller = wrapper.refs.scroller;
-	            scroller && scroller.fixHorizontalScrollbar();
+	        if (scroller) {
+	            scroller.fixHorizontalScrollbar();
 	        }
+	    },
+
+	    onWrapperMount: function onWrapperMount(wrapper, scroller) {
+	        this.scroller = scroller;
 	    },
 
 	    prepareWrapper: function prepareWrapper(props, state) {
@@ -607,6 +601,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var wrapperProps = assign({
 	            ref: 'wrapper',
+	            onMount: this.onWrapperMount,
 	            scrollLeft: state.scrollLeft,
 	            scrollTop: scrollTop,
 	            topOffset: state.topOffset,
@@ -634,7 +629,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // bottomLoader: bottomLoader,
 	            // loadersSize: loadersSize,
 
-	            onRowClick: this.handleRowClick,
+	            // onRowClick: this.handleRowClick,
 	            selected: props.selected == null ? state.defaultSelected : props.selected
 	        }, props);
 
@@ -1188,2135 +1183,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(18);
-	var Toolbar = __webpack_require__(36);
-	var Region = Toolbar.Region;
-	var normalize = __webpack_require__(37);
-
-	var WHITESPACE = ' ';
-	function sortAsc(a, b) {
-		return a - b;
-	}
-
-	function emptyFn() {}
-
-	function gotoPrev(props) {
-		return React.createElement(
-			'svg',
-			_extends({ version: '1.1', viewBox: '0 0 2 3' }, props),
-			React.createElement('polygon', { points: '2,0 2,3 0,1.5 ' })
-		);
-	}
-
-	function gotoNext(props) {
-		return React.createElement(
-			'svg',
-			_extends({ version: '1.1', viewBox: '0 0 2 3' }, props),
-			React.createElement('polygon', { points: '0,0 2,1.5 0,3' })
-		);
-	}
-
-	function gotoFirst(props) {
-		return React.createElement(
-			'svg',
-			_extends({ version: '1.1', viewBox: '0 0 3 3' }, props),
-			React.createElement('polygon', { points: '3,0 3,3 1,1.5' }),
-			React.createElement('rect', { height: '3', width: '0.95', y: '0', x: '0' })
-		);
-	}
-
-	function gotoLast(props) {
-		return React.createElement(
-			'svg',
-			_extends({ version: '1.1', viewBox: '0 0 3 3' }, props),
-			React.createElement('polygon', { points: '0,0 0,3 2,1.5' }),
-			React.createElement('rect', { height: '3', width: '0.95', y: '0', x: '2' })
-		);
-	}
-
-	function refresh(props) {
-		return React.createElement(
-			'svg',
-			_extends({ version: '1.1', x: '0px', y: '0px', viewBox: '0 0 487.23 487.23' }, props),
-			React.createElement(
-				'g',
-				null,
-				React.createElement('path', { d: 'M55.323,203.641c15.664,0,29.813-9.405,35.872-23.854c25.017-59.604,83.842-101.61,152.42-101.61 c37.797,0,72.449,12.955,100.23,34.442l-21.775,3.371c-7.438,1.153-13.224,7.054-14.232,14.512 c-1.01,7.454,3.008,14.686,9.867,17.768l119.746,53.872c5.249,2.357,11.33,1.904,16.168-1.205 c4.83-3.114,7.764-8.458,7.796-14.208l0.621-131.943c0.042-7.506-4.851-14.144-12.024-16.332 c-7.185-2.188-14.947,0.589-19.104,6.837l-16.505,24.805C370.398,26.778,310.1,0,243.615,0C142.806,0,56.133,61.562,19.167,149.06 c-5.134,12.128-3.84,26.015,3.429,36.987C29.865,197.023,42.152,203.641,55.323,203.641z' }),
-				React.createElement('path', { d: 'M464.635,301.184c-7.27-10.977-19.558-17.594-32.728-17.594c-15.664,0-29.813,9.405-35.872,23.854 c-25.018,59.604-83.843,101.61-152.42,101.61c-37.798,0-72.45-12.955-100.232-34.442l21.776-3.369 c7.437-1.153,13.223-7.055,14.233-14.514c1.009-7.453-3.008-14.686-9.867-17.768L49.779,285.089 c-5.25-2.356-11.33-1.905-16.169,1.205c-4.829,3.114-7.764,8.458-7.795,14.207l-0.622,131.943 c-0.042,7.506,4.85,14.144,12.024,16.332c7.185,2.188,14.948-0.59,19.104-6.839l16.505-24.805 c44.004,43.32,104.303,70.098,170.788,70.098c100.811,0,187.481-61.561,224.446-149.059 C473.197,326.043,471.903,312.157,464.635,301.184z' })
-			)
-		);
-	}
-
-	function separator(props) {
-
-		if (props.showSeparators === false) {
-			return;
-		}
-
-		var margin = 5;
-		var width = 2;
-		var color = props.iconProps.style.fill;
-
-		var result;
-
-		var sepProps = {
-			width: 2,
-			margin: 5,
-			color: color
-		};
-
-		if (props.separatorFactory) {
-			result = props.separatorFactory(sepProps);
-		}
-
-		if (result !== undefined) {
-			return result;
-		}
-
-		var style = normalize({
-			marginLeft: sepProps.margin,
-			marginRight: sepProps.margin,
-			width: sepProps.width,
-			background: sepProps.color,
-			display: 'inline-block',
-			alignSelf: 'stretch'
-		});
-
-		return React.createElement('span', { style: style });
-	}
-
-	var ICON_MAP = {
-		gotoFirst: gotoFirst,
-		gotoLast: gotoLast,
-		gotoPrev: gotoPrev,
-		gotoNext: gotoNext,
-		refresh: refresh
-	};
-
-	var defaultStyles = {};
-
-	module.exports = React.createClass({
-
-		displayName: 'PaginationToolbar',
-
-		getDefaultProps: function getDefaultProps() {
-			return {
-				iconSize: 20,
-				showRefreshIcon: true,
-				showPageSize: true,
-				defaultStyle: {
-					color: 'inherit'
-				},
-
-				pageSizes: [10, 20, 50, 100, 200, 500, 1000],
-
-				theme: '',
-
-				defaultIconProps: {
-					version: '1.2',
-					style: {
-						cursor: 'pointer',
-						marginLeft: 3,
-						marginRight: 3,
-						fill: '#8E8E8E',
-						verticalAlign: 'middle'
-					},
-					disabledStyle: {
-						cursor: 'auto',
-						fill: '#DFDCDC'
-					},
-					overStyle: {
-						fill: 'gray'
-					}
-				}
-			};
-		},
-
-		getInitialState: function getInitialState() {
-			return {
-				mouseOver: {}
-			};
-		},
-
-		prepareProps: function prepareProps(thisProps) {
-			var props = assign({}, thisProps);
-
-			props.className = this.prepareClassName(props);
-			props.iconProps = this.prepareIconProps(props);
-			props.style = this.prepareStyle(props);
-			props.pageSizes = this.preparePageSizes(props);
-			delete props.defaultStyle;
-
-			return props;
-		},
-
-		prepareClassName: function prepareClassName(props) {
-			var className = props.className || '';
-
-			className += ' react-datagrid-pagination-toolbar';
-
-			return className;
-		},
-
-		preparePageSizes: function preparePageSizes(props) {
-			var sizes = [].concat(props.pageSizes);
-
-			if (sizes.indexOf(props.pageSize) == -1) {
-				sizes.push(props.pageSize);
-			}
-
-			return sizes.sort(sortAsc);
-		},
-
-		prepareIconProps: function prepareIconProps(props) {
-			var iconProps = assign({}, props.defaultIconProps);
-			var defaultIconStyle = iconProps.style;
-			var defaultIconOverStyle = iconProps.overStyle;
-			var defaultIconDisabledStyle = iconProps.disabledStyle;
-
-			assign(iconProps, props.iconProps);
-
-			var iconSizeStyle = {};
-
-			if (props.iconSize != null) {
-				iconSizeStyle = { width: props.iconSize, height: props.iconSize };
-			}
-
-			if (props.iconHeight != null) {
-				iconSizeStyle.height = props.iconHeight;
-			}
-			if (props.iconWidth != null) {
-				iconSizeStyle.width = props.iconWidth;
-			}
-
-			iconProps.style = assign({}, defaultIconStyle, iconSizeStyle, iconProps.style);
-			iconProps.overStyle = assign({}, defaultIconOverStyle, iconProps.overStyle);
-			iconProps.disabledStyle = assign({}, defaultIconDisabledStyle, iconProps.disabledStyle);
-
-			return iconProps;
-		},
-
-		prepareStyle: function prepareStyle(props) {
-			var borderStyle = {};
-			var borderName = 'borderTop';
-
-			if (props.position == 'top') {
-				borderName = 'borderBottom';
-			}
-
-			if (props.border) {
-				borderStyle[borderName] = props.border;
-			}
-
-			return assign({}, props.defaultStyle, borderStyle, props.style);
-		},
-
-		handleInputChange: function handleInputChange(event) {
-			var value = event.target.value * 1;
-
-			if (!isNaN(value) && value >= this.props.minPage && value <= this.props.maxPage && value != this.props.page) {
-				this.gotoPage(value);
-			}
-		},
-
-		handleInputBlur: function handleInputBlur() {
-			this.setState({
-				inputFocused: false
-			});
-		},
-
-		handleInputFocus: function handleInputFocus() {
-
-			var page = this.props.page;
-			this.setState({
-				inputFocused: true
-			}, (function () {
-				var domNode = React.findDOMNode(this.refs.input);
-				domNode.value = page;
-			}).bind(this));
-		},
-
-		onPageSizeChange: function onPageSizeChange(event) {
-			this.props.onPageSizeChange(event.target.value * 1);
-		},
-
-		renderInput: function renderInput(props) {
-			var otherProps = {};
-
-			if (this.state.inputFocused) {
-				otherProps.defaultValue = props.page;
-			} else {
-				otherProps.value = props.page;
-			}
-
-			var inputProps = assign({
-				ref: 'input',
-				onBlur: this.handleInputBlur,
-				onFocus: this.handleInputFocus,
-				style: normalize({
-					marginLeft: 5,
-					marginRight: 5,
-					padding: 2,
-					maxWidth: 60,
-					textAlign: 'right',
-					flex: 1,
-					minWidth: 40
-				}),
-				page: props.page,
-				onChange: this.handleInputChange
-			}, otherProps);
-
-			var defaultFactory = React.DOM.input;
-			var factory = props.pageInputFactory || defaultFactory;
-
-			var result = factory(inputProps);
-
-			if (result === undefined) {
-				result = defaultFactory(inputProps);
-			}
-
-			return result;
-		},
-
-		renderSelect: function renderSelect(props) {
-
-			var options = props.pageSizes.map(function (value) {
-				return React.createElement(
-					'option',
-					{ value: value },
-					value
-				);
-			});
-
-			var selectProps = {
-				onChange: this.onPageSizeChange,
-				value: props.pageSize,
-				style: { marginLeft: 5, marginRight: 5, padding: 2, textAlign: 'right' },
-				children: options
-			};
-
-			var defaultFactory = React.DOM.select;
-			var factory = props.pageSizeSelectFactory || defaultFactory;
-
-			var result = factory(selectProps);
-
-			if (result === undefined) {
-				result = defaultFactory(selectProps);
-			}
-
-			return result;
-		},
-
-		renderDisplaying: function renderDisplaying(props) {
-			var start = (props.pageSize * (props.page - 1) || 0) + 1;
-			var end = Math.min(props.pageSize * props.page, props.dataSourceCount) || 1;
-			var refreshIcon = props.showRefreshIcon ? this.icon('refresh', props) : null;
-			var sep = refreshIcon ? this.separator : null;
-
-			var factory = props.displayingFactory;
-
-			if (factory) {
-				return factory({
-					start: start,
-					end: end,
-					dataSourceCount: props.dataSourceCount,
-					page: props.page,
-					pageSize: props.pageSize,
-					minPage: props.minPage,
-					maxPage: props.maxPage,
-					reload: this.reload,
-					gotoPage: this.gotoPage,
-					refreshIcon: refreshIcon
-				});
-			}
-
-			var textStyle = { display: 'inline-block', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' };
-
-			return React.createElement(
-				'div',
-				{ style: normalize({ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }) },
-				React.createElement(
-					'span',
-					{ style: textStyle },
-					'Displaying ',
-					start,
-					' - ',
-					end,
-					' of ',
-					props.dataSourceCount || 1,
-					'.'
-				),
-				sep,
-				refreshIcon
-			);
-		},
-
-		renderPageSize: function renderPageSize(props) {
-			if (props.showPageSize) {
-				return React.createElement(
-					'div',
-					null,
-					'Page size ',
-					this.renderSelect(props)
-				);
-			}
-		},
-
-		render: function render() {
-
-			var props = this.prepareProps(this.props);
-
-			this.separator = separator(props);
-
-			var showPageSize = props.showPageSize;
-			var pageSize = showPageSize ? this.renderPageSize(props) : null;
-
-			var start = props.pageSize * (props.page - 1) + 1;
-			var end = Math.min(props.pageSize * props.page, props.dataSourceCount);
-
-			var displaying = this.renderDisplaying(props);
-			var minWidth = 430;
-
-			if (!showPageSize) {
-				minWidth -= 100;
-			}
-
-			var sep = this.separator;
-
-			return React.createElement(
-				Toolbar,
-				props,
-				React.createElement(
-					Region,
-					{ flex: '1 1 auto', style: normalize({ display: 'flex', alignItems: 'center', minWidth: minWidth }) },
-					this.icon('gotoFirst', props),
-					this.icon('gotoPrev', props),
-					sep,
-					'Page ',
-					this.renderInput(props),
-					' of',
-					WHITESPACE,
-					props.maxPage,
-					'.',
-					sep,
-					this.icon('gotoNext', props),
-					this.icon('gotoLast', props),
-					showPageSize ? sep : null,
-					pageSize
-				),
-				React.createElement(
-					Region,
-					{ flex: '1 1 auto' },
-					displaying
-				)
-			);
-		},
-
-		icon: function icon(iconName, props) {
-			var icon = props[iconName + 'Icon'];
-
-			if (!icon || typeof icon != 'function') {
-				var MAP = {
-					refresh: props.page,
-					gotoFirst: props.minPage,
-					gotoLast: props.maxPage,
-					gotoPrev: Math.max(props.page - 1, props.minPage),
-					gotoNext: Math.min(props.page + 1, props.maxPage)
-				};
-
-				var targetPage = MAP[iconName];
-				var disabled = targetPage === props.page && iconName != 'refresh';
-				var mouseOver = this.state.mouseOver[iconName];
-
-				var iconProps = assign({
-					mouseOver: mouseOver,
-					name: iconName,
-					disabled: disabled
-				}, props.iconProps);
-
-				var iconStyle = iconProps.style = assign({}, iconProps.style, defaultStyles[iconName], props.iconStyle, props[iconName + 'IconStyle']);
-
-				if (mouseOver) {
-					iconProps.style = assign({}, iconStyle, iconProps.overStyle, props.overIconStyle);
-				}
-				if (disabled) {
-					iconProps.style = assign({}, iconStyle, iconProps.disabledStyle, props.disabledIconStyle);
-				} else {
-					iconProps.onClick = iconName == 'refresh' ? this.reload : this.gotoPage.bind(this, targetPage);
-				}
-
-				iconProps.onMouseEnter = this.onIconMouseEnter.bind(this, props, iconProps);
-				iconProps.onMouseLeave = this.onIconMouseLeave.bind(this, props, iconProps);
-
-				var defaultFactory = ICON_MAP[iconName];
-				var factory = props[iconName + 'IconFactory'] || defaultFactory;
-				icon = factory(iconProps);
-
-				if (icon === undefined) {
-					icon = defaultFactory(iconProps);
-				}
-			}
-
-			return icon;
-		},
-
-		onIconMouseEnter: function onIconMouseEnter(props, iconProps) {
-			var mouseOver = this.state.mouseOver;
-
-			mouseOver[iconProps.name] = true;
-
-			this.setState({});
-		},
-
-		onIconMouseLeave: function onIconMouseLeave(props, iconProps) {
-			var mouseOver = this.state.mouseOver;
-
-			mouseOver[iconProps.name] = false;
-
-			this.setState({});
-		},
-
-		reload: function reload() {
-			;(this.props.reload || emptyFn)();
-		},
-
-		gotoPage: function gotoPage(page) {
-			this.props.onPageChange(page);
-		}
-	});
-
-	// gotoPrev: { marginRight: 10},
-	// gotoNext: { marginLeft: 10}
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var humanize = __webpack_require__(33).humanize;
-	var assign = __webpack_require__(18);
-
-	function getVisibleInfo(col) {
-	    var visible = true;
-	    var defaultVisible;
-
-	    if (col.hidden != null) {
-	        visible = !col.hidden;
-	    } else if (col.visible != null) {
-	        visible = !!col.visible;
-	    } else {
-	        //no visible or hidden specified
-	        //so we look for defaultVisible/defaultHidden
-
-	        if (col.defaultHidden != null) {
-	            defaultVisible = !col.defaultHidden;
-	        } else if (col.defaultVisible != null) {
-	            defaultVisible = !!col.defaultVisible;
-	        }
-
-	        visible = defaultVisible;
-	    }
-
-	    return {
-	        visible: visible,
-	        defaultVisible: defaultVisible
-	    };
-	}
-
-	var Column = (function (_Column) {
-	    function Column(_x, _x2) {
-	        return _Column.apply(this, arguments);
-	    }
-
-	    Column.toString = function () {
-	        return _Column.toString();
-	    };
-
-	    return Column;
-	})(function (col, props) {
-
-	    col = assign({}, Column.defaults, col);
-
-	    //title
-	    if (!col.title) {
-	        col.title = humanize(col.name);
-	    }
-
-	    //sortable
-	    if (props && !props.sortable) {
-	        col.sortable = false;
-	    }
-	    col.sortable = !!col.sortable;
-
-	    //resizable
-	    if (props && props.resizableColumns === false) {
-	        col.resizable = false;
-	    }
-	    col.resizable = !!col.resizable;
-
-	    //filterable
-	    if (props && props.filterable === false) {
-	        col.filterable = false;
-	    }
-	    col.filterable = !!col.filterable;
-
-	    var visibleInfo = getVisibleInfo(col);
-	    var visible = visibleInfo.visible;
-
-	    if (visibleInfo.defaultVisible != null) {
-	        col.defaultHidden = !visibleInfo.defaultVisible;
-	        col.defaultVisible = visibleInfo.defaultVisible;
-	    }
-
-	    //hidden
-	    col.hidden = !visible;
-	    //visible
-	    col.visible = visible;
-
-	    if (col.width == null && col.defaultWidth) {
-	        col.width = col.defaultWidth;
-	    }
-
-	    //flexible
-	    col.flexible = !col.width;
-
-	    return col;
-	});
-
-	Column.displayName = 'Column';
-
-	Column.defaults = {
-	    sortable: true,
-	    filterable: true,
-	    resizable: true,
-	    defaultVisible: true,
-	    type: 'string'
-	};
-
-	module.exports = Column;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	function val(fn) {
-
-	    return function (props, propName) {
-
-	        return fn(props[propName], propName, props);
-	    };
-	}
-
-	module.exports = {
-	    numeric: val(function (value, propName) {
-
-	        if (value == null) {
-	            return;
-	        }
-	        if (value * 1 != value) {
-	            return new Error('Invalid numeric value for ' + propName);
-	        }
-	    }),
-
-	    sortInfo: val(function (value) {
-	        if (typeof value == 'string' || typeof value == 'number') {
-	            return new Error('Invalid sortInfo specified');
-	        }
-	    }),
-
-	    column: val(function (value, props, propName) {
-
-	        if (!value) {
-	            return new Error('No columns specified. Please specify at least one column!');
-	        }
-
-	        if (!Array.isArray(value)) {
-	            value = props[propName] = [value];
-	        }
-
-	        var err;
-
-	        value.some(function (col, index) {
-	            if (!col.name) {
-	                err = new Error('All grid columns must have a name! Column at index ' + index + ' has no name!');
-	                return true;
-	            }
-	        });
-
-	        return err;
-	    })
-	};
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(18);
-
-	module.exports = React.createClass({
-
-	    displayName: 'ReactDataGrid.ResizeProxy',
-
-	    propTypes: {
-	        active: React.PropTypes.bool
-	    },
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            offset: 0
-	        };
-	    },
-
-	    render: function render() {
-
-	        var props = assign({}, this.props);
-	        var state = this.state;
-
-	        var style = {};
-	        var active = props.active;
-
-	        if (active) {
-	            style.display = 'block';
-	            style.left = state.offset;
-	        }
-
-	        return React.createElement('div', { className: 'z-resize-proxy', style: style });
-	    }
-	});
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var findIndexBy = __webpack_require__(22);
-
-	function findIndexByName(arr, name) {
-	    return findIndexBy(arr, function (info) {
-	        return info.name === name;
-	    });
-	}
-
-	module.exports = findIndexByName;
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hasown = __webpack_require__(32);
-
-	function copyIf(source, target) {
-	    var hasOwn = hasown(target);
-
-	    Object.keys(source).forEach(function (key) {
-	        if (!hasOwn(key)) {
-	            target[key] = source[key];
-	        }
-	    });
-	}
-
-	function groupByFields(data, fields, path, names, fieldIndex) {
-	    data = data || [];
-	    fieldIndex = fieldIndex || 0;
-
-	    var field = fields[fieldIndex];
-
-	    if (!field) {
-	        return data;
-	    }
-
-	    var group = groupArrayByField(data, field);
-	    var fieldName = typeof field == 'string' ? field : field.name;
-
-	    if (!fieldIndex) {
-	        group.namePath = [];
-	        group.valuePath = [];
-	        group.depth = 0;
-	        delete group.name;
-	    }
-
-	    var groupsCount = group.length;
-
-	    if (group.keys && group.keys.length) {
-
-	        group.leaf = false;
-	        group.keys.forEach(function (key) {
-
-	            var groupPath = (path || []).concat(key);
-	            var fieldNames = (names || []).concat(fieldName);
-	            var data = groupByFields(group.data[key], fields, groupPath, fieldNames, fieldIndex + 1);
-
-	            if (Array.isArray(data)) {
-	                data = {
-	                    data: data,
-	                    leaf: true
-	                };
-	            }
-
-	            data.name = fieldName;
-	            data.value = key;
-	            data.valuePath = groupPath;
-	            data.namePath = fieldNames;
-	            data.depth = fieldIndex + 1;
-
-	            if (typeof field != 'string') {
-
-	                copyIf(field, data);
-	            }
-
-	            group.data[key] = data;
-
-	            if (!data.leaf) {
-	                groupsCount += data.groupsCount;
-	            }
-	        });
-	    }
-
-	    if (!group.leaf) {
-	        group.groupsCount = groupsCount;
-	    }
-
-	    return group;
-	}
-
-	function groupArrayByField(data, field) {
-
-	    var groupKeys = {};
-	    var groupKeysArray = [];
-
-	    var fieldName = typeof field == 'string' ? field : field.name;(data || []).forEach(function (item) {
-	        var itemKey = item[fieldName];
-
-	        if (groupKeys[itemKey]) {
-	            groupKeys[itemKey].push(item);
-	        } else {
-	            groupKeys[itemKey] = [item];
-	            groupKeysArray.push(itemKey);
-	        }
-	    });
-
-	    var result = {
-	        keys: groupKeysArray,
-	        data: groupKeys,
-	        childName: fieldName,
-	        length: groupKeysArray.length,
-	        leaf: true
-	    };
-
-	    return result;
-	}
-
-	module.exports = groupByFields;
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	function slice(data, props) {
-
-	    if (!props.virtualRendering) {
-	        return data;
-	    }
-
-	    return data.slice(props.startIndex, props.startIndex + props.renderCount);
-	}
-
-	module.exports = slice;
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var renderMenu = __webpack_require__(11);
-	var renderRow = __webpack_require__(23);
-	var tableStyle = __webpack_require__(24);
-	var slice = __webpack_require__(8);
-	var LoadMask = __webpack_require__(21);
-
-	function getData(props) {
-
-	    if (!props.virtualRendering) {
-	        return props.data;
-	    }
-
-	    return slice(props.data, props);
-	}
-
-	module.exports = function (props, rows) {
-
-	    rows = rows || getData(props).map(function (data, index) {
-	        return renderRow.call(this, props, data, index + props.startIndex);
-	    }, this);
-
-	    // if (props.topLoader && props.scrollTop < (2 * props.rowHeight)){
-	    // rows.unshift(props.topLoader)
-	    // }
-
-	    return {
-	        className: 'z-table',
-	        style: tableStyle(props),
-	        children: rows
-	    };
-	};
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var Row = __webpack_require__(29);
-	var Cell = __webpack_require__(30);
-	var CellFactory = React.createFactory(Cell);
-
-	var renderRow = __webpack_require__(23);
-
-	function renderData(props, data, depth) {
-
-	    return data.map(function (data, index) {
-
-	        return renderRow(props, data, index, function (config) {
-	            config.cellFactory = function (cellProps) {
-	                if (cellProps.index === 0) {
-	                    cellProps.innerStyle = {
-	                        paddingLeft: depth * props.groupNestingWidth
-	                    };
-	                }
-
-	                return CellFactory(cellProps);
-	            };
-
-	            config.className += ' z-grouped';
-
-	            return config;
-	        });
-	    });
-	}
-
-	function renderGroupRow(props, groupData) {
-
-	    var style = {
-	        paddingLeft: (groupData.depth - 1) * props.groupNestingWidth
-	    };
-
-	    var cellStyle = {
-	        minWidth: props.totalColumnWidth
-	        // ,
-	        // maxWidth: props.totalColumnWidth
-	    };
-
-	    return React.createElement(
-	        Row,
-	        { className: 'z-group-row', key: 'group-' + groupData.valuePath, rowHeight: props.rowHeight },
-	        React.createElement(Cell, {
-	            className: 'z-group-cell',
-	            textPadding: props.cellPadding,
-	            innerStyle: style,
-	            text: groupData.value,
-	            style: cellStyle
-	        })
-	    );
-	}
-
-	function renderGroup(props, groupData) {
-
-	    var result = [renderGroupRow(props, groupData)];
-
-	    if (groupData && groupData.leaf) {
-	        result.push.apply(result, renderData(props, groupData.data, groupData.depth));
-	    } else {
-	        groupData.keys.forEach(function (key) {
-	            var items = renderGroup(props, groupData.data[key]);
-	            result.push.apply(result, items);
-	        });
-	    }
-
-	    return result;
-	}
-
-	function renderGroups(props, groupsData) {
-	    var result = [];
-
-	    groupsData.keys.map(function (key) {
-	        result.push.apply(result, renderGroup(props, groupsData.data[key]));
-	    });
-
-	    return result;
-	}
-
-	module.exports = function (props, groupData) {
-	    return renderGroups(props, groupData);
-	};
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function renderMenu(props) {
-	    if (!props.menu) {
-	        return;
-	    }
-
-	    return props.menu({
-	        className: 'z-header-menu-column',
-	        gridColumns: props.columns
-	    });
-	};
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	module.exports = function preventDefault(event) {
-	    event.preventDefault();
-	};
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var assign = __webpack_require__(18);
-	var getSelected = __webpack_require__(28);
-
-	var hasOwn = function hasOwn(obj, prop) {
-	    return Object.prototype.hasOwnProperty.call(obj, prop);
-	};
-
-	/**
-	 * Here is how multi selection is implemented - trying to emulate behavior in OSX Finder
-	 *
-	 * When there is no selection, and an initial click for selection is done, keep that index (SELINDEX)
-	 *
-	 * Next, if we shift+click, we mark as selected the items from initial index to current click index.
-	 *
-	 * Now, if we ctrl+click elsewhere, keep the selection, but also add the selected file,
-	 * and set SELINDEX to the new index. Now on any subsequent clicks, have the same behavior,
-	 * selecting/deselecting items starting from SELINDEX to the new click index
-	 */
-
-	module.exports = {
-
-	    findInitialSelectionIndex: function findInitialSelectionIndex() {
-	        var selected = getSelected(this.p, this.state);
-	        var index = undefined;
-
-	        if (!Object.keys(selected).length) {
-	            return index;
-	        }
-
-	        var i = 0;
-	        var data = this.p.data;
-	        var len = data.length;
-	        var id;
-	        var idProperty = this.props.idProperty;
-
-	        for (; i < len; i++) {
-	            id = data[i][idProperty];
-
-	            if (selected[id]) {
-	                index = i;
-	            }
-	        }
-
-	        return index;
-	    },
-
-	    notifySelection: function notifySelection(selected, data) {
-	        if (typeof this.props.onSelectionChange == 'function') {
-	            this.props.onSelectionChange(selected, data);
-	        }
-
-	        if (!hasOwn(this.props, 'selected')) {
-	            this.cleanCache();
-	            this.setState({
-	                defaultSelected: selected
-	            });
-	        }
-	    },
-
-	    handleSingleSelection: function handleSingleSelection(data, event) {
-	        var props = this.p;
-
-	        var rowSelected = this.isRowSelected(data);
-	        var newSelected = !rowSelected;
-
-	        var ctrlKey = event.metaKey || event.ctrlKey;
-	        if (rowSelected && event && !ctrlKey) {
-	            //if already selected and not ctrl, keep selected
-	            newSelected = true;
-	        }
-
-	        var selectedId = newSelected ? data[props.idProperty] : null;
-
-	        this.notifySelection(selectedId, data);
-	    },
-
-	    handleMultiSelection: function handleMultiSelection(data, event, config) {
-
-	        var selIndex = config.selIndex;
-	        var prevShiftKeyIndex = config.prevShiftKeyIndex;
-
-	        var props = this.p;
-	        var map = selIndex == null ? {} : assign({}, getSelected(props, this.state));
-
-	        if (prevShiftKeyIndex != null && selIndex != null) {
-	            var min = Math.min(prevShiftKeyIndex, selIndex);
-	            var max = Math.max(prevShiftKeyIndex, selIndex);
-
-	            var removeArray = props.data.slice(min, max + 1) || [];
-
-	            removeArray.forEach(function (item) {
-	                if (item) {
-	                    var id = item[props.idProperty];
-	                    delete map[id];
-	                }
-	            });
-	        }
-
-	        data.forEach(function (item) {
-	            if (item) {
-	                var id = item[props.idProperty];
-	                map[id] = item;
-	            }
-	        });
-
-	        this.notifySelection(map, data);
-	    },
-
-	    handleMultiSelectionRowToggle: function handleMultiSelectionRowToggle(data, event) {
-
-	        var selected = getSelected(this.p, this.state);
-	        var isSelected = this.isRowSelected(data);
-
-	        var clone = assign({}, selected);
-	        var id = data[this.p.idProperty];
-
-	        if (isSelected) {
-	            delete clone[id];
-	        } else {
-	            clone[id] = data;
-	        }
-
-	        this.notifySelection(clone, data);
-
-	        return isSelected;
-	    },
-
-	    handleSelection: function handleSelection(rowProps, event) {
-
-	        var props = this.p;
-
-	        if (!hasOwn(props, 'selected') && !hasOwn(props, 'defaultSelected')) {
-	            return;
-	        }
-
-	        var isSelected = this.isRowSelected(rowProps.data);
-	        var multiSelect = this.isMultiSelect();
-
-	        if (!multiSelect) {
-	            this.handleSingleSelection(rowProps.data, event);
-	            return;
-	        }
-
-	        if (this.selIndex === undefined) {
-	            this.selIndex = this.findInitialSelectionIndex();
-	        }
-
-	        var selIndex = this.selIndex;
-
-	        //multi selection
-	        var index = rowProps.index;
-	        var prevShiftKeyIndex = this.shiftKeyIndex;
-	        var start;
-	        var end;
-	        var data;
-
-	        if (event.metaKey || event.ctrlKey) {
-	            this.selIndex = index;
-	            this.shiftKeyIndex = null;
-
-	            var unselect = this.handleMultiSelectionRowToggle(props.data[index], event);
-
-	            if (unselect) {
-	                this.selIndex++;
-	                this.shiftKeyIndex = prevShiftKeyIndex;
-	            }
-
-	            return;
-	        }
-
-	        if (!event.shiftKey) {
-	            //set selIndex, for future use
-	            this.selIndex = index;
-	            this.shiftKeyIndex = null;
-
-	            //should not select many, so make selIndex null
-	            selIndex = null;
-	        } else {
-	            this.shiftKeyIndex = index;
-	        }
-
-	        if (selIndex == null) {
-	            data = [props.data[index]];
-	        } else {
-	            start = Math.min(index, selIndex);
-	            end = Math.max(index, selIndex) + 1;
-	            data = props.data.slice(start, end);
-	        }
-
-	        this.handleMultiSelection(data, event, {
-	            selIndex: selIndex,
-	            prevShiftKeyIndex: prevShiftKeyIndex
-	        });
-	    },
-
-	    isRowSelected: function isRowSelected(data) {
-	        var selectedMap = this.getSelectedMap();
-	        var id = data[this.props.idProperty];
-
-	        return selectedMap[id];
-	    },
-
-	    isMultiSelect: function isMultiSelect() {
-	        var selected = getSelected(this.p, this.state);
-
-	        return selected && typeof selected == 'object';
-	    },
-
-	    getSelectedMap: function getSelectedMap() {
-	        var selected = getSelected(this.p, this.state);
-	        var multiSelect = selected && typeof selected == 'object';
-	        var map;
-
-	        if (multiSelect) {
-	            map = selected;
-	        } else {
-	            map = {};
-	            map[selected] = true;
-	        }
-
-	        return map;
-	    }
-	};
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(18);
-	var ReactMenu = __webpack_require__(38);
-
-	function stopPropagation(event) {
-	    event.stopPropagation();
-	}
-
-	function emptyFn() {}
-
-	var FILTER_FIELDS = {};
-
-	module.exports = {
-
-	    getColumnFilterFieldFactory: function getColumnFilterFieldFactory(column) {
-
-	        var type = column.type || 'string';
-
-	        return FILTER_FIELDS[type] || React.DOM.input;
-	    },
-
-	    getFilterField: function getFilterField(props) {
-	        var column = props.column;
-	        var filterValue = this.filterValues ? this.filterValues[column.name] : '';
-
-	        var fieldProps = {
-	            autoFocus: true,
-	            defaultValue: filterValue,
-	            column: column,
-	            onChange: this.onFilterChange.bind(this, column),
-	            onKeyUp: this.onFilterKeyUp.bind(this, column)
-	        };
-
-	        var fieldFactory = column.renderFilterField || this.props.renderFilterField;
-	        var field;
-
-	        if (fieldFactory) {
-	            field = fieldFactory(fieldProps);
-	        }
-
-	        if (field === undefined) {
-	            field = this.getColumnFilterFieldFactory(column)(fieldProps);
-	        }
-
-	        return field;
-	    },
-
-	    onFilterKeyUp: function onFilterKeyUp(column, event) {
-	        if (event.key == 'Enter') {
-	            this.onFilterClick(column, event);
-	        }
-	    },
-
-	    onFilterChange: function onFilterChange(column, eventOrValue) {
-
-	        var value = eventOrValue;
-
-	        if (eventOrValue && eventOrValue.target) {
-	            value = eventOrValue.target.value;
-	        }
-
-	        this.filterValues = this.filterValues || {};
-	        this.filterValues[column.name] = value;
-
-	        if (this.props.liveFilter) {
-	            this.filterBy(column, value);
-	        }
-	    },
-
-	    filterBy: function filterBy(column, value, event) {
-	        ;(this.props.onFilter || emptyFn)(column, value, this.filterValues, event);
-	    },
-
-	    onFilterClick: function onFilterClick(column, event) {
-	        this.showMenu(null);
-
-	        var value = this.filterValues ? this.filterValues[column.name] : '';
-
-	        this.filterBy(column, value, event);
-	    },
-
-	    onFilterClear: function onFilterClear(column) {
-	        this.showMenu(null);
-
-	        if (this.filterValues) {
-	            this.filterValues[column.name] = '';
-	        }
-
-	        this.filterBy(column, '');(this.props.onClearFilter || emptyFn).apply(null, arguments);
-	    },
-
-	    getFilterButtons: function getFilterButtons(props) {
-
-	        var column = props.column;
-	        var factory = column.renderFilterButtons || this.props.renderFilterButtons;
-
-	        var result;
-
-	        if (factory) {
-	            result = factory(props);
-	        }
-
-	        if (result !== undefined) {
-	            return result;
-	        }
-
-	        var doFilter = this.onFilterClick.bind(this, column);
-	        var doClear = this.onFilterClear.bind(this, column);
-
-	        return React.createElement(
-	            'div',
-	            { style: { textAlign: 'center' } },
-	            React.createElement(
-	                'button',
-	                { onClick: doFilter },
-	                'Filter'
-	            ),
-	            React.createElement(
-	                'button',
-	                { onClick: doClear, style: { marginLeft: 5 } },
-	                'Clear'
-	            )
-	        );
-	    },
-
-	    filterMenuFactory: function filterMenuFactory(props) {
-
-	        var overStyle = {
-	            background: 'white',
-	            color: 'auto'
-	        };
-
-	        var column = props.column;
-	        var field = this.getFilterField(props);
-	        var buttons = this.getFilterButtons({
-	            column: column
-	        });
-
-	        var children = [field, buttons].map(function (x, index) {
-	            return React.createElement(
-	                ReactMenu.Item,
-	                { key: index },
-	                React.createElement(
-	                    ReactMenu.Item.Cell,
-	                    null,
-	                    x
-	                )
-	            );
-	        });
-
-	        props.itemOverStyle = props.itemOverStyle || overStyle;
-	        props.itemActiveStyle = props.itemActiveStyle || overStyle;
-	        props.onClick = props.onClick || stopPropagation;
-
-	        var factory = this.props.filterMenuFactory;
-	        var result;
-
-	        if (factory) {
-	            result = factory(props);
-
-	            if (result !== undefined) {
-	                return result;
-	            }
-	        }
-
-	        props.onMount = this.onFilterMenuMount;
-
-	        return React.createElement(
-	            ReactMenu,
-	            props,
-	            children
-	        );
-	    },
-
-	    onFilterMenuMount: function onFilterMenuMount(menu) {
-	        var dom = menu.getDOMNode();
-
-	        if (dom) {
-	            var input = dom.querySelector('input');
-
-	            if (input) {
-	                setTimeout(function () {
-	                    input.focus();
-	                }, 10);
-	            }
-	        }
-	    }
-	};
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	if (!global.fetch && global.window) {
-	    __webpack_require__(40);
-	}
-
-	var fetch = global.fetch;
-
-	module.exports = function () {
-	    return {
-	        fetch: fetch,
-	        defaultPageSize: 20,
-	        defaultPage: 1,
-
-	        appendDataSourceQueryParams: true,
-	        pagination: null,
-	        // virtualPagination: false,
-
-	        loading: null,
-	        showLoadMask: true,
-	        columnMinWidth: 50,
-	        cellPadding: '0px 5px',
-	        headerPadding: '10px 5px',
-	        filterIconColor: '#6EB8F1',
-	        menuIconColor: '#6EB8F1',
-	        scrollbarSize: 20,
-
-	        scrollBy: undefined,
-	        virtualRendering: true,
-
-	        styleAlternateRowsCls: 'z-style-alternate',
-	        withColumnMenuCls: 'z-with-column-menu',
-	        cellEllipsisCls: 'z-cell-ellipsis',
-	        defaultClassName: 'react-datagrid',
-
-	        withColumnMenu: true,
-	        sortable: true,
-
-	        filterable: null,
-	        resizableColumns: null,
-	        reorderColumns: null,
-
-	        emptyCls: 'z-empty',
-	        emptyTextStyle: null,
-	        emptyWrapperStyle: null,
-
-	        loadMaskOverHeader: true,
-
-	        showCellBordersCls: 'z-cell-borders',
-	        showCellBorders: false,
-	        styleAlternateRows: true,
-	        cellEllipsis: true,
-	        rowHeight: 31,
-
-	        groupNestingWidth: 20,
-
-	        defaultStyle: {
-	            position: 'relative'
-	        }
-	    };
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(18);
-	var Scroller = __webpack_require__(39);
-
-	module.exports = React.createClass({
-
-	    displayName: 'ReactDataGrid.Wrapper',
-
-	    propTypes: {
-	        scrollLeft: React.PropTypes.number,
-	        scrollTop: React.PropTypes.number,
-	        scrollbarSize: React.PropTypes.number,
-	        rowHeight: React.PropTypes.any,
-	        renderCount: React.PropTypes.number
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            scrollLeft: 0,
-	            scrollTop: 0
-	        };
-	    },
-
-	    render: function render() {
-
-	        var props = this.prepareProps(this.props);
-	        var rowsCount = props.renderCount;
-
-	        var groupsCount = 0;
-	        if (props.groupData) {
-	            groupsCount = props.groupData.groupsCount;
-	        }
-
-	        rowsCount += groupsCount;
-
-	        // var loadersSize = props.loadersSize
-	        var verticalScrollerSize = (props.totalLength + groupsCount) * props.rowHeight; // + loadersSize
-
-	        var content = props.empty ? React.createElement(
-	            'div',
-	            { className: 'z-empty-text', style: props.emptyTextStyle },
-	            props.emptyText
-	        ) : React.createElement('div', _extends({}, props.tableProps, { ref: 'table' }));
-
-	        return React.createElement(
-	            Scroller,
-	            {
-	                ref: 'scroller',
-	                preventDefaultHorizontal: true,
-
-	                loadMask: !props.loadMaskOverHeader,
-	                loading: props.loading,
-
-	                scrollbarSize: props.scrollbarSize,
-
-	                minVerticalScrollStep: props.rowHeight,
-	                scrollTop: props.scrollTop,
-	                scrollLeft: props.scrollLeft,
-
-	                scrollHeight: verticalScrollerSize,
-	                scrollWidth: props.minRowWidth,
-
-	                onVerticalScroll: this.onVerticalScroll,
-	                onHorizontalScroll: this.onHorizontalScroll
-	            },
-	            content
-	        );
-	    },
-
-	    onVerticalScrollOverflow: function onVerticalScrollOverflow() {},
-
-	    onHorizontalScrollOverflow: function onHorizontalScrollOverflow() {},
-
-	    onHorizontalScroll: function onHorizontalScroll(scrollLeft) {
-	        this.props.onScrollLeft(scrollLeft);
-	    },
-
-	    onVerticalScroll: function onVerticalScroll(pos) {
-	        this.props.onScrollTop(pos);
-	    },
-
-	    prepareProps: function prepareProps(thisProps) {
-	        var props = {};
-
-	        assign(props, thisProps);
-
-	        return props;
-	    }
-	});
-
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var React = __webpack_require__(1);
-	var Region = __webpack_require__(19);
-	var ReactMenu = React.createFactory(__webpack_require__(38));
-	var assign = __webpack_require__(18);
-	var clone = __webpack_require__(41);
-	var asArray = __webpack_require__(25);
-	var findIndexBy = __webpack_require__(22);
-	var findIndexByName = __webpack_require__(6);
-	var Cell = __webpack_require__(30);
-	var setupColumnDrag = __webpack_require__(26);
-	var setupColumnResize = __webpack_require__(27);
-
-	var normalize = __webpack_require__(37);
-	var EVENT_NAMES = __webpack_require__(34);
-
-	function emptyFn() {}
-
-	function getColumnSortInfo(column, sortInfo) {
-
-	    sortInfo = asArray(sortInfo);
-
-	    var index = findIndexBy(sortInfo, function (info) {
-	        return info.name === column.name;
-	    });
-
-	    return sortInfo[index];
-	}
-
-	function removeColumnSort(column, sortInfo) {
-	    sortInfo = asArray(sortInfo);
-
-	    var index = findIndexBy(sortInfo, function (info) {
-	        return info.name === column.name;
-	    });
-
-	    if (~index) {
-	        sortInfo.splice(index, 1);
-	    }
-
-	    return sortInfo;
-	}
-
-	function getDropState() {
-	    return {
-	        dragLeft: null,
-	        dragColumn: null,
-	        dragColumnIndex: null,
-	        dragging: false,
-	        dropIndex: null,
-
-	        shiftIndexes: null,
-	        shiftSize: null
-	    };
-	}
-
-	module.exports = React.createClass({
-
-	    displayName: 'ReactDataGrid.Header',
-
-	    propTypes: {
-	        columns: React.PropTypes.array
-	    },
-
-	    onDrop: function onDrop(event) {
-	        if (this.state.dragging) {
-	            event.stopPropagation();
-	        }
-
-	        var dragIndex = this.state.dragColumnIndex;
-	        var dropIndex = this.state.dropIndex;
-
-	        if (dropIndex != null) {
-
-	            //since we need the indexes in the array of all columns
-	            //not only in the array of the visible columns
-	            //we need to search them and make this transform
-	            var dragColumn = this.props.columns[dragIndex];
-	            var dropColumn = this.props.columns[dropIndex];
-
-	            dragIndex = findIndexByName(this.props.allColumns, dragColumn.name);
-	            dropIndex = findIndexByName(this.props.allColumns, dropColumn.name);
-
-	            this.props.onDropColumn(dragIndex, dropIndex);
-	        }
-
-	        this.setState(getDropState());
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            defaultClassName: 'z-header-wrapper',
-	            draggingClassName: 'z-dragging',
-	            cellClassName: 'z-column-header',
-	            defaultStyle: {},
-	            sortInfo: null,
-	            scrollLeft: 0,
-	            scrollTop: 0
-	        };
-	    },
-
-	    getInitialState: function getInitialState() {
-
-	        return {
-	            mouseOver: true,
-	            dragging: false,
-
-	            shiftSize: null,
-	            dragColumn: null,
-	            shiftIndexes: null
-	        };
-	    },
-
-	    render: function render() {
-	        var props = this.prepareProps(this.props);
-
-	        var cells = props.columns.map(this.renderCell.bind(this, props, this.state));
-
-	        var style = normalize(props.style);
-	        var headerStyle = normalize({
-	            paddingRight: props.scrollbarSize,
-	            transform: 'translate3d(' + -props.scrollLeft + 'px, ' + -props.scrollTop + 'px, 0px)'
-	        });
-
-	        return React.createElement(
-	            'div',
-	            { style: style, className: props.className },
-	            React.createElement(
-	                'div',
-	                { className: 'z-header', style: headerStyle },
-	                cells
-	            )
-	        );
-	    },
-
-	    renderCell: function renderCell(props, state, column, index) {
-
-	        var resizing = props.resizing;
-	        var text = column.title;
-	        var className = props.cellClassName || '';
-	        var style = {
-	            left: 0
-	        };
-
-	        var menu = this.renderColumnMenu(props, state, column, index);
-
-	        if (state.dragColumn && state.shiftIndexes && state.shiftIndexes[index]) {
-	            style.left = state.shiftSize;
-	        }
-
-	        if (state.dragColumn === column) {
-	            className += ' z-drag z-over';
-	            style.zIndex = 1;
-	            style.left = state.dragLeft || 0;
-	        }
-
-	        var filterIcon = props.filterIcon || React.createElement(
-	            'svg',
-	            { version: '1.1', style: { transform: 'translate3d(0,0,0)', height: '100%', width: '100%', padding: '0px 2px' }, viewBox: '0 0 3 4' },
-	            React.createElement('polygon', { points: '0,0 1,2 1,4 2,4 2,2 3,0 ', style: { fill: props.filterIconColor, strokeWidth: 0, fillRule: 'nonZero' } })
-	        );
-
-	        var filter = column.filterable ? React.createElement(
-	            'div',
-	            { className: 'z-show-filter', onMouseUp: this.handleFilterMouseUp.bind(this, column) },
-	            filterIcon
-	        ) : null;
-
-	        var resizer = column.resizable ? React.createElement('span', { className: 'z-column-resize', onMouseDown: this.handleResizeMouseDown.bind(this, column) }) : null;
-
-	        if (column.sortable) {
-	            text = React.createElement(
-	                'span',
-	                null,
-	                text,
-	                React.createElement('span', { className: 'z-icon-sort-info' })
-	            );
-
-	            var sortInfo = getColumnSortInfo(column, props.sortInfo);
-
-	            if (sortInfo && sortInfo.dir) {
-	                className += sortInfo.dir === -1 || sortInfo.dir === 'desc' ? ' z-desc' : ' z-asc';
-	            }
-
-	            className += ' z-sortable';
-	        }
-
-	        if (filter) {
-	            className += ' z-filterable';
-	        }
-
-	        if (state.mouseOver === column.name && !resizing) {
-	            className += ' z-over';
-	        }
-
-	        if (props.menuColumn === column.name) {
-	            className += ' z-active';
-	        }
-
-	        className += ' z-unselectable';
-
-	        var events = {};
-
-	        events[EVENT_NAMES.onMouseDown] = this.handleMouseDown.bind(this, column);
-	        events[EVENT_NAMES.onMouseUp] = this.handleMouseUp.bind(this, column);
-
-	        return React.createElement(
-	            Cell,
-	            _extends({
-	                key: column.name,
-	                textPadding: props.cellPadding,
-	                columns: props.columns,
-	                index: index,
-	                className: className,
-	                style: style,
-	                text: text,
-	                header: true,
-
-	                onMouseOut: this.handleMouseOut.bind(this, column),
-	                onMouseOver: this.handleMouseOver.bind(this, column)
-	            }, events),
-	            filter,
-	            menu,
-	            resizer
-	        );
-	    },
-
-	    toggleSort: function toggleSort(column) {
-	        var sortInfo = asArray(clone(this.props.sortInfo));
-	        var columnSortInfo = getColumnSortInfo(column, sortInfo);
-
-	        if (!columnSortInfo) {
-	            columnSortInfo = {
-	                name: column.name,
-	                type: column.type,
-	                fn: column.sortFn
-	            };
-
-	            sortInfo.push(columnSortInfo);
-	        }
-
-	        if (typeof column.toggleSort === 'function') {
-	            column.toggleSort(columnSortInfo, sortInfo);
-	        } else {
-
-	            var dir = columnSortInfo.dir;
-	            var dirSign = dir === 'asc' ? 1 : dir === 'desc' ? -1 : dir;
-	            var newDir = dirSign === 1 ? -1 : dirSign === -1 ? 0 : 1;
-
-	            columnSortInfo.dir = newDir;
-
-	            if (!newDir) {
-	                sortInfo = removeColumnSort(column, sortInfo);
-	            }
-	        }
-
-	        ;(this.props.onSortChange || emptyFn)(sortInfo);
-	    },
-
-	    renderColumnMenu: function renderColumnMenu(props, state, column, index) {
-	        if (!props.withColumnMenu) {
-	            return;
-	        }
-
-	        var menuIcon = props.menuIcon || React.createElement(
-	            'svg',
-	            { version: '1.1', style: { transform: 'translate3d(0,0,0)', height: '100%', width: '100%', padding: '0px 2px' }, viewBox: '0 0 3 4' },
-	            React.createElement('polygon', { points: '0,0 1.5,3 3,0 ', style: { fill: props.menuIconColor, strokeWidth: 0, fillRule: 'nonZero' } })
-	        );
-
-	        return React.createElement(
-	            'div',
-	            { className: 'z-show-menu', onMouseUp: this.handleShowMenuMouseUp.bind(this, props, column, index) },
-	            menuIcon
-	        );
-	    },
-
-	    handleShowMenuMouseUp: function handleShowMenuMouseUp(props, column, index, event) {
-	        event.nativeEvent.stopSort = true;
-
-	        this.showMenu(column, event);
-	    },
-
-	    showMenu: function showMenu(column, event) {
-
-	        var menuItem = (function (column) {
-	            var visibility = this.props.columnVisibility;
-
-	            var visible = column.visible;
-
-	            if (column.name in visibility) {
-	                visible = visibility[column.name];
-	            }
-
-	            return {
-	                cls: visible ? 'z-selected' : '',
-	                selected: visible ? React.createElement(
-	                    'span',
-	                    { style: { fontSize: '0.95em' } },
-	                    '✓'
-	                ) : '',
-	                label: column.title,
-	                fn: this.toggleColumn.bind(this, column)
-	            };
-	        }).bind(this);
-
-	        function menu(eventTarget, props) {
-
-	            var columns = props.gridColumns;
-
-	            props.columns = ['selected', 'label'];
-	            props.items = columns.map(menuItem);
-	            props.alignTo = eventTarget;
-	            props.alignPositions = ['tl-bl', 'tr-br', 'bl-tl', 'br-tr'];
-	            props.style = {
-	                position: 'absolute'
-	            };
-
-	            var factory = this.props.columnMenuFactory || ReactMenu;
-
-	            var result = factory(props);
-
-	            return result === undefined ? ReactMenu(props) : result;
-	        }
-
-	        this.props.showMenu(menu.bind(this, event.currentTarget), {
-	            menuColumn: column.name
-	        });
-	    },
-
-	    showFilterMenu: function showFilterMenu(column, event) {
-
-	        function menu(eventTarget, props) {
-
-	            var defaultFactory = this.props.filterMenuFactory;
-	            var factory = column.filterMenuFactory || defaultFactory;
-
-	            props.columns = ['component'];
-	            props.column = column;
-	            props.alignTo = eventTarget;
-	            props.alignPositions = ['tl-bl', 'tr-br', 'bl-tl', 'br-tr'];
-	            props.style = {
-	                position: 'absolute'
-	            };
-
-	            var result = factory(props);
-
-	            return result === undefined ? defaultFactory(props) : result;
-	        }
-
-	        this.props.showMenu(menu.bind(this, event.currentTarget), {
-	            menuColumn: column.name
-	        });
-	    },
-
-	    toggleColumn: function toggleColumn(column) {
-	        this.props.toggleColumn(column);
-	    },
-
-	    hideMenu: function hideMenu() {
-	        this.props.showColumnMenu(null, null);
-	    },
-
-	    handleResizeMouseDown: function handleResizeMouseDown(column, event) {
-	        setupColumnResize(this, this.props, column, event);
-
-	        //in order to prevent setupColumnDrag in handleMouseDown
-	        // event.stopPropagation()
-
-	        //we are doing setupColumnDrag protection using the resizing flag on native event
-	        if (event.nativeEvent) {
-	            event.nativeEvent.resizing = true;
-	        }
-	    },
-
-	    handleFilterMouseUp: function handleFilterMouseUp(column, event) {
-	        event.nativeEvent.stopSort = true;
-
-	        this.showFilterMenu(column, event);
-	    },
-
-	    handleMouseUp: function handleMouseUp(column, event) {
-	        if (this.state.dragging) {
-	            return;
-	        }
-
-	        if (this.state.resizing) {
-	            return;
-	        }
-
-	        if (event && event.nativeEvent && event.nativeEvent.stopSort) {
-	            return;
-	        }
-
-	        if (column.sortable) {
-	            this.toggleSort(column);
-	        }
-	    },
-
-	    handleMouseOut: function handleMouseOut(column) {
-	        this.setState({
-	            mouseOver: false
-	        });
-	    },
-
-	    handleMouseOver: function handleMouseOver(column) {
-	        this.setState({
-	            mouseOver: column.name
-	        });
-	    },
-
-	    handleMouseDown: function handleMouseDown(column, event) {
-	        if (event && event.nativeEvent && event.nativeEvent.resizing) {
-	            return;
-	        }
-
-	        if (!this.props.reorderColumns) {
-	            return;
-	        }
-
-	        setupColumnDrag(this, this.props, column, event);
-	    },
-
-	    onResizeDragStart: function onResizeDragStart(config) {
-	        this.setState({
-	            resizing: true
-	        });
-	        this.props.onColumnResizeDragStart(config);
-	    },
-
-	    onResizeDrag: function onResizeDrag(config) {
-	        this.props.onColumnResizeDrag(config);
-	    },
-
-	    onResizeDrop: function onResizeDrop(config, resizeInfo, event) {
-	        this.setState({
-	            resizing: false
-	        });
-
-	        this.props.onColumnResizeDrop(config, resizeInfo);
-	    },
-
-	    prepareProps: function prepareProps(thisProps) {
-	        var props = {};
-
-	        assign(props, thisProps);
-
-	        this.prepareClassName(props);
-	        this.prepareStyle(props);
-
-	        return props;
-	    },
-
-	    prepareClassName: function prepareClassName(props) {
-	        props.className = props.className || '';
-	        props.className += ' ' + props.defaultClassName;
-
-	        if (this.state.dragging) {
-	            props.className += ' ' + props.draggingClassName;
-	        }
-	    },
-
-	    prepareStyle: function prepareStyle(props) {
-	        var style = props.style = {};
-
-	        assign(style, props.defaultStyle);
-	    }
-	});
-	// event.stopPropagation()
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = Object.keys(Object(from));
-
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-
-		return to;
-	};
-
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(31)
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, setImmediate, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
 	 *            See https://raw.githubusercontent.com/jakearchibald/es6-promise/master/LICENSE
-	 * @version   2.1.1
+	 * @version   2.3.0
 	 */
 
 	(function() {
@@ -3346,7 +1218,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var lib$es6$promise$asap$$len = 0;
 	    var lib$es6$promise$asap$$toString = {}.toString;
 	    var lib$es6$promise$asap$$vertxNext;
-	    function lib$es6$promise$asap$$asap(callback, arg) {
+	    var lib$es6$promise$asap$$customSchedulerFn;
+
+	    var lib$es6$promise$asap$$asap = function asap(callback, arg) {
 	      lib$es6$promise$asap$$queue[lib$es6$promise$asap$$len] = callback;
 	      lib$es6$promise$asap$$queue[lib$es6$promise$asap$$len + 1] = arg;
 	      lib$es6$promise$asap$$len += 2;
@@ -3354,11 +1228,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // If len is 2, that means that we need to schedule an async flush.
 	        // If additional callbacks are queued before the queue is flushed, they
 	        // will be processed by this flush that we are scheduling.
-	        lib$es6$promise$asap$$scheduleFlush();
+	        if (lib$es6$promise$asap$$customSchedulerFn) {
+	          lib$es6$promise$asap$$customSchedulerFn(lib$es6$promise$asap$$flush);
+	        } else {
+	          lib$es6$promise$asap$$scheduleFlush();
+	        }
 	      }
 	    }
 
-	    var lib$es6$promise$asap$$default = lib$es6$promise$asap$$asap;
+	    function lib$es6$promise$asap$$setScheduler(scheduleFn) {
+	      lib$es6$promise$asap$$customSchedulerFn = scheduleFn;
+	    }
+
+	    function lib$es6$promise$asap$$setAsap(asapFn) {
+	      lib$es6$promise$asap$$asap = asapFn;
+	    }
 
 	    var lib$es6$promise$asap$$browserWindow = (typeof window !== 'undefined') ? window : undefined;
 	    var lib$es6$promise$asap$$browserGlobal = lib$es6$promise$asap$$browserWindow || {};
@@ -3491,7 +1375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    function lib$es6$promise$$internal$$handleForeignThenable(promise, thenable, then) {
-	       lib$es6$promise$asap$$default(function(promise) {
+	       lib$es6$promise$asap$$asap(function(promise) {
 	        var sealed = false;
 	        var error = lib$es6$promise$$internal$$tryThen(then, thenable, function(value) {
 	          if (sealed) { return; }
@@ -3572,7 +1456,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      promise._state = lib$es6$promise$$internal$$FULFILLED;
 
 	      if (promise._subscribers.length !== 0) {
-	        lib$es6$promise$asap$$default(lib$es6$promise$$internal$$publish, promise);
+	        lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publish, promise);
 	      }
 	    }
 
@@ -3581,7 +1465,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      promise._state = lib$es6$promise$$internal$$REJECTED;
 	      promise._result = reason;
 
-	      lib$es6$promise$asap$$default(lib$es6$promise$$internal$$publishRejection, promise);
+	      lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publishRejection, promise);
 	    }
 
 	    function lib$es6$promise$$internal$$subscribe(parent, child, onFulfillment, onRejection) {
@@ -3595,7 +1479,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      subscribers[length + lib$es6$promise$$internal$$REJECTED]  = onRejection;
 
 	      if (length === 0 && parent._state) {
-	        lib$es6$promise$asap$$default(lib$es6$promise$$internal$$publish, parent);
+	        lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publish, parent);
 	      }
 	    }
 
@@ -3852,7 +1736,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	      Promise objects represent the eventual result of an asynchronous operation. The
 	      primary way of interacting with a promise is through its `then` method, which
-	      registers callbacks to receive either a promise’s eventual value or the reason
+	      registers callbacks to receive either a promise's eventual value or the reason
 	      why the promise cannot be fulfilled.
 
 	      Terminology
@@ -3975,6 +1859,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    lib$es6$promise$promise$$Promise.race = lib$es6$promise$promise$race$$default;
 	    lib$es6$promise$promise$$Promise.resolve = lib$es6$promise$promise$resolve$$default;
 	    lib$es6$promise$promise$$Promise.reject = lib$es6$promise$promise$reject$$default;
+	    lib$es6$promise$promise$$Promise._setScheduler = lib$es6$promise$asap$$setScheduler;
+	    lib$es6$promise$promise$$Promise._setAsap = lib$es6$promise$asap$$setAsap;
+	    lib$es6$promise$promise$$Promise._asap = lib$es6$promise$asap$$asap;
 
 	    lib$es6$promise$promise$$Promise.prototype = {
 	      constructor: lib$es6$promise$promise$$Promise,
@@ -4185,7 +2072,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        if (state) {
 	          var callback = arguments[state - 1];
-	          lib$es6$promise$asap$$default(function(){
+	          lib$es6$promise$asap$$asap(function(){
 	            lib$es6$promise$$internal$$invokeCallback(state, child, callback, result);
 	          });
 	        } else {
@@ -4257,7 +2144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    /* global define:true module:true window: true */
-	    if ("function" === 'function' && __webpack_require__(63)['amd']) {
+	    if ("function" === 'function' && __webpack_require__(5)['amd']) {
 	      !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return lib$es6$promise$umd$$ES6Promise; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module !== 'undefined' && module['exports']) {
 	      module['exports'] = lib$es6$promise$umd$$ES6Promise;
@@ -4269,17 +2156,256 @@ return /******/ (function(modules) { // webpackBootstrap
 	}).call(this);
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56), __webpack_require__(57).setImmediate, (function() { return this; }()), __webpack_require__(64)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3).setImmediate, (function() { return this; }()), __webpack_require__(4)(module)))
 
 /***/ },
-/* 21 */
+/* 2 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = setTimeout(cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            currentQueue[queueIndex].run();
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    clearTimeout(timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	// TODO(shtylman)
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(2).nextTick;
+	var apply = Function.prototype.apply;
+	var slice = Array.prototype.slice;
+	var immediateIds = {};
+	var nextImmediateId = 0;
+
+	// DOM APIs, for completeness
+
+	exports.setTimeout = function() {
+	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+	};
+	exports.setInterval = function() {
+	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+	};
+	exports.clearTimeout =
+	exports.clearInterval = function(timeout) { timeout.close(); };
+
+	function Timeout(id, clearFn) {
+	  this._id = id;
+	  this._clearFn = clearFn;
+	}
+	Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+	Timeout.prototype.close = function() {
+	  this._clearFn.call(window, this._id);
+	};
+
+	// Does not start the time, just sets up the members needed.
+	exports.enroll = function(item, msecs) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = msecs;
+	};
+
+	exports.unenroll = function(item) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = -1;
+	};
+
+	exports._unrefActive = exports.active = function(item) {
+	  clearTimeout(item._idleTimeoutId);
+
+	  var msecs = item._idleTimeout;
+	  if (msecs >= 0) {
+	    item._idleTimeoutId = setTimeout(function onTimeout() {
+	      if (item._onTimeout)
+	        item._onTimeout();
+	    }, msecs);
+	  }
+	};
+
+	// That's not how node.js implements it but the exposed api is the same.
+	exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
+	  var id = nextImmediateId++;
+	  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
+
+	  immediateIds[id] = true;
+
+	  nextTick(function onNextTick() {
+	    if (immediateIds[id]) {
+	      // fn.call() is faster so we optimize for the common use-case
+	      // @see http://jsperf.com/call-apply-segu
+	      if (args) {
+	        fn.apply(null, args);
+	      } else {
+	        fn.call(null);
+	      }
+	      // Prevent ids from leaking
+	      exports.clearImmediate(id);
+	    }
+	  });
+
+	  return id;
+	};
+
+	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
+	  delete immediateIds[id];
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).setImmediate, __webpack_require__(3).clearImmediate))
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	module.exports = function() { throw new Error("define cannot be used indirect"); };
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	function ToObject(val) {
+		if (val == null) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var keys;
+		var to = ToObject(target);
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = arguments[s];
+			keys = Object.keys(Object(from));
+
+			for (var i = 0; i < keys.length; i++) {
+				to[keys[i]] = from[keys[i]];
+			}
+		}
+
+		return to;
+	};
+
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 
-	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
-	var Loader = __webpack_require__(35)
+	var React  = __webpack_require__(6)
+	var assign = __webpack_require__(7)
+	var Loader = __webpack_require__(9)
 
 	module.exports = React.createClass({
 
@@ -4328,751 +2454,91 @@ return /******/ (function(modules) { // webpackBootstrap
 	})
 
 /***/ },
-/* 22 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	function findIndexBy(arr, fn) {
-
-	    var i = 0;
-	    var len = arr.length;
-
-	    for (; i < len; i++) {
-	        if (fn(arr[i]) === true) {
-	            return i;
-	        }
-	    }
-
-	    return -1;
-	}
-
-	module.exports = findIndexBy;
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var assign = __webpack_require__(18);
-	var React = __webpack_require__(1);
-
-	var Row = __webpack_require__(29);
-	var RowFactory = React.createFactory(Row);
-
-	var renderCell = Row.prototype.renderCell;
-
-	/**
-	 * Render a datagrid row
-	 *
-	 * @param  {Object}   props The props from which to build row props
-	 * @param  {Object}   data The data object that backs this row
-	 * @param  {Number}   index The index in the grid of the row to be rendered
-	 * @param  {Function} [fn] A function that can be used to modify built row props
-	 *
-	 * If props.rowFactory is specified, it will be used to build the ReactElement
-	 * corresponding to this row. In case it returns undefined, the default RowFactory will be used
-	 * (this case occurs when the rowFactory was specified just to modify the row props)
-	 *
-	 * @return {ReactElement}
-	 */
-	module.exports = function renderRow(props, data, index, fn) {
-	    var factory = props.rowFactory || RowFactory;
-	    var key = data[props.idProperty];
-	    var selectedKey = key;
-	    var renderKey = key;
-
-	    if (!props.groupBy) {
-	        renderKey = index - props.startIndex;
-	    }
-
-	    var selected = false;
-
-	    if (typeof props.selected == 'object' && props.selected) {
-	        selected = !!props.selected[selectedKey];
-	    } else if (props.selected) {
-	        selected = selectedKey === props.selected;
-	    }
-
-	    var config = {
-	        className: index % 2 === 0 ? 'z-even' : 'z-odd',
-	        selected: selected,
-
-	        key: renderKey,
-	        data: data,
-	        index: index,
-
-	        cellFactory: props.cellFactory,
-	        renderCell: props.renderCell,
-	        renderText: props.renderText,
-	        cellPadding: props.cellPadding,
-	        rowHeight: props.rowHeight,
-	        minWidth: props.minRowWidth,
-	        columns: props.columns,
-
-	        rowContextMenu: props.rowContextMenu,
-	        showMenu: props.showMenu,
-
-	        _onClick: props.onRowClick
-	    };
-
-	    var style;
-	    var rowStyle = props.rowStyle;
-
-	    if (rowStyle) {
-	        style = {};
-
-	        if (typeof rowStyle == 'function') {
-	            style = rowStyle(data, config);
-	        } else {
-	            assign(style, rowStyle);
-	        }
-
-	        config.style = style;
-	    }
-
-	    var className = props.rowClassName;
-
-	    if (typeof className == 'function') {
-	        className = className(data, config);
-	    }
-
-	    if (className) {
-	        config.className = className;
-	    }
-
-	    if (typeof fn == 'function') {
-	        config = fn(config);
-	    }
-
-	    var row = factory(config);
-
-	    if (row === undefined) {
-	        row = RowFactory(config);
-	    }
-
-	    if (config.selected && this) {
-	        this.selIndex = index;
-	    }
-
-	    // var cached = this.rowCache && this.rowCache[renderKey]
-
-	    // if (cached){
-	    // return React.cloneElement(cached, {
-	    //     children: config.columns.map(function(col, index){
-	    //         return renderCell(config, col, index)
-	    //     })
-	    // })
-	    // }
-
-	    // if (this.rowCache){
-	    //     this.rowCache[renderKey] = row
-	    // }
-
-	    return row;
-	};
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var normalize = __webpack_require__(37);
-
-	var colors = ['blue', 'red', 'magenta'];
-	module.exports = function (props) {
-	    var scrollTop = props.virtualRendering ? -(props.topOffset || 0) : props.scrollTop;
-
-	    return normalize({
-	        transform: 'translate3d(' + -props.scrollLeft + 'px, ' + -scrollTop + 'px, 0px)'
-	    });
-	};
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function asArray(x) {
-	    if (!x) {
-	        x = [];
-	    }
-
-	    if (!Array.isArray(x)) {
-	        x = [x];
-	    }
-
-	    return x;
-	};
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(19);
-	var DragHelper = __webpack_require__(54);
-
-	function range(start, end) {
-	    var res = [];
-
-	    for (; start <= end; start++) {
-	        res.push(start);
-	    }
-
-	    return res;
-	}
-
-	function buildIndexes(direction, index, dragIndex) {
-	    var indexes = direction < 0 ? range(index, dragIndex) : range(dragIndex, index);
-
-	    var result = {};
-
-	    indexes.forEach(function (value) {
-	        result[value] = true;
-	    });
-
-	    return result;
-	}
-
-	module.exports = function (header, props, column, event) {
-
-	    event.preventDefault();
-
-	    var headerNode = header.getDOMNode();
-	    var headerRegion = Region.from(headerNode);
-	    var dragColumn = column;
-	    var dragColumnIndex;
-	    var columnData;
-	    var shiftRegion;
-
-	    DragHelper(event, {
-
-	        constrainTo: headerRegion.expand({ top: true, bottom: true }),
-
-	        onDragStart: function onDragStart(event, config) {
-
-	            var columnHeaders = headerNode.querySelectorAll('.' + props.cellClassName);
-
-	            columnData = props.columns.map(function (column, i) {
-	                var region = Region.from(columnHeaders[i]);
-
-	                if (column === dragColumn) {
-	                    dragColumnIndex = i;
-	                    shiftRegion = region.clone();
-	                }
-
-	                return {
-	                    column: column,
-	                    index: i,
-	                    region: region
-	                };
-	            });
-
-	            header.setState({
-	                dragColumn: column,
-	                dragging: true
-	            });
-
-	            config.columnData = columnData;
-	        },
-	        onDrag: function onDrag(event, config) {
-	            var diff = config.diff.left;
-	            var directionSign = diff < 0 ? -1 : 1;
-	            var state = {
-	                dragColumnIndex: dragColumnIndex,
-	                dragColumn: dragColumn,
-	                dragLeft: diff,
-	                dropIndex: null,
-	                shiftIndexes: null,
-	                shiftSize: null
-	            };
-
-	            var shift;
-	            var shiftSize;
-	            var newLeft = shiftRegion.left + diff;
-	            var newRight = newLeft + shiftRegion.width;
-	            var shiftZone = { left: newLeft, right: newRight };
-
-	            config.columnData.forEach(function (columnData, index, arr) {
-
-	                var itColumn = columnData.column;
-	                var itRegion = columnData.region;
-
-	                if (shift || itColumn === dragColumn) {
-	                    return;
-	                }
-
-	                var itLeft = itRegion.left;
-	                var itRight = itRegion.right;
-	                var itZone = directionSign == -1 ? { left: itLeft, right: itLeft + itRegion.width } : { left: itRight - itRegion.width, right: itRight };
-
-	                if (shiftRegion.width < itRegion.width) {
-	                    //shift region is smaller than itRegion
-	                    shift = Region.getIntersectionWidth(itZone, shiftZone) >= Math.min(itRegion.width, shiftRegion.width) / 2;
-	                } else {
-	                    //shift region is bigger than itRegion
-	                    shift = Region.getIntersectionWidth(itRegion, shiftZone) >= itRegion.width / 2;
-	                }
-
-	                if (shift) {
-	                    shiftSize = -directionSign * shiftRegion.width;
-	                    state.dropIndex = index;
-	                    state.shiftIndexes = buildIndexes(directionSign, index, dragColumnIndex);
-	                    state.shiftSize = shiftSize;
-	                }
-	            });
-
-	            header.setState(state);
-	        },
-
-	        onDrop: function onDrop(event) {
-	            header.onDrop(event);
-	        }
-	    });
-	};
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(19);
-	var DragHelper = __webpack_require__(54);
-
-	var findIndexByName = __webpack_require__(6);
-
-	module.exports = function (header, props, column, event) {
-
-	    event.preventDefault();
-
-	    var columns = props.columns;
-	    var index = findIndexByName(columns, column.name);
-	    var proxyLeft = Region.from(event.target).right;
-
-	    var headerNode = header.getDOMNode();
-
-	    var constrainTo = Region.from(headerNode);
-
-	    DragHelper(event, {
-	        constrainTo: constrainTo,
-
-	        onDragStart: function onDragStart(event, config) {
-
-	            header.onResizeDragStart({
-	                resizing: true,
-	                resizeColumn: column,
-	                resizeProxyLeft: proxyLeft
-	            });
-	        },
-
-	        onDrag: function onDrag(event, config) {
-	            var diff = config.diff.left;
-
-	            header.onResizeDrag({
-	                resizeProxyDiff: diff
-	            });
-	        },
-
-	        onDrop: function onDrop(event, config) {
-
-	            var diff = config.diff.left;
-	            var columnHeaders = headerNode.querySelectorAll('.' + props.cellClassName);
-	            var nextColumn = diff > 0 ? null : columns[index + 1];
-
-	            var columnSize = Region.from(columnHeaders[index]).width;
-	            var nextColumnSize;
-	            var firstSize = columnSize + diff;
-	            var secondSize = 0;
-
-	            // if (firstSize < column.minWidth){
-	            //     firstSize = column.minWidth
-	            //     diff = firstSize - columnSize
-	            // }
-
-	            if (nextColumn) {
-	                nextColumnSize = nextColumn ? Region.from(columnHeaders[index + 1]).width : 0;
-
-	                secondSize = nextColumnSize - diff;
-	            }
-
-	            // if (nextColumn && secondSize < nextColumn.minWidth){
-	            //     secondSize = nextColumn.minWidth
-	            //     diff = nextColumnSize - secondSize
-	            //     firstSize = columnSize + diff
-	            // }
-
-	            var resizeInfo = [{
-	                name: column.name,
-	                size: firstSize,
-	                diff: diff
-	            }];
-
-	            if (nextColumn) {
-	                resizeInfo.push({
-	                    name: nextColumn.name,
-	                    size: secondSize,
-	                    diff: -diff
-	                });
-	            }
-
-	            header.onResizeDrop({
-	                resizing: false,
-	                resizeColumn: null,
-	                resizeProxyLeft: null
-	            }, resizeInfo, event);
-	        }
-	    });
-	};
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function (props, state) {
-	                    var selected = props.selected == null ? state.defaultSelected : props.selected;
-
-	                    return selected;
-	};
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var Region = __webpack_require__(19);
-	var assign = __webpack_require__(18);
-	var normalize = __webpack_require__(37);
-	var Cell = __webpack_require__(30);
-	var CellFactory = React.createFactory(Cell);
-	var ReactMenu = __webpack_require__(38);
-	var ReactMenuFactory = React.createFactory(ReactMenu);
+	var React  = __webpack_require__(6)
+	var assign = __webpack_require__(7)
 
 	module.exports = React.createClass({
 
-	    displayName: 'ReactDataGrid.Row',
+	    displayName: 'Loader',
 
-	    propTypes: {
-	        data: React.PropTypes.object,
-	        columns: React.PropTypes.array,
-	        index: React.PropTypes.number
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-
+	    getDefaultProps: function(){
 	        return {
-	            defaultClassName: 'z-row',
-	            mouseOverClassName: 'z-over',
-	            selectedClassName: 'z-selected',
-	            defaultStyle: normalize({
-	                userSelect: 'none'
-	            })
-	        };
-	    },
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            mouseOver: false
-	        };
-	    },
-
-	    render: function render() {
-	        var props = this.prepareProps(this.props);
-	        var cells = props.children || props.columns.map(this.renderCell.bind(this, this.props));
-
-	        return React.createElement(
-	            'div',
-	            props,
-	            cells
-	        );
-	    },
-
-	    prepareProps: function prepareProps(thisProps) {
-	        var props = assign({}, thisProps);
-
-	        props.className = this.prepareClassName(props, this.state);
-	        props.style = this.prepareStyle(props);
-
-	        props.onMouseEnter = this.handleMouseEnter;
-	        props.onMouseLeave = this.handleMouseLeave;
-	        props.onContextMenu = this.handleContextMenu;
-	        props.onClick = this.handleRowClick;
-
-	        delete props.data;
-	        delete props.cellPadding;
-
-	        return props;
-	    },
-
-	    handleRowClick: function handleRowClick(event) {
-
-	        if (this.props.onClick) {
-	            this.props.onClick(event);
-	        }
-
-	        if (this.props._onClick) {
-	            this.props._onClick(this.props, event);
-	        }
-	    },
-
-	    handleContextMenu: function handleContextMenu(event) {
-
-	        if (this.props.rowContextMenu) {
-	            this.showMenu(event);
-	        }
-
-	        if (this.props.onContextMenu) {
-	            this.props.onContextMenu(event);
-	        }
-	    },
-
-	    showMenu: function showMenu(event) {
-	        var factory = this.props.rowContextMenu;
-	        var alignTo = Region.from(event);
-
-	        var props = {
-	            style: {
-	                position: 'absolute'
+	            defaultStyle: {
+	                margin: 'auto',
+	                position: 'absolute',
+	                top: 0,
+	                left: 0,
+	                bottom: 0,
+	                right: 0,
 	            },
-	            rowProps: this.props,
-	            data: this.props.data,
-	            alignTo: alignTo,
-	            alignPositions: ['tl-bl', 'tr-br', 'bl-tl', 'br-tr'],
-	            items: [{
-	                label: 'stop'
-	            }]
-	        };
-
-	        var menu = factory(props);
-
-	        if (menu === undefined) {
-	            menu = ReactMenuFactory(props);
-	        }
-
-	        event.preventDefault();
-
-	        this.props.showMenu(function () {
-	            return menu;
-	        });
-	    },
-
-	    handleMouseLeave: function handleMouseLeave(event) {
-	        this.setState({
-	            mouseOver: false
-	        });
-
-	        if (this.props.onMouseLeave) {
-	            this.props.onMouseLeave(event);
+	            defaultClassName: 'loader',
+	            size: 40,
 	        }
 	    },
 
-	    handleMouseEnter: function handleMouseEnter(event) {
-	        this.setState({
-	            mouseOver: true
-	        });
+	    render: function() {
+	        var props = assign({}, this.props)
 
-	        if (this.props.onMouseEnter) {
-	            this.props.onMouseEnter(event);
-	        }
+	        this.prepareStyle(props)
+
+	        props.className = props.className || ''
+	        props.className += ' ' + props.defaultClassName
+
+	        return React.DOM.div(props,
+	            React.createElement("div", {className: "loadbar loadbar-1"}),
+	            React.createElement("div", {className: "loadbar loadbar-2"}),
+	            React.createElement("div", {className: "loadbar loadbar-3"}),
+	            React.createElement("div", {className: "loadbar loadbar-4"}),
+	            React.createElement("div", {className: "loadbar loadbar-5"}),
+	            React.createElement("div", {className: "loadbar loadbar-6"}),
+	            React.createElement("div", {className: "loadbar loadbar-7"}),
+	            React.createElement("div", {className: "loadbar loadbar-8"}),
+	            React.createElement("div", {className: "loadbar loadbar-9"}),
+	            React.createElement("div", {className: "loadbar loadbar-10"}),
+	            React.createElement("div", {className: "loadbar loadbar-11"}),
+	            React.createElement("div", {className: "loadbar loadbar-12"})
+	        )
 	    },
 
-	    renderCell: function renderCell(props, column, index) {
+	    prepareStyle: function(props){
 
-	        var text = props.data[column.name];
-	        var columns = props.columns;
+	        var style = {}
 
-	        var cellProps = {
-	            style: column.style,
-	            className: column.className,
+	        assign(style, props.defaultStyle)
+	        assign(style, props.style)
 
-	            key: column.name,
-	            name: column.name,
+	        style.width = props.size
+	        style.height = props.size
 
-	            data: props.data,
-	            columns: columns,
-	            index: index,
-	            rowIndex: props.index,
-	            textPadding: props.cellPadding,
-	            renderCell: props.renderCell,
-	            renderText: props.renderText
-	        };
-
-	        if (typeof column.render == 'function') {
-	            text = column.render(text, props.data, cellProps);
-	        }
-
-	        cellProps.text = text;
-
-	        var result;
-
-	        if (props.cellFactory) {
-	            result = props.cellFactory(cellProps);
-	        }
-
-	        if (result === undefined) {
-	            result = CellFactory(cellProps);
-	        }
-
-	        return result;
-	    },
-
-	    prepareClassName: function prepareClassName(props, state) {
-	        var className = props.className || '';
-
-	        className += ' ' + props.defaultClassName;
-
-	        if (state.mouseOver) {
-	            className += ' ' + props.mouseOverClassName;
-	        }
-
-	        if (props.selected) {
-	            className += ' ' + props.selectedClassName;
-	        }
-
-	        return className;
-	    },
-
-	    prepareStyle: function prepareStyle(props) {
-
-	        var style = assign({}, props.defaultStyle, props.style);
-
-	        style.height = props.rowHeight;
-	        // style.minWidth = props.minWidth
-
-	        return style;
+	        props.style = style
 	    }
-	});
+	})
 
 /***/ },
-/* 30 */
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(11)
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(18);
-	var normalize = __webpack_require__(37);
+	var hasOwn    = __webpack_require__(12)
+	var newify    = __webpack_require__(13)
 
-	var EVENT_NAMES = __webpack_require__(34);
+	var assign      = __webpack_require__(7);
+	var EventEmitter = __webpack_require__(15).EventEmitter
 
-	var TEXT_ALIGN_2_JUSTIFY = {
-	    right: 'flex-end',
-	    center: 'center'
-	};
-
-	function copyProps(target, source, list) {
-
-	    list.forEach(function (name) {
-	        if (name in source) {
-	            target[name] = source[name];
-	        }
-	    });
-	}
-
-	module.exports = React.createClass({
-
-	    displayName: 'ReactDataGrid.Cell',
-
-	    propTypes: {
-	        className: React.PropTypes.string,
-	        textPadding: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-	        style: React.PropTypes.object,
-	        text: React.PropTypes.any,
-	        rowIndex: React.PropTypes.number
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            text: '',
-	            defaultClassName: 'z-cell'
-	        };
-	    },
-
-	    render: function render() {
-	        var props = this.props;
-
-	        var columns = props.columns;
-	        var index = props.index;
-	        var column = columns ? columns[index] : null;
-	        var className = props.className || '';
-	        var textAlign = column && column.textAlign;
-	        var text = props.renderText ? props.renderText(props.text, column, props.rowIndex) : props.text;
-
-	        var textCellProps = {
-	            className: 'z-text',
-	            style: { padding: props.textPadding, margin: 'auto 0' }
-	        };
-
-	        var textCell = props.renderCell ? props.renderCell(textCellProps, text, props) : React.DOM.div(textCellProps, text);
-
-	        if (!index) {
-	            className += ' z-first';
-	        }
-	        if (columns && index == columns.length - 1) {
-	            className += ' z-last';
-	        }
-
-	        if (textAlign) {
-	            className += ' z-align-' + textAlign;
-	        }
-
-	        className += ' ' + props.defaultClassName;
-
-	        var sizeStyle = column && column.sizeStyle;
-	        var cellProps = {
-	            className: className,
-	            style: normalize(assign({}, props.style, sizeStyle))
-	        };
-
-	        copyProps(cellProps, props, ['onMouseOver', 'onMouseOut', 'onClick'].concat([EVENT_NAMES.onMouseDown, EVENT_NAMES.onMouseUp]));
-
-	        var innerStyle = props.innerStyle;
-
-	        if (textAlign) {
-	            innerStyle = assign({}, innerStyle, {
-	                justifyContent: column.style.justifyContent || TEXT_ALIGN_2_JUSTIFY[column.textAlign]
-	            });
-	        }
-
-	        var c = React.createElement(
-	            'div',
-	            { className: 'z-inner', style: innerStyle },
-	            textCell
-	        );
-
-	        // var c = {textCell}
-	        return React.createElement(
-	            'div',
-	            cellProps,
-	            c,
-	            props.children
-	        );
-	    }
-	});
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hasOwn    = __webpack_require__(32)
-	var newify    = __webpack_require__(69)
-
-	var assign      = __webpack_require__(18);
-	var EventEmitter = __webpack_require__(65).EventEmitter
-
-	var inherits = __webpack_require__(51)
-	var VALIDATE = __webpack_require__(52)
+	var inherits = __webpack_require__(16)
+	var VALIDATE = __webpack_require__(17)
 
 	var objectToString = Object.prototype.toString
 
@@ -6111,13 +3577,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	})
 
-	__webpack_require__(53)(REGION)
+	__webpack_require__(18)(REGION)
 
 	module.exports = REGION
 
 /***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
+/* 12 */
+/***/ function(module, exports) {
 
 	'use strict'
 
@@ -6159,2384 +3625,51 @@ return /******/ (function(modules) { // webpackBootstrap
 	})
 
 /***/ },
-/* 33 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = {
-	    toLowerFirst     : __webpack_require__(42),
-	    toUpperFirst     : __webpack_require__(43),
-	    separate         : __webpack_require__(44),
-	    stripWhitespace  : __webpack_require__(45),
-	    compactWhitespace: __webpack_require__(46),
-	    camelize         : __webpack_require__(47),
-	    humanize         : __webpack_require__(48),
-	    hyphenate        : __webpack_require__(49),
-	    endsWith         : __webpack_require__(50),
+	var getInstantiatorFunction = __webpack_require__(14)
 
-	    is: __webpack_require__(55)
+	module.exports = function(fn, args){
+		return getInstantiatorFunction(args.length)(fn, args)
 	}
 
 /***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
+/* 14 */
+/***/ function(module, exports) {
 
-	'use strict';
+	module.exports = function(){
 
-	module.exports = __webpack_require__(70)?
-		{
-			onMouseDown: 'onTouchStart',
-			onMouseUp  : 'onTouchEnd',
-			onMouseMove: 'onTouchMove'
-		}:
-		{
-			onMouseDown: 'onMouseDown',
-			onMouseUp  : 'onMouseUp',
-			onMouseMove: 'onMouseMove'
-		}
+	    'use strict';
 
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
+	    var fns = {}
 
-	'use strict';
+	    return function(len){
 
-	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
+	        if ( ! fns [len ] ) {
 
-	module.exports = React.createClass({
+	            var args = []
+	            var i    = 0
 
-	    displayName: 'Loader',
-
-	    getDefaultProps: function(){
-	        return {
-	            defaultStyle: {
-	                margin: 'auto',
-	                position: 'absolute',
-	                top: 0,
-	                left: 0,
-	                bottom: 0,
-	                right: 0,
-	            },
-	            defaultClassName: 'loader',
-	            size: 40,
-	        }
-	    },
-
-	    render: function() {
-	        var props = assign({}, this.props)
-
-	        this.prepareStyle(props)
-
-	        props.className = props.className || ''
-	        props.className += ' ' + props.defaultClassName
-
-	        return React.DOM.div(props,
-	            React.createElement("div", {className: "loadbar loadbar-1"}),
-	            React.createElement("div", {className: "loadbar loadbar-2"}),
-	            React.createElement("div", {className: "loadbar loadbar-3"}),
-	            React.createElement("div", {className: "loadbar loadbar-4"}),
-	            React.createElement("div", {className: "loadbar loadbar-5"}),
-	            React.createElement("div", {className: "loadbar loadbar-6"}),
-	            React.createElement("div", {className: "loadbar loadbar-7"}),
-	            React.createElement("div", {className: "loadbar loadbar-8"}),
-	            React.createElement("div", {className: "loadbar loadbar-9"}),
-	            React.createElement("div", {className: "loadbar loadbar-10"}),
-	            React.createElement("div", {className: "loadbar loadbar-11"}),
-	            React.createElement("div", {className: "loadbar loadbar-12"})
-	        )
-	    },
-
-	    prepareStyle: function(props){
-
-	        var style = {}
-
-	        assign(style, props.defaultStyle)
-	        assign(style, props.style)
-
-	        style.width = props.size
-	        style.height = props.size
-
-	        props.style = style
-	    }
-	})
-
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React     = __webpack_require__(1)
-	var normalize = __webpack_require__(37)
-	var assign    = __webpack_require__(18)
-	var clone = React.cloneElement || __webpack_require__(74)
-	var emptyFn = function(){}
-
-	var DISPLAY_NAME = 'ReactToolbar'
-
-	function isRegion(child){
-		return child && child.props && child.props.isToolbarRegion
-	}
-
-	function toAlign(index, regions){
-		if (index == 0){
-			return 'left'
-		}
-
-		if (index == regions.length - 1){
-			return 'right'
-		}
-
-		return 'center'
-	}
-
-	var THEMES = {
-		default: {
-			style: {
-				//theme styles
-				color  : 'rgb(120, 120, 120)',
-				border : '1px solid rgb(218, 218, 218)'
-			}
-		}
-	}
-
-	var Toolbar = React.createClass({
-
-		displayName: DISPLAY_NAME,
-
-		getDefaultProps: function() {
-			return {
-				'data-display-name': DISPLAY_NAME,
-				isReactToolbar: true,
-
-				padding: 2,
-				theme: 'default',
-
-				defaultStyle  : {
-					display  : 'inline-flex',
-					boxSizing: 'border-box',
-					overflow: 'hidden',
-					whiteSpace: 'nowrap',
-					textOverflow: 'ellipsis',
-
-					padding: 2
-				},
-
-				defaultHorizontalStyle: {
-					width       : '100%',
-					flexFlow    : 'row',
-					alignItems  : 'center', //so items are centered vertically
-					alignContent: 'stretch'
-				},
-
-				defaultVerticalStyle: {
-					height      : '100%',
-					flexFlow    : 'column',
-					alignItems  : 'stretch',
-					alignContent: 'center'
-				}
-			}
-		},
-
-		getInitialState: function(){
-			return {}
-		},
-
-		render: function(){
-
-			var state = this.state
-			var props = this.prepareProps(this.props, state)
-
-			// this.prepareContent(props)
-
-			return React.createElement("div", React.__spread({},  props))
-		},
-
-		prepareContent: function(props){
-
-			// var style = {
-			// 	display : 'inline-flex',
-			// 	position: 'relative',
-			// 	overflow: 'hidden',
-			// 	flex    : '1 0 0',
-			// 	padding : props.style.padding
-			// }
-
-			// props.style.padding = 0
-		},
-
-		prepareProps: function(thisProps, state) {
-			var props = assign({}, thisProps)
-
-			props.vertical = props.orientation == 'vertical'
-			props.style    = this.prepareStyle(props, state)
-			props.children = this.prepareChildren(props, state)
-
-			return props
-		},
-
-		prepareStyle: function(props, state) {
-
-			var defaultOrientationStyle = props.defaultHorizontalStyle
-			var orientationStyle = props.horizontalStyle
-
-			if (props.vertical){
-				defaultOrientationStyle = props.defaultVerticalStyle
-				orientationStyle = props.verticalStyle
-			}
-
-			var themes     = Toolbar.themes || {}
-			var theme      = themes[props.theme]
-			var themeStyle = theme? theme.style: null
-
-			var style = assign({}, props.defaultStyle, defaultOrientationStyle, themeStyle, props.style, orientationStyle)
-
-			return normalize(style)
-		},
-
-		prepareChildren: function(props) {
-
-			var regionCount = 0
-
-			var children = []
-			var regions  = []
-
-			React.Children.forEach(props.children, function(child){
-				if (isRegion(child)){
-					regions.push(child)
-					regionCount++
-				}
-			}, this)
-
-
-			var regionIndex = -1
-			React.Children.forEach(props.children, function(child){
-				if (isRegion(child)){
-					regionIndex++
-					child = this.prepareRegion(child, regionIndex, regions)
-				}
-
-				children.push(child)
-			}, this)
-
-			if (!regionCount){
-				return this.prepareRegion(
-					React.createElement(Toolbar.Region, null, 
-						children
-					)
-				)
-			}
-
-			return children
-		},
-
-		prepareRegion: function(region, index, regions) {
-			index   = index   || 0
-			regions = regions || []
-
-			var props = this.props
-			var regionStyle = assign({}, props.defaultRegionStyle, props.regionStyle)
-
-			if (props.padding){
-				regionStyle.padding = props.padding
-			}
-
-			var style = assign({}, regionStyle, region.props.style)
-			var align = region.props.align || toAlign(index, regions)
-
-
-			return clone(region, {
-				style: style,
-				align: align
-			})
-		}
-	})
-
-	Toolbar.Region = __webpack_require__(58)
-	Toolbar.themes = THEMES
-
-	module.exports = Toolbar
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hasOwn      = __webpack_require__(59)
-	var getPrefixed = __webpack_require__(60)
-
-	var map      = __webpack_require__(61)
-	var plugable = __webpack_require__(62)
-
-	function plugins(key, value){
-
-		var result = {
-			key  : key,
-			value: value
-		}
-
-		;(RESULT.plugins || []).forEach(function(fn){
-
-			var tmp = map(function(res){
-				return fn(key, value, res)
-			}, result)
-
-			if (tmp){
-				result = tmp
-			}
-		})
-
-		return result
-	}
-
-	function normalize(key, value){
-
-		var result = plugins(key, value)
-
-		return map(function(result){
-			return {
-				key  : getPrefixed(result.key, result.value),
-				value: result.value
-			}
-		}, result)
-
-		return result
-	}
-
-	var RESULT = function(style){
-
-		var k
-		var item
-		var result = {}
-
-		for (k in style) if (hasOwn(style, k)){
-			item = normalize(k, style[k])
-
-			if (!item){
-				continue
-			}
-
-			map(function(item){
-				result[item.key] = item.value
-			}, item)
-		}
-
-		return result
-	}
-
-	module.exports = plugable(RESULT)
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var MenuClass = __webpack_require__(66)
-
-	var MenuItem      = __webpack_require__(71)
-	var MenuItemCell  = __webpack_require__(67)
-	var MenuSeparator = __webpack_require__(68)
-
-	MenuClass.Item      = MenuItem
-	MenuClass.Item.Cell = MenuItemCell
-	MenuClass.ItemCell  = MenuItemCell
-	MenuClass.Separator = MenuSeparator
-
-	module.exports = MenuClass
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	Object.defineProperty(exports, '__esModule', {
-		value: true
-	});
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var LoadMask = __webpack_require__(21);
-	var assign = __webpack_require__(18);
-	var DragHelper = __webpack_require__(54);
-	var normalize = __webpack_require__(37);
-	var hasTouch = __webpack_require__(70);
-
-	var preventDefault = function preventDefault(event) {
-		return event && event.preventDefault();
-	};
-	var signum = function signum(x) {
-		return x < 0 ? -1 : 1;
-	};
-	var emptyFn = function emptyFn() {};
-	var ABS = Math.abs;
-
-	var LoadMaskFactory = React.createFactory(LoadMask);
-
-	var horizontalScrollbarStyle = {};
-
-	var IS_MAC = global && global.navigator && global.navigator.appVersion && global.navigator.appVersion.indexOf('Mac') != -1;
-	var IS_FIREFOX = global && global.navigator && global.navigator.userAgent && !! ~global.navigator.userAgent.toLowerCase().indexOf('firefox');
-
-	if (IS_MAC) {
-		horizontalScrollbarStyle.position = 'absolute';
-		horizontalScrollbarStyle.height = 20;
-	}
-
-	var PT = React.PropTypes;
-	var DISPLAY_NAME = 'Scroller';
-
-	var ON_OVERFLOW_NAMES = {
-		vertical: 'onVerticalScrollOverflow',
-		horizontal: 'onHorizontalScrollOverflow'
-	};
-
-	var ON_SCROLL_NAMES = {
-		vertical: 'onVerticalScroll',
-		horizontal: 'onHorizontalScroll'
-	};
-
-	/**
-	 * Called on scroll by mouse wheel
-	 */
-	var syncScrollbar = function syncScrollbar(orientation) {
-
-		var refNames = {
-			vertical: 'verticalScrollbar',
-			horizontal: 'horizontalScrollbar'
-		};
-
-		return function (scrollPos, event) {
-
-			var domNode = React.findDOMNode(this.refs[refNames[orientation]]);
-			var scrollPosName = orientation == 'horizontal' ? 'scrollLeft' : 'scrollTop';
-			var overflowCallback;
-
-			domNode[scrollPosName] = scrollPos;
-
-			var newScrollPos = domNode[scrollPosName];
-
-			if (newScrollPos != scrollPos) {} else {
-				preventDefault(event);
-			}
-		};
-	};
-
-	var syncHorizontalScrollbar = syncScrollbar('horizontal');
-	var syncVerticalScrollbar = syncScrollbar('vertical');
-
-	var scrollAt = function scrollAt(orientation) {
-		var syncFn = orientation == 'horizontal' ? syncHorizontalScrollbar : syncVerticalScrollbar;
-
-		return function (scrollPos, event) {
-			// this.mouseWheelScroll = true
-
-			syncFn.call(this, Math.round(scrollPos), event);
-		};
-	};
-
-	var onScroll = function onScroll(orientation) {
-
-		var clientHeightNames = {
-			vertical: 'clientHeight',
-			horizontal: 'clientWidth'
-		};
-
-		var scrollHeightNames = {
-			vertical: 'scrollHeight',
-			horizontal: 'scrollWidth'
-		};
-
-		return function (event) {
-
-			var scrollPosName = orientation == 'horizontal' ? 'scrollLeft' : 'scrollTop';
-			var target = event.target;
-			var scrollPos = target[scrollPosName];
-
-			var onScroll = this.props[ON_SCROLL_NAMES[orientation]];
-			var onOverflow = this.props[ON_OVERFLOW_NAMES[orientation]];
-
-			// if (!this.mouseWheelScroll && onOverflow){
-			if (onOverflow) {
-				if (scrollPos == 0) {
-					onOverflow(-1, scrollPos);
-				} else if (scrollPos + target[clientHeightNames[orientation]] >= target[scrollHeightNames[orientation]]) {
-					onOverflow(1, scrollPos);
-				}
-			}
-
-			;(onScroll || emptyFn)(scrollPos);
-		};
-	};
-
-	/**
-	 * The scroller can have a load mask (loadMask prop is true by default),
-	 * you just need to specify loading=true to see it in action
-	 *
-	 * <Scroller loading={true} />
-	 *
-	 * If you don't want a load mask, specify
-	 *
-	 * <Scroller loadMask={false} />
-	 *
-	 * Or if you want to customize the loadMask factory, specify
-	 *
-	 * function mask(props) { return aMaskFactory(props) }
-	 * <Scroller loading={true} loadMask={mask}
-	 *
-	 */
-	var Scroller = React.createClass({
-
-		displayName: DISPLAY_NAME,
-
-		propTypes: {
-			loadMask: PT.oneOfType([PT.bool, PT.func]),
-
-			loading: PT.bool,
-			normalizeStyles: PT.bool,
-
-			scrollTop: PT.number,
-			scrollLeft: PT.number,
-
-			scrollWidth: PT.number.isRequired,
-			scrollHeight: PT.number.isRequired,
-
-			height: PT.number,
-			width: PT.number,
-
-			minScrollStep: PT.number,
-			minHorizontalScrollStep: PT.number,
-			minVerticalScrollStep: PT.number,
-
-			virtualRendering: PT.oneOf([true]),
-
-			preventDefaultVertical: PT.bool,
-			preventDefaultHorizontal: PT.bool
-		},
-
-		getDefaultProps: function getDefaultProps() {
-			return {
-				'data-display-name': DISPLAY_NAME,
-				loadMask: true,
-
-				virtualRendering: true, //FOR NOW, only true is supported
-				scrollbarSize: 20,
-
-				scrollTop: 0,
-				scrollLeft: 0,
-
-				minScrollStep: 10,
-
-				minHorizontalScrollStep: IS_FIREFOX ? 40 : 1,
-
-				//since FF goes back in browser history on scroll too soon
-				//chrome and others also do this, but the normal preventDefault in syncScrollbar fn prevents this
-				preventDefaultHorizontal: IS_FIREFOX
-			};
-		},
-
-		render: function render() {
-			var props = this.p = this.prepareProps(this.props);
-
-			var loadMask = this.renderLoadMask(props);
-			var horizontalScrollbar = this.renderHorizontalScrollbar(props);
-			var verticalScrollbar = this.renderVerticalScrollbar(props);
-
-			var events = {};
-
-			if (!hasTouch) {
-				events.onWheel = this.handleWheel;
-			} else {
-				events.onTouchStart = this.handleTouchStart;
-			}
-
-			//extra div needed for SAFARI V SCROLL
-			//maxWidth needed for FF - see
-			//http://stackoverflow.com/questions/27424831/firefox-flexbox-overflow
-			//http://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
-			var content = React.createElement('div', { className: 'z-content-wrapper-fix', style: { maxWidth: 'calc(100% - ' + props.scrollbarSize + 'px)' },
-				children: props.children });
-
-			var renderProps = this.prepareRenderProps(props);
-
-			return React.createElement(
-				'div',
-				renderProps,
-				loadMask,
-				React.createElement(
-					'div',
-					_extends({ className: 'z-content-wrapper' }, events),
-					content,
-					verticalScrollbar
-				),
-				horizontalScrollbar
-			);
-		},
-
-		prepareRenderProps: function prepareRenderProps(props) {
-			var renderProps = assign({}, props);
-
-			delete renderProps.height;
-			delete renderProps.width;
-
-			return renderProps;
-		},
-
-		handleTouchStart: function handleTouchStart(event) {
-
-			var props = this.props;
-			var scroll = {
-				top: props.scrollTop,
-				left: props.scrollLeft
-			};
-
-			var newScrollPos;
-			var side;
-
-			DragHelper(event, {
-				scope: this,
-				onDrag: function onDrag(event, config) {
-					if (config.diff.top == 0 && config.diff.left == 0) {
-						return;
-					}
-
-					if (!side) {
-						side = ABS(config.diff.top) > ABS(config.diff.left) ? 'top' : 'left';
-					}
-
-					var diff = config.diff[side];
-
-					newScrollPos = scroll[side] - diff;
-
-					if (side == 'top') {
-						this.verticalScrollAt(newScrollPos, event);
-					} else {
-						this.horizontalScrollAt(newScrollPos, event);
-					}
-				}
-			});
-
-			event.stopPropagation();
-			preventDefault(event);
-		},
-
-		handleWheel: function handleWheel(event) {
-
-			var props = this.props;
-			// var normalizedEvent = normalizeWheel(event)
-
-			var virtual = props.virtualRendering;
-			var horizontal = event.shiftKey;
-			var scrollStep = props.scrollStep;
-			var minScrollStep = props.minScrollStep;
-
-			var scrollTop = props.scrollTop;
-			var scrollLeft = props.scrollLeft;
-
-			// var delta = normalizedEvent.pixelY
-			var delta = event.deltaY;
-
-			if (horizontal) {
-				// delta = delta || normalizedEvent.pixelX
-				delta = delta || event.deltaX;
-
-				minScrollStep = props.minHorizontalScrollStep || minScrollStep;
-			} else {
-				minScrollStep = props.minVerticalScrollStep || minScrollStep;
-			}
-
-			if (typeof props.interceptWheelScroll == 'function') {
-				delta = props.interceptWheelScroll(delta, normalizedEvent, event);
-			} else if (minScrollStep) {
-				if (ABS(delta) < minScrollStep) {
-					delta = signum(delta) * minScrollStep;
-				}
-			}
-
-			if (horizontal) {
-				this.horizontalScrollAt(scrollLeft + delta, event);
-
-				props.preventDefaultHorizontal && preventDefault(event);
-			} else {
-				this.verticalScrollAt(scrollTop + delta, event);
-
-				props.preventDefaultVertical && preventDefault(event);
-			}
-		},
-
-		componentDidMount: function componentDidMount() {
-			this.fixHorizontalScrollbar();
-
-			setTimeout(this.fixHorizontalScrollbar, 0);
-		},
-
-		fixHorizontalScrollbar: function fixHorizontalScrollbar() {
-			var dom = React.findDOMNode(this.refs.horizontalScroller);
-
-			if (dom) {
-				var height = dom.style.height;
-
-				dom.style.height = height == '0.2px' ? '0.1px' : '0.2px';
-			}
-		},
-
-		onVerticalScroll: onScroll('vertical'),
-		onHorizontalScroll: onScroll('horizontal'),
-
-		verticalScrollAt: scrollAt('vertical'),
-		horizontalScrollAt: scrollAt('horizontal'),
-
-		syncHorizontalScrollbar: syncHorizontalScrollbar,
-		syncVerticalScrollbar: syncVerticalScrollbar,
-
-		////////////////////////////////////////////////
-		//
-		// RENDER METHODS
-		//
-		////////////////////////////////////////////////
-		renderVerticalScrollbar: function renderVerticalScrollbar(props) {
-			var height = props.scrollHeight;
-			var verticalScrollbarStyle = {
-				width: props.scrollbarSize
-			};
-
-			var onScroll = this.onVerticalScroll;
-
-			return React.createElement(
-				'div',
-				{ className: 'z-vertical-scrollbar', style: verticalScrollbarStyle },
-				React.createElement(
-					'div',
-					{
-						ref: 'verticalScrollbar',
-						onScroll: onScroll,
-						style: { overflow: 'auto', width: '100%', height: '100%' }
-					},
-					React.createElement('div', { className: 'z-vertical-scroller', style: { height: height } })
-				)
-			);
-		},
-
-		renderHorizontalScrollbar: function renderHorizontalScrollbar(props) {
-			var scrollbar;
-			var onScroll = this.onHorizontalScroll;
-			var style = horizontalScrollbarStyle;
-			var minWidth = props.scrollWidth;
-
-			var scroller = React.createElement('div', { ref: 'horizontalScroller', className: 'z-horizontal-scroller', style: { width: minWidth } });
-
-			if (IS_MAC) {
-				//needed for mac safari
-				scrollbar = React.createElement(
-					'div',
-					{
-						style: style,
-						className: 'z-horizontal-scrollbar mac-fix'
-					},
-					React.createElement(
-						'div',
-						{
-							ref: 'horizontalScrollbar',
-							onScroll: onScroll,
-							className: 'z-horizontal-scrollbar-fix'
-						},
-						scroller
-					)
-				);
-			} else {
-				scrollbar = React.createElement(
-					'div',
-					{
-						style: style,
-						className: 'z-horizontal-scrollbar',
-						ref: 'horizontalScrollbar',
-						onScroll: onScroll
-					},
-					scroller
-				);
-			}
-
-			return scrollbar;
-		},
-
-		renderLoadMask: function renderLoadMask(props) {
-			if (props.loadMask) {
-				var loadMaskProps = assign({ visible: props.loading }, props.loadMaskProps);
-
-				var defaultFactory = LoadMaskFactory;
-				var factory = typeof props.loadMask == 'function' ? props.loadMask : defaultFactory;
-
-				var mask = factory(loadMaskProps);
-
-				if (mask === undefined) {
-					//allow the specified factory to just modify props
-					//and then leave the rendering to the defaultFactory
-					mask = defaultFactory(loadMaskProps);
-				}
-
-				return mask;
-			}
-		},
-
-		////////////////////////////////////////////////
-		//
-		// PREPARE PROPS METHODS
-		//
-		////////////////////////////////////////////////
-		prepareProps: function prepareProps(thisProps) {
-			var props = assign({}, thisProps);
-
-			props.className = this.prepareClassName(props);
-			props.style = this.prepareStyle(props);
-
-			return props;
-		},
-
-		prepareStyle: function prepareStyle(props) {
-			var style = assign({}, props.style);
-
-			if (props.height != null) {
-				style.height = props.height;
-			}
-
-			if (props.width != null) {
-				style.width = props.width;
-			}
-
-			if (props.normalizeStyles) {
-				style = normalize(style);
-			}
-
-			return style;
-		},
-
-		prepareClassName: function prepareClassName(props) {
-			var className = props.className || '';
-
-			if (Scroller.className) {
-				className += ' ' + Scroller.className;
-			}
-
-			return className;
-		}
-	});
-
-	Scroller.className = 'z-scroller';
-
-	exports['default'] = Scroller;
-	module.exports = exports['default'];
-
-	// overflowCallback = this.props[ON_OVERFLOW_NAMES[orientation]]
-	// overflowCallback && overflowCallback(signum(scrollPos), newScrollPos)
-	// raf(function(){
-	//     this.mouseWheelScroll = false
-	// }.bind(this))
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 40 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function() {
-	  'use strict';
-
-	  if (self.fetch) {
-	    return
-	  }
-
-	  function Headers(headers) {
-	    this.map = {}
-
-	    var self = this
-	    if (headers instanceof Headers) {
-	      headers.forEach(function(name, values) {
-	        values.forEach(function(value) {
-	          self.append(name, value)
-	        })
-	      })
-
-	    } else if (headers) {
-	      Object.getOwnPropertyNames(headers).forEach(function(name) {
-	        self.append(name, headers[name])
-	      })
-	    }
-	  }
-
-	  Headers.prototype.append = function(name, value) {
-	    name = name.toLowerCase()
-	    var list = this.map[name]
-	    if (!list) {
-	      list = []
-	      this.map[name] = list
-	    }
-	    list.push(value)
-	  }
-
-	  Headers.prototype['delete'] = function(name) {
-	    delete this.map[name.toLowerCase()]
-	  }
-
-	  Headers.prototype.get = function(name) {
-	    var values = this.map[name.toLowerCase()]
-	    return values ? values[0] : null
-	  }
-
-	  Headers.prototype.getAll = function(name) {
-	    return this.map[name.toLowerCase()] || []
-	  }
-
-	  Headers.prototype.has = function(name) {
-	    return this.map.hasOwnProperty(name.toLowerCase())
-	  }
-
-	  Headers.prototype.set = function(name, value) {
-	    this.map[name.toLowerCase()] = [value]
-	  }
-
-	  // Instead of iterable for now.
-	  Headers.prototype.forEach = function(callback) {
-	    var self = this
-	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
-	      callback(name, self.map[name])
-	    })
-	  }
-
-	  function consumed(body) {
-	    if (body.bodyUsed) {
-	      return Promise.reject(new TypeError('Already read'))
-	    }
-	    body.bodyUsed = true
-	  }
-
-	  function fileReaderReady(reader) {
-	    return new Promise(function(resolve, reject) {
-	      reader.onload = function() {
-	        resolve(reader.result)
-	      }
-	      reader.onerror = function() {
-	        reject(reader.error)
-	      }
-	    })
-	  }
-
-	  function readBlobAsArrayBuffer(blob) {
-	    var reader = new FileReader()
-	    reader.readAsArrayBuffer(blob)
-	    return fileReaderReady(reader)
-	  }
-
-	  function readBlobAsText(blob) {
-	    var reader = new FileReader()
-	    reader.readAsText(blob)
-	    return fileReaderReady(reader)
-	  }
-
-	  var support = {
-	    blob: 'FileReader' in self && 'Blob' in self && (function() {
-	      try {
-	        new Blob();
-	        return true
-	      } catch(e) {
-	        return false
-	      }
-	    })(),
-	    formData: 'FormData' in self
-	  }
-
-	  function Body() {
-	    this.bodyUsed = false
-
-	    if (support.blob) {
-	      this._initBody = function(body) {
-	        this._bodyInit = body
-	        if (typeof body === 'string') {
-	          this._bodyText = body
-	        } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
-	          this._bodyBlob = body
-	        } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
-	          this._bodyFormData = body
-	        } else if (!body) {
-	          this._bodyText = ''
-	        } else {
-	          throw new Error('unsupported BodyInit type')
-	        }
-	      }
-
-	      this.blob = function() {
-	        var rejected = consumed(this)
-	        if (rejected) {
-	          return rejected
-	        }
-
-	        if (this._bodyBlob) {
-	          return Promise.resolve(this._bodyBlob)
-	        } else if (this._bodyFormData) {
-	          throw new Error('could not read FormData body as blob')
-	        } else {
-	          return Promise.resolve(new Blob([this._bodyText]))
-	        }
-	      }
-
-	      this.arrayBuffer = function() {
-	        return this.blob().then(readBlobAsArrayBuffer)
-	      }
-
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        if (rejected) {
-	          return rejected
-	        }
-
-	        if (this._bodyBlob) {
-	          return readBlobAsText(this._bodyBlob)
-	        } else if (this._bodyFormData) {
-	          throw new Error('could not read FormData body as text')
-	        } else {
-	          return Promise.resolve(this._bodyText)
-	        }
-	      }
-	    } else {
-	      this._initBody = function(body) {
-	        this._bodyInit = body
-	        if (typeof body === 'string') {
-	          this._bodyText = body
-	        } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
-	          this._bodyFormData = body
-	        } else if (!body) {
-	          this._bodyText = ''
-	        } else {
-	          throw new Error('unsupported BodyInit type')
-	        }
-	      }
-
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        return rejected ? rejected : Promise.resolve(this._bodyText)
-	      }
-	    }
-
-	    if (support.formData) {
-	      this.formData = function() {
-	        return this.text().then(decode)
-	      }
-	    }
-
-	    this.json = function() {
-	      return this.text().then(JSON.parse)
-	    }
-
-	    return this
-	  }
-
-	  // HTTP methods whose capitalization should be normalized
-	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
-
-	  function normalizeMethod(method) {
-	    var upcased = method.toUpperCase()
-	    return (methods.indexOf(upcased) > -1) ? upcased : method
-	  }
-
-	  function Request(url, options) {
-	    options = options || {}
-	    this.url = url
-
-	    this.credentials = options.credentials || 'omit'
-	    this.headers = new Headers(options.headers)
-	    this.method = normalizeMethod(options.method || 'GET')
-	    this.mode = options.mode || null
-	    this.referrer = null
-
-	    if ((this.method === 'GET' || this.method === 'HEAD') && options.body) {
-	      throw new TypeError('Body not allowed for GET or HEAD requests')
-	    }
-	    this._initBody(options.body)
-	  }
-
-	  function decode(body) {
-	    var form = new FormData()
-	    body.trim().split('&').forEach(function(bytes) {
-	      if (bytes) {
-	        var split = bytes.split('=')
-	        var name = split.shift().replace(/\+/g, ' ')
-	        var value = split.join('=').replace(/\+/g, ' ')
-	        form.append(decodeURIComponent(name), decodeURIComponent(value))
-	      }
-	    })
-	    return form
-	  }
-
-	  function headers(xhr) {
-	    var head = new Headers()
-	    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
-	    pairs.forEach(function(header) {
-	      var split = header.trim().split(':')
-	      var key = split.shift().trim()
-	      var value = split.join(':').trim()
-	      head.append(key, value)
-	    })
-	    return head
-	  }
-
-	  Request.prototype.fetch = function() {
-	    var self = this
-
-	    return new Promise(function(resolve, reject) {
-	      var xhr = new XMLHttpRequest()
-	      if (self.credentials === 'cors') {
-	        xhr.withCredentials = true;
-	      }
-
-	      function responseURL() {
-	        if ('responseURL' in xhr) {
-	          return xhr.responseURL
-	        }
-
-	        // Avoid security warnings on getResponseHeader when not allowed by CORS
-	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
-	          return xhr.getResponseHeader('X-Request-URL')
-	        }
-
-	        return;
-	      }
-
-	      xhr.onload = function() {
-	        var status = (xhr.status === 1223) ? 204 : xhr.status
-	        if (status < 100 || status > 599) {
-	          reject(new TypeError('Network request failed'))
-	          return
-	        }
-	        var options = {
-	          status: status,
-	          statusText: xhr.statusText,
-	          headers: headers(xhr),
-	          url: responseURL()
-	        }
-	        var body = 'response' in xhr ? xhr.response : xhr.responseText;
-	        resolve(new Response(body, options))
-	      }
-
-	      xhr.onerror = function() {
-	        reject(new TypeError('Network request failed'))
-	      }
-
-	      xhr.open(self.method, self.url, true)
-	      if ('responseType' in xhr && support.blob) {
-	        xhr.responseType = 'blob'
-	      }
-
-	      self.headers.forEach(function(name, values) {
-	        values.forEach(function(value) {
-	          xhr.setRequestHeader(name, value)
-	        })
-	      })
-
-	      xhr.send(typeof self._bodyInit === 'undefined' ? null : self._bodyInit)
-	    })
-	  }
-
-	  Body.call(Request.prototype)
-
-	  function Response(bodyInit, options) {
-	    if (!options) {
-	      options = {}
-	    }
-
-	    this._initBody(bodyInit)
-	    this.type = 'default'
-	    this.url = null
-	    this.status = options.status
-	    this.statusText = options.statusText
-	    this.headers = options.headers
-	    this.url = options.url || ''
-	  }
-
-	  Body.call(Response.prototype)
-
-	  self.Headers = Headers;
-	  self.Request = Request;
-	  self.Response = Response;
-
-	  self.fetch = function (url, options) {
-	    return new Request(url, options).fetch()
-	  }
-	  self.fetch.polyfill = true
-	})();
-
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
-
-	function objectToString(o) {
-	  return Object.prototype.toString.call(o);
-	}
-
-	// shim for Node's 'util' package
-	// DO NOT REMOVE THIS! It is required for compatibility with EnderJS (http://enderjs.com/).
-	var util = {
-	  isArray: function (ar) {
-	    return Array.isArray(ar) || (typeof ar === 'object' && objectToString(ar) === '[object Array]');
-	  },
-	  isDate: function (d) {
-	    return typeof d === 'object' && objectToString(d) === '[object Date]';
-	  },
-	  isRegExp: function (re) {
-	    return typeof re === 'object' && objectToString(re) === '[object RegExp]';
-	  },
-	  getRegExpFlags: function (re) {
-	    var flags = '';
-	    re.global && (flags += 'g');
-	    re.ignoreCase && (flags += 'i');
-	    re.multiline && (flags += 'm');
-	    return flags;
-	  }
-	};
-
-
-	if (true)
-	  module.exports = clone;
-
-	/**
-	 * Clones (copies) an Object using deep copying.
-	 *
-	 * This function supports circular references by default, but if you are certain
-	 * there are no circular references in your object, you can save some CPU time
-	 * by calling clone(obj, false).
-	 *
-	 * Caution: if `circular` is false and `parent` contains circular references,
-	 * your program may enter an infinite loop and crash.
-	 *
-	 * @param `parent` - the object to be cloned
-	 * @param `circular` - set to true if the object to be cloned may contain
-	 *    circular references. (optional - true by default)
-	 * @param `depth` - set to a number if the object is only to be cloned to
-	 *    a particular depth. (optional - defaults to Infinity)
-	 * @param `prototype` - sets the prototype to be used when cloning an object.
-	 *    (optional - defaults to parent prototype).
-	*/
-
-	function clone(parent, circular, depth, prototype) {
-	  // maintain two arrays for circular references, where corresponding parents
-	  // and children have the same index
-	  var allParents = [];
-	  var allChildren = [];
-
-	  var useBuffer = typeof Buffer != 'undefined';
-
-	  if (typeof circular == 'undefined')
-	    circular = true;
-
-	  if (typeof depth == 'undefined')
-	    depth = Infinity;
-
-	  // recurse this function so we don't reset allParents and allChildren
-	  function _clone(parent, depth) {
-	    // cloning null always returns null
-	    if (parent === null)
-	      return null;
-
-	    if (depth == 0)
-	      return parent;
-
-	    var child;
-	    var proto;
-	    if (typeof parent != 'object') {
-	      return parent;
-	    }
-
-	    if (util.isArray(parent)) {
-	      child = [];
-	    } else if (util.isRegExp(parent)) {
-	      child = new RegExp(parent.source, util.getRegExpFlags(parent));
-	      if (parent.lastIndex) child.lastIndex = parent.lastIndex;
-	    } else if (util.isDate(parent)) {
-	      child = new Date(parent.getTime());
-	    } else if (useBuffer && Buffer.isBuffer(parent)) {
-	      child = new Buffer(parent.length);
-	      parent.copy(child);
-	      return child;
-	    } else {
-	      if (typeof prototype == 'undefined') {
-	        proto = Object.getPrototypeOf(parent);
-	        child = Object.create(proto);
-	      }
-	      else {
-	        child = Object.create(prototype);
-	        proto = prototype;
-	      }
-	    }
-
-	    if (circular) {
-	      var index = allParents.indexOf(parent);
-
-	      if (index != -1) {
-	        return allChildren[index];
-	      }
-	      allParents.push(parent);
-	      allChildren.push(child);
-	    }
-
-	    for (var i in parent) {
-	      var attrs;
-	      if (proto) {
-	        attrs = Object.getOwnPropertyDescriptor(proto, i);
-	      }
-	      
-	      if (attrs && attrs.set == null) {
-	        continue;
-	      }
-	      child[i] = _clone(parent[i], depth - 1);
-	    }
-
-	    return child;
-	  }
-
-	  return _clone(parent, depth);
-	}
-
-	/**
-	 * Simple flat clone using prototype, accepts only objects, usefull for property
-	 * override on FLAT configuration object (no nested props).
-	 *
-	 * USE WITH CAUTION! This may not behave as you wish if you do not know how this
-	 * works.
-	 */
-	clone.clonePrototype = function(parent) {
-	  if (parent === null)
-	    return null;
-
-	  var c = function () {};
-	  c.prototype = parent;
-	  return new c();
-	};
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72).Buffer))
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(str){
-	    return str.length?
-	            str.charAt(0).toLowerCase() + str.substring(1):
-	            str
-	}
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = function(value){
-	    return value.length?
-	                value.charAt(0).toUpperCase() + value.substring(1):
-	                value
-	}
-
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var doubleColonRe      = /::/g
-	var upperToLowerRe     = /([A-Z]+)([A-Z][a-z])/g
-	var lowerToUpperRe     = /([a-z\d])([A-Z])/g
-	var underscoreToDashRe = /_/g
-
-	module.exports = function(name, separator){
-
-	   return name?
-	           name.replace(doubleColonRe, '/')
-	                .replace(upperToLowerRe, '$1_$2')
-	                .replace(lowerToUpperRe, '$1_$2')
-	                .replace(underscoreToDashRe, separator || '-')
-	            :
-	            ''
-	}
-
-/***/ },
-/* 45 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RE = /\s/g
-
-	module.exports = function(str){
-	    if (!str){
-	        return ''
-	    }
-
-	    return str.replace(RE, '')
-	}
-
-/***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RE = /\s+/g
-
-	module.exports = function(str){
-	    if (!str){
-	        return ''
-	    }
-
-	    return str.trim().replace(RE, ' ')
-	}
-
-/***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var toCamelFn = function(str, letter){
-	       return letter ? letter.toUpperCase(): ''
-	   }
-
-	var hyphenRe = __webpack_require__(73)
-
-	module.exports = function(str){
-	   return str?
-	          str.replace(hyphenRe, toCamelFn):
-	          ''
-	}
-
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var separate     = __webpack_require__(44)
-	var camelize     = __webpack_require__(47)
-	var toUpperFirst = __webpack_require__(43)
-	var hyphenRe     = __webpack_require__(73)
-
-	function toLowerAndSpace(str, letter){
-	    return letter? ' ' + letter.toLowerCase(): ' '
-	}
-
-	module.exports = function(name, config){
-
-	    var str = config && config.capitalize?
-	                    separate(camelize(name), ' '):
-	                    separate(name, ' ').replace(hyphenRe, toLowerAndSpace)
-
-	    return toUpperFirst(str.trim())
-	}
-
-
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var separate = __webpack_require__(44)
-
-	module.exports = function(name){
-	   return separate(name).toLowerCase()
-	}
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = function(str, endsWith){
-
-	    str += ''
-
-	    if (!str){
-	        return typeof endsWith == 'string'?
-	                    !endsWith:
-	                    false
-	    }
-
-	    endsWith += ''
-
-	    if (str.length < endsWith.length){
-	        return false
-	    }
-
-	    return str.lastIndexOf(endsWith) == str.length - endsWith.length
-	}
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	        constructor: {
-	            value       : ctor,
-	            enumerable  : false,
-	            writable    : true,
-	            configurable: true
-	        }
-	    })
-	}
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	/**
-	 * @static
-	 * Returns true if the given region is valid, false otherwise.
-	 * @param  {Region} region The region to check
-	 * @return {Boolean}        True, if the region is valid, false otherwise.
-	 * A region is valid if
-	 *  * left <= right  &&
-	 *  * top  <= bottom
-	 */
-	module.exports = function validate(region){
-
-	    var isValid = true
-
-	    if (region.right < region.left){
-	        isValid = false
-	        region.right = region.left
-	    }
-
-	    if (region.bottom < region.top){
-	        isValid = false
-	        region.bottom = region.top
-	    }
-
-	    return isValid
-	}
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hasOwn   = __webpack_require__(32)
-	var VALIDATE = __webpack_require__(52)
-
-	module.exports = function(REGION){
-
-	    var MAX = Math.max
-	    var MIN = Math.min
-
-	    var statics = {
-	        init: function(){
-	            var exportAsNonStatic = {
-	                getIntersection      : true,
-	                getIntersectionArea  : true,
-	                getIntersectionHeight: true,
-	                getIntersectionWidth : true,
-	                getUnion             : true
-	            }
-	            var thisProto = REGION.prototype
-	            var newName
-
-	            var exportHasOwn = hasOwn(exportAsNonStatic)
-	            var methodName
-
-	            for (methodName in exportAsNonStatic) if (exportHasOwn(methodName)) {
-	                newName = exportAsNonStatic[methodName]
-	                if (typeof newName != 'string'){
-	                    newName = methodName
-	                }
-
-	                ;(function(proto, methodName, protoMethodName){
-
-	                    proto[methodName] = function(region){
-	                        //<debug>
-	                        if (!REGION[protoMethodName]){
-	                            console.warn('cannot find method ', protoMethodName,' on ', REGION)
-	                        }
-	                        //</debug>
-	                        return REGION[protoMethodName](this, region)
-	                    }
-
-	                })(thisProto, newName, methodName);
-	            }
-	        },
-
-	        validate: VALIDATE,
-
-	        /**
-	         * Returns the region corresponding to the documentElement
-	         * @return {Region} The region corresponding to the documentElement. This region is the maximum region visible on the screen.
-	         */
-	        getDocRegion: function(){
-	            return REGION.fromDOM(document.documentElement)
-	        },
-
-	        from: function(reg){
-	            if (reg.__IS_REGION){
-	                return reg
+	            for (; i < len; i++ ) {
+	                args.push( 'a[' + i + ']')
 	            }
 
-	            if (typeof document != 'undefined'){
-	                if (typeof HTMLElement != 'undefined' && reg instanceof HTMLElement){
-	                    return REGION.fromDOM(reg)
-	                }
-
-	                if (reg.type && typeof reg.pageX !== 'undefined' && typeof reg.pageY !== 'undefined'){
-	                    return REGION.fromEvent(reg)
-	                }
-	            }
-
-	            return REGION(reg)
-	        },
-
-	        fromEvent: function(event){
-	            return REGION.fromPoint({
-	                x: event.pageX,
-	                y: event.pageY
-	            })
-	        },
-
-	        fromDOM: function(dom){
-	            var rect = dom.getBoundingClientRect()
-	            // var docElem = document.documentElement
-	            // var win     = window
-
-	            // var top  = rect.top + win.pageYOffset - docElem.clientTop
-	            // var left = rect.left + win.pageXOffset - docElem.clientLeft
-
-	            return new REGION({
-	                top   : rect.top,
-	                left  : rect.left,
-	                bottom: rect.bottom,
-	                right : rect.right
-	            })
-	        },
-
-	        /**
-	         * @static
-	         * Returns a region that is the intersection of the given two regions
-	         * @param  {Region} first  The first region
-	         * @param  {Region} second The second region
-	         * @return {Region/Boolean}        The intersection region or false if no intersection found
-	         */
-	        getIntersection: function(first, second){
-
-	            var area = this.getIntersectionArea(first, second)
-
-	            if (area){
-	                return new REGION(area)
-	            }
-
-	            return false
-	        },
-
-	        getIntersectionWidth: function(first, second){
-	            var minRight  = MIN(first.right, second.right)
-	            var maxLeft   = MAX(first.left,  second.left)
-
-	            if (maxLeft < minRight){
-	                return minRight  - maxLeft
-	            }
-
-	            return 0
-	        },
-
-	        getIntersectionHeight: function(first, second){
-	            var maxTop    = MAX(first.top,   second.top)
-	            var minBottom = MIN(first.bottom,second.bottom)
-
-	            if (maxTop  < minBottom){
-	                return minBottom - maxTop
-	            }
-
-	            return 0
-	        },
-
-	        getIntersectionArea: function(first, second){
-	            var maxTop    = MAX(first.top,   second.top)
-	            var minRight  = MIN(first.right, second.right)
-	            var minBottom = MIN(first.bottom,second.bottom)
-	            var maxLeft   = MAX(first.left,  second.left)
-
-	            if (
-	                    maxTop  < minBottom &&
-	                    maxLeft < minRight
-	                ){
-	                return {
-	                    top    : maxTop,
-	                    right  : minRight,
-	                    bottom : minBottom,
-	                    left   : maxLeft,
-
-	                    width  : minRight  - maxLeft,
-	                    height : minBottom - maxTop
-	                }
-	            }
-
-	            return false
-	        },
-
-	        /**
-	         * @static
-	         * Returns a region that is the union of the given two regions
-	         * @param  {Region} first  The first region
-	         * @param  {Region} second The second region
-	         * @return {Region}        The union region. The smallest region that contains both given regions.
-	         */
-	        getUnion: function(first, second){
-	            var top    = MIN(first.top,   second.top)
-	            var right  = MAX(first.right, second.right)
-	            var bottom = MAX(first.bottom,second.bottom)
-	            var left   = MIN(first.left,  second.left)
-
-	            return new REGION(top, right, bottom, left)
-	        },
-
-	        /**
-	         * @static
-	         * Returns a region. If the reg argument is a region, returns it, otherwise return a new region built from the reg object.
-	         *
-	         * @param  {Region} reg A region or an object with either top, left, bottom, right or
-	         * with top, left, width, height
-	         * @return {Region} A region
-	         */
-	        getRegion: function(reg){
-	            return REGION.from(reg)
-	        },
-
-	        /**
-	         * Creates a region that corresponds to a point.
-	         *
-	         * @param  {Object} xy The point
-	         * @param  {Number} xy.x
-	         * @param  {Number} xy.y
-	         *
-	         * @return {Region}    The new region, with top==xy.y, bottom = xy.y and left==xy.x, right==xy.x
-	         */
-	        fromPoint: function(xy){
-	            return new REGION({
-	                        top    : xy.y,
-	                        bottom : xy.y,
-	                        left   : xy.x,
-	                        right  : xy.x
-	                    })
+	            fns[len] = new Function(
+	                            'c',
+	                            'a',
+	                            'return new c(' + args.join(',') + ')'
+	                        )
 	        }
+
+	        return fns[len]
 	    }
 
-	    Object.keys(statics).forEach(function(key){
-	        REGION[key] = statics[key]
-	    })
-
-	    REGION.init()
-	}
+	}()
 
 /***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var assign = __webpack_require__(18)
-	var Region = __webpack_require__(94)
-	var hasTouch = __webpack_require__(70)
-	var once   = __webpack_require__(82)
-
-	var Helper = function(config){
-	    this.config = config
-	}
-
-	var EVENTS = {
-	    move: hasTouch? 'touchmove': 'mousemove',
-	    up  : hasTouch? 'touchend': 'mouseup'
-	}
-
-	function emptyFn(){}
-
-	function getPageCoords(event){
-	    var firstTouch
-
-	    var pageX = event.pageX
-	    var pageY = event.pageY
-
-	    if (hasTouch && event.touches && (firstTouch = event.touches[0])){
-	        pageX = firstTouch.pageX
-	        pageY = firstTouch.pageY
-	    }
-
-	    return {
-	        pageX: pageX,
-	        pageY: pageY
-	    }
-	}
-
-	assign(Helper.prototype, {
-
-	    /**
-	     * Should be called on a mousedown event
-	     *
-	     * @param  {Event} event
-	     * @return {[type]}       [description]
-	     */
-	    initDrag: function(event) {
-
-	        this.onDragInit(event)
-
-	        var onDragStart = once(this.onDragStart, this)
-	        var target = hasTouch?
-	                        event.target:
-	                        window
-
-	        var mouseMoveListener = (function(event){
-	            onDragStart(event)
-	            this.onDrag(event)
-	        }).bind(this)
-
-	        var mouseUpListener = (function(event){
-
-	            this.onDrop(event)
-
-	            target.removeEventListener(EVENTS.move, mouseMoveListener)
-	            target.removeEventListener(EVENTS.up, mouseUpListener)
-	        }).bind(this)
-
-	        target.addEventListener(EVENTS.move, mouseMoveListener, false)
-	        target.addEventListener(EVENTS.up, mouseUpListener)
-	    },
-
-	    onDragInit: function(event){
-
-	        var config = {
-	            diff: {
-	                left: 0,
-	                top : 0
-	            }
-	        }
-	        this.state = {
-	            config: config
-	        }
-
-	        if (this.config.region){
-	            this.state.initialRegion = Region.from(this.config.region)
-	            this.state.dragRegion =
-	                config.dragRegion =
-	                    this.state.initialRegion.clone()
-	        }
-	        if (this.config.constrainTo){
-	            this.state.constrainTo = Region.from(this.config.constrainTo)
-	        }
-
-	        this.callConfig('onDragInit', event)
-	    },
-
-	    /**
-	     * Called when the first mousemove event occurs after drag is initialized
-	     * @param  {Event} event
-	     */
-	    onDragStart: function(event){
-	        this.state.initPageCoords = getPageCoords(event)
-
-	        this.state.didDrag = this.state.config.didDrag = true
-	        this.callConfig('onDragStart', event)
-	    },
-
-	    /**
-	     * Called on all mousemove events after drag is initialized.
-	     *
-	     * @param  {Event} event
-	     */
-	    onDrag: function(event){
-
-	        var config = this.state.config
-
-	        var initPageCoords = this.state.initPageCoords
-	        var eventCoords = getPageCoords(event)
-
-	        var diff = config.diff = {
-	            left: eventCoords.pageX - initPageCoords.pageX,
-	            top : eventCoords.pageY - initPageCoords.pageY
-	        }
-
-	        if (this.state.initialRegion){
-	            var dragRegion = config.dragRegion
-
-	            //set the dragRegion to initial coords
-	            dragRegion.set(this.state.initialRegion)
-
-	            //shift it to the new position
-	            dragRegion.shift(diff)
-
-	            if (this.state.constrainTo){
-	                //and finally constrain it if it's the case
-	                dragRegion.constrainTo(this.state.constrainTo)
-
-	                diff.left = dragRegion.left - this.state.initialRegion.left
-	                diff.top  = dragRegion.top - this.state.initialRegion.top
-	            }
-
-	            config.dragRegion = dragRegion
-	        }
-
-	        this.callConfig('onDrag', event)
-	    },
-
-	    /**
-	     * Called on the mouseup event on window
-	     *
-	     * @param  {Event} event
-	     */
-	    onDrop: function(event){
-	        this.callConfig('onDrop', event)
-
-	        this.state = null
-	    },
-
-	    callConfig: function(fnName, event){
-	        var config = this.state.config
-	        var args   = [event, config]
-
-	        var fn = this.config[fnName]
-
-	        if (fn){
-	            fn.apply(this, args)
-	        }
-	    }
-
-	})
-
-	module.exports = function(event, config){
-
-	    if (config.scope){
-	        var skippedKeys = {
-	            scope      : 1,
-	            region     : 1,
-	            constrainTo: 1
-	        }
-
-	        Object.keys(config).forEach(function(key){
-	            var value = config[key]
-
-	            if (key in skippedKeys){
-	                return
-	            }
-
-	            if (typeof value == 'function'){
-	                config[key] = value.bind(config.scope)
-	            }
-	        })
-	    }
-	    var helper = new Helper(config)
-
-	    helper.initDrag(event)
-
-	    return helper
-	}
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	    alphanum: __webpack_require__(75),
-	    match   : __webpack_require__(76),
-	    guid   : __webpack_require__(77),
-	    // email   : require('./email'),
-	    numeric   : __webpack_require__(78)
-	}
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// shim for using process in browser
-
-	var process = module.exports = {};
-	var queue = [];
-	var draining = false;
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    draining = true;
-	    var currentQueue;
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        var i = -1;
-	        while (++i < len) {
-	            currentQueue[i]();
-	        }
-	        len = queue.length;
-	    }
-	    draining = false;
-	}
-	process.nextTick = function (fun) {
-	    queue.push(fun);
-	    if (!draining) {
-	        setTimeout(drainQueue, 0);
-	    }
-	};
-
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	// TODO(shtylman)
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(56).nextTick;
-	var apply = Function.prototype.apply;
-	var slice = Array.prototype.slice;
-	var immediateIds = {};
-	var nextImmediateId = 0;
-
-	// DOM APIs, for completeness
-
-	exports.setTimeout = function() {
-	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-	};
-	exports.setInterval = function() {
-	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-	};
-	exports.clearTimeout =
-	exports.clearInterval = function(timeout) { timeout.close(); };
-
-	function Timeout(id, clearFn) {
-	  this._id = id;
-	  this._clearFn = clearFn;
-	}
-	Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-	Timeout.prototype.close = function() {
-	  this._clearFn.call(window, this._id);
-	};
-
-	// Does not start the time, just sets up the members needed.
-	exports.enroll = function(item, msecs) {
-	  clearTimeout(item._idleTimeoutId);
-	  item._idleTimeout = msecs;
-	};
-
-	exports.unenroll = function(item) {
-	  clearTimeout(item._idleTimeoutId);
-	  item._idleTimeout = -1;
-	};
-
-	exports._unrefActive = exports.active = function(item) {
-	  clearTimeout(item._idleTimeoutId);
-
-	  var msecs = item._idleTimeout;
-	  if (msecs >= 0) {
-	    item._idleTimeoutId = setTimeout(function onTimeout() {
-	      if (item._onTimeout)
-	        item._onTimeout();
-	    }, msecs);
-	  }
-	};
-
-	// That's not how node.js implements it but the exposed api is the same.
-	exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
-	  var id = nextImmediateId++;
-	  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
-
-	  immediateIds[id] = true;
-
-	  nextTick(function onNextTick() {
-	    if (immediateIds[id]) {
-	      // fn.call() is faster so we optimize for the common use-case
-	      // @see http://jsperf.com/call-apply-segu
-	      if (args) {
-	        fn.apply(null, args);
-	      } else {
-	        fn.call(null);
-	      }
-	      // Prevent ids from leaking
-	      exports.clearImmediate(id);
-	    }
-	  });
-
-	  return id;
-	};
-
-	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
-	  delete immediateIds[id];
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(57).setImmediate, __webpack_require__(57).clearImmediate))
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React     = __webpack_require__(1)
-	var normalize = __webpack_require__(37)
-	var assign    = __webpack_require__(18)
-
-	var cloneWithProps = React.cloneElement || __webpack_require__(74)
-	var DISPLAY_NAME   = 'ReactToolbarRegion'
-
-	var JUSTIFY_MAP = {
-		start: 'flex-start',
-		left: 'flex-start',
-
-		end: 'flex-end',
-		right: 'flex-end'
-	}
-
-	var TEXT_ALIGN = {
-		start: 'left',
-		left : 'left',
-
-		right: 'right',
-		end  :'right'
-	}
-
-	module.exports = React.createClass({
-
-		displayName: DISPLAY_NAME,
-
-		getDefaultProps: function(){
-			return {
-				'data-display-name': DISPLAY_NAME,
-
-				isToolbarRegion: true,
-
-				flex: 1,
-				flexShrink: null,
-				flexBasis : null,
-
-				defaultStyle: {
-					boxSizing   : 'border-box',
-
-					// alignSelf   : 'center',
-					alignItems  : 'center',
-					flexShrink  : 1,
-					flexBasis   : 0,
-
-					position    : 'relative',
-					display     : 'inline-block',
-
-					overflow    : 'hidden',
-					whiteSpace  : 'nowrap',
-					textOverflow: 'ellipsis',
-				},
-
-				defaultHorizontalStyle: {
-					// display : 'inline-flex',
-					flexFlow: 'row'
-				},
-
-				defaultVerticalStyle: {
-					// display : 'flex',
-					flexFlow: 'column'
-				}
-			}
-		},
-
-		render: function(){
-			var props = this.prepareProps(this.props)
-
-			return React.createElement("div", React.__spread({},  props))
-		},
-
-
-		prepareProps: function(thisProps) {
-			var props = assign({}, thisProps)
-
-			props.vertical = props.orientation == 'vertical'
-			props.style    = this.prepareStyle(props)
-
-			return props
-		},
-
-		prepareStyle: function(props) {
-			var alignStyle = {
-				justifyContent: JUSTIFY_MAP[props.align] || 'center',
-				textAlign     : TEXT_ALIGN[props.align] || 'center'
-			}
-
-			var defaultOrientationStyle = props.defaultHorizontalStyle
-			var orientationStyle = props.horizontalStyle
-
-			if (props.vertical){
-				defaultOrientationStyle = props.defaultVerticalStyle
-				orientationStyle = props.verticalStyle
-			}
-
-			var style = assign({},
-							props.defaultStyle,
-							defaultOrientationStyle,
-							props.style,
-							orientationStyle,
-							alignStyle
-						)
-
-			if (props.flex !== false && props.flex != null){
-				var flex
-				var flexShrink = 0
-				var flexBasis  = 0
-
-				if (typeof props.flex == 'number'){
-					flex = props.flex + ' ' + (props.flexShrink || style.flexShrink || flexShrink) + ' ' + (props.flexBasis || style.flexBasis || flexBasis)
-				} else {
-					flex = props.flex
-				}
-
-				style.flex = flex
-			}
-
-			return normalize(style)
-		}
-	})
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function(obj, prop){
-		return Object.prototype.hasOwnProperty.call(obj, prop)
-	}
-
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var getStylePrefixed = __webpack_require__(79)
-	var properties       = __webpack_require__(80)
-
-	module.exports = function(key, value){
-
-		if (!properties[key]){
-			return key
-		}
-
-		return getStylePrefixed(key, value)
-	}
-
-/***/ },
-/* 61 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function(fn, item){
-
-		if (!item){
-			return
-		}
-
-		if (Array.isArray(item)){
-			return item.map(fn).filter(function(x){
-				return !!x
-			})
-		} else {
-			return fn(item)
-		}
-	}
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var getCssPrefixedValue = __webpack_require__(81)
-
-	module.exports = function(target){
-		target.plugins = target.plugins || [
-			(function(){
-				var values = {
-					'flex':1,
-					'inline-flex':1
-				}
-
-				return function(key, value){
-					if (key === 'display' && value in values){
-						return {
-							key  : key,
-							value: getCssPrefixedValue(key, value, true)
-						}
-					}
-				}
-			})()
-		]
-
-		target.plugin = function(fn){
-			target.plugins = target.plugins || []
-
-			target.plugins.push(fn)
-		}
-
-		return target
-	}
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function() { throw new Error("define cannot be used indirect"); };
-
-
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
+/* 15 */
+/***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
 	//
@@ -8842,32 +3975,5260 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    ctor.prototype = Object.create(superCtor.prototype, {
+	        constructor: {
+	            value       : ctor,
+	            enumerable  : false,
+	            writable    : true,
+	            configurable: true
+	        }
+	    })
+	}
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	/**
+	 * @static
+	 * Returns true if the given region is valid, false otherwise.
+	 * @param  {Region} region The region to check
+	 * @return {Boolean}        True, if the region is valid, false otherwise.
+	 * A region is valid if
+	 *  * left <= right  &&
+	 *  * top  <= bottom
+	 */
+	module.exports = function validate(region){
+
+	    var isValid = true
+
+	    if (region.right < region.left){
+	        isValid = false
+	        region.right = region.left
+	    }
+
+	    if (region.bottom < region.top){
+	        isValid = false
+	        region.bottom = region.top
+	    }
+
+	    return isValid
+	}
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var hasOwn   = __webpack_require__(12)
+	var VALIDATE = __webpack_require__(17)
+
+	module.exports = function(REGION){
+
+	    var MAX = Math.max
+	    var MIN = Math.min
+
+	    var statics = {
+	        init: function(){
+	            var exportAsNonStatic = {
+	                getIntersection      : true,
+	                getIntersectionArea  : true,
+	                getIntersectionHeight: true,
+	                getIntersectionWidth : true,
+	                getUnion             : true
+	            }
+	            var thisProto = REGION.prototype
+	            var newName
+
+	            var exportHasOwn = hasOwn(exportAsNonStatic)
+	            var methodName
+
+	            for (methodName in exportAsNonStatic) if (exportHasOwn(methodName)) {
+	                newName = exportAsNonStatic[methodName]
+	                if (typeof newName != 'string'){
+	                    newName = methodName
+	                }
+
+	                ;(function(proto, methodName, protoMethodName){
+
+	                    proto[methodName] = function(region){
+	                        //<debug>
+	                        if (!REGION[protoMethodName]){
+	                            console.warn('cannot find method ', protoMethodName,' on ', REGION)
+	                        }
+	                        //</debug>
+	                        return REGION[protoMethodName](this, region)
+	                    }
+
+	                })(thisProto, newName, methodName);
+	            }
+	        },
+
+	        validate: VALIDATE,
+
+	        /**
+	         * Returns the region corresponding to the documentElement
+	         * @return {Region} The region corresponding to the documentElement. This region is the maximum region visible on the screen.
+	         */
+	        getDocRegion: function(){
+	            return REGION.fromDOM(document.documentElement)
+	        },
+
+	        from: function(reg){
+	            if (reg.__IS_REGION){
+	                return reg
+	            }
+
+	            if (typeof document != 'undefined'){
+	                if (typeof HTMLElement != 'undefined' && reg instanceof HTMLElement){
+	                    return REGION.fromDOM(reg)
+	                }
+
+	                if (reg.type && typeof reg.pageX !== 'undefined' && typeof reg.pageY !== 'undefined'){
+	                    return REGION.fromEvent(reg)
+	                }
+	            }
+
+	            return REGION(reg)
+	        },
+
+	        fromEvent: function(event){
+	            return REGION.fromPoint({
+	                x: event.pageX,
+	                y: event.pageY
+	            })
+	        },
+
+	        fromDOM: function(dom){
+	            var rect = dom.getBoundingClientRect()
+	            // var docElem = document.documentElement
+	            // var win     = window
+
+	            // var top  = rect.top + win.pageYOffset - docElem.clientTop
+	            // var left = rect.left + win.pageXOffset - docElem.clientLeft
+
+	            return new REGION({
+	                top   : rect.top,
+	                left  : rect.left,
+	                bottom: rect.bottom,
+	                right : rect.right
+	            })
+	        },
+
+	        /**
+	         * @static
+	         * Returns a region that is the intersection of the given two regions
+	         * @param  {Region} first  The first region
+	         * @param  {Region} second The second region
+	         * @return {Region/Boolean}        The intersection region or false if no intersection found
+	         */
+	        getIntersection: function(first, second){
+
+	            var area = this.getIntersectionArea(first, second)
+
+	            if (area){
+	                return new REGION(area)
+	            }
+
+	            return false
+	        },
+
+	        getIntersectionWidth: function(first, second){
+	            var minRight  = MIN(first.right, second.right)
+	            var maxLeft   = MAX(first.left,  second.left)
+
+	            if (maxLeft < minRight){
+	                return minRight  - maxLeft
+	            }
+
+	            return 0
+	        },
+
+	        getIntersectionHeight: function(first, second){
+	            var maxTop    = MAX(first.top,   second.top)
+	            var minBottom = MIN(first.bottom,second.bottom)
+
+	            if (maxTop  < minBottom){
+	                return minBottom - maxTop
+	            }
+
+	            return 0
+	        },
+
+	        getIntersectionArea: function(first, second){
+	            var maxTop    = MAX(first.top,   second.top)
+	            var minRight  = MIN(first.right, second.right)
+	            var minBottom = MIN(first.bottom,second.bottom)
+	            var maxLeft   = MAX(first.left,  second.left)
+
+	            if (
+	                    maxTop  < minBottom &&
+	                    maxLeft < minRight
+	                ){
+	                return {
+	                    top    : maxTop,
+	                    right  : minRight,
+	                    bottom : minBottom,
+	                    left   : maxLeft,
+
+	                    width  : minRight  - maxLeft,
+	                    height : minBottom - maxTop
+	                }
+	            }
+
+	            return false
+	        },
+
+	        /**
+	         * @static
+	         * Returns a region that is the union of the given two regions
+	         * @param  {Region} first  The first region
+	         * @param  {Region} second The second region
+	         * @return {Region}        The union region. The smallest region that contains both given regions.
+	         */
+	        getUnion: function(first, second){
+	            var top    = MIN(first.top,   second.top)
+	            var right  = MAX(first.right, second.right)
+	            var bottom = MAX(first.bottom,second.bottom)
+	            var left   = MIN(first.left,  second.left)
+
+	            return new REGION(top, right, bottom, left)
+	        },
+
+	        /**
+	         * @static
+	         * Returns a region. If the reg argument is a region, returns it, otherwise return a new region built from the reg object.
+	         *
+	         * @param  {Region} reg A region or an object with either top, left, bottom, right or
+	         * with top, left, width, height
+	         * @return {Region} A region
+	         */
+	        getRegion: function(reg){
+	            return REGION.from(reg)
+	        },
+
+	        /**
+	         * Creates a region that corresponds to a point.
+	         *
+	         * @param  {Object} xy The point
+	         * @param  {Number} xy.x
+	         * @param  {Number} xy.y
+	         *
+	         * @return {Region}    The new region, with top==xy.y, bottom = xy.y and left==xy.x, right==xy.x
+	         */
+	        fromPoint: function(xy){
+	            return new REGION({
+	                        top    : xy.y,
+	                        bottom : xy.y,
+	                        left   : xy.x,
+	                        right  : xy.x
+	                    })
+	        }
+	    }
+
+	    Object.keys(statics).forEach(function(key){
+	        REGION[key] = statics[key]
+	    })
+
+	    REGION.init()
+	}
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var React = __webpack_require__(6);
+	var assign = __webpack_require__(7);
+	var Toolbar = __webpack_require__(20);
+	var Region = Toolbar.Region;
+	var normalize = __webpack_require__(21);
+
+	var WHITESPACE = ' ';
+	function sortAsc(a, b) {
+		return a - b;
+	}
+
+	function emptyFn() {}
+
+	function gotoPrev(props) {
+		return React.createElement(
+			'svg',
+			_extends({ version: '1.1', viewBox: '0 0 2 3' }, props),
+			React.createElement('polygon', { points: '2,0 2,3 0,1.5 ' })
+		);
+	}
+
+	function gotoNext(props) {
+		return React.createElement(
+			'svg',
+			_extends({ version: '1.1', viewBox: '0 0 2 3' }, props),
+			React.createElement('polygon', { points: '0,0 2,1.5 0,3' })
+		);
+	}
+
+	function gotoFirst(props) {
+		return React.createElement(
+			'svg',
+			_extends({ version: '1.1', viewBox: '0 0 3 3' }, props),
+			React.createElement('polygon', { points: '3,0 3,3 1,1.5' }),
+			React.createElement('rect', { height: '3', width: '0.95', y: '0', x: '0' })
+		);
+	}
+
+	function gotoLast(props) {
+		return React.createElement(
+			'svg',
+			_extends({ version: '1.1', viewBox: '0 0 3 3' }, props),
+			React.createElement('polygon', { points: '0,0 0,3 2,1.5' }),
+			React.createElement('rect', { height: '3', width: '0.95', y: '0', x: '2' })
+		);
+	}
+
+	function refresh(props) {
+		return React.createElement(
+			'svg',
+			_extends({ version: '1.1', x: '0px', y: '0px', viewBox: '0 0 487.23 487.23' }, props),
+			React.createElement(
+				'g',
+				null,
+				React.createElement('path', { d: 'M55.323,203.641c15.664,0,29.813-9.405,35.872-23.854c25.017-59.604,83.842-101.61,152.42-101.61 c37.797,0,72.449,12.955,100.23,34.442l-21.775,3.371c-7.438,1.153-13.224,7.054-14.232,14.512 c-1.01,7.454,3.008,14.686,9.867,17.768l119.746,53.872c5.249,2.357,11.33,1.904,16.168-1.205 c4.83-3.114,7.764-8.458,7.796-14.208l0.621-131.943c0.042-7.506-4.851-14.144-12.024-16.332 c-7.185-2.188-14.947,0.589-19.104,6.837l-16.505,24.805C370.398,26.778,310.1,0,243.615,0C142.806,0,56.133,61.562,19.167,149.06 c-5.134,12.128-3.84,26.015,3.429,36.987C29.865,197.023,42.152,203.641,55.323,203.641z' }),
+				React.createElement('path', { d: 'M464.635,301.184c-7.27-10.977-19.558-17.594-32.728-17.594c-15.664,0-29.813,9.405-35.872,23.854 c-25.018,59.604-83.843,101.61-152.42,101.61c-37.798,0-72.45-12.955-100.232-34.442l21.776-3.369 c7.437-1.153,13.223-7.055,14.233-14.514c1.009-7.453-3.008-14.686-9.867-17.768L49.779,285.089 c-5.25-2.356-11.33-1.905-16.169,1.205c-4.829,3.114-7.764,8.458-7.795,14.207l-0.622,131.943 c-0.042,7.506,4.85,14.144,12.024,16.332c7.185,2.188,14.948-0.59,19.104-6.839l16.505-24.805 c44.004,43.32,104.303,70.098,170.788,70.098c100.811,0,187.481-61.561,224.446-149.059 C473.197,326.043,471.903,312.157,464.635,301.184z' })
+			)
+		);
+	}
+
+	function separator(props) {
+
+		if (props.showSeparators === false) {
+			return;
+		}
+
+		var margin = 5;
+		var width = 2;
+		var color = props.iconProps.style.fill;
+
+		var result;
+
+		var sepProps = {
+			width: 2,
+			margin: 5,
+			color: color
+		};
+
+		if (props.separatorFactory) {
+			result = props.separatorFactory(sepProps);
+		}
+
+		if (result !== undefined) {
+			return result;
+		}
+
+		var style = normalize({
+			marginLeft: sepProps.margin,
+			marginRight: sepProps.margin,
+			width: sepProps.width,
+			background: sepProps.color,
+			display: 'inline-block',
+			alignSelf: 'stretch'
+		});
+
+		return React.createElement('span', { style: style });
+	}
+
+	var ICON_MAP = {
+		gotoFirst: gotoFirst,
+		gotoLast: gotoLast,
+		gotoPrev: gotoPrev,
+		gotoNext: gotoNext,
+		refresh: refresh
+	};
+
+	var defaultStyles = {};
+
+	module.exports = React.createClass({
+
+		displayName: 'PaginationToolbar',
+
+		getDefaultProps: function getDefaultProps() {
+			return {
+				iconSize: 20,
+				showRefreshIcon: true,
+				showPageSize: true,
+				defaultStyle: {
+					color: 'inherit'
+				},
+
+				pageSizes: [10, 20, 50, 100, 200, 500, 1000],
+
+				theme: '',
+
+				defaultIconProps: {
+					version: '1.2',
+					style: {
+						cursor: 'pointer',
+						marginLeft: 3,
+						marginRight: 3,
+						fill: '#8E8E8E',
+						verticalAlign: 'middle'
+					},
+					disabledStyle: {
+						cursor: 'auto',
+						fill: '#DFDCDC'
+					},
+					overStyle: {
+						fill: 'gray'
+					}
+				}
+			};
+		},
+
+		getInitialState: function getInitialState() {
+			return {
+				mouseOver: {}
+			};
+		},
+
+		prepareProps: function prepareProps(thisProps) {
+			var props = assign({}, thisProps);
+
+			props.className = this.prepareClassName(props);
+			props.iconProps = this.prepareIconProps(props);
+			props.style = this.prepareStyle(props);
+			props.pageSizes = this.preparePageSizes(props);
+			delete props.defaultStyle;
+
+			return props;
+		},
+
+		prepareClassName: function prepareClassName(props) {
+			var className = props.className || '';
+
+			className += ' react-datagrid-pagination-toolbar';
+
+			return className;
+		},
+
+		preparePageSizes: function preparePageSizes(props) {
+			var sizes = [].concat(props.pageSizes);
+
+			if (sizes.indexOf(props.pageSize) == -1) {
+				sizes.push(props.pageSize);
+			}
+
+			return sizes.sort(sortAsc);
+		},
+
+		prepareIconProps: function prepareIconProps(props) {
+			var iconProps = assign({}, props.defaultIconProps);
+			var defaultIconStyle = iconProps.style;
+			var defaultIconOverStyle = iconProps.overStyle;
+			var defaultIconDisabledStyle = iconProps.disabledStyle;
+
+			assign(iconProps, props.iconProps);
+
+			var iconSizeStyle = {};
+
+			if (props.iconSize != null) {
+				iconSizeStyle = { width: props.iconSize, height: props.iconSize };
+			}
+
+			if (props.iconHeight != null) {
+				iconSizeStyle.height = props.iconHeight;
+			}
+			if (props.iconWidth != null) {
+				iconSizeStyle.width = props.iconWidth;
+			}
+
+			iconProps.style = assign({}, defaultIconStyle, iconSizeStyle, iconProps.style);
+			iconProps.overStyle = assign({}, defaultIconOverStyle, iconProps.overStyle);
+			iconProps.disabledStyle = assign({}, defaultIconDisabledStyle, iconProps.disabledStyle);
+
+			return iconProps;
+		},
+
+		prepareStyle: function prepareStyle(props) {
+			var borderStyle = {};
+			var borderName = 'borderTop';
+
+			if (props.position == 'top') {
+				borderName = 'borderBottom';
+			}
+
+			if (props.border) {
+				borderStyle[borderName] = props.border;
+			}
+
+			return assign({}, props.defaultStyle, borderStyle, props.style);
+		},
+
+		handleInputChange: function handleInputChange(event) {
+			var value = event.target.value * 1;
+
+			if (!isNaN(value) && value >= this.props.minPage && value <= this.props.maxPage && value != this.props.page) {
+				this.gotoPage(value);
+			}
+		},
+
+		handleInputBlur: function handleInputBlur() {
+			this.setState({
+				inputFocused: false
+			});
+		},
+
+		handleInputFocus: function handleInputFocus() {
+
+			var page = this.props.page;
+			this.setState({
+				inputFocused: true
+			}, (function () {
+				var domNode = React.findDOMNode(this.refs.input);
+				domNode.value = page;
+			}).bind(this));
+		},
+
+		onPageSizeChange: function onPageSizeChange(event) {
+			this.props.onPageSizeChange(event.target.value * 1);
+		},
+
+		renderInput: function renderInput(props) {
+			var otherProps = {};
+
+			if (this.state.inputFocused) {
+				otherProps.defaultValue = props.page;
+			} else {
+				otherProps.value = props.page;
+			}
+
+			var inputProps = assign({
+				ref: 'input',
+				onBlur: this.handleInputBlur,
+				onFocus: this.handleInputFocus,
+				style: normalize({
+					marginLeft: 5,
+					marginRight: 5,
+					padding: 2,
+					maxWidth: 60,
+					textAlign: 'right',
+					flex: 1,
+					minWidth: 40
+				}),
+				page: props.page,
+				onChange: this.handleInputChange
+			}, otherProps);
+
+			var defaultFactory = React.DOM.input;
+			var factory = props.pageInputFactory || defaultFactory;
+
+			var result = factory(inputProps);
+
+			if (result === undefined) {
+				result = defaultFactory(inputProps);
+			}
+
+			return result;
+		},
+
+		renderSelect: function renderSelect(props) {
+
+			var options = props.pageSizes.map(function (value) {
+				return React.createElement(
+					'option',
+					{ value: value },
+					value
+				);
+			});
+
+			var selectProps = {
+				onChange: this.onPageSizeChange,
+				value: props.pageSize,
+				style: { marginLeft: 5, marginRight: 5, padding: 2, textAlign: 'right' },
+				children: options
+			};
+
+			var defaultFactory = React.DOM.select;
+			var factory = props.pageSizeSelectFactory || defaultFactory;
+
+			var result = factory(selectProps);
+
+			if (result === undefined) {
+				result = defaultFactory(selectProps);
+			}
+
+			return result;
+		},
+
+		renderDisplaying: function renderDisplaying(props) {
+			var start = (props.pageSize * (props.page - 1) || 0) + 1;
+			var end = Math.min(props.pageSize * props.page, props.dataSourceCount) || 1;
+			var refreshIcon = props.showRefreshIcon ? this.icon('refresh', props) : null;
+			var sep = refreshIcon ? this.separator : null;
+
+			var factory = props.displayingFactory;
+
+			if (factory) {
+				return factory({
+					start: start,
+					end: end,
+					dataSourceCount: props.dataSourceCount,
+					page: props.page,
+					pageSize: props.pageSize,
+					minPage: props.minPage,
+					maxPage: props.maxPage,
+					reload: this.reload,
+					gotoPage: this.gotoPage,
+					refreshIcon: refreshIcon
+				});
+			}
+
+			var textStyle = { display: 'inline-block', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' };
+
+			return React.createElement(
+				'div',
+				{ style: normalize({ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }) },
+				React.createElement(
+					'span',
+					{ style: textStyle },
+					'Displaying ',
+					start,
+					' - ',
+					end,
+					' of ',
+					props.dataSourceCount || 1,
+					'.'
+				),
+				sep,
+				refreshIcon
+			);
+		},
+
+		renderPageSize: function renderPageSize(props) {
+			if (props.showPageSize) {
+				return React.createElement(
+					'div',
+					null,
+					'Page size ',
+					this.renderSelect(props)
+				);
+			}
+		},
+
+		render: function render() {
+
+			var props = this.prepareProps(this.props);
+
+			this.separator = separator(props);
+
+			var showPageSize = props.showPageSize;
+			var pageSize = showPageSize ? this.renderPageSize(props) : null;
+
+			var start = props.pageSize * (props.page - 1) + 1;
+			var end = Math.min(props.pageSize * props.page, props.dataSourceCount);
+
+			var displaying = this.renderDisplaying(props);
+			var minWidth = 430;
+
+			if (!showPageSize) {
+				minWidth -= 100;
+			}
+
+			var sep = this.separator;
+
+			return React.createElement(
+				Toolbar,
+				props,
+				React.createElement(
+					Region,
+					{ flex: '1 1 auto', style: normalize({ display: 'flex', alignItems: 'center', minWidth: minWidth }) },
+					this.icon('gotoFirst', props),
+					this.icon('gotoPrev', props),
+					sep,
+					'Page ',
+					this.renderInput(props),
+					' of',
+					WHITESPACE,
+					props.maxPage,
+					'.',
+					sep,
+					this.icon('gotoNext', props),
+					this.icon('gotoLast', props),
+					showPageSize ? sep : null,
+					pageSize
+				),
+				React.createElement(
+					Region,
+					{ flex: '1 1 auto' },
+					displaying
+				)
+			);
+		},
+
+		icon: function icon(iconName, props) {
+			var icon = props[iconName + 'Icon'];
+
+			if (!icon || typeof icon != 'function') {
+				var MAP = {
+					refresh: props.page,
+					gotoFirst: props.minPage,
+					gotoLast: props.maxPage,
+					gotoPrev: Math.max(props.page - 1, props.minPage),
+					gotoNext: Math.min(props.page + 1, props.maxPage)
+				};
+
+				var targetPage = MAP[iconName];
+				var disabled = targetPage === props.page && iconName != 'refresh';
+				var mouseOver = this.state.mouseOver[iconName];
+
+				var iconProps = assign({
+					mouseOver: mouseOver,
+					name: iconName,
+					disabled: disabled
+				}, props.iconProps);
+
+				var iconStyle = iconProps.style = assign({}, iconProps.style, defaultStyles[iconName], props.iconStyle, props[iconName + 'IconStyle']);
+
+				if (mouseOver) {
+					iconProps.style = assign({}, iconStyle, iconProps.overStyle, props.overIconStyle);
+				}
+				if (disabled) {
+					iconProps.style = assign({}, iconStyle, iconProps.disabledStyle, props.disabledIconStyle);
+				} else {
+					iconProps.onClick = iconName == 'refresh' ? this.reload : this.gotoPage.bind(this, targetPage);
+				}
+
+				iconProps.onMouseEnter = this.onIconMouseEnter.bind(this, props, iconProps);
+				iconProps.onMouseLeave = this.onIconMouseLeave.bind(this, props, iconProps);
+
+				var defaultFactory = ICON_MAP[iconName];
+				var factory = props[iconName + 'IconFactory'] || defaultFactory;
+				icon = factory(iconProps);
+
+				if (icon === undefined) {
+					icon = defaultFactory(iconProps);
+				}
+			}
+
+			return icon;
+		},
+
+		onIconMouseEnter: function onIconMouseEnter(props, iconProps) {
+			var mouseOver = this.state.mouseOver;
+
+			mouseOver[iconProps.name] = true;
+
+			this.setState({});
+		},
+
+		onIconMouseLeave: function onIconMouseLeave(props, iconProps) {
+			var mouseOver = this.state.mouseOver;
+
+			mouseOver[iconProps.name] = false;
+
+			this.setState({});
+		},
+
+		reload: function reload() {
+			;(this.props.reload || emptyFn)();
+		},
+
+		gotoPage: function gotoPage(page) {
+			this.props.onPageChange(page);
+		}
+	});
+
+	// gotoPrev: { marginRight: 10},
+	// gotoNext: { marginLeft: 10}
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React     = __webpack_require__(6)
+	var normalize = __webpack_require__(21)
+	var assign    = __webpack_require__(7)
+	var clone = React.cloneElement || __webpack_require__(33)
+	var emptyFn = function(){}
+
+	var DISPLAY_NAME = 'ReactToolbar'
+
+	function isRegion(child){
+		return child && child.props && child.props.isToolbarRegion
+	}
+
+	function toAlign(index, regions){
+		if (index == 0){
+			return 'left'
+		}
+
+		if (index == regions.length - 1){
+			return 'right'
+		}
+
+		return 'center'
+	}
+
+	var THEMES = {
+		default: {
+			style: {
+				//theme styles
+				color  : 'rgb(120, 120, 120)',
+				border : '1px solid rgb(218, 218, 218)'
+			}
+		}
+	}
+
+	var Toolbar = React.createClass({
+
+		displayName: DISPLAY_NAME,
+
+		getDefaultProps: function() {
+			return {
+				'data-display-name': DISPLAY_NAME,
+				isReactToolbar: true,
+
+				padding: 2,
+				theme: 'default',
+
+				defaultStyle  : {
+					display  : 'inline-flex',
+					boxSizing: 'border-box',
+					overflow: 'hidden',
+					whiteSpace: 'nowrap',
+					textOverflow: 'ellipsis',
+
+					padding: 2
+				},
+
+				defaultHorizontalStyle: {
+					width       : '100%',
+					flexFlow    : 'row',
+					alignItems  : 'center', //so items are centered vertically
+					alignContent: 'stretch'
+				},
+
+				defaultVerticalStyle: {
+					height      : '100%',
+					flexFlow    : 'column',
+					alignItems  : 'stretch',
+					alignContent: 'center'
+				}
+			}
+		},
+
+		getInitialState: function(){
+			return {}
+		},
+
+		render: function(){
+
+			var state = this.state
+			var props = this.prepareProps(this.props, state)
+
+			// this.prepareContent(props)
+
+			return React.createElement("div", React.__spread({},  props))
+		},
+
+		prepareContent: function(props){
+
+			// var style = {
+			// 	display : 'inline-flex',
+			// 	position: 'relative',
+			// 	overflow: 'hidden',
+			// 	flex    : '1 0 0',
+			// 	padding : props.style.padding
+			// }
+
+			// props.style.padding = 0
+		},
+
+		prepareProps: function(thisProps, state) {
+			var props = assign({}, thisProps)
+
+			props.vertical = props.orientation == 'vertical'
+			props.style    = this.prepareStyle(props, state)
+			props.children = this.prepareChildren(props, state)
+
+			return props
+		},
+
+		prepareStyle: function(props, state) {
+
+			var defaultOrientationStyle = props.defaultHorizontalStyle
+			var orientationStyle = props.horizontalStyle
+
+			if (props.vertical){
+				defaultOrientationStyle = props.defaultVerticalStyle
+				orientationStyle = props.verticalStyle
+			}
+
+			var themes     = Toolbar.themes || {}
+			var theme      = themes[props.theme]
+			var themeStyle = theme? theme.style: null
+
+			var style = assign({}, props.defaultStyle, defaultOrientationStyle, themeStyle, props.style, orientationStyle)
+
+			return normalize(style)
+		},
+
+		prepareChildren: function(props) {
+
+			var regionCount = 0
+
+			var children = []
+			var regions  = []
+
+			React.Children.forEach(props.children, function(child){
+				if (isRegion(child)){
+					regions.push(child)
+					regionCount++
+				}
+			}, this)
+
+
+			var regionIndex = -1
+			React.Children.forEach(props.children, function(child){
+				if (isRegion(child)){
+					regionIndex++
+					child = this.prepareRegion(child, regionIndex, regions)
+				}
+
+				children.push(child)
+			}, this)
+
+			if (!regionCount){
+				return this.prepareRegion(
+					React.createElement(Toolbar.Region, null, 
+						children
+					)
+				)
+			}
+
+			return children
+		},
+
+		prepareRegion: function(region, index, regions) {
+			index   = index   || 0
+			regions = regions || []
+
+			var props = this.props
+			var regionStyle = assign({}, props.defaultRegionStyle, props.regionStyle)
+
+			if (props.padding){
+				regionStyle.padding = props.padding
+			}
+
+			var style = assign({}, regionStyle, region.props.style)
+			var align = region.props.align || toAlign(index, regions)
+
+
+			return clone(region, {
+				style: style,
+				align: align
+			})
+		}
+	})
+
+	Toolbar.Region = __webpack_require__(34)
+	Toolbar.themes = THEMES
+
+	module.exports = Toolbar
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var hasOwn      = __webpack_require__(22)
+	var getPrefixed = __webpack_require__(23)
+
+	var map      = __webpack_require__(29)
+	var plugable = __webpack_require__(30)
+
+	function plugins(key, value){
+
+		var result = {
+			key  : key,
+			value: value
+		}
+
+		;(RESULT.plugins || []).forEach(function(fn){
+
+			var tmp = map(function(res){
+				return fn(key, value, res)
+			}, result)
+
+			if (tmp){
+				result = tmp
+			}
+		})
+
+		return result
+	}
+
+	function normalize(key, value){
+
+		var result = plugins(key, value)
+
+		return map(function(result){
+			return {
+				key  : getPrefixed(result.key, result.value),
+				value: result.value
+			}
+		}, result)
+
+		return result
+	}
+
+	var RESULT = function(style){
+
+		var k
+		var item
+		var result = {}
+
+		for (k in style) if (hasOwn(style, k)){
+			item = normalize(k, style[k])
+
+			if (!item){
+				continue
+			}
+
+			map(function(item){
+				result[item.key] = item.value
+			}, item)
+		}
+
+		return result
+	}
+
+	module.exports = plugable(RESULT)
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function(obj, prop){
+		return Object.prototype.hasOwnProperty.call(obj, prop)
+	}
+
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var getStylePrefixed = __webpack_require__(24)
+	var properties       = __webpack_require__(28)
+
+	module.exports = function(key, value){
+
+		if (!properties[key]){
+			return key
+		}
+
+		return getStylePrefixed(key, value)
+	}
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var toUpperFirst = __webpack_require__(25)
+	var getPrefix    = __webpack_require__(26)
+	var el           = __webpack_require__(27)
+
+	var MEMORY = {}
+	var STYLE
+	var ELEMENT
+
+	var PREFIX
+
+	module.exports = function(key, value){
+
+	    ELEMENT = ELEMENT || el()
+	    STYLE   = STYLE   || ELEMENT.style
+
+	    var k = key// + ': ' + value
+
+	    if (MEMORY[k]){
+	        return MEMORY[k]
+	    }
+
+	    var prefix
+	    var prefixed
+
+	    if (!(key in STYLE)){//we have to prefix
+
+	        // if (PREFIX){
+	        //     prefix = PREFIX
+	        // } else {
+	            prefix = getPrefix('appearance')
+
+	        //     if (prefix){
+	        //         prefix = PREFIX = prefix.toLowerCase()
+	        //     }
+	        // }
+
+	        if (prefix){
+	            prefixed = prefix + toUpperFirst(key)
+
+	            if (prefixed in STYLE){
+	                key = prefixed
+	            }
+	        }
+	    }
+
+	    MEMORY[k] = key
+
+	    return key
+	}
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function(str){
+		return str?
+				str.charAt(0).toUpperCase() + str.slice(1):
+				''
+	}
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var toUpperFirst = __webpack_require__(25)
+	var prefixes     = ["ms", "Moz", "Webkit", "O"]
+
+	var el = __webpack_require__(27)
+
+	var ELEMENT
+	var PREFIX
+
+	module.exports = function(key){
+
+		if (PREFIX !== undefined){
+			return PREFIX
+		}
+
+		ELEMENT = ELEMENT || el()
+
+		var i = 0
+		var len = prefixes.length
+		var tmp
+		var prefix
+
+		for (; i < len; i++){
+			prefix = prefixes[i]
+			tmp = prefix + toUpperFirst(key)
+
+			if (typeof ELEMENT.style[tmp] != 'undefined'){
+				return PREFIX = prefix
+			}
+		}
+
+		return PREFIX
+	}
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	var el
+
+	module.exports = function(){
+
+		if(!el && !!global.document){
+		  	el = global.document.createElement('div')
+		}
+
+		if (!el){
+			el = {style: {}}
+		}
+
+		return el
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	  'alignItems': 1,
+	  'justifyContent': 1,
+	  'flex': 1,
+	  'flexFlow': 1,
+	  'flexGrow': 1,
+	  'flexShrink': 1,
+	  'flexBasis': 1,
+	  'flexDirection': 1,
+	  'flexWrap': 1,
+	  'alignContent': 1,
+	  'alignSelf': 1,
+
+	  'userSelect': 1,
+	  'transform': 1,
+	  'transition': 1,
+	  'transformOrigin': 1,
+	  'transformStyle': 1,
+	  'transitionProperty': 1,
+	  'transitionDuration': 1,
+	  'transitionTimingFunction': 1,
+	  'transitionDelay': 1,
+	  'borderImage': 1,
+	  'borderImageSlice': 1,
+	  'boxShadow': 1,
+	  'backgroundClip': 1,
+	  'backfaceVisibility': 1,
+	  'perspective': 1,
+	  'perspectiveOrigin': 1,
+	  'animation': 1,
+	  'animationDuration': 1,
+	  'animationName': 1,
+	  'animationDelay': 1,
+	  'animationDirection': 1,
+	  'animationIterationCount': 1,
+	  'animationTimingFunction': 1,
+	  'animationPlayState': 1,
+	  'animationFillMode': 1,
+	  'appearance': 1
+	}
+
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function(fn, item){
+
+		if (!item){
+			return
+		}
+
+		if (Array.isArray(item)){
+			return item.map(fn).filter(function(x){
+				return !!x
+			})
+		} else {
+			return fn(item)
+		}
+	}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var getCssPrefixedValue = __webpack_require__(31)
+
+	module.exports = function(target){
+		target.plugins = target.plugins || [
+			(function(){
+				var values = {
+					'flex':1,
+					'inline-flex':1
+				}
+
+				return function(key, value){
+					if (key === 'display' && value in values){
+						return {
+							key  : key,
+							value: getCssPrefixedValue(key, value, true)
+						}
+					}
+				}
+			})()
+		]
+
+		target.plugin = function(fn){
+			target.plugins = target.plugins || []
+
+			target.plugins.push(fn)
+		}
+
+		return target
+	}
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var getPrefix     = __webpack_require__(26)
+	var forcePrefixed = __webpack_require__(32)
+	var el            = __webpack_require__(27)
+
+	var MEMORY = {}
+	var STYLE
+	var ELEMENT
+
+	module.exports = function(key, value, force){
+
+	    ELEMENT = ELEMENT || el()
+	    STYLE   = STYLE   ||  ELEMENT.style
+
+	    var k = key + ': ' + value
+
+	    if (MEMORY[k]){
+	        return MEMORY[k]
+	    }
+
+	    var prefix
+	    var prefixed
+	    var prefixedValue
+
+	    if (force || !(key in STYLE)){
+
+	        prefix = getPrefix('appearance')
+
+	        if (prefix){
+	            prefixed = forcePrefixed(key, value)
+
+	            prefixedValue = '-' + prefix.toLowerCase() + '-' + value
+
+	            if (prefixed in STYLE){
+	                ELEMENT.style[prefixed] = ''
+	                ELEMENT.style[prefixed] = prefixedValue
+
+	                if (ELEMENT.style[prefixed] !== ''){
+	                    value = prefixedValue
+	                }
+	            }
+	        }
+	    }
+
+	    MEMORY[k] = value
+
+	    return value
+	}
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var toUpperFirst = __webpack_require__(25)
+	var getPrefix    = __webpack_require__(26)
+	var properties   = __webpack_require__(28)
+
+	/**
+	 * Returns the given key prefixed, if the property is found in the prefixProps map.
+	 *
+	 * Does not test if the property supports the given value unprefixed.
+	 * If you need this, use './getPrefixed' instead
+	 */
+	module.exports = function(key, value){
+
+		if (!properties[key]){
+			return key
+		}
+
+		var prefix = getPrefix(key)
+
+		return prefix?
+					prefix + toUpperFirst(key):
+					key
+	}
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var React    = __webpack_require__(6)
+	  , hasOwn   = Object.prototype.hasOwnProperty
+	  , version  = React.version.split('.').map(parseFloat)
+	  , RESERVED = {
+	      className:  resolve(joinClasses),
+	      children:   function(){},
+	      key:        function(){},
+	      ref:        function(){},
+	      style:      resolve(extend)
+	    };
+
+	module.exports = function cloneWithProps(child, props) {
+	  var newProps = mergeProps(props, child.props);
+
+	  if (!hasOwn.call(newProps, 'children') && hasOwn.call(child.props, 'children'))
+	    newProps.children = child.props.children;
+
+	  // < 0.11
+	  if (version[0] === 0 && version[1] < 11)
+	    return child.constructor.ConvenienceConstructor(newProps);
+	  
+	  // 0.11
+	  if (version[0] === 0 && version[1] === 11)
+	    return child.constructor(newProps);
+
+	  // 0.12
+	  else if (version[0] === 0 && version[1] === 12){
+	    MockLegacyFactory.isReactLegacyFactory = true
+	    MockLegacyFactory.type = child.type
+	    return React.createElement(MockLegacyFactory, newProps);
+	  }
+
+	  // 0.13+
+	  return React.createElement(child.type, newProps);
+
+	  function MockLegacyFactory(){}
+	}
+
+	function mergeProps(currentProps, childProps) {
+	  var newProps = extend(currentProps), key
+
+	  for (key in childProps) {
+	    if (hasOwn.call(RESERVED, key) )
+	      RESERVED[key](newProps, childProps[key], key)
+
+	    else if ( !hasOwn.call(newProps, key) )
+	      newProps[key] = childProps[key];
+	  }
+	  return newProps
+	}
+
+	function resolve(fn){
+	  return function(src, value, key){
+	    if( !hasOwn.call(src, key)) src[key] = value
+	    else src[key] = fn(src[key], value)
+	  }
+	}
+
+	function joinClasses(a, b){
+	  if ( !a ) return b || ''
+	  return a + (b ? ' ' + b : '')
+	}
+
+	function extend() {
+	  var target = {};
+	  for (var i = 0; i < arguments.length; i++) 
+	    for (var key in arguments[i]) if (hasOwn.call(arguments[i], key)) 
+	      target[key] = arguments[i][key]   
+	  return target
+	}
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React     = __webpack_require__(6)
+	var normalize = __webpack_require__(21)
+	var assign    = __webpack_require__(7)
+
+	var cloneWithProps = React.cloneElement || __webpack_require__(33)
+	var DISPLAY_NAME   = 'ReactToolbarRegion'
+
+	var JUSTIFY_MAP = {
+		start: 'flex-start',
+		left: 'flex-start',
+
+		end: 'flex-end',
+		right: 'flex-end'
+	}
+
+	var TEXT_ALIGN = {
+		start: 'left',
+		left : 'left',
+
+		right: 'right',
+		end  :'right'
+	}
+
+	module.exports = React.createClass({
+
+		displayName: DISPLAY_NAME,
+
+		getDefaultProps: function(){
+			return {
+				'data-display-name': DISPLAY_NAME,
+
+				isToolbarRegion: true,
+
+				flex: 1,
+				flexShrink: null,
+				flexBasis : null,
+
+				defaultStyle: {
+					boxSizing   : 'border-box',
+
+					// alignSelf   : 'center',
+					alignItems  : 'center',
+					flexShrink  : 1,
+					flexBasis   : 0,
+
+					position    : 'relative',
+					display     : 'inline-block',
+
+					overflow    : 'hidden',
+					whiteSpace  : 'nowrap',
+					textOverflow: 'ellipsis',
+				},
+
+				defaultHorizontalStyle: {
+					// display : 'inline-flex',
+					flexFlow: 'row'
+				},
+
+				defaultVerticalStyle: {
+					// display : 'flex',
+					flexFlow: 'column'
+				}
+			}
+		},
+
+		render: function(){
+			var props = this.prepareProps(this.props)
+
+			return React.createElement("div", React.__spread({},  props))
+		},
+
+
+		prepareProps: function(thisProps) {
+			var props = assign({}, thisProps)
+
+			props.vertical = props.orientation == 'vertical'
+			props.style    = this.prepareStyle(props)
+
+			return props
+		},
+
+		prepareStyle: function(props) {
+			var alignStyle = {
+				justifyContent: JUSTIFY_MAP[props.align] || 'center',
+				textAlign     : TEXT_ALIGN[props.align] || 'center'
+			}
+
+			var defaultOrientationStyle = props.defaultHorizontalStyle
+			var orientationStyle = props.horizontalStyle
+
+			if (props.vertical){
+				defaultOrientationStyle = props.defaultVerticalStyle
+				orientationStyle = props.verticalStyle
+			}
+
+			var style = assign({},
+							props.defaultStyle,
+							defaultOrientationStyle,
+							props.style,
+							orientationStyle,
+							alignStyle
+						)
+
+			if (props.flex !== false && props.flex != null){
+				var flex
+				var flexShrink = 0
+				var flexBasis  = 0
+
+				if (typeof props.flex == 'number'){
+					flex = props.flex + ' ' + (props.flexShrink || style.flexShrink || flexShrink) + ' ' + (props.flexBasis || style.flexBasis || flexBasis)
+				} else {
+					flex = props.flex
+				}
+
+				style.flex = flex
+			}
+
+			return normalize(style)
+		}
+	})
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var humanize = __webpack_require__(36).humanize;
+	var assign = __webpack_require__(7);
+
+	function getVisibleInfo(col) {
+	    var visible = true;
+	    var defaultVisible;
+
+	    if (col.hidden != null) {
+	        visible = !col.hidden;
+	    } else if (col.visible != null) {
+	        visible = !!col.visible;
+	    } else {
+	        //no visible or hidden specified
+	        //so we look for defaultVisible/defaultHidden
+
+	        if (col.defaultHidden != null) {
+	            defaultVisible = !col.defaultHidden;
+	        } else if (col.defaultVisible != null) {
+	            defaultVisible = !!col.defaultVisible;
+	        }
+
+	        visible = defaultVisible;
+	    }
+
+	    return {
+	        visible: visible,
+	        defaultVisible: defaultVisible
+	    };
+	}
+
+	var Column = function Column(col, props) {
+
+	    col = assign({}, Column.defaults, col);
+
+	    //title
+	    if (!col.title) {
+	        col.title = humanize(col.name);
+	    }
+
+	    //sortable
+	    if (props && !props.sortable) {
+	        col.sortable = false;
+	    }
+	    col.sortable = !!col.sortable;
+
+	    //resizable
+	    if (props && props.resizableColumns === false) {
+	        col.resizable = false;
+	    }
+	    col.resizable = !!col.resizable;
+
+	    //filterable
+	    if (props && props.filterable === false) {
+	        col.filterable = false;
+	    }
+	    col.filterable = !!col.filterable;
+
+	    var visibleInfo = getVisibleInfo(col);
+	    var visible = visibleInfo.visible;
+
+	    if (visibleInfo.defaultVisible != null) {
+	        col.defaultHidden = !visibleInfo.defaultVisible;
+	        col.defaultVisible = visibleInfo.defaultVisible;
+	    }
+
+	    //hidden
+	    col.hidden = !visible;
+	    //visible
+	    col.visible = visible;
+
+	    if (col.width == null && col.defaultWidth) {
+	        col.width = col.defaultWidth;
+	    }
+
+	    //flexible
+	    col.flexible = !col.width;
+
+	    return col;
+	};
+
+	Column.displayName = 'Column';
+
+	Column.defaults = {
+	    sortable: true,
+	    filterable: true,
+	    resizable: true,
+	    defaultVisible: true,
+	    type: 'string'
+	};
+
+	module.exports = Column;
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	    toLowerFirst     : __webpack_require__(39),
+	    toUpperFirst     : __webpack_require__(40),
+	    separate         : __webpack_require__(41),
+	    stripWhitespace  : __webpack_require__(42),
+	    compactWhitespace: __webpack_require__(43),
+	    camelize         : __webpack_require__(37),
+	    humanize         : __webpack_require__(44),
+	    hyphenate        : __webpack_require__(45),
+	    endsWith         : __webpack_require__(46),
+
+	    is: __webpack_require__(47)
+	}
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var toCamelFn = function(str, letter){
+	       return letter ? letter.toUpperCase(): ''
+	   }
+
+	var hyphenRe = __webpack_require__(38)
+
+	module.exports = function(str){
+	   return str?
+	          str.replace(hyphenRe, toCamelFn):
+	          ''
+	}
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	module.exports = /[-\s]+(.)?/g
+
+/***/ },
+/* 39 */
+/***/ function(module, exports) {
+
+	module.exports = function(str){
+	    return str.length?
+	            str.charAt(0).toLowerCase() + str.substring(1):
+	            str
+	}
+
+/***/ },
+/* 40 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	module.exports = function(value){
+	    return value.length?
+	                value.charAt(0).toUpperCase() + value.substring(1):
+	                value
+	}
+
+/***/ },
+/* 41 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var doubleColonRe      = /::/g
+	var upperToLowerRe     = /([A-Z]+)([A-Z][a-z])/g
+	var lowerToUpperRe     = /([a-z\d])([A-Z])/g
+	var underscoreToDashRe = /_/g
+
+	module.exports = function(name, separator){
+
+	   return name?
+	           name.replace(doubleColonRe, '/')
+	                .replace(upperToLowerRe, '$1_$2')
+	                .replace(lowerToUpperRe, '$1_$2')
+	                .replace(underscoreToDashRe, separator || '-')
+	            :
+	            ''
+	}
+
+/***/ },
+/* 42 */
+/***/ function(module, exports) {
+
+	var RE = /\s/g
+
+	module.exports = function(str){
+	    if (!str){
+	        return ''
+	    }
+
+	    return str.replace(RE, '')
+	}
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	var RE = /\s+/g
+
+	module.exports = function(str){
+	    if (!str){
+	        return ''
+	    }
+
+	    return str.trim().replace(RE, ' ')
+	}
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var separate     = __webpack_require__(41)
+	var camelize     = __webpack_require__(37)
+	var toUpperFirst = __webpack_require__(40)
+	var hyphenRe     = __webpack_require__(38)
+
+	function toLowerAndSpace(str, letter){
+	    return letter? ' ' + letter.toLowerCase(): ' '
+	}
+
+	module.exports = function(name, config){
+
+	    var str = config && config.capitalize?
+	                    separate(camelize(name), ' '):
+	                    separate(name, ' ').replace(hyphenRe, toLowerAndSpace)
+
+	    return toUpperFirst(str.trim())
+	}
+
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var separate = __webpack_require__(41)
+
+	module.exports = function(name){
+	   return separate(name).toLowerCase()
+	}
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	module.exports = function(str, endsWith){
+
+	    str += ''
+
+	    if (!str){
+	        return typeof endsWith == 'string'?
+	                    !endsWith:
+	                    false
+	    }
+
+	    endsWith += ''
+
+	    if (str.length < endsWith.length){
+	        return false
+	    }
+
+	    return str.lastIndexOf(endsWith) == str.length - endsWith.length
+	}
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	    alphanum: __webpack_require__(48),
+	    match   : __webpack_require__(49),
+	    guid   : __webpack_require__(65),
+	    // email   : require('./email'),
+	    numeric   : __webpack_require__(66)
+	}
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = __webpack_require__(49)(/^[a-zA-Z0-9]+$/)
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var F = __webpack_require__(50)
+
+	module.exports = F.curry(function(re, value){
+	    return !!re.test(value)
+	})
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	    var setImmediate = function(fn){
+	        setTimeout(fn, 0)
+	    }
+	    var clearImmediate = clearTimeout
+	    /**
+	     * Utility methods for working with functions.
+	     * These methods augment the Function prototype.
+	     *
+	     * Using {@link #before}
+	     *
+	     *      function log(m){
+	     *          console.log(m)
+	     *      }
+	     *
+	     *      var doLog = function (m){
+	     *          console.log('LOG ')
+	     *      }.before(log)
+	     *
+	     *      doLog('test')
+	     *      //will log
+	     *      //"LOG "
+	     *      //and then
+	     *      //"test"
+	     *
+	     *
+	     *
+	     * Using {@link #bindArgs}:
+	     *
+	     *      //returns the sum of all arguments
+	     *      function add(){
+	     *          var sum = 0
+	     *          [].from(arguments).forEach(function(n){
+	     *              sum += n
+	     *          })
+	     *
+	     *          return sum
+	     *      }
+	     *
+	     *      var add1 = add.bindArgs(1)
+	     *
+	     *      add1(2, 3) == 6
+	     *
+	     * Using {@link #lockArgs}:
+	     *
+	     *      function add(){
+	     *          var sum = 0
+	     *          [].from(arguments).forEach(function(n){
+	     *              sum += n
+	     *          })
+	     *
+	     *          return sum
+	     *      }
+	     *
+	     *      var add1_2   = add.lockArgs(1,2)
+	     *      var add1_2_3 = add.lockArgs(1,2,3)
+	     *
+	     *      add1_2(3,4)  == 3 //args are locked to only be 1 and 2
+	     *      add1_2_3(6)  == 6 //args are locked to only be 1, 2 and 3
+	     *
+	     *
+	     *
+	     * Using {@link #compose}:
+	     *
+	     *      function multiply(a,b){
+	     *          return a* b
+	     *      }
+	     *
+	     *      var multiply2 = multiply.curry()(2)
+	     *
+	     *      Function.compose(multiply2( add(5,6) )) == multiply2( add(5,6) )
+	     *
+	     *
+	     * @class Function
+	     */
+
+	    var SLICE = Array.prototype.slice
+
+	    var curry = __webpack_require__(52),
+
+	        findFn = function(fn, target, onFound){
+	            // if (typeof target.find == 'function'){
+	            //     return target.find(fn)
+	            // }
+
+	            onFound = typeof onFound == 'function'?
+	                        onFound:
+	                        function(found, key, target){
+	                            return found
+	                        }
+
+	            if (Array.isArray(target)){
+	                var i   = 0
+	                var len = target.length
+	                var it
+
+	                for(; i < len; i++){
+	                    it = target[i]
+	                    if (fn(it, i, target)){
+	                        return onFound(it, i, target)
+	                    }
+	                }
+
+	                return
+	            }
+
+	            if (typeof target == 'object'){
+	                var keys = Object.keys(target)
+	                var i = 0
+	                var len = keys.length
+	                var k
+	                var it
+
+	                for( ; i < len; i++){
+	                    k  = keys[i]
+	                    it = target[k]
+
+	                    if (fn(it, k, target)){
+	                        return onFound(it, k, target)
+	                    }
+	                }
+	            }
+	        },
+
+	        find = curry(findFn, 2),
+
+	        findIndex = curry(function(fn, target){
+	            return findFn(fn, target, function(it, i){
+	                return i
+	            })
+	        }),
+
+	        bindFunctionsOf = function(obj) {
+	            Object.keys(obj).forEach(function(k){
+	                if (typeof obj[k] == 'function'){
+	                    obj[k] = obj[k].bind(obj)
+	                }
+	            })
+
+	            return obj
+	        },
+
+	        /*
+	         * @param {Function...} an enumeration of functions, each consuming the result of the following function.
+	         *
+	         * For example: compose(c, b, a)(1,4) == c(b(a(1,4)))
+	         *
+	         * @return the result of the first function in the enumeration
+	         */
+	        compose = __webpack_require__(53),
+
+	        chain = __webpack_require__(54),
+
+	        once = __webpack_require__(55),
+
+	        bindArgsArray = __webpack_require__(56),
+
+	        bindArgs = __webpack_require__(57),
+
+	        lockArgsArray = __webpack_require__(51),
+
+	        lockArgs = __webpack_require__(58),
+
+	        skipArgs = function(fn, count){
+	            return function(){
+	                var args = SLICE.call(arguments, count || 0)
+
+	                return fn.apply(this, args)
+	            }
+	        },
+
+	        intercept = function(interceptedFn, interceptingFn, withStopArg){
+
+	            return function(){
+	                var args    = [].from(arguments),
+	                    stopArg = { stop: false }
+
+	                if (withStopArg){
+	                    args.push(stopArg)
+	                }
+
+	                var result = interceptingFn.apply(this, args)
+
+	                if (withStopArg){
+	                    if (stopArg.stop === true){
+	                        return result
+	                    }
+
+	                } else {
+	                    if (result === false){
+	                        return result
+	                    }
+	                }
+
+	                //the interception was not stopped
+	                return interceptedFn.apply(this, arguments)
+	            }
+
+	        },
+
+	        delay = function(fn, delay, scope){
+
+	            var delayIsNumber = delay * 1 == delay
+
+	            if (arguments.length == 2 && !delayIsNumber){
+	                scope = delay
+	                delay = 0
+	            } else {
+	                if (!delayIsNumber){
+	                    delay = 0
+	                }
+	            }
+
+	            return function(){
+	                var self = scope || this,
+	                    args = arguments
+
+	                if (delay < 0){
+	                    fn.apply(self, args)
+	                    return
+	                }
+
+	                if (delay || !setImmediate){
+	                    setTimeout(function(){
+	                        fn.apply(self, args)
+	                    }, delay)
+
+	                } else {
+	                    setImmediate(function(){
+	                        fn.apply(self, args)
+	                    })
+	                }
+	            }
+	        },
+
+	        defer = function(fn, scope){
+	            return delay(fn, 0, scope)
+	        },
+
+	        buffer = function(fn, delay, scope){
+
+	            var timeoutId = -1
+
+	            return function(){
+
+	                var self = scope || this,
+	                    args = arguments
+
+	                if (delay < 0){
+	                    fn.apply(self, args)
+	                    return
+	                }
+
+	                var withTimeout = delay || !setImmediate,
+	                    clearFn = withTimeout?
+	                                clearTimeout:
+	                                clearImmediate,
+	                    setFn   = withTimeout?
+	                                setTimeout:
+	                                setImmediate
+
+	                if (timeoutId !== -1){
+	                    clearFn(timeoutId)
+	                }
+
+	                timeoutId = setFn(function(){
+	                    fn.apply(self, args)
+	                    self = null
+	                }, delay)
+
+	            }
+
+	        },
+
+	        throttle = function(fn, delay, scope) {
+	            var timeoutId = -1,
+	                self,
+	                args
+
+	            return function () {
+
+	                self = scope || this
+	                args = arguments
+
+	                if (timeoutId !== -1) {
+	                    //the function was called once again in the delay interval
+	                } else {
+	                    timeoutId = setTimeout(function () {
+	                        fn.apply(self, args)
+
+	                        self = null
+	                        timeoutId = -1
+	                    }, delay)
+	                }
+
+	            }
+
+	        },
+
+	        spread = function(fn, delay, scope){
+
+	            var timeoutId       = -1
+	            var callCount       = 0
+	            var executeCount    = 0
+	            var nextArgs        = {}
+	            var increaseCounter = true
+	            var resultingFnUnbound
+	            var resultingFn
+
+	            resultingFn = resultingFnUnbound = function(){
+
+	                var args = arguments,
+	                    self = scope || this
+
+	                if (increaseCounter){
+	                    nextArgs[callCount++] = {args: args, scope: self}
+	                }
+
+	                if (timeoutId !== -1){
+	                    //the function was called once again in the delay interval
+	                } else {
+	                    timeoutId = setTimeout(function(){
+	                        fn.apply(self, args)
+
+	                        timeoutId = -1
+	                        executeCount++
+
+	                        if (callCount !== executeCount){
+	                            resultingFn = bindArgsArray(resultingFnUnbound, nextArgs[executeCount].args).bind(nextArgs[executeCount].scope)
+	                            delete nextArgs[executeCount]
+
+	                            increaseCounter = false
+	                            resultingFn.apply(self)
+	                            increaseCounter = true
+	                        } else {
+	                            nextArgs = {}
+	                        }
+	                    }, delay)
+	                }
+
+	            }
+
+	            return resultingFn
+	        },
+
+	        /*
+	         * @param {Array} args the array for which to create a cache key
+	         * @param {Number} [cacheParamNumber] the number of args to use for the cache key. Use this to limit the args that area actually used for the cache key
+	         */
+	        getCacheKey = function(args, cacheParamNumber){
+	            if (cacheParamNumber == null){
+	                cacheParamNumber = -1
+	            }
+
+	            var i        = 0,
+	                len      = Math.min(args.length, cacheParamNumber),
+	                cacheKey = [],
+	                it
+
+	            for ( ; i < len; i++){
+	                it = args[i]
+
+	                if (root.check.isPlainObject(it) || Array.isArray(it)){
+	                    cacheKey.push(JSON.stringify(it))
+	                } else {
+	                    cacheKey.push(String(it))
+	                }
+	            }
+
+	            return cacheKey.join(', ')
+	        },
+
+	        /*
+	         * @param {Function} fn - the function to cache results for
+	         * @param {Number} skipCacheParamNumber - the index of the boolean parameter that makes this function skip the caching and
+	         * actually return computed results.
+	         * @param {Function|String} cacheBucketMethod - a function or the name of a method on this object which makes caching distributed across multiple buckets.
+	         * If given, cached results will be searched into the cache corresponding to this bucket. If no result found, return computed result.
+	         *
+	         * For example this param is very useful when a function from a prototype is cached,
+	         * but we want to return the same cached results only for one object that inherits that proto, not for all objects. Thus, for example for Wes.Element,
+	         * we use the 'getId' cacheBucketMethod to indicate cached results for one object only.
+	         * @param {Function} [cacheKeyBuilder] A function to be used to compose the cache key
+	         *
+	         * @return {Function} a new function, which returns results from cache, if they are available, otherwise uses the given fn to compute the results.
+	         * This returned function has a 'clearCache' function attached, which clears the caching. If a parameter ( a bucket id) is  provided,
+	         * only clears the cache in the specified cache bucket.
+	         */
+	        cache = function(fn, config){
+	            config = config || {}
+
+	            var bucketCache = {},
+	                cache       = {},
+	                skipCacheParamNumber = config.skipCacheIndex,
+	                cacheBucketMethod    = config.cacheBucket,
+	                cacheKeyBuilder      = config.cacheKey,
+	                cacheArgsLength      = skipCacheParamNumber == null?
+	                                            fn.length:
+	                                            skipCacheParamNumber,
+	                cachingFn
+
+	            cachingFn = function(){
+	                var result,
+	                    skipCache = skipCacheParamNumber != null?
+	                                                arguments[skipCacheParamNumber] === true:
+	                                                false,
+	                    args = skipCache?
+	                                    SLICE.call(arguments, 0, cacheArgsLength):
+	                                    SLICE.call(arguments),
+
+	                    cacheBucketId = cacheBucketMethod != null?
+	                                        typeof cacheBucketMethod == 'function'?
+	                                            cacheBucketMethod():
+	                                            typeof this[cacheBucketMethod] == 'function'?
+	                                                this[cacheBucketMethod]():
+	                                                null
+	                                        :
+	                                        null,
+
+
+	                    cacheObject = cacheBucketId?
+	                                        bucketCache[cacheBucketId]:
+	                                        cache,
+
+	                    cacheKey = (cacheKeyBuilder || getCacheKey)(args, cacheArgsLength)
+
+	                if (cacheBucketId && !cacheObject){
+	                    cacheObject = bucketCache[cacheBucketId] = {}
+	                }
+
+	                if (skipCache || cacheObject[cacheKey] == null){
+	                    cacheObject[cacheKey] = result = fn.apply(this, args)
+	                } else {
+	                    result = cacheObject[cacheKey]
+	                }
+
+	                return result
+	            }
+
+	            /*
+	             * @param {String|Object|Number} [bucketId] the bucket for which to clear the cache. If none given, clears all the cache for this function.
+	             */
+	            cachingFn.clearCache = function(bucketId){
+	                if (bucketId){
+	                    delete bucketCache[String(bucketId)]
+	                } else {
+	                    cache = {}
+	                    bucketCache = {}
+	                }
+	            }
+
+	            /*
+	             *
+	             * @param {Array} cacheArgs The array of objects from which to create the cache key
+	             * @param {Number} [cacheParamNumber] A limit for the cache args that are actually used to compute the cache key.
+	             * @param {Function} [cacheKeyBuilder] The function to be used to compute the cache key from the given cacheArgs and cacheParamNumber
+	             */
+	            cachingFn.getCache = function(cacheArgs, cacheParamNumber, cacheKeyBuilder){
+	                return cachingFn.getBucketCache(null, cacheArgs, cacheParamNumber, cacheKeyBuilder)
+	            }
+
+	            /*
+	             *
+	             * @param {String} bucketId The id of the cache bucket from which to retrieve the cached value
+	             * @param {Array} cacheArgs The array of objects from which to create the cache key
+	             * @param {Number} [cacheParamNumber] A limit for the cache args that are actually used to compute the cache key.
+	             * @param {Function} [cacheKeyBuilder] The function to be used to compute the cache key from the given cacheArgs and cacheParamNumber
+	             */
+	            cachingFn.getBucketCache = function(bucketId, cacheArgs, cacheParamNumber, cacheKeyBuilder){
+	                var cacheObject = cache,
+	                    cacheKey = (cacheKeyBuilder || getCacheKey)(cacheArgs, cacheParamNumber)
+
+	                if (bucketId){
+	                    bucketId = String(bucketId);
+
+	                    cacheObject = bucketCache[bucketId] = bucketCache[bucketId] || {}
+	                }
+
+	                return cacheObject[cacheKey]
+	            }
+
+	            /*
+	             *
+	             * @param {Object} value The value to set in the cache
+	             * @param {Array} cacheArgs The array of objects from which to create the cache key
+	             * @param {Number} [cacheParamNumber] A limit for the cache args that are actually used to compute the cache key.
+	             * @param {Function} [cacheKeyBuilder] The function to be used to compute the cache key from the given cacheArgs and cacheParamNumber
+	             */
+	            cachingFn.setCache = function(value, cacheArgs, cacheParamNumber, cacheKeyBuilder){
+	                return cachingFn.setBucketCache(null, value, cacheArgs, cacheParamNumber, cacheKeyBuilder)
+	            }
+
+	            /*
+	             *
+	             * @param {String} bucketId The id of the cache bucket for which to set the cache value
+	             * @param {Object} value The value to set in the cache
+	             * @param {Array} cacheArgs The array of objects from which to create the cache key
+	             * @param {Number} [cacheParamNumber] A limit for the cache args that are actually used to compute the cache key.
+	             * @param {Function} [cacheKeyBuilder] The function to be used to compute the cache key from the given cacheArgs and cacheParamNumber
+	             */
+	            cachingFn.setBucketCache = function(bucketId, value, cacheArgs, cacheParamNumber, cacheKeyBuilder){
+
+	                var cacheObject = cache,
+	                    cacheKey = (cacheKeyBuilder || getCacheKey)(cacheArgs, cacheParamNumber)
+
+	                if (bucketId){
+	                    bucketId = String(bucketId)
+
+	                    cacheObject = bucketCache[bucketId] = bucketCache[bucketId] || {};
+	                }
+
+	                return cacheObject[cacheKey] = value
+	            }
+
+	            return cachingFn
+	        }
+
+	module.exports = {
+
+	    map: __webpack_require__(59),
+
+	    dot: __webpack_require__(60),
+
+	    maxArgs: __webpack_require__(61),
+
+	    /**
+	     * @method compose
+	     *
+	     * Example:
+	     *
+	     *      zippy.Function.compose(c, b, a)
+	     *
+	     * See {@link Function#compose}
+	     */
+	    compose: compose,
+
+	    /**
+	     * See {@link Function#self}
+	     */
+	    self: function(fn){
+	        return fn
+	    },
+
+	    /**
+	     * See {@link Function#buffer}
+	     */
+	    buffer: buffer,
+
+	    /**
+	     * See {@link Function#delay}
+	     */
+	    delay: delay,
+
+	    /**
+	     * See {@link Function#defer}
+	     * @param {Function} fn
+	     * @param {Object} scope
+	     */
+	    defer:defer,
+
+	    /**
+	     * See {@link Function#skipArgs}
+	     * @param {Function} fn
+	     * @param {Number} [count=0] how many args to skip when calling the resulting function
+	     * @return {Function} The function that will call the original fn without the first count args.
+	     */
+	    skipArgs: skipArgs,
+
+	    /**
+	     * See {@link Function#intercept}
+	     */
+	    intercept: function(fn, interceptedFn, withStopArgs){
+	        return intercept(interceptedFn, fn, withStopArgs)
+	    },
+
+	    /**
+	     * See {@link Function#throttle}
+	     */
+	    throttle: throttle,
+
+	    /**
+	     * See {@link Function#spread}
+	     */
+	    spread: spread,
+
+	    /**
+	     * See {@link Function#chain}
+	     */
+	    chain: function(fn, where, mainFn){
+	        return chain(where, mainFn, fn)
+	    },
+
+	    /**
+	     * See {@link Function#before}
+	     */
+	    before: function(fn, otherFn){
+	        return chain('before', otherFn, fn)
+	    },
+
+	    /**
+	     * See {@link Function#after}
+	     */
+	    after: function(fn, otherFn){
+	        return chain('after', otherFn, fn)
+	    },
+
+	    /**
+	     * See {@link Function#curry}
+	     */
+	    curry: curry,
+
+	    /**
+	     * See {@link Function#once}
+	     */
+	    once: once,
+
+	    /**
+	     * See {@link Function#bindArgs}
+	     */
+	    bindArgs: bindArgs,
+
+	    /**
+	     * See {@link Function#bindArgsArray}
+	     */
+	    bindArgsArray: bindArgsArray,
+
+	    /**
+	     * See {@link Function#lockArgs}
+	     */
+	    lockArgs: lockArgs,
+
+	    /**
+	     * See {@link Function#lockArgsArray}
+	     */
+	    lockArgsArray: lockArgsArray,
+
+	    bindFunctionsOf: bindFunctionsOf,
+
+	    find: find,
+
+	    findIndex: findIndex,
+
+	    newify: __webpack_require__(62)
+	}
+
+/***/ },
+/* 51 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+
+	module.exports = function(fn, args){
+
+	    return function(){
+	        if (!Array.isArray(args)){
+	            args = SLICE.call(args || [])
+	        }
+
+	        return fn.apply(this, args)
+	    }
+	}
+
+/***/ },
+/* 52 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	function curry(fn, n){
+
+	    if (typeof n !== 'number'){
+	        n = fn.length
+	    }
+
+	    function getCurryClosure(prevArgs){
+
+	        function curryClosure() {
+
+	            var len  = arguments.length
+	            var args = [].concat(prevArgs)
+
+	            if (len){
+	                args.push.apply(args, arguments)
+	            }
+
+	            if (args.length < n){
+	                return getCurryClosure(args)
+	            }
+
+	            return fn.apply(this, args)
+	        }
+
+	        return curryClosure
+	    }
+
+	    return getCurryClosure([])
+	}
+
+	module.exports = curry
+
+/***/ },
+/* 53 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	function composeTwo(f, g) {
+	    return function () {
+	        return f(g.apply(this, arguments))
+	    }
+	}
+
+	/*
+	 * @param {Function...} an enumeration of functions, each consuming the result of the following function.
+	 *
+	 * For example: compose(c, b, a)(1,4) == c(b(a(1,4)))
+	 *
+	 * @return the result of the first function in the enumeration
+	 */
+	module.exports = function(){
+
+	    var args = arguments
+	    var len  = args.length
+	    var i    = 0
+	    var f    = args[0]
+
+	    while (++i < len) {
+	        f = composeTwo(f, args[i])
+	    }
+
+	    return f
+	}
+
+/***/ },
+/* 54 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	function chain(where, fn, secondFn){
+
+	    return function(){
+	        if (where === 'before'){
+	            secondFn.apply(this, arguments)
+	        }
+
+	        var result = fn.apply(this, arguments)
+
+	        if (where !== 'before'){
+	            secondFn.apply(this, arguments)
+	        }
+
+	        return result
+	    }
+	}
+
+	module.exports = chain
+
+/***/ },
+/* 55 */
+/***/ function(module, exports) {
+
+	'use once'
+
+	function once(fn, scope){
+
+	    var called
+	    var result
+
+	    return function(){
+	        if (called){
+	            return result
+	        }
+
+	        called = true
+
+	        return result = fn.apply(scope || this, arguments)
+	    }
+	}
+
+	module.exports = once
+
+/***/ },
+/* 56 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+
+	module.exports = function(fn, args){
+	    return function(){
+	        var thisArgs = SLICE.call(args || [])
+
+	        if (arguments.length){
+	            thisArgs.push.apply(thisArgs, arguments)
+	        }
+
+	        return fn.apply(this, thisArgs)
+	    }
+	}
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var bindArgsArray = __webpack_require__(56)
+
+	module.exports = function(fn){
+	    return bindArgsArray(fn, SLICE.call(arguments,1))
+	}
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var lockArgsArray = __webpack_require__(51)
+
+	module.exports = function(fn){
+	    return lockArgsArray(fn, SLICE.call(arguments, 1))
+	}
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var curry = __webpack_require__(52)
+
+	module.exports = curry(function(fn, value){
+	    return value != undefined && typeof value.map?
+	            value.map(fn):
+	            fn(value)
+	})
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var curry = __webpack_require__(52)
+
+	module.exports = curry(function(prop, value){
+	    return value != undefined? value[prop]: undefined
+	})
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+	var curry = __webpack_require__(52)
+
+	module.exports = function(fn, count){
+	    return function(){
+	        return fn.apply(this, SLICE.call(arguments, 0, count))
+	    }
+	}
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var newify = __webpack_require__(63)
+	var curry  = __webpack_require__(52)
+
+	module.exports = curry(newify)
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getInstantiatorFunction = __webpack_require__(64)
+
+	module.exports = function(fn, args){
+		return getInstantiatorFunction(args.length)(fn, args)
+	}
+
+/***/ },
+/* 64 */
+/***/ function(module, exports) {
+
+	module.exports = function(){
+
+	    'use strict';
+
+	    var fns = {}
+
+	    return function(len){
+
+	        if ( ! fns [len ] ) {
+
+	            var args = []
+	            var i    = 0
+
+	            for (; i < len; i++ ) {
+	                args.push( 'a[' + i + ']')
+	            }
+
+	            fns[len] = new Function(
+	                            'c',
+	                            'a',
+	                            'return new c(' + args.join(',') + ')'
+	                        )
+	        }
+
+	        return fns[len]
+	    }
+
+	}()
+
+/***/ },
+/* 65 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var regex = /^[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}$/i
+	var regex2 = /^\{[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}\}$/i
+
+	module.exports = function(value){
+	    return regex.test(value) || regex2.test(value)
+	}
+
+
+
+/***/ },
 /* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = __webpack_require__(67).numeric
+
+/***/ },
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(68)
+
+/***/ },
+/* 68 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	module.exports = {
+	    'numeric'  : __webpack_require__(70),
+	    'number'   : __webpack_require__(71),
+	    'int'      : __webpack_require__(72),
+	    'float'    : __webpack_require__(73),
+	    'string'   : __webpack_require__(74),
+	    'function' : __webpack_require__(75),
+	    'object'   : __webpack_require__(69),
+	    'arguments': __webpack_require__(76),
+	    'boolean'  : __webpack_require__(77),
+	    'date'     : __webpack_require__(78),
+	    'regexp'   : __webpack_require__(79),
+	    'array'    : __webpack_require__(80)
+	}
+
+/***/ },
+/* 69 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var objectToString = Object.prototype.toString
+
+	module.exports = function(value){
+	    return objectToString.apply(value) === '[object Object]'
+	}
+
+/***/ },
+/* 70 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	module.exports = function(value){
+	    return !isNaN( parseFloat( value ) ) && isFinite( value )
+	}
+
+/***/ },
+/* 71 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	module.exports = function(value){
+	    return typeof value === 'number' && isFinite(value)
+	}
+
+/***/ },
+/* 72 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var number = __webpack_require__(71)
+
+	module.exports = function(value){
+	    return number(value) && (value === parseInt(value, 10))
+	}
+
+/***/ },
+/* 73 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var number = __webpack_require__(71)
+
+	module.exports = function(value){
+	    return number(value) && (value === parseFloat(value, 10)) && !(value === parseInt(value, 10))
+	}
+
+/***/ },
+/* 74 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	module.exports = function(value){
+	    return typeof value == 'string'
+	}
+
+/***/ },
+/* 75 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var objectToString = Object.prototype.toString
+
+	module.exports = function(value){
+	    return objectToString.apply(value) === '[object Function]'
+	}
+
+/***/ },
+/* 76 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var objectToString = Object.prototype.toString
+
+	module.exports = function(value){
+	    return objectToString.apply(value) === '[object Arguments]' || !!value.callee
+	}
+
+/***/ },
+/* 77 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	module.exports = function(value){
+	    return typeof value == 'boolean'
+	}
+
+/***/ },
+/* 78 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var objectToString = Object.prototype.toString
+
+	module.exports = function(value){
+	    return objectToString.apply(value) === '[object Date]'
+	}
+
+/***/ },
+/* 79 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var objectToString = Object.prototype.toString
+
+	module.exports = function(value){
+	    return objectToString.apply(value) === '[object RegExp]'
+	}
+
+/***/ },
+/* 80 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	module.exports = function(value){
+	    return Array.isArray(value)
+	}
+
+/***/ },
+/* 81 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	function val(fn) {
+
+	    return function (props, propName) {
+
+	        return fn(props[propName], propName, props);
+	    };
+	}
+
+	module.exports = {
+	    numeric: val(function (value, propName) {
+
+	        if (value == null) {
+	            return;
+	        }
+	        if (value * 1 != value) {
+	            return new Error('Invalid numeric value for ' + propName);
+	        }
+	    }),
+
+	    sortInfo: val(function (value) {
+	        if (typeof value == 'string' || typeof value == 'number') {
+	            return new Error('Invalid sortInfo specified');
+	        }
+	    }),
+
+	    column: val(function (value, props, propName) {
+
+	        if (!value) {
+	            return new Error('No columns specified. Please specify at least one column!');
+	        }
+
+	        if (!Array.isArray(value)) {
+	            value = props[propName] = [value];
+	        }
+
+	        var err;
+
+	        value.some(function (col, index) {
+	            if (!col.name) {
+	                err = new Error('All grid columns must have a name! Column at index ' + index + ' has no name!');
+	                return true;
+	            }
+	        });
+
+	        return err;
+	    })
+	};
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var React = __webpack_require__(6);
+	var assign = __webpack_require__(7);
+	var Scroller = __webpack_require__(83);
+
+	function emptyFn() {}
+
+	module.exports = React.createClass({
+
+	    displayName: 'ReactDataGrid.Wrapper',
+
+	    propTypes: {
+	        scrollLeft: React.PropTypes.number,
+	        scrollTop: React.PropTypes.number,
+	        scrollbarSize: React.PropTypes.number,
+	        rowHeight: React.PropTypes.any,
+	        renderCount: React.PropTypes.number
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            scrollLeft: 0,
+	            scrollTop: 0
+	        };
+	    },
+
+	    onMount: function onMount(scroller) {
+	        ;(this.props.onMount || emptyFn)(this, scroller);
+	    },
+
+	    render: function render() {
+
+	        var props = this.prepareProps(this.props);
+	        var rowsCount = props.renderCount;
+
+	        var groupsCount = 0;
+	        if (props.groupData) {
+	            groupsCount = props.groupData.groupsCount;
+	        }
+
+	        rowsCount += groupsCount;
+
+	        // var loadersSize = props.loadersSize
+	        var verticalScrollerSize = (props.totalLength + groupsCount) * props.rowHeight; // + loadersSize
+
+	        var content = props.empty ? React.createElement(
+	            'div',
+	            { className: 'z-empty-text', style: props.emptyTextStyle },
+	            props.emptyText
+	        ) : React.createElement('div', _extends({}, props.tableProps, { ref: 'table' }));
+
+	        return React.createElement(
+	            Scroller,
+	            {
+	                onMount: this.onMount,
+	                preventDefaultHorizontal: true,
+
+	                loadMask: !props.loadMaskOverHeader,
+	                loading: props.loading,
+
+	                scrollbarSize: props.scrollbarSize,
+
+	                minVerticalScrollStep: props.rowHeight,
+	                scrollTop: props.scrollTop,
+	                scrollLeft: props.scrollLeft,
+
+	                scrollHeight: verticalScrollerSize,
+	                scrollWidth: props.minRowWidth,
+
+	                onVerticalScroll: this.onVerticalScroll,
+	                onHorizontalScroll: this.onHorizontalScroll
+	            },
+	            content
+	        );
+	    },
+
+	    onVerticalScrollOverflow: function onVerticalScrollOverflow() {},
+
+	    onHorizontalScrollOverflow: function onHorizontalScrollOverflow() {},
+
+	    onHorizontalScroll: function onHorizontalScroll(scrollLeft) {
+	        this.props.onScrollLeft(scrollLeft);
+	    },
+
+	    onVerticalScroll: function onVerticalScroll(pos) {
+	        this.props.onScrollTop(pos);
+	    },
+
+	    prepareProps: function prepareProps(thisProps) {
+	        var props = {};
+
+	        assign(props, thisProps);
+
+	        return props;
+	    }
+	});
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
+
+	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	var _Component2 = __webpack_require__(84);
+
+	var _Component3 = _interopRequireDefault(_Component2);
+
+	'use strict';
+
+	var React = __webpack_require__(6);
+	var LoadMask = __webpack_require__(8);
+	var assign = __webpack_require__(7);
+	var DragHelper = __webpack_require__(86);
+	var normalize = __webpack_require__(21);
+	var hasTouch = __webpack_require__(94);
+
+	var preventDefault = function preventDefault(event) {
+		return event && event.preventDefault();
+	};
+	var signum = function signum(x) {
+		return x < 0 ? -1 : 1;
+	};
+	var emptyFn = function emptyFn() {};
+	var ABS = Math.abs;
+
+	var LoadMaskFactory = React.createFactory(LoadMask);
+
+	var horizontalScrollbarStyle = {};
+
+	var IS_MAC = global && global.navigator && global.navigator.appVersion && global.navigator.appVersion.indexOf('Mac') != -1;
+	var IS_FIREFOX = global && global.navigator && global.navigator.userAgent && !! ~global.navigator.userAgent.toLowerCase().indexOf('firefox');
+
+	if (IS_MAC) {
+		horizontalScrollbarStyle.position = 'absolute';
+		horizontalScrollbarStyle.height = 20;
+	}
+
+	var PT = React.PropTypes;
+	var DISPLAY_NAME = 'Scroller';
+
+	var ON_OVERFLOW_NAMES = {
+		vertical: 'onVerticalScrollOverflow',
+		horizontal: 'onHorizontalScrollOverflow'
+	};
+
+	var ON_SCROLL_NAMES = {
+		vertical: 'onVerticalScroll',
+		horizontal: 'onHorizontalScroll'
+	};
+
+	/**
+	 * Called on scroll by mouse wheel
+	 */
+	var syncScrollbar = function syncScrollbar(orientation) {
+
+		return function (scrollPos, event) {
+
+			var domNode = orientation == 'horizontal' ? this.getHorizontalScrollbarNode() : this.getVerticalScrollbarNode();
+			var scrollPosName = orientation == 'horizontal' ? 'scrollLeft' : 'scrollTop';
+			var overflowCallback;
+
+			domNode[scrollPosName] = scrollPos;
+
+			var newScrollPos = domNode[scrollPosName];
+
+			if (newScrollPos != scrollPos) {} else {
+				preventDefault(event);
+			}
+		};
+	};
+
+	var syncHorizontalScrollbar = syncScrollbar('horizontal');
+	var syncVerticalScrollbar = syncScrollbar('vertical');
+
+	var scrollAt = function scrollAt(orientation) {
+		var syncFn = orientation == 'horizontal' ? syncHorizontalScrollbar : syncVerticalScrollbar;
+
+		return function (scrollPos, event) {
+			// this.mouseWheelScroll = true
+
+			syncFn.call(this, Math.round(scrollPos), event);
+		};
+	};
+
+	var onScroll = function onScroll(orientation) {
+
+		var clientHeightNames = {
+			vertical: 'clientHeight',
+			horizontal: 'clientWidth'
+		};
+
+		var scrollHeightNames = {
+			vertical: 'scrollHeight',
+			horizontal: 'scrollWidth'
+		};
+
+		return function (event) {
+
+			var scrollPosName = orientation == 'horizontal' ? 'scrollLeft' : 'scrollTop';
+			var target = event.target;
+			var scrollPos = target[scrollPosName];
+
+			var onScroll = this.props[ON_SCROLL_NAMES[orientation]];
+			var onOverflow = this.props[ON_OVERFLOW_NAMES[orientation]];
+
+			// if (!this.mouseWheelScroll && onOverflow){
+			if (onOverflow) {
+				if (scrollPos == 0) {
+					onOverflow(-1, scrollPos);
+				} else if (scrollPos + target[clientHeightNames[orientation]] >= target[scrollHeightNames[orientation]]) {
+					onOverflow(1, scrollPos);
+				}
+			}
+
+			;(onScroll || emptyFn)(scrollPos);
+		};
+	};
+
+	/**
+	 * The scroller can have a load mask (loadMask prop is true by default),
+	 * you just need to specify loading=true to see it in action
+	 *
+	 * <Scroller loading={true} />
+	 *
+	 * If you don't want a load mask, specify
+	 *
+	 * <Scroller loadMask={false} />
+	 *
+	 * Or if you want to customize the loadMask factory, specify
+	 *
+	 * function mask(props) { return aMaskFactory(props) }
+	 * <Scroller loading={true} loadMask={mask}
+	 *
+	 */
+
+	var Scroller = (function (_Component) {
+		function Scroller() {
+			_classCallCheck(this, Scroller);
+
+			if (_Component != null) {
+				_Component.apply(this, arguments);
+			}
+		}
+
+		_inherits(Scroller, _Component);
+
+		_createClass(Scroller, [{
+			key: 'render',
+			value: function render() {
+				var props = this.p = this.prepareProps(this.props);
+
+				var loadMask = this.renderLoadMask(props);
+				var horizontalScrollbar = this.renderHorizontalScrollbar(props);
+				var verticalScrollbar = this.renderVerticalScrollbar(props);
+
+				var events = {};
+
+				if (!hasTouch) {
+					events.onWheel = this.handleWheel;
+				} else {
+					events.onTouchStart = this.handleTouchStart;
+				}
+
+				//extra div needed for SAFARI V SCROLL
+				//maxWidth needed for FF - see
+				//http://stackoverflow.com/questions/27424831/firefox-flexbox-overflow
+				//http://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
+				var content = React.createElement('div', { className: 'z-content-wrapper-fix', style: { maxWidth: 'calc(100% - ' + props.scrollbarSize + 'px)' },
+					children: props.children });
+
+				var renderProps = this.prepareRenderProps(props);
+
+				return React.createElement(
+					'div',
+					renderProps,
+					loadMask,
+					React.createElement(
+						'div',
+						_extends({ className: 'z-content-wrapper' }, events),
+						content,
+						verticalScrollbar
+					),
+					horizontalScrollbar
+				);
+			}
+		}, {
+			key: 'prepareRenderProps',
+			value: function prepareRenderProps(props) {
+				var renderProps = assign({}, props);
+
+				delete renderProps.height;
+				delete renderProps.width;
+
+				return renderProps;
+			}
+		}, {
+			key: 'handleTouchStart',
+			value: function handleTouchStart(event) {
+
+				var props = this.props;
+				var scroll = {
+					top: props.scrollTop,
+					left: props.scrollLeft
+				};
+
+				var newScrollPos;
+				var side;
+
+				DragHelper(event, {
+					scope: this,
+					onDrag: function onDrag(event, config) {
+						if (config.diff.top == 0 && config.diff.left == 0) {
+							return;
+						}
+
+						if (!side) {
+							side = ABS(config.diff.top) > ABS(config.diff.left) ? 'top' : 'left';
+						}
+
+						var diff = config.diff[side];
+
+						newScrollPos = scroll[side] - diff;
+
+						if (side == 'top') {
+							this.verticalScrollAt(newScrollPos, event);
+						} else {
+							this.horizontalScrollAt(newScrollPos, event);
+						}
+					}
+				});
+
+				event.stopPropagation();
+				preventDefault(event);
+			}
+		}, {
+			key: 'handleWheel',
+			value: function handleWheel(event) {
+
+				var props = this.props;
+				// var normalizedEvent = normalizeWheel(event)
+
+				var virtual = props.virtualRendering;
+				var horizontal = event.shiftKey;
+				var scrollStep = props.scrollStep;
+				var minScrollStep = props.minScrollStep;
+
+				var scrollTop = props.scrollTop;
+				var scrollLeft = props.scrollLeft;
+
+				// var delta = normalizedEvent.pixelY
+				var delta = event.deltaY;
+
+				if (horizontal) {
+					// delta = delta || normalizedEvent.pixelX
+					delta = delta || event.deltaX;
+
+					minScrollStep = props.minHorizontalScrollStep || minScrollStep;
+				} else {
+					minScrollStep = props.minVerticalScrollStep || minScrollStep;
+				}
+
+				if (typeof props.interceptWheelScroll == 'function') {
+					delta = props.interceptWheelScroll(delta, normalizedEvent, event);
+				} else if (minScrollStep) {
+					if (ABS(delta) < minScrollStep) {
+						delta = signum(delta) * minScrollStep;
+					}
+				}
+
+				if (horizontal) {
+					this.horizontalScrollAt(scrollLeft + delta, event);
+
+					props.preventDefaultHorizontal && preventDefault(event);
+				} else {
+					this.verticalScrollAt(scrollTop + delta, event);
+
+					props.preventDefaultVertical && preventDefault(event);
+				}
+			}
+		}, {
+			key: 'componentWillReceiveProps',
+			value: function componentWillReceiveProps() {
+				setTimeout(this.fixHorizontalScrollbar, 0);
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.fixHorizontalScrollbar();(this.props.onMount || emptyFn)(this);
+
+				setTimeout((function () {
+					this.fixHorizontalScrollbar();
+				}).bind(this), 0);
+			}
+		}, {
+			key: 'fixHorizontalScrollbar',
+			value: function fixHorizontalScrollbar() {
+				this.horizontalScrollerNode = this.horizontalScrollerNode || React.findDOMNode(this).querySelector('.z-horizontal-scroller');
+
+				var dom = this.horizontalScrollerNode;
+
+				if (dom) {
+					var height = dom.style.height;
+
+					dom.style.height = height == '0.2px' ? '0.1px' : '0.2px';
+				}
+			}
+		}, {
+			key: 'getVerticalScrollbarNode',
+			value: function getVerticalScrollbarNode() {
+				return this.verticalScrollbarNode = this.verticalScrollbarNode || React.findDOMNode(this).querySelector('.ref-verticalScrollbar');
+			}
+		}, {
+			key: 'getHorizontalScrollbarNode',
+			value: function getHorizontalScrollbarNode() {
+				return this.horizontalScrollbarNode = this.horizontalScrollbarNode || React.findDOMNode(this).querySelector('.ref-horizontalScrollbar');
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				delete this.horizontalScrollerNode;
+				delete this.horizontalScrollbarNode;
+				delete this.verticalScrollbarNode;
+			}
+		}, {
+			key: 'renderVerticalScrollbar',
+
+			////////////////////////////////////////////////
+			//
+			// RENDER METHODS
+			//
+			////////////////////////////////////////////////
+			value: function renderVerticalScrollbar(props) {
+				var height = props.scrollHeight;
+				var verticalScrollbarStyle = {
+					width: props.scrollbarSize
+				};
+
+				var onScroll = this.onVerticalScroll;
+
+				return React.createElement(
+					'div',
+					{ className: 'z-vertical-scrollbar', style: verticalScrollbarStyle },
+					React.createElement(
+						'div',
+						{
+							className: 'ref-verticalScrollbar',
+							onScroll: onScroll,
+							style: { overflow: 'auto', width: '100%', height: '100%' }
+						},
+						React.createElement('div', { className: 'z-vertical-scroller', style: { height: height } })
+					)
+				);
+			}
+		}, {
+			key: 'renderHorizontalScrollbar',
+			value: function renderHorizontalScrollbar(props) {
+				var scrollbar;
+				var onScroll = this.onHorizontalScroll;
+				var style = horizontalScrollbarStyle;
+				var minWidth = props.scrollWidth;
+
+				var scroller = React.createElement('div', { xref: 'horizontalScroller', className: 'z-horizontal-scroller', style: { width: minWidth } });
+
+				if (IS_MAC) {
+					//needed for mac safari
+					scrollbar = React.createElement(
+						'div',
+						{
+							style: style,
+							className: 'z-horizontal-scrollbar mac-fix'
+						},
+						React.createElement(
+							'div',
+							{
+								onScroll: onScroll,
+								className: 'ref-horizontalScrollbar z-horizontal-scrollbar-fix'
+							},
+							scroller
+						)
+					);
+				} else {
+					scrollbar = React.createElement(
+						'div',
+						{
+							style: style,
+							className: 'ref-horizontalScrollbar z-horizontal-scrollbar',
+							onScroll: onScroll
+						},
+						scroller
+					);
+				}
+
+				return scrollbar;
+			}
+		}, {
+			key: 'renderLoadMask',
+			value: function renderLoadMask(props) {
+				if (props.loadMask) {
+					var loadMaskProps = assign({ visible: props.loading }, props.loadMaskProps);
+
+					var defaultFactory = LoadMaskFactory;
+					var factory = typeof props.loadMask == 'function' ? props.loadMask : defaultFactory;
+
+					var mask = factory(loadMaskProps);
+
+					if (mask === undefined) {
+						//allow the specified factory to just modify props
+						//and then leave the rendering to the defaultFactory
+						mask = defaultFactory(loadMaskProps);
+					}
+
+					return mask;
+				}
+			}
+		}, {
+			key: 'prepareProps',
+
+			////////////////////////////////////////////////
+			//
+			// PREPARE PROPS METHODS
+			//
+			////////////////////////////////////////////////
+			value: function prepareProps(thisProps) {
+				var props = assign({}, thisProps);
+
+				props.className = this.prepareClassName(props);
+				props.style = this.prepareStyle(props);
+
+				return props;
+			}
+		}, {
+			key: 'prepareStyle',
+			value: function prepareStyle(props) {
+				var style = assign({}, props.style);
+
+				if (props.height != null) {
+					style.height = props.height;
+				}
+
+				if (props.width != null) {
+					style.width = props.width;
+				}
+
+				if (props.normalizeStyles) {
+					style = normalize(style);
+				}
+
+				return style;
+			}
+		}, {
+			key: 'prepareClassName',
+			value: function prepareClassName(props) {
+				var className = props.className || '';
+
+				if (Scroller.className) {
+					className += ' ' + Scroller.className;
+				}
+
+				return className;
+			}
+		}]);
+
+		return Scroller;
+	})(_Component3['default']);
+
+	Scroller.className = 'z-scroller';
+	Scroller.displayName = DISPLAY_NAME;
+
+	assign(Scroller.prototype, {
+		onVerticalScroll: onScroll('vertical'),
+		onHorizontalScroll: onScroll('horizontal'),
+
+		verticalScrollAt: scrollAt('vertical'),
+		horizontalScrollAt: scrollAt('horizontal'),
+
+		syncHorizontalScrollbar: syncHorizontalScrollbar,
+		syncVerticalScrollbar: syncVerticalScrollbar
+	});
+
+	Scroller.propTypes = {
+		loadMask: PT.oneOfType([PT.bool, PT.func]),
+
+		loading: PT.bool,
+		normalizeStyles: PT.bool,
+
+		scrollTop: PT.number,
+		scrollLeft: PT.number,
+
+		scrollWidth: PT.number.isRequired,
+		scrollHeight: PT.number.isRequired,
+
+		height: PT.number,
+		width: PT.number,
+
+		minScrollStep: PT.number,
+		minHorizontalScrollStep: PT.number,
+		minVerticalScrollStep: PT.number,
+
+		virtualRendering: PT.oneOf([true]),
+
+		preventDefaultVertical: PT.bool,
+		preventDefaultHorizontal: PT.bool
+	}, Scroller.defaultProps = {
+		'data-display-name': DISPLAY_NAME,
+		loadMask: true,
+
+		virtualRendering: true, //FOR NOW, only true is supported
+		scrollbarSize: 20,
+
+		scrollTop: 0,
+		scrollLeft: 0,
+
+		minScrollStep: 10,
+
+		minHorizontalScrollStep: IS_FIREFOX ? 40 : 1,
+
+		//since FF goes back in browser history on scroll too soon
+		//chrome and others also do this, but the normal preventDefault in syncScrollbar fn prevents this
+		preventDefaultHorizontal: IS_FIREFOX
+	};
+
+	exports['default'] = Scroller;
+	module.exports = exports['default'];
+
+	// overflowCallback = this.props[ON_OVERFLOW_NAMES[orientation]]
+	// overflowCallback && overflowCallback(signum(scrollPos), newScrollPos)
+	// raf(function(){
+	//     this.mouseWheelScroll = false
+	// }.bind(this))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(6);
+	var assign = __webpack_require__(85);
+
+	function autoBind(object) {
+	  var proto = object.constructor.prototype;
+
+	  var names = Object.getOwnPropertyNames(proto).filter(function (key) {
+	    return key != 'constructor' && key != 'render' && typeof proto[key] == 'function';
+	  });
+
+	  names.push('setState');
+	  names.forEach(function (key) {
+	    object[key] = object[key].bind(object);
+	  });
+
+	  return object;
+	}
+
+	var ReactClass = (function (_React$Component) {
+	  function ReactClass(props) {
+	    _classCallCheck(this, ReactClass);
+
+	    _get(Object.getPrototypeOf(ReactClass.prototype), 'constructor', this).call(this, props);
+	    autoBind(this);
+	  }
+
+	  _inherits(ReactClass, _React$Component);
+
+	  _createClass(ReactClass, [{
+	    key: 'prepareProps',
+	    value: function prepareProps(thisProps) {
+
+	      var props = assign({}, thisProps);
+
+	      props.style = this.prepareStyle(props);
+	      props.className = this.prepareClassName(props);
+
+	      return props;
+	    }
+	  }, {
+	    key: 'prepareClassName',
+	    value: function prepareClassName(props) {
+	      var className = props.className || '';
+
+	      var defaultProps = this.constructor.defaultProps;
+
+	      if (defaultProps.defaultClassName != null) {
+	        className += ' ' + defaultProps.defaultClassName;
+	      }
+
+	      return className;
+	    }
+	  }, {
+	    key: 'prepareStyle',
+	    value: function prepareStyle(props) {
+	      var defaultStyle;
+
+	      if (this.constructor.defaultProps) {
+	        defaultStyle = this.constructor.defaultProps.defaultStyle;
+	      }
+
+	      return assign({}, defaultStyle, props.style);
+	    }
+	  }]);
+
+	  return ReactClass;
+	})(React.Component);
+
+	module.exports = ReactClass;
+
+/***/ },
+/* 85 */
+/***/ function(module, exports) {
+
+	'use strict';
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+	function ToObject(val) {
+		if (val == null) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	function ownEnumerableKeys(obj) {
+		var keys = Object.getOwnPropertyNames(obj);
+
+		if (Object.getOwnPropertySymbols) {
+			keys = keys.concat(Object.getOwnPropertySymbols(obj));
+		}
+
+		return keys.filter(function (key) {
+			return propIsEnumerable.call(obj, key);
+		});
+	}
+
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var keys;
+		var to = ToObject(target);
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = arguments[s];
+			keys = ownEnumerableKeys(Object(from));
+
+			for (var i = 0; i < keys.length; i++) {
+				to[keys[i]] = from[keys[i]];
+			}
+		}
+
+		return to;
+	};
+
+
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var assign = __webpack_require__(7)
+	var Region = __webpack_require__(87)
+	var hasTouch = __webpack_require__(92)
+	var once   = __webpack_require__(93)
+
+	var Helper = function(config){
+	    this.config = config
+	}
+
+	var EVENTS = {
+	    move: hasTouch? 'touchmove': 'mousemove',
+	    up  : hasTouch? 'touchend': 'mouseup'
+	}
+
+	function emptyFn(){}
+
+	function getPageCoords(event){
+	    var firstTouch
+
+	    var pageX = event.pageX
+	    var pageY = event.pageY
+
+	    if (hasTouch && event.touches && (firstTouch = event.touches[0])){
+	        pageX = firstTouch.pageX
+	        pageY = firstTouch.pageY
+	    }
+
+	    return {
+	        pageX: pageX,
+	        pageY: pageY
+	    }
+	}
+
+	assign(Helper.prototype, {
+
+	    /**
+	     * Should be called on a mousedown event
+	     *
+	     * @param  {Event} event
+	     * @return {[type]}       [description]
+	     */
+	    initDrag: function(event) {
+
+	        this.onDragInit(event)
+
+	        var onDragStart = once(this.onDragStart, this)
+	        var target = hasTouch?
+	                        event.target:
+	                        window
+
+	        var mouseMoveListener = (function(event){
+	            onDragStart(event)
+	            this.onDrag(event)
+	        }).bind(this)
+
+	        var mouseUpListener = (function(event){
+
+	            this.onDrop(event)
+
+	            target.removeEventListener(EVENTS.move, mouseMoveListener)
+	            target.removeEventListener(EVENTS.up, mouseUpListener)
+	        }).bind(this)
+
+	        target.addEventListener(EVENTS.move, mouseMoveListener, false)
+	        target.addEventListener(EVENTS.up, mouseUpListener)
+	    },
+
+	    onDragInit: function(event){
+
+	        var config = {
+	            diff: {
+	                left: 0,
+	                top : 0
+	            }
+	        }
+	        this.state = {
+	            config: config
+	        }
+
+	        if (this.config.region){
+	            this.state.initialRegion = Region.from(this.config.region)
+	            this.state.dragRegion =
+	                config.dragRegion =
+	                    this.state.initialRegion.clone()
+	        }
+	        if (this.config.constrainTo){
+	            this.state.constrainTo = Region.from(this.config.constrainTo)
+	        }
+
+	        this.callConfig('onDragInit', event)
+	    },
+
+	    /**
+	     * Called when the first mousemove event occurs after drag is initialized
+	     * @param  {Event} event
+	     */
+	    onDragStart: function(event){
+	        this.state.initPageCoords = getPageCoords(event)
+
+	        this.state.didDrag = this.state.config.didDrag = true
+	        this.callConfig('onDragStart', event)
+	    },
+
+	    /**
+	     * Called on all mousemove events after drag is initialized.
+	     *
+	     * @param  {Event} event
+	     */
+	    onDrag: function(event){
+
+	        var config = this.state.config
+
+	        var initPageCoords = this.state.initPageCoords
+	        var eventCoords = getPageCoords(event)
+
+	        var diff = config.diff = {
+	            left: eventCoords.pageX - initPageCoords.pageX,
+	            top : eventCoords.pageY - initPageCoords.pageY
+	        }
+
+	        if (this.state.initialRegion){
+	            var dragRegion = config.dragRegion
+
+	            //set the dragRegion to initial coords
+	            dragRegion.set(this.state.initialRegion)
+
+	            //shift it to the new position
+	            dragRegion.shift(diff)
+
+	            if (this.state.constrainTo){
+	                //and finally constrain it if it's the case
+	                dragRegion.constrainTo(this.state.constrainTo)
+
+	                diff.left = dragRegion.left - this.state.initialRegion.left
+	                diff.top  = dragRegion.top - this.state.initialRegion.top
+	            }
+
+	            config.dragRegion = dragRegion
+	        }
+
+	        this.callConfig('onDrag', event)
+	    },
+
+	    /**
+	     * Called on the mouseup event on window
+	     *
+	     * @param  {Event} event
+	     */
+	    onDrop: function(event){
+	        this.callConfig('onDrop', event)
+
+	        this.state = null
+	    },
+
+	    callConfig: function(fnName, event){
+	        var config = this.state.config
+	        var args   = [event, config]
+
+	        var fn = this.config[fnName]
+
+	        if (fn){
+	            fn.apply(this, args)
+	        }
+	    }
+
+	})
+
+	module.exports = function(event, config){
+
+	    if (config.scope){
+	        var skippedKeys = {
+	            scope      : 1,
+	            region     : 1,
+	            constrainTo: 1
+	        }
+
+	        Object.keys(config).forEach(function(key){
+	            var value = config[key]
+
+	            if (key in skippedKeys){
+	                return
+	            }
+
+	            if (typeof value == 'function'){
+	                config[key] = value.bind(config.scope)
+	            }
+	        })
+	    }
+	    var helper = new Helper(config)
+
+	    helper.initDrag(event)
+
+	    return helper
+	}
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Region = __webpack_require__(10)
+
+	__webpack_require__(88)
+	__webpack_require__(89)
+
+	var COMPUTE_ALIGN_REGION = __webpack_require__(90)
+
+	/**
+	 * region-align module exposes methods for aligning {@link Element} and {@link Region} instances
+	 *
+	 * The #alignTo method aligns this to the target element/region using the specified positions. See #alignTo for a graphical example.
+	 *
+	 *
+	 *      var div = Element.select('div.first')
+	 *
+	 *      div.alignTo(Element.select('body') , 'br-br')
+	 *
+	 *      //aligns the div to be in the bottom-right corner of the body
+	 *
+	 * Other useful methods
+	 *
+	 *  * {@link #alignRegions} - aligns a given source region to a target region
+	 *  * {@link #COMPUTE_ALIGN_REGION} - given a source region and a target region, and alignment positions, returns a clone of the source region, but aligned to satisfy the given alignments
+	 */
+
+
+	/**
+	 * Aligns sourceRegion to targetRegion. It modifies the sourceRegion in order to perform the correct alignment.
+	 * See #COMPUTE_ALIGN_REGION for details and examples.
+	 *
+	 * This method calls #COMPUTE_ALIGN_REGION passing to it all its arguments. The #COMPUTE_ALIGN_REGION method returns a region that is properly aligned.
+	 * If this returned region position/size differs from sourceRegion, then the sourceRegion is modified to be an exact copy of the aligned region.
+	 *
+	 * @inheritdoc #COMPUTE_ALIGN_REGION
+	 * @return {String} the position used for alignment
+	 */
+	Region.alignRegions = function(sourceRegion, targetRegion, positions, config){
+
+	    var result        = COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config)
+	    var alignedRegion = result.region
+
+	    if ( !alignedRegion.equals(sourceRegion) ) {
+	        sourceRegion.setRegion(alignedRegion)
+	    }
+
+	    return result.position
+
+	}
+
+	    /**
+	     *
+	     * The #alignTo method aligns this to the given target region, using the specified alignment position(s).
+	     * You can also specify a constrain for the alignment.
+	     *
+	     * Example
+	     *
+	     *      BIG
+	     *      ________________________
+	     *      |  _______              |
+	     *      | |       |             |
+	     *      | |   A   |             |
+	     *      | |       |      _____  |
+	     *      | |_______|     |     | |
+	     *      |               |  B  | |
+	     *      |               |     | |
+	     *      |_______________|_____|_|
+	     *
+	     * Assume the *BIG* outside rectangle is our constrain region, and you want to align the *A* rectangle
+	     * to the *B* rectangle. Ideally, you'll want their tops to be aligned, and *A* to be placed at the right side of *B*
+	     *
+	     *
+	     *      //so we would align them using
+	     *
+	     *      A.alignTo(B, 'tl-tr', { constrain: BIG })
+	     *
+	     * But this would result in
+	     *
+	     *       BIG
+	     *      ________________________
+	     *      |                       |
+	     *      |                       |
+	     *      |                       |
+	     *      |                _____ _|_____
+	     *      |               |     | .     |
+	     *      |               |  B  | . A   |
+	     *      |               |     | .     |
+	     *      |_______________|_____|_._____|
+	     *
+	     *
+	     * Which is not what we want. So we specify an array of options to try
+	     *
+	     *      A.alignTo(B, ['tl-tr', 'tr-tl'], { constrain: BIG })
+	     *
+	     * So by this we mean: try to align A(top,left) with B(top,right) and stick to the BIG constrain. If this is not possible,
+	     * try the next option: align A(top,right) with B(top,left)
+	     *
+	     * So this is what we end up with
+	     *
+	     *      BIG
+	     *      ________________________
+	     *      |                       |
+	     *      |                       |
+	     *      |                       |
+	     *      |        _______ _____  |
+	     *      |       |       |     | |
+	     *      |       |   A   |  B  | |
+	     *      |       |       |     | |
+	     *      |_______|_______|_____|_|
+	     *
+	     *
+	     * Which is a lot better!
+	     *
+	     * @param {Element/Region} target The target to which to align this alignable.
+	     *
+	     * @param {String[]/String} positions The positions for the alignment.
+	     *
+	     * Example:
+	     *
+	     *      'br-tl'
+	     *      ['br-tl','br-tr','cx-tc']
+	     *
+	     * This method will try to align using the first position. But if there is a constrain region, that position might not satisfy the constrain.
+	     * If this is the case, the next positions will be tried. If one of them satifies the constrain, it will be used for aligning and it will be returned from this method.
+	     *
+	     * If no position matches the contrain, the one with the largest intersection of the source region with the constrain will be used, and this alignable will be resized to fit the constrain region.
+	     *
+	     * @param {Object} config A config object with other configuration for this method
+	     *
+	     * @param {Array[]/Object[]/Object} config.offset The offset to use for aligning. If more that one offset is specified, then offset at a given index is used with the position at the same index.
+	     *
+	     * An offset can have the following form:
+	     *
+	     *      [left_offset, top_offset]
+	     *      {left: left_offset, top: top_offset}
+	     *      {x: left_offset, y: top_offset}
+	     *
+	     * You can pass one offset or an array of offsets. In case you pass just one offset,
+	     * it cannot have the array form, so you cannot call
+	     *
+	     *      this.alignTo(target, positions, [10, 20])
+	     *
+	     * If you do, it will not be considered. Instead, please use
+	     *
+	     *      this.alignTo(target, positions, {x: 10, y: 20})
+	     *
+	     * Or
+	     *
+	     *      this.alignTo(target, positions, [[10, 20]] )
+	     *
+	     * @param {Boolean/Element/Region} config.constrain If boolean, target will be constrained to the document region, otherwise,
+	     * getRegion will be called on this argument to determine the region we need to constrain to.
+	     *
+	     * @param {Boolean/Object} config.sync Either boolean or an object with {width, height}. If it is boolean,
+	     * both width and height will be synced. If directions are specified, will only sync the direction which is specified as true
+	     *
+	     * @return {String}
+	     *
+	     */
+	Region.prototype.alignTo = function(target, positions, config){
+
+	    config = config || {}
+
+	    var sourceRegion = this
+	    var targetRegion = Region.from(target)
+
+	    var result = COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config)
+	    var resultRegion = result.region
+
+	    if (!resultRegion.equalsSize(sourceRegion)){
+	        this.setSize(resultRegion.getSize())
+	    }
+	    if (!resultRegion.equalsPosition(sourceRegion)){
+	        this.setPosition(resultRegion.getPosition(), { absolute: !!config.absolute })
+	    }
+
+	    return result.position
+	}
+
+	module.exports = Region
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var Region = __webpack_require__(10)
+
+	/**
+	 * @static
+	 * Aligns the source region to the target region, so as to correspond to the given alignment.
+	 *
+	 * NOTE that this method makes changes on the sourceRegion in order for it to be aligned as specified.
+	 *
+	 * @param {Region} sourceRegion
+	 * @param {Region} targetRegion
+	 *
+	 * @param {String} align A string with 2 valid align positions, eg: 'tr-bl'.
+	 * For valid positions, see {@link Region#getPoint}
+	 *
+	 * Having 2 regions, we need to be able to align them as we wish:
+	 *
+	 * for example, if we have
+	 *
+	 *       source    target
+	 *       ________________
+	 *       ____
+	 *      |    |     ________
+	 *      |____|    |        |
+	 *                |        |
+	 *                |________|
+	 *
+	 * and we align 't-t', we get:
+	 *
+	 *       source    target
+	 *       _________________
+	 *
+	 *       ____      ________
+	 *      |    |    |        |
+	 *      |____|    |        |
+	 *                |________|
+	 *
+	 *  In this case, the source was moved down to be aligned to the top of the target
+	 *
+	 *
+	 * and if we align 'tc-tc' we get
+	 *
+	 *       source     target
+	 *       __________________
+	 *
+	 *                 ________
+	 *                | |    | |
+	 *                | |____| |
+	 *                |________|
+	 *
+	 *  Since the source was moved to have the top-center point to be the same with target top-center
+	 *
+	 *
+	 *
+	 * @return {RegionClass} The Region class
+	 */
+	Region.align = function(sourceRegion, targetRegion, align){
+
+	    targetRegion = Region.from(targetRegion)
+
+	    align = (align || 'c-c').split('-')
+
+	    //<debug>
+	    if (align.length != 2){
+	        console.warn('Incorrect region alignment! The align parameter need to be in the form \'br-c\', that is, a - separated string!', align)
+	    }
+	    //</debug>
+
+	    return Region.alignToPoint(sourceRegion, targetRegion.getPoint(align[1]), align[0])
+	}
+
+	/**
+	 * Modifies the given region to be aligned to the point, as specified by anchor
+	 *
+	 * @param {Region} region The region to align to the point
+	 * @param {Object} point The point to be used as a reference
+	 * @param {Number} point.x
+	 * @param {Number} point.y
+	 * @param {String} anchor The position where to anchor the region to the point. See {@link #getPoint} for available options/
+	 *
+	 * @return {Region} the given region
+	 */
+	Region.alignToPoint = function(region, point, anchor){
+
+	    region = Region.from(region)
+
+	    var sourcePoint = region.getPoint(anchor)
+	    var count       = 0
+	    var shiftObj    = {}
+
+	    if (
+	            sourcePoint.x != null &&
+	            point.x != null
+	        ){
+
+	            count++
+	            shiftObj.left = point.x - sourcePoint.x
+	    }
+
+	    if (
+	            sourcePoint.y != null &&
+	            point.y != null
+	        ){
+	            count++
+	            shiftObj.top = point.y - sourcePoint.y
+	    }
+
+	    if (count){
+
+	        region.shift(shiftObj)
+
+	    }
+
+	    return region
+	}
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Region = __webpack_require__(10)
+
+	/**
+	 *
+	 * Aligns this region to the given region
+	 * @param {Region} region
+	 * @param {String} alignPositions For available positions, see {@link #getPoint}
+	 *
+	 *     eg: 'tr-bl'
+	 *
+	 * @return this
+	 */
+	Region.prototype.alignToRegion = function(region, alignPositions){
+	    Region.align(this, region, alignPositions)
+
+	    return this
+	}
+
+	/**
+	 * Aligns this region to the given point, in the anchor position
+	 * @param {Object} point eg: {x: 20, y: 600}
+	 * @param {Number} point.x
+	 * @param {Number} point.y
+	 *
+	 * @param {String} anchor For available positions, see {@link #getPoint}
+	 *
+	 *     eg: 'bl'
+	 *
+	 * @return this
+	 */
+	 Region.prototype.alignToPoint = function(point, anchor){
+	    Region.alignToPoint(this, point, anchor)
+
+	    return this
+	}
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var ALIGN_TO_NORMALIZED = __webpack_require__(91)
+
+	var Region = __webpack_require__(10)
+
+	/**
+	 * @localdoc Given source and target regions, and the given alignments required, returns a region that is the resulting allignment.
+	 * Does not modify the sourceRegion.
+	 *
+	 * Example
+	 *
+	 *      var sourceRegion = zippy.getInstance({
+	 *          alias  : 'z.region',
+	 *          top    : 10,
+	 *          left   : 10,
+	 *          bottom : 40,
+	 *          right  : 100
+	 *      })
+	 *
+	 *      var targetRegion = zippy.getInstance({
+	 *          alias  : 'z.region',
+	 *          top    : 10,
+	 *          left   : 10,
+	 *          bottom : 40,
+	 *          right  : 100
+	 *      })
+	 *      //has top-left at (10,10)
+	 *      //and bottom-right at (40, 100)
+	 *
+	 *      var alignRegion = alignable.COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, 'tl-br')
+	 *
+	 *      //alignRegion will be a clone of sourceRegion, but will have the
+	 *      //top-left corner aligned with bottom-right of targetRegion
+	 *
+	 *      alignRegion.get() // => { top: 40, left: 100, bottom: 70, right: 190 }
+	 *
+	 * @param  {Region} sourceRegion The source region to align to targetRegion
+	 * @param  {Region} targetRegion The target region to which to align the sourceRegion
+	 * @param  {String/String[]} positions    A string ( delimited by "-" characters ) or an array of strings with the position to try, in the order of their priority.
+	 * See Region#getPoint for a list of available positions. They can be combined in any way.
+	 * @param  {Object} config      A config object with other configuration for the alignment
+	 * @param  {Object/Object[]} config.offset      Optional offsets. Either an object or an array with a different offset for each position
+	 * @param  {Element/Region/Boolean} config.constrain  The constrain to region or element. If the boolean true, Region.getDocRegion() will be used
+	 * @param  {Object/Boolean} config.sync   A boolean object that indicates whether to sync sourceRegion and targetRegion sizes (width/height or both). Can be
+	 *
+	 *  * true - in order to sync both width and height
+	 *  * { width: true }  - to only sync width
+	 *  * { height: true } - to only sync height
+	 *  * { size: true }   - to sync both width and height
+	 *
+	 * @return {Object} an object with the following keys:
+	 *
+	 *  * position - the position where the alignment was made. One of the given positions
+	 *  * region   - the region where the alignment is in place
+	 *  * positionChanged - boolean value indicating if the position of the returned region is different from the position of sourceRegion
+	 *  * widthChanged    - boolean value indicating if the width of the returned region is different from the width of sourceRegion
+	 *  * heightChanged   - boolean value indicating if the height of the returned region is different from the height of sourceRegion
+	 */
+	function COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config){
+	    sourceRegion = Region.from(sourceRegion)
+
+	    var sourceClone = sourceRegion.clone()
+	    var position    = ALIGN_TO_NORMALIZED(sourceClone, targetRegion, positions, config)
+
+	    return {
+	        position        : position,
+	        region          : sourceClone,
+	        widthChanged    : sourceClone.getWidth() != sourceRegion.getWidth(),
+	        heightChanged   : sourceClone.getHeight() != sourceRegion.getHeight(),
+	        positionChanged : sourceClone.equalsPosition(sourceRegion)
+	    }
+	}
+
+
+	module.exports = COMPUTE_ALIGN_REGION
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var Region = __webpack_require__(10)
+
+	/**
+	 *
+	 * This method is trying to align the sourceRegion to the targetRegion, given the alignment positions
+	 * and the offsets. It only modifies the sourceRegion
+	 *
+	 * This is all well and easy, but if there is a constrainTo region, the algorithm has to take it into account.
+	 * In this case, it works as follows.
+	 *
+	 *  * start with the first alignment position. Aligns the region, adds the offset and then check for the constraint.
+	 *  * if the constraint condition is ok, return the position.
+	 *  * otherwise, remember the intersection area, if the regions are intersecting.
+	 *  * then go to the next specified align position, and so on, computing the maximum intersection area.
+	 *
+	 * If no alignment fits the constrainRegion, the sourceRegion will be resized to match it,
+	 * using the position with the maximum intersection area.
+	 *
+	 * Since we have computed the index of the position with the max intersection area, take that position,
+	 * and align the sourceRegion accordingly. Then resize the sourceRegion to the intersection, and reposition
+	 * it again, since resizing it might have destroyed the alignment.
+	 *
+	 * Return the position.
+	 *
+	 * @param {Region} sourceRegion
+	 * @param {Region} targetRegion
+	 * @param {String[]} positions
+	 * @param {Object} config
+	 * @param {Array} config.offset
+	 * @param {Region} config.constrain
+	 * @param {Boolean/Object} config.sync
+	 *
+	 * @return {String/Undefined} the chosen position for the alignment, or undefined if no position found
+	 */
+	function ALIGN_TO_NORMALIZED(sourceRegion, targetRegion, positions, config){
+
+	    targetRegion = Region.from(targetRegion)
+
+	    config = config  || {}
+
+	    var constrainTo = config.constrain,
+	        syncOption  = config.sync,
+	        offsets     = config.offset || [],
+	        syncWidth   = false,
+	        syncHeight  = false,
+	        sourceClone = sourceRegion.clone()
+
+	    /*
+	     * Prepare the method arguments: positions, offsets, constrain and sync options
+	     */
+	    if (!Array.isArray(positions)){
+	        positions = positions? [positions]: []
+	    }
+
+	    if (!Array.isArray(offsets)){
+	        offsets = offsets? [offsets]: []
+	    }
+
+	    if (constrainTo){
+	        constrainTo = constrainTo === true?
+	                                Region.getDocRegion():
+	                                constrainTo.getRegion()
+	    }
+
+	    if (syncOption){
+
+	        if (syncOption.size){
+	            syncWidth  = true
+	            syncHeight = true
+	        } else {
+	            syncWidth  = syncOption === true?
+	                            true:
+	                            syncOption.width || false
+
+	            syncHeight = syncOption === true?
+	                            true:
+	                            syncOption.height || false
+	        }
+	    }
+
+	    if (syncWidth){
+	        sourceClone.setWidth(targetRegion.getWidth())
+	    }
+	    if (syncHeight){
+	        sourceClone.setHeight(targetRegion.getHeight())
+
+	    }
+
+	    var offset,
+	        i = 0,
+	        len = positions.length,
+	        pos,
+	        intersection,
+	        itArea,
+	        maxArea = -1,
+	        maxAreaIndex = -1
+
+	    for (; i < len; i++){
+	        pos     = positions[i]
+	        offset  = offsets[i]
+
+	        sourceClone.alignToRegion(targetRegion, pos)
+
+	        if (offset){
+	            if (!Array.isArray(offset)){
+	                offset = offsets[i] = [offset.x || offset.left, offset.y || offset.top]
+	            }
+
+	            sourceClone.shift({
+	                left: offset[0],
+	                top : offset[1]
+	            })
+	        }
+
+	        //the source region is already aligned in the correct position
+
+	        if (constrainTo){
+	            //if we have a constrain region, test for the constrain
+	            intersection = sourceClone.getIntersection(constrainTo)
+
+	            if ( intersection && intersection.equals(sourceClone) ) {
+	                //constrain respected, so return (the aligned position)
+
+	                sourceRegion.set(sourceClone)
+	                return pos
+	            } else {
+
+	                //the constrain was not respected, so continue trying
+	                if (intersection && ((itArea = intersection.getArea()) > maxArea)){
+	                    maxArea      = itArea
+	                    maxAreaIndex = i
+	                }
+	            }
+
+	        } else {
+	            sourceRegion.set(sourceClone)
+	            return pos
+	        }
+	    }
+
+	    //no alignment respected the constraints
+	    if (~maxAreaIndex){
+	        pos     = positions[maxAreaIndex]
+	        offset  = offsets[maxAreaIndex]
+
+	        sourceClone.alignToRegion(targetRegion, pos)
+
+	        if (offset){
+	            sourceClone.shift({
+	                left: offset[0],
+	                top : offset[1]
+	            })
+	        }
+
+	        //we are sure an intersection exists, because of the way the maxAreaIndex was computed
+	        intersection = sourceClone.getIntersection(constrainTo)
+
+	        sourceClone.setRegion(intersection)
+	        sourceClone.alignToRegion(targetRegion, pos)
+
+	        if (offset){
+	            sourceClone.shift({
+	                left: offset[0],
+	                top : offset[1]
+	            })
+	        }
+
+	        sourceRegion.set(sourceClone)
+
+	        return pos
+	    }
+
+	}
+
+	module.exports = ALIGN_TO_NORMALIZED
+
+/***/ },
+/* 92 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 93 */
+/***/ function(module, exports) {
+
+	'use once'
+
+	module.exports = function once(fn, scope){
+
+	    var called
+	    var result
+
+	    return function(){
+	        if (called){
+	            return result
+	        }
+
+	        called = true
+
+	        return result = fn.apply(scope || this, arguments)
+	    }
+	}
+
+/***/ },
+/* 94 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var React = __webpack_require__(6);
+	var Region = __webpack_require__(10);
+	var ReactMenu = React.createFactory(__webpack_require__(96));
+	var assign = __webpack_require__(7);
+	var clone = __webpack_require__(126);
+	var asArray = __webpack_require__(131);
+	var findIndexBy = __webpack_require__(132);
+	var findIndexByName = __webpack_require__(133);
+	var Cell = __webpack_require__(134);
+	var setupColumnDrag = __webpack_require__(135);
+	var setupColumnResize = __webpack_require__(136);
+
+	var normalize = __webpack_require__(21);
+	var EVENT_NAMES = __webpack_require__(114);
+
+	function emptyFn() {}
+
+	function getColumnSortInfo(column, sortInfo) {
+
+	    sortInfo = asArray(sortInfo);
+
+	    var index = findIndexBy(sortInfo, function (info) {
+	        return info.name === column.name;
+	    });
+
+	    return sortInfo[index];
+	}
+
+	function removeColumnSort(column, sortInfo) {
+	    sortInfo = asArray(sortInfo);
+
+	    var index = findIndexBy(sortInfo, function (info) {
+	        return info.name === column.name;
+	    });
+
+	    if (~index) {
+	        sortInfo.splice(index, 1);
+	    }
+
+	    return sortInfo;
+	}
+
+	function getDropState() {
+	    return {
+	        dragLeft: null,
+	        dragColumn: null,
+	        dragColumnIndex: null,
+	        dragging: false,
+	        dropIndex: null,
+
+	        shiftIndexes: null,
+	        shiftSize: null
+	    };
+	}
+
+	module.exports = React.createClass({
+
+	    displayName: 'ReactDataGrid.Header',
+
+	    propTypes: {
+	        columns: React.PropTypes.array
+	    },
+
+	    onDrop: function onDrop(event) {
+	        var state = this.state;
+	        var props = this.props;
+
+	        if (state.dragging) {
+	            event.stopPropagation();
+	        }
+
+	        var dragIndex = state.dragColumnIndex;
+	        var dropIndex = state.dropIndex;
+
+	        if (dropIndex != null) {
+
+	            //since we need the indexes in the array of all columns
+	            //not only in the array of the visible columns
+	            //we need to search them and make this transform
+	            var dragColumn = props.columns[dragIndex];
+	            var dropColumn = props.columns[dropIndex];
+
+	            dragIndex = findIndexByName(props.allColumns, dragColumn.name);
+	            dropIndex = findIndexByName(props.allColumns, dropColumn.name);
+
+	            this.props.onDropColumn(dragIndex, dropIndex);
+	        }
+
+	        this.setState(getDropState());
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            defaultClassName: 'z-header-wrapper',
+	            draggingClassName: 'z-dragging',
+	            cellClassName: 'z-column-header',
+	            defaultStyle: {},
+	            sortInfo: null,
+	            scrollLeft: 0,
+	            scrollTop: 0
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+
+	        return {
+	            mouseOver: true,
+	            dragging: false,
+
+	            shiftSize: null,
+	            dragColumn: null,
+	            shiftIndexes: null
+	        };
+	    },
+
+	    render: function render() {
+	        var props = this.prepareProps(this.props);
+	        var state = this.state;
+
+	        var cellMap = {};
+	        var cells = props.columns.map(function (col, index) {
+	            var cell = this.renderCell(props, state, col, index);
+	            cellMap[col.name] = cell;
+
+	            return cell;
+	        }, this);
+
+	        if (props.columnGroups && props.columnGroups.length) {
+
+	            cells = props.columnGroups.map(function (colGroup) {
+	                var cellProps = {};
+	                var columns = [];
+
+	                var cells = colGroup.columns.map(function (colName) {
+	                    var col = props.columnMap[colName];
+	                    columns.push(col);
+	                    return cellMap[colName];
+	                });
+
+	                return React.createElement(
+	                    Cell,
+	                    cellProps,
+	                    cells
+	                );
+	            }, this);
+	        }
+
+	        var style = normalize(props.style);
+	        var headerStyle = normalize({
+	            paddingRight: props.scrollbarSize,
+	            transform: 'translate3d(' + -props.scrollLeft + 'px, ' + -props.scrollTop + 'px, 0px)'
+	        });
+
+	        return React.createElement(
+	            'div',
+	            { style: style, className: props.className },
+	            React.createElement(
+	                'div',
+	                { className: 'z-header', style: headerStyle },
+	                cells
+	            )
+	        );
+	    },
+
+	    renderCell: function renderCell(props, state, column, index) {
+
+	        var resizing = props.resizing;
+	        var text = column.title;
+	        var className = props.cellClassName || '';
+	        var style = {
+	            left: 0
+	        };
+
+	        var menu = this.renderColumnMenu(props, state, column, index);
+
+	        if (state.dragColumn && state.shiftIndexes && state.shiftIndexes[index]) {
+	            style.left = state.shiftSize;
+	        }
+
+	        if (state.dragColumn === column) {
+	            className += ' z-drag z-over';
+	            style.zIndex = 1;
+	            style.left = state.dragLeft || 0;
+	        }
+
+	        var filterIcon = props.filterIcon || React.createElement(
+	            'svg',
+	            { version: '1.1', style: { transform: 'translate3d(0,0,0)', height: '100%', width: '100%', padding: '0px 2px' }, viewBox: '0 0 3 4' },
+	            React.createElement('polygon', { points: '0,0 1,2 1,4 2,4 2,2 3,0 ', style: { fill: props.filterIconColor, strokeWidth: 0, fillRule: 'nonZero' } })
+	        );
+
+	        var filter = column.filterable ? React.createElement(
+	            'div',
+	            { className: 'z-show-filter', onMouseUp: this.handleFilterMouseUp.bind(this, column) },
+	            filterIcon
+	        ) : null;
+
+	        var resizer = column.resizable ? React.createElement('span', { className: 'z-column-resize', onMouseDown: this.handleResizeMouseDown.bind(this, column) }) : null;
+
+	        if (column.sortable) {
+	            text = React.createElement(
+	                'span',
+	                null,
+	                text,
+	                React.createElement('span', { className: 'z-icon-sort-info' })
+	            );
+
+	            var sortInfo = getColumnSortInfo(column, props.sortInfo);
+
+	            if (sortInfo && sortInfo.dir) {
+	                className += sortInfo.dir === -1 || sortInfo.dir === 'desc' ? ' z-desc' : ' z-asc';
+	            }
+
+	            className += ' z-sortable';
+	        }
+
+	        if (filter) {
+	            className += ' z-filterable';
+	        }
+
+	        if (state.mouseOver === column.name && !resizing) {
+	            className += ' z-over';
+	        }
+
+	        if (props.menuColumn === column.name) {
+	            className += ' z-active';
+	        }
+
+	        className += ' z-unselectable';
+
+	        var events = {};
+
+	        events[EVENT_NAMES.onMouseDown] = this.handleMouseDown.bind(this, column);
+	        events[EVENT_NAMES.onMouseUp] = this.handleMouseUp.bind(this, column);
+
+	        return React.createElement(
+	            Cell,
+	            _extends({
+	                key: column.name,
+	                contentPadding: props.cellPadding,
+	                columns: props.columns || [],
+	                index: index,
+	                column: props.columns[index],
+	                className: className,
+	                style: style,
+	                text: text,
+	                header: true,
+	                onMouseOut: this.handleMouseOut.bind(this, column),
+	                onMouseOver: this.handleMouseOver.bind(this, column)
+	            }, events),
+	            filter,
+	            menu,
+	            resizer
+	        );
+	    },
+
+	    toggleSort: function toggleSort(column) {
+	        var sortInfo = asArray(clone(this.props.sortInfo));
+	        var columnSortInfo = getColumnSortInfo(column, sortInfo);
+
+	        if (!columnSortInfo) {
+	            columnSortInfo = {
+	                name: column.name,
+	                type: column.type,
+	                fn: column.sortFn
+	            };
+
+	            sortInfo.push(columnSortInfo);
+	        }
+
+	        if (typeof column.toggleSort === 'function') {
+	            column.toggleSort(columnSortInfo, sortInfo);
+	        } else {
+
+	            var dir = columnSortInfo.dir;
+	            var dirSign = dir === 'asc' ? 1 : dir === 'desc' ? -1 : dir;
+	            var newDir = dirSign === 1 ? -1 : dirSign === -1 ? 0 : 1;
+
+	            columnSortInfo.dir = newDir;
+
+	            if (!newDir) {
+	                sortInfo = removeColumnSort(column, sortInfo);
+	            }
+	        }
+
+	        ;(this.props.onSortChange || emptyFn)(sortInfo);
+	    },
+
+	    renderColumnMenu: function renderColumnMenu(props, state, column, index) {
+	        if (!props.withColumnMenu) {
+	            return;
+	        }
+
+	        var menuIcon = props.menuIcon || React.createElement(
+	            'svg',
+	            { version: '1.1', style: { transform: 'translate3d(0,0,0)', height: '100%', width: '100%', padding: '0px 2px' }, viewBox: '0 0 3 4' },
+	            React.createElement('polygon', { points: '0,0 1.5,3 3,0 ', style: { fill: props.menuIconColor, strokeWidth: 0, fillRule: 'nonZero' } })
+	        );
+
+	        return React.createElement(
+	            'div',
+	            { className: 'z-show-menu', onMouseUp: this.handleShowMenuMouseUp.bind(this, props, column, index) },
+	            menuIcon
+	        );
+	    },
+
+	    handleShowMenuMouseUp: function handleShowMenuMouseUp(props, column, index, event) {
+	        event.nativeEvent.stopSort = true;
+
+	        this.showMenu(column, event);
+	    },
+
+	    showMenu: function showMenu(column, event) {
+
+	        var menuItem = (function (column) {
+	            var visibility = this.props.columnVisibility;
+
+	            var visible = column.visible;
+
+	            if (column.name in visibility) {
+	                visible = visibility[column.name];
+	            }
+
+	            return {
+	                cls: visible ? 'z-selected' : '',
+	                selected: visible ? React.createElement(
+	                    'span',
+	                    { style: { fontSize: '0.95em' } },
+	                    '✓'
+	                ) : '',
+	                label: column.title,
+	                fn: this.toggleColumn.bind(this, column)
+	            };
+	        }).bind(this);
+
+	        function menu(eventTarget, props) {
+
+	            var columns = props.gridColumns;
+
+	            props.columns = ['selected', 'label'];
+	            props.items = columns.map(menuItem);
+	            props.alignTo = eventTarget;
+	            props.alignPositions = ['tl-bl', 'tr-br', 'bl-tl', 'br-tr'];
+	            props.style = {
+	                position: 'absolute'
+	            };
+
+	            var factory = this.props.columnMenuFactory || ReactMenu;
+
+	            var result = factory(props);
+
+	            return result === undefined ? ReactMenu(props) : result;
+	        }
+
+	        this.props.showMenu(menu.bind(this, event.currentTarget), {
+	            menuColumn: column.name
+	        });
+	    },
+
+	    showFilterMenu: function showFilterMenu(column, event) {
+
+	        function menu(eventTarget, props) {
+
+	            var defaultFactory = this.props.filterMenuFactory;
+	            var factory = column.filterMenuFactory || defaultFactory;
+
+	            props.columns = ['component'];
+	            props.column = column;
+	            props.alignTo = eventTarget;
+	            props.alignPositions = ['tl-bl', 'tr-br', 'bl-tl', 'br-tr'];
+	            props.style = {
+	                position: 'absolute'
+	            };
+
+	            var result = factory(props);
+
+	            return result === undefined ? defaultFactory(props) : result;
+	        }
+
+	        this.props.showMenu(menu.bind(this, event.currentTarget), {
+	            menuColumn: column.name
+	        });
+	    },
+
+	    toggleColumn: function toggleColumn(column) {
+	        this.props.toggleColumn(column);
+	    },
+
+	    hideMenu: function hideMenu() {
+	        this.props.showColumnMenu(null, null);
+	    },
+
+	    handleResizeMouseDown: function handleResizeMouseDown(column, event) {
+	        setupColumnResize(this, this.props, column, event);
+
+	        //in order to prevent setupColumnDrag in handleMouseDown
+	        // event.stopPropagation()
+
+	        //we are doing setupColumnDrag protection using the resizing flag on native event
+	        if (event.nativeEvent) {
+	            event.nativeEvent.resizing = true;
+	        }
+	    },
+
+	    handleFilterMouseUp: function handleFilterMouseUp(column, event) {
+	        event.nativeEvent.stopSort = true;
+
+	        this.showFilterMenu(column, event);
+	    },
+
+	    handleMouseUp: function handleMouseUp(column, event) {
+	        if (this.state.dragging) {
+	            return;
+	        }
+
+	        if (this.state.resizing) {
+	            return;
+	        }
+
+	        if (event && event.nativeEvent && event.nativeEvent.stopSort) {
+	            return;
+	        }
+
+	        if (column.sortable) {
+	            this.toggleSort(column);
+	        }
+	    },
+
+	    handleMouseOut: function handleMouseOut(column) {
+	        this.setState({
+	            mouseOver: false
+	        });
+	    },
+
+	    handleMouseOver: function handleMouseOver(column) {
+	        this.setState({
+	            mouseOver: column.name
+	        });
+	    },
+
+	    handleMouseDown: function handleMouseDown(column, event) {
+	        if (event && event.nativeEvent && event.nativeEvent.resizing) {
+	            return;
+	        }
+
+	        if (!this.props.reorderColumns) {
+	            return;
+	        }
+
+	        setupColumnDrag(this, this.props, column, event);
+	    },
+
+	    onResizeDragStart: function onResizeDragStart(config) {
+	        this.setState({
+	            resizing: true
+	        });
+	        this.props.onColumnResizeDragStart(config);
+	    },
+
+	    onResizeDrag: function onResizeDrag(config) {
+	        this.props.onColumnResizeDrag(config);
+	    },
+
+	    onResizeDrop: function onResizeDrop(config, resizeInfo, event) {
+	        this.setState({
+	            resizing: false
+	        });
+
+	        this.props.onColumnResizeDrop(config, resizeInfo);
+	    },
+
+	    prepareProps: function prepareProps(thisProps) {
+	        var props = {};
+
+	        assign(props, thisProps);
+
+	        this.prepareClassName(props);
+	        this.prepareStyle(props);
+
+	        var columnMap = {};(props.columns || []).forEach(function (col) {
+	            columnMap[col.name] = col;
+	        });
+
+	        props.columnMap = columnMap;
+
+	        return props;
+	    },
+
+	    prepareClassName: function prepareClassName(props) {
+	        props.className = props.className || '';
+	        props.className += ' ' + props.defaultClassName;
+
+	        if (this.state.dragging) {
+	            props.className += ' ' + props.draggingClassName;
+	        }
+	    },
+
+	    prepareStyle: function prepareStyle(props) {
+	        var style = props.style = {};
+
+	        assign(style, props.defaultStyle);
+	    }
+	});
+	// event.stopPropagation()
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var MenuClass = __webpack_require__(97)
+
+	var MenuItem      = __webpack_require__(113)
+	var MenuItemCell  = __webpack_require__(111)
+	var MenuSeparator = __webpack_require__(119)
+
+	MenuClass.Item      = MenuItem
+	MenuClass.Item.Cell = MenuItemCell
+	MenuClass.ItemCell  = MenuItemCell
+	MenuClass.Separator = MenuSeparator
+
+	module.exports = MenuClass
+
+/***/ },
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	function emptyFn(){}
 
-	var React      = __webpack_require__(1)
-	var assign     = __webpack_require__(18)
-	var Region     = __webpack_require__(94)
+	var React      = __webpack_require__(6)
+	var assign     = __webpack_require__(7)
+	var Region     = __webpack_require__(87)
 	var inTriangle = __webpack_require__(99)
-	var hasTouch = __webpack_require__(70)
+	var hasTouch = __webpack_require__(100)
 
-	var normalize = __webpack_require__(37)
+	var normalize = __webpack_require__(21)
 
-	var getMenuOffset = __webpack_require__(84)
-	var getConstrainRegion = __webpack_require__(86)
-	var getItemStyleProps = __webpack_require__(87)
-	var renderSubMenu     = __webpack_require__(88)
-	var renderChildren    = __webpack_require__(89)
-	var prepareItem       = __webpack_require__(90)
+	var getMenuOffset = __webpack_require__(101)
+	var getConstrainRegion = __webpack_require__(105)
+	var getItemStyleProps = __webpack_require__(98)
+	var renderSubMenu     = __webpack_require__(106)
+	var renderChildren    = __webpack_require__(110)
+	var prepareItem       = __webpack_require__(112)
 
-	var propTypes = __webpack_require__(91)
-	var ScrollContainer = __webpack_require__(92)
+	var propTypes = __webpack_require__(120)
+	var ScrollContainer = __webpack_require__(121)
 
-	var MenuItem = __webpack_require__(71)
+	var MenuItem = __webpack_require__(113)
 
 	var MenuClass = React.createClass({
 
@@ -9408,18 +9769,570 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	})
 
-	MenuClass.themes = __webpack_require__(93)
+	MenuClass.themes = __webpack_require__(125)
 
 	module.exports = MenuClass
 
 /***/ },
-/* 67 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var React  = __webpack_require__(1)
-	var assign =__webpack_require__(18)
+	var assign = __webpack_require__(7)
+
+	module.exports = function(props, state){
+
+	    var itemStyle         = assign({}, props.defaultItemStyle, props.itemStyle)
+	    var itemOverStyle     = assign({}, props.defaultItemOverStyle, props.itemOverStyle)
+	    var itemActiveStyle   = assign({}, props.defaultItemActiveStyle, props.itemActiveStyle)
+	    var itemDisabledStyle = assign({}, props.defaultItemDisabledStyle, props.itemDisabledStyle)
+	    var itemExpandedStyle = assign({}, props.defaultItemExpandedStyle, props.itemExpandedStyle)
+	    var cellStyle     = assign({}, props.defaultCellStyle, props.cellStyle)
+
+	    return {
+	        itemStyle        : itemStyle,
+	        itemOverStyle    : itemOverStyle,
+	        itemActiveStyle  : itemActiveStyle,
+	        itemDisabledStyle: itemDisabledStyle,
+	        itemExpandedStyle: itemExpandedStyle,
+	        cellStyle        : cellStyle
+	    }
+	}
+
+/***/ },
+/* 99 */
+/***/ function(module, exports) {
+
+	//http://www.blackpawn.com/texts/pointinpoly/
+	module.exports = function pointInTriangle(point, triangle) {
+	    //compute vectors & dot products
+	    var cx = point[0], cy = point[1],
+	        t0 = triangle[0], t1 = triangle[1], t2 = triangle[2],
+	        v0x = t2[0]-t0[0], v0y = t2[1]-t0[1],
+	        v1x = t1[0]-t0[0], v1y = t1[1]-t0[1],
+	        v2x = cx-t0[0], v2y = cy-t0[1],
+	        dot00 = v0x*v0x + v0y*v0y,
+	        dot01 = v0x*v1x + v0y*v1y,
+	        dot02 = v0x*v2x + v0y*v2y,
+	        dot11 = v1x*v1x + v1y*v1y,
+	        dot12 = v1x*v2x + v1y*v2y
+
+	    // Compute barycentric coordinates
+	    var b = (dot00 * dot11 - dot01 * dot01),
+	        inv = b === 0 ? 0 : (1 / b),
+	        u = (dot11*dot02 - dot01*dot12) * inv,
+	        v = (dot00*dot12 - dot01*dot02) * inv
+	    return u>=0 && v>=0 && (u+v < 1)
+	}
+
+/***/ },
+/* 100 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Region       = __webpack_require__(87)
+	var selectParent = __webpack_require__(102)
+
+	module.exports = function(domNode){
+
+	    var menuRegion = Region.from(selectParent('.z-menu', domNode))
+	    var thisRegion = Region.from(domNode)
+
+	    return {
+	        // pageX : thisRegion.left,
+	        // pageY : thisRegion.top,
+
+	        left  : thisRegion.left - menuRegion.left,
+	        top   : thisRegion.top  - menuRegion.top,
+	        width : thisRegion.width,
+	        height: thisRegion.height
+	    }
+	}
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var curry   = __webpack_require__(103)
+	var matches
+
+	module.exports = curry(function(selector, node){
+
+		matches = matches || __webpack_require__(104)
+
+	    while (node = node.parentElement){
+	        if (matches.call(node, selector)){
+	            return node
+	        }
+	    }
+	})
+
+/***/ },
+/* 103 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	function curry(fn, n){
+
+	    if (typeof n !== 'number'){
+	        n = fn.length
+	    }
+
+	    function getCurryClosure(prevArgs){
+
+	        function curryClosure() {
+
+	            var len  = arguments.length
+	            var args = [].concat(prevArgs)
+
+	            if (len){
+	                args.push.apply(args, arguments)
+	            }
+
+	            if (args.length < n){
+	                return getCurryClosure(args)
+	            }
+
+	            return fn.apply(this, args)
+	        }
+
+	        return curryClosure
+	    }
+
+	    return getCurryClosure([])
+	}
+
+	module.exports = curry
+
+/***/ },
+/* 104 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var proto = Element.prototype
+
+	var nativeMatches = proto.matches ||
+	  proto.mozMatchesSelector ||
+	  proto.msMatchesSelector ||
+	  proto.oMatchesSelector ||
+	  proto.webkitMatchesSelector
+
+	module.exports = nativeMatches
+
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Region = __webpack_require__(87)
+	var selectParent = __webpack_require__(102)
+
+	module.exports = function(constrainTo){
+	    var constrainRegion
+
+	    if (constrainTo === true){
+	        constrainRegion = Region.getDocRegion()
+	    }
+
+	    if (!constrainRegion && typeof constrainTo === 'string'){
+	        var parent = selectParent(constrainTo, this.getDOMNode())
+	        constrainRegion = Region.from(parent)
+	    }
+
+	    if (!constrainRegion && typeof constrainTo === 'function'){
+	        constrainRegion = Region.from(constrainTo())
+	    }
+
+	    return constrainRegion
+	}
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Region           = __webpack_require__(87)
+	var assign           = __webpack_require__(7)
+	var cloneWithProps   = __webpack_require__(107)
+	var getPositionStyle = __webpack_require__(108)
+
+	module.exports = function(props, state) {
+	    var menu = state.menu
+
+	    if (menu && this.didMount){
+
+	        var style = getPositionStyle.call(this, props, state)
+
+	        menu = cloneWithProps(menu, assign({
+	            ref          : 'subMenu',
+	            subMenu      : true,
+	            parentMenu   : this,
+	            maxHeight    : state.subMenuMaxHeight,
+	            onActivate   : this.onSubMenuActivate,
+	            onInactivate : this.onSubMenuInactivate,
+	            scrollerProps: props.scrollerProps,
+	            constrainTo  : props.constrainTo,
+	            expander     : props.expander,
+	            theme        : props.theme,
+	            themes       : props.themes || this.constructor.themes
+	        }, props.itemStyleProps))
+
+	        return React.createElement("div", {ref: "subMenuWrap", style: style, 
+	                onMouseEnter: this.handleSubMenuMouseEnter, 
+	                onMouseLeave: this.handleSubMenuMouseLeave
+	            }, menu)
+	    }
+	}
+
+/***/ },
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var React    = __webpack_require__(6)
+	  , hasOwn   = Object.prototype.hasOwnProperty
+	  , version  = React.version.split('.').map(parseFloat)
+	  , RESERVED = {
+	      className:  resolve(joinClasses),
+	      children:   function(){},
+	      key:        function(){},
+	      ref:        function(){},
+	      style:      resolve(extend)
+	    };
+
+	module.exports = function cloneWithProps(child, props) {
+	  var newProps = mergeProps(props, child.props);
+
+	  if (!hasOwn.call(newProps, 'children') && hasOwn.call(child.props, 'children'))
+	    newProps.children = child.props.children;
+
+	  // < 0.11
+	  if (version[0] === 0 && version[1] < 11)
+	    return child.constructor.ConvenienceConstructor(newProps);
+	  
+	  // 0.11
+	  if (version[0] === 0 && version[1] === 11)
+	    return child.constructor(newProps);
+
+	  // 0.12
+	  else if (version[0] === 0 && version[1] === 12){
+	    MockLegacyFactory.isReactLegacyFactory = true
+	    MockLegacyFactory.type = child.type
+	    return React.createElement(MockLegacyFactory, newProps);
+	  }
+
+	  // 0.13+
+	  return React.createElement(child.type, newProps);
+
+	  function MockLegacyFactory(){}
+	}
+
+	function mergeProps(currentProps, childProps) {
+	  var newProps = extend(currentProps), key
+
+	  for (key in childProps) {
+	    if (hasOwn.call(RESERVED, key) )
+	      RESERVED[key](newProps, childProps[key], key)
+
+	    else if ( !hasOwn.call(newProps, key) )
+	      newProps[key] = childProps[key];
+	  }
+	  return newProps
+	}
+
+	function resolve(fn){
+	  return function(src, value, key){
+	    if( !hasOwn.call(src, key)) src[key] = value
+	    else src[key] = fn(src[key], value)
+	  }
+	}
+
+	function joinClasses(a, b){
+	  if ( !a ) return b || ''
+	  return a + (b ? ' ' + b : '')
+	}
+
+	function extend() {
+	  var target = {};
+	  for (var i = 0; i < arguments.length; i++) 
+	    for (var key in arguments[i]) if (hasOwn.call(arguments[i], key)) 
+	      target[key] = arguments[i][key]   
+	  return target
+	}
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Region = __webpack_require__(87)
+	var assign = __webpack_require__(7)
+	var align  = __webpack_require__(109)
+
+	module.exports = function getPositionStyle(props, state){
+	    if (!state.menu || !this.didMount){
+	        this.prevMenuIndex = -1
+	        return
+	    }
+
+	    var offset = state.menuOffset
+	    var left   = offset.left + offset.width
+	    var top    = offset.top
+
+	    var menuIndex = state.itemProps.index
+	    var sameMenu = this.prevMenuIndex == menuIndex
+
+	    if (this.aligning && !sameMenu){
+	        this.aligning = false
+	    }
+
+	    this.prevMenuIndex = menuIndex
+
+	    var style = {
+	        position     : 'absolute',
+	        visibility   : 'hidden',
+	        overflow     : 'hidden',
+	        pointerEvents: 'none',
+	        left         : left,
+	        top          : top,
+	        zIndex       : 1
+	    }
+
+	    if (!this.aligning && !sameMenu){
+	        setTimeout(function(){
+
+	            if (!this.didMount){
+	                return
+	            }
+
+	            var thisRegion = Region.from(this.getDOMNode())
+	            var menuItemRegion = Region.from({
+	                left  : thisRegion.left,
+	                top   : thisRegion.top + offset.top,
+	                width : offset.width,
+	                height: offset.height
+	            })
+
+	            var subMenuMounted = this.refs.subMenu && this.refs.subMenu.isMounted()
+	            if (!subMenuMounted){
+	                return
+	            }
+
+	            var subMenuRegion = Region.from(this.refs.subMenu.refs.scrollContainer.getCurrentSizeDOM())
+
+	            var initialHeight = subMenuRegion.height
+
+	            var alignPos = align(props, subMenuRegion, /* alignTo */ menuItemRegion, props.constrainTo)
+
+	            var newHeight = subMenuRegion.height
+	            var maxHeight
+
+	            if (newHeight < initialHeight){
+	                maxHeight = newHeight - props.subMenuConstrainMargin
+	            }
+
+	            if (maxHeight && alignPos == -1 /* upwards*/){
+	                subMenuRegion.top = subMenuRegion.bottom - maxHeight
+	            }
+
+	            var newLeft = subMenuRegion.left - thisRegion.left
+	            var newTop  = subMenuRegion.top  - thisRegion.top
+
+	            if (Math.abs(newLeft - left) < 5){
+	                newLeft = left
+	            }
+
+	            if (Math.abs(newTop - top) < 5){
+	                newTop = top
+	            }
+
+	            this.subMenuPosition = newLeft < 0? 'left': 'right'
+
+	            this.alignOffset = {
+	                left: newLeft,
+	                top : newTop
+	            }
+	            this.aligning = true
+
+	            this.setState({
+	                subMenuMaxHeight: maxHeight
+	            })
+
+	        }.bind(this), 0)
+	    }
+
+	    if (sameMenu || (this.aligning && this.alignOffset)){
+	        assign(style, this.alignOffset)
+	        style.visibility = 'visible'
+	        delete style.pointerEvents
+	        delete style.overflow
+	    }
+
+	    this.aligning = false
+
+	    return style
+	}
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Region = __webpack_require__(87)
+	var getConstrainRegion = __webpack_require__(105)
+
+	module.exports = function(props, subMenuRegion, targetAlignRegion, constrainTo){
+	    var constrainRegion = getConstrainRegion.call(this, constrainTo)
+
+	    if (!constrainRegion){
+	        return
+	    }
+
+
+
+	    if (typeof props.alignSubMenu === 'function'){
+	        props.alignSubMenu(subMenuRegion, targetAlignRegion, constrainRegion)
+	    } else {
+	        var pos = subMenuRegion.alignTo(targetAlignRegion, [
+	            //align to right
+	            'tl-tr','bl-br',
+
+	            //align to left
+	            'tr-tl', 'br-bl'
+	        ], { constrain: constrainRegion })
+
+	        return (pos == 'tl-tr' || pos == 'tr-tl')?
+	                    //align downwards
+	                    1:
+
+	                    //align upwards
+	                    -1
+	    }
+	}
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(6)
+	var MenuItemCell = __webpack_require__(111)
+
+	var cloneWithProps = __webpack_require__(107)
+	var assign         = __webpack_require__(7)
+
+	function emptyFn(){}
+
+	module.exports = function(props, state) {
+
+	    var expandedIndex  = state.itemProps?
+	                            state.itemProps.index:
+	                            -1
+
+	    var children     = props.children
+	    var maxCellCount = 1
+	    var menuItems    = []
+
+	    React.Children.map(children, function(item){
+	        var itemProps = item.props
+
+	        menuItems.push(item)
+
+	        if (!itemProps || !itemProps.isMenuItem){
+	            return
+	        }
+
+	        var count = React.Children.count(itemProps.children)
+
+	        maxCellCount = Math.max(maxCellCount, count)
+	    })
+
+	    var itemStyleProps = props.itemStyleProps
+	    var i = -1
+	    var result = menuItems.map(function(item, index){
+	        var itemProps = item.props
+
+	        if (itemProps && itemProps.isMenuItem){
+	            i++
+
+	            itemProps.onMenuItemMouseOver = this.onMenuItemMouseOver
+	            itemProps.onMenuItemMouseOut  = this.onMenuItemMouseOut
+	        }
+
+	        var children = React.Children.map(itemProps.children, function(c){ return c })
+	        var count    = React.Children.count(children)
+
+	        if (count < maxCellCount){
+	            children = children? [children]: []
+	        }
+
+	        while (count < maxCellCount){
+	            count++
+	            children.push(React.createElement(MenuItemCell, null))
+	        }
+
+	        var onClick = itemProps.onClick || emptyFn
+
+	        var cloned = cloneWithProps(item, assign({
+	            interactionStyles: props.interactionStyles,
+	            itemIndex: i,
+	            itemCount: menuItems.length,
+	            key      : index,
+	            index    : index,
+	            expanded : expandedIndex == index,
+	            children : children,
+	            expander : props.expander,
+	            applyDefaultTheme: props.applyDefaultTheme,
+	            theme    : props.theme,
+	            themes   : props.themes || this.constructor.themes,
+	            onExpanderClick: this.onMenuItemExpanderClick,
+	            onClick  : function(event, props, index){
+	                onClick.apply(null, arguments)
+	                this.onMenuItemClick(event, props, index)
+	            }.bind(this)
+	        }, {
+	            style        : itemStyleProps.itemStyle,
+	            overStyle    : itemStyleProps.itemOverStyle,
+	            activeStyle  : itemStyleProps.itemActiveStyle,
+	            disabledStyle: itemStyleProps.itemDisabledStyle,
+	            expandedStyle: itemStyleProps.itemExpandedStyle,
+	            cellStyle    : itemStyleProps.cellStyle
+	        }))
+
+	        return cloned
+
+	    }, this)
+
+	    return result
+	}
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React  = __webpack_require__(6)
+	var assign =__webpack_require__(7)
 
 	var MenuItemCell = React.createClass({
 
@@ -9475,110 +10388,70 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = MenuItemCell
 
 /***/ },
-/* 68 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
+	var React  = __webpack_require__(6)
+	var assign = __webpack_require__(7)
 
-	var emptyFn = function(){}
+	var renderCells     = __webpack_require__(118)
+	var MenuItem        = __webpack_require__(113)
+	var MenuItemFactory = React.createFactory(MenuItem)
+	var MenuSeparator   = __webpack_require__(119)
 
-	var MenuSeparator = React.createClass({
+	module.exports = function(props, state, item, index) {
 
-	    displayName: 'ReactMenuSeparator',
+	    var expandedIndex = state.itemProps?
+	                            state.itemProps.index:
+	                            -1
 
-	    getDefaultProps: function() {
-	        return {
-	            size: 1
-	        }
-	    },
-
-	    render: function() {
-	        var props = this.prepareProps(this.props)
-
-	        return React.createElement("tr", React.__spread({},  props), React.createElement("td", {colSpan: 10, style: {padding: 0}}))
-	    },
-
-	    prepareProps: function(thisProps) {
-	        var props = {}
-
-	        assign(props, thisProps)
-
-	        props.style = this.prepareStyle(props)
-	        props.className = this.prepareClassName(props)
-
-	        return props
-	    },
-
-	    prepareClassName: function(props) {
-	        var className = props.className || ''
-
-	        className += ' menu-separator'
-
-	        return className
-	    },
-
-	    prepareStyle: function(props) {
-	        var style = {}
-
-	        assign(style,
-	            MenuSeparator.defaultStyle,
-	            MenuSeparator.style,
-	            {
-	                height: MenuSeparator.size || props.size
-	            },
-	            props.style
-	        )
-
-	        return style
+	    if (item === '-'){
+	        return React.createElement(MenuSeparator, {key: index})
 	    }
-	})
 
-	MenuSeparator.defaultStyle = {
-	    cursor    : 'auto',
-	    background: 'gray'
+	    var className   = [props.itemClassName, item.cls, item.className]
+	                        .filter(function(x)  {return !!x;})
+	                        .join(' ')
+
+	    var itemProps = assign({
+	        className  : className,
+	        key        : index,
+	        data       : item,
+	        columns    : props.columns,
+	        expanded   : index === expandedIndex,
+	        disabled   : item.disabled,
+	        onClick    : item.onClick || item.fn
+	    }, props.itemStyleProps)
+
+	    itemProps.children = renderCells(itemProps)
+
+	    if (item.items){
+	        var Menu = __webpack_require__(97)
+	        itemProps.children.push(React.createElement(Menu, {items: item.items}))
+	    }
+
+	    return (props.itemFactory || MenuItemFactory)(itemProps)
 	}
 
-	MenuSeparator.style = {}
-
-	module.exports = MenuSeparator
-
 /***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var getInstantiatorFunction = __webpack_require__(83)
-
-	module.exports = function(fn, args){
-		return getInstantiatorFunction(args.length)(fn, args)
-	}
-
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 71 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var React         = __webpack_require__(1)
-	var assign        = __webpack_require__(18)
-	var normalize     = __webpack_require__(37)
-	var EVENT_NAMES   = __webpack_require__(34)
+	var React         = __webpack_require__(6)
+	var assign        = __webpack_require__(7)
+	var normalize     = __webpack_require__(21)
+	var EVENT_NAMES   = __webpack_require__(114)
 
-	var getMenuOffset = __webpack_require__(84)
+	var getMenuOffset = __webpack_require__(101)
 
-	var prepareChildren = __webpack_require__(85)
+	var prepareChildren = __webpack_require__(116)
 
-	var Menu = __webpack_require__(66)
-	var MenuItemCell = __webpack_require__(67)
+	var Menu = __webpack_require__(97)
+	var MenuItemCell = __webpack_require__(111)
 
 	var emptyFn = function(){}
 
@@ -9882,7 +10755,939 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = MenuItem
 
 /***/ },
-/* 72 */
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(115)?
+		{
+			onMouseDown: 'onTouchStart',
+			onMouseUp  : 'onTouchEnd',
+			onMouseMove: 'onTouchMove'
+		}:
+		{
+			onMouseDown: 'onMouseDown',
+			onMouseUp  : 'onMouseUp',
+			onMouseMove: 'onMouseMove'
+		}
+
+/***/ },
+/* 115 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React        = __webpack_require__(6)
+	var Menu         = __webpack_require__(97)
+	var MenuItemCell = __webpack_require__(111)
+	var renderCell   = __webpack_require__(117)
+	var cloneWithProps = __webpack_require__(107)
+
+	module.exports = function(props) {
+
+	    var children = []
+	    var menu
+
+	    React.Children.forEach(props.children, function(child){
+	        if (child){
+	            if (child.props && child.props.isMenu){
+	                menu = cloneWithProps(child, {
+	                    ref: 'subMenu'
+	                })
+	                menu.props.subMenu = true
+	                return
+	            }
+
+	            if (typeof child != 'string'){
+	                child = cloneWithProps(child, {
+	                    style    : props.cellStyle,
+	                    itemIndex: props.itemIndex,
+	                    itemCount: props.itemCount
+	                })
+	            }
+
+	            children.push(child)
+	        }
+	    })
+
+	    if (menu){
+	        props.menu = menu
+	        var expander = props.expander || true
+	        var expanderProps = {}
+
+	        if (expander){
+	            expanderProps.onClick = props.onExpanderClick
+	        }
+	        children.push(React.createElement(MenuItemCell, React.__spread({expander: expander},  expanderProps)))
+	    }
+
+	    return children
+	}
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React        = __webpack_require__(6)
+	var assign       = __webpack_require__(7)
+	var MenuItemCell = __webpack_require__(111)
+
+	module.exports = function(props, column) {
+	    var style = assign({}, props.defaultCellStyle, props.cellStyle)
+
+	    return React.createElement(MenuItemCell, {style: style}, props.data[column])
+	}
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var renderCell = __webpack_require__(117)
+
+	module.exports = function(props) {
+	    return props.columns.map(renderCell.bind(null, props))
+	}
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React  = __webpack_require__(6)
+	var assign = __webpack_require__(7)
+
+	var emptyFn = function(){}
+
+	var MenuSeparator = React.createClass({
+
+	    displayName: 'ReactMenuSeparator',
+
+	    getDefaultProps: function() {
+	        return {
+	            size: 1
+	        }
+	    },
+
+	    render: function() {
+	        var props = this.prepareProps(this.props)
+
+	        return React.createElement("tr", React.__spread({},  props), React.createElement("td", {colSpan: 10, style: {padding: 0}}))
+	    },
+
+	    prepareProps: function(thisProps) {
+	        var props = {}
+
+	        assign(props, thisProps)
+
+	        props.style = this.prepareStyle(props)
+	        props.className = this.prepareClassName(props)
+
+	        return props
+	    },
+
+	    prepareClassName: function(props) {
+	        var className = props.className || ''
+
+	        className += ' menu-separator'
+
+	        return className
+	    },
+
+	    prepareStyle: function(props) {
+	        var style = {}
+
+	        assign(style,
+	            MenuSeparator.defaultStyle,
+	            MenuSeparator.style,
+	            {
+	                height: MenuSeparator.size || props.size
+	            },
+	            props.style
+	        )
+
+	        return style
+	    }
+	})
+
+	MenuSeparator.defaultStyle = {
+	    cursor    : 'auto',
+	    background: 'gray'
+	}
+
+	MenuSeparator.style = {}
+
+	module.exports = MenuSeparator
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(6)
+
+	module.exports = {
+	    items      : React.PropTypes.array,
+	    columns    : React.PropTypes.array,
+	    onMount    : React.PropTypes.func,
+
+	    defaultRowActiveStyle: React.PropTypes.object,
+	    defaultRowOverStyle  : React.PropTypes.object,
+	    defaultRowStyle      : React.PropTypes.object,
+
+	    rowActiveStyle: React.PropTypes.object,
+	    rowOverStyle  : React.PropTypes.object,
+	    rowStyle      : React.PropTypes.object,
+
+	    cellStyle  : React.PropTypes.object
+	}
+
+/***/ },
+/* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var React    = __webpack_require__(6)
+	var assign   = __webpack_require__(7)
+	var buffer   = __webpack_require__(122)
+
+	var Scroller = __webpack_require__(123)
+
+	function stop(event){
+	    event.preventDefault()
+	    event.stopPropagation()
+	}
+
+	module.exports = React.createClass({
+
+	    displayName: 'ReactMenuScrollContainer',
+
+	    getInitialState: function(){
+	        return {
+	            adjustScroll: true,
+	            scrollPos: 0
+	        }
+	    },
+
+	    getDefaultProps: function() {
+	        return {
+	            scrollStep : 5,
+	            scrollSpeed: 50
+	        }
+	    },
+
+	    componentWillUnmount: function(){
+	        if (this.props.enableScroll){
+	            window.removeEventListener('resize', this.onResizeListener)
+	        }
+	    },
+
+	    componentDidMount: function(){
+	        if (this.props.enableScroll){
+	            setTimeout(function(){
+	                if (!this.isMounted()){
+	                    return
+	                }
+
+	                this.adjustScroll()
+
+	                window.addEventListener('resize', this.onResizeListener = buffer(this.onWindowResize, this.props.onWindowResizeBuffer, this))
+	            }.bind(this), 0)
+	        }
+	    },
+
+	    componentDidUpdate: function(){
+	        this.props.enableScroll && this.adjustScroll()
+	    },
+
+	    onWindowResize: function(){
+	        this.adjustScroll()
+	        this.doScroll(0)
+	    },
+
+	    render: function(){
+
+	        var props = this.props
+	        var children = props.children
+
+	        if (!props.enableScroll){
+	            return children
+	        }
+
+	        var scrollStyle = {
+	            position: 'relative'
+	        }
+
+	        if (this.state.scrollPos){
+	            scrollStyle.top = -this.state.scrollPos
+	        }
+
+	        var containerStyle = {
+	            position: 'relative',
+	            overflow: 'hidden'
+	        }
+
+	        if (props.maxHeight){
+	            containerStyle.maxHeight = props.maxHeight
+	        }
+
+	        return React.createElement("div", {
+	            onMouseEnter: props.onMouseEnter, 
+	            onMouseLeave: props.onMouseLeave, 
+	            className: "z-menu-scroll-container", 
+	            style: containerStyle
+	        }, 
+	            React.createElement("div", {ref: "tableWrap", style: scrollStyle}, 
+	                children
+	            ), 
+	            this.renderScroller(props, -1), 
+	            this.renderScroller(props, 1)
+	        )
+	    },
+
+	    renderScroller: function(props, direction) {
+
+	        var onMouseDown = direction == -1?
+	                            this.handleScrollTop:
+	                            this.handleScrollBottom
+
+	        var onDoubleClick = direction == -1?
+	                                this.handleScrollTopMax:
+	                                this.handleScrollBottomMax
+
+	        var visible = direction == -1?
+	                            this.state.hasTopScroll:
+	                            this.state.hasBottomScroll
+
+	        var scrollerProps = assign({}, props.scrollerProps, {
+	            visible    : visible,
+	            side       : direction == -1? 'top': 'bottom',
+	            onMouseDown: onMouseDown,
+	            onDoubleClick: onDoubleClick
+	        })
+
+	        return React.createElement(Scroller, React.__spread({},  scrollerProps))
+	    },
+
+	    adjustScroll: function(){
+	        if (!this.props.enableScroll){
+	            return
+	        }
+
+	        if (!this.state.adjustScroll){
+	            this.state.adjustScroll = true
+	            return
+	        }
+
+	        var availableHeight = this.getAvailableHeight()
+	        var tableHeight      = this.getCurrentTableHeight()
+
+	        var state = {
+	            adjustScroll  : false,
+	            hasTopScroll : false,
+	            hasBottomScroll: false
+	        }
+
+	        if (tableHeight > availableHeight){
+	            state.maxScrollPos    = tableHeight - availableHeight
+	            state.hasTopScroll    = this.state.scrollPos !== 0
+	            state.hasBottomScroll = this.state.scrollPos != state.maxScrollPos
+	        } else {
+	            state.maxScrollPos = 0
+	            state.scrollPos    = 0
+	        }
+
+	        this.setState(state)
+	    },
+
+	    getAvailableHeight: function() {
+	        return this.getAvailableSizeDOM().clientHeight
+	    },
+
+	    getAvailableSizeDOM: function() {
+	        return this.getDOMNode()
+	    },
+
+	    getCurrentTableHeight: function() {
+	        return this.getCurrentSizeDOM().clientHeight
+	    },
+
+	    getCurrentSizeDOM: function() {
+	        return this.refs.tableWrap.getDOMNode()
+	    },
+
+	    handleScrollTop: function(event){
+	        event.preventDefault()
+	        this.handleScroll(-1)
+	    },
+
+	    handleScrollBottom: function(event){
+	        event.preventDefault()
+	        this.handleScroll(1)
+	    },
+
+	    handleScrollTopMax: function(event){
+	        stop(event)
+	        this.handleScrollMax(-1)
+	    },
+
+	    handleScrollBottomMax: function(event){
+	        stop(event)
+	        this.handleScrollMax(1)
+	    },
+
+	    handleScrollMax: function(direction){
+	        var maxPos = direction == -1?
+	                        0:
+	                        this.state.maxScrollPos
+
+	        this.setScrollPosition(maxPos)
+	    },
+
+	    handleScroll: function(direction /*1 to bottom, -1 to up*/){
+	        var mouseUpListener = function(){
+	            this.stopScroll()
+	            window.removeEventListener('mouseup', mouseUpListener)
+	        }.bind(this)
+
+	        window.addEventListener('mouseup', mouseUpListener)
+
+	        this.scrollInterval = setInterval(this.doScroll.bind(this, direction), this.props.scrollSpeed)
+	    },
+
+	    doScroll: function(direction){
+	        this.setState({
+	            scrollDirection: direction
+	        })
+
+	        var newScrollPos = this.state.scrollPos + direction * this.props.scrollStep
+
+	        this.setScrollPosition(newScrollPos)
+	    },
+
+	    setScrollPosition: function(scrollPos){
+	        if (scrollPos > this.state.maxScrollPos){
+	            scrollPos = this.state.maxScrollPos
+	        }
+
+	        if (scrollPos < 0){
+	            scrollPos = 0
+	        }
+
+	        this.setState({
+	            scrollPos: scrollPos,
+	            scrolling : true
+	        })
+	    },
+
+	    stopScroll: function(){
+	        clearInterval(this.scrollInterval)
+
+	        this.setState({
+	            scrolling: false
+	        })
+	    }
+	})
+
+/***/ },
+/* 122 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	var setImmediate   = global.setImmediate
+	var clearImmediate = global.clearImmediate
+
+	module.exports = function(fn, delay, scope){
+
+	    var timeoutId = -1
+
+	    return function(){
+
+	        var self = scope || this
+	        var args = arguments
+
+	        if (delay < 0){
+	            fn.apply(self, args)
+	            return
+	        }
+
+	        var withTimeout = delay || !setImmediate
+	        var clearFn = withTimeout?
+	                        clearTimeout:
+	                        clearImmediate
+	        var setFn   = withTimeout?
+	                        setTimeout:
+	                        setImmediate
+
+	        if (timeoutId !== -1){
+	            clearFn(timeoutId)
+	        }
+
+	        timeoutId = setFn(function(){
+	            fn.apply(self, args)
+	            self = null
+	        }, delay)
+	    }
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React         = __webpack_require__(6)
+	var assign        = __webpack_require__(7)
+	var getArrowStyle = __webpack_require__(124)
+
+	function emptyFn(){}
+
+	var SCROLLER_STYLE = {
+	    left      : 0,
+	    right     : 0,
+	    position  : 'absolute',
+	    cursor    : 'pointer',
+	    zIndex    : 1
+	}
+
+	function generateArrowStyle(props, state, overrideStyle){
+	    var style = assign({}, overrideStyle)
+
+	    var arrowConfig = {
+	        color: style.color || props.arrowColor
+	    }
+
+	    var offset = 4
+	    var width  = style.width  || props.arrowWidth  || props.arrowSize || (props.style.height - offset)
+	    var height = style.height || props.arrowHeight || props.arrowSize || (props.style.height - offset)
+
+	    arrowConfig.width  = width
+	    arrowConfig.height = height
+
+	    assign(style, getArrowStyle(props.side == 'top'? 'up':'down', arrowConfig))
+
+	    style.display = 'inline-block'
+	    style.position = 'absolute'
+
+	    style.left = '50%'
+	    style.marginLeft = -width
+
+	    style.top = '50%'
+	    style.marginTop = -height/2
+
+	    if (state.active){
+	        style.marginTop += props.side == 'top'? -1: 1
+	    }
+
+	    return style
+	}
+
+	var Scroller = React.createClass({displayName: "Scroller",
+
+	    display: 'ReactMenuScroller',
+
+	    getInitialState: function() {
+	        return {}
+	    },
+
+	    getDefaultProps: function(){
+	        return {
+	            height: 10,
+	            defaultStyle: {
+	                background : 'white'
+	            },
+	            defaultOverStyle: {},
+	            overStyle: {},
+
+	            defaultTopStyle: {
+	                borderBottom: '1px solid gray'
+	            },
+	            topStyle: {},
+	            defaultBottomStyle: {
+	                borderTop: '1px solid gray'
+	            },
+	            bottomStyle: {},
+
+	            arrowColor: 'gray',
+
+	            arrowStyle: {},
+	            defaultArrowStyle: {},
+	            defaultArrowOverStyle: {
+	                color: 'rgb(74, 74, 74)'
+	            },
+	            arrowOverStyle: {}
+	        }
+	    },
+
+	    handleMouseEnter: function() {
+	        this.setState({
+	            mouseOver: true
+	        })
+	    },
+
+	    handleMouseLeave: function() {
+	        this.setState({
+	            mouseOver: false
+	        })
+	    },
+
+	    handleMouseDown: function(event) {
+	        this.setState({
+	            active: true
+	        })
+
+	        ;(this.props.onMouseDown || emptyFn)(event)
+	    },
+
+	    handleMouseUp: function(event) {
+	        this.setState({
+	            active: false
+	        })
+
+	        ;(this.props.onMouseUp || emptyFn)(event)
+	    },
+
+	    render: function(){
+	        var props = assign({}, this.props, {
+	            onMouseEnter: this.handleMouseEnter,
+	            onMouseLeave: this.handleMouseLeave,
+
+	            onMouseDown: this.handleMouseDown,
+	            onMouseUp  : this.handleMouseUp
+	        })
+
+	        var state = this.state
+	        var side  = props.side
+
+	        props.className = this.prepareClassName(props, state)
+
+	        props.style = this.prepareStyle(props, state)
+
+	        var arrowStyle = this.prepareArrowStyle(props, state)
+
+	        return props.factory?
+	                    props.factory(props, side):
+	                    React.createElement("div", React.__spread({},  props), 
+	                        React.createElement("div", {style: arrowStyle})
+	                    )
+	    },
+
+	    prepareStyle: function(props, state) {
+	        var defaultOverStyle
+	        var overStyle
+
+	        if (state.mouseOver){
+	            overStyle        = props.overStyle
+	            defaultOverStyle = props.defaultOverStyle
+	        }
+
+	        var defaultSideStyle = props.side == 'top'?
+	                                props.defaultTopStyle:
+	                                props.defaultBottomStyle
+	        var sideStyle = props.side == 'top'?
+	                            props.topStyle:
+	                            props.bottomStyle
+
+	        var style = assign({}, SCROLLER_STYLE,
+	                            props.defaultStyle, defaultSideStyle, defaultOverStyle,
+	                            props.style, sideStyle, overStyle)
+
+	        style.height = style.height || props.height
+	        style[props.side] = 0
+	        if (!props.visible){
+	            style.display = 'none'
+	        }
+
+	        return style
+	    },
+
+	    prepareClassName: function(props, state) {
+	        //className
+	        var className = props.className || ''
+	        className += ' z-menu-scroller ' + props.side
+
+	        if (props.active && props.visible){
+	            className += ' active'
+	        }
+
+	        return className
+	    },
+
+	    prepareArrowStyle: function(props, state) {
+
+	        var defaultArrowOverStyle
+	        var arrowOverStyle
+
+	        if (state.mouseOver){
+	            defaultArrowOverStyle = props.defaultArrowOverStyle
+	            arrowOverStyle        = props.arrowOverStyle
+	        }
+
+	        var arrowStyle = assign({}, props.defaultArrowStyle, defaultArrowOverStyle, props.arrowStyle, arrowOverStyle)
+
+	        return generateArrowStyle(props, state, arrowStyle)
+	    },
+
+	    handleClick: function(event){
+	        event.stopPropagation
+	    }
+	})
+
+	module.exports = Scroller
+
+/***/ },
+/* 124 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function arrowStyle(side, config){
+
+	    var arrowSize   = config.size   || 8
+	    var arrowWidth  = config.width  || arrowSize
+	    var arrowHeight = config.height || arrowSize
+	    var arrowColor  = config.color  || 'black'
+	    var includePosition = config.includePosition
+
+	    var style
+
+	    if (side == 'up' || side == 'down'){
+
+	        style = {
+	            borderLeft : arrowWidth + 'px solid transparent',
+	            borderRight: arrowWidth + 'px solid transparent'
+	        }
+
+	        if (includePosition){
+	            style.marginTop = -Math.round(arrowHeight/2) + 'px'
+	            style.position  = 'relative'
+	            style.top       = '50%'
+	        }
+
+	        style[side === 'up'? 'borderBottom': 'borderTop'] = arrowHeight + 'px solid ' + arrowColor
+	    }
+
+	    if (side == 'left' || side == 'right'){
+
+	        style = {
+	            borderTop : arrowHeight + 'px solid transparent',
+	            borderBottom: arrowHeight + 'px solid transparent'
+	        }
+
+	        if (includePosition){
+	            style.marginLeft = -Math.round(arrowWidth/2) + 'px'
+	            style.position   = 'relative'
+	            style.left       = '50%'
+	        }
+
+	        style[side === 'left'? 'borderRight': 'borderLeft'] = arrowWidth + 'px solid ' + arrowColor
+	    }
+
+	    return style
+	}
+
+/***/ },
+/* 125 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	    default: {
+	        // overStyle: {
+	        //     background: 'rgb(202, 223, 255)'
+	        // },
+	        overStyle: {
+	                    background: 'linear-gradient(to bottom, rgb(125, 191, 242) 0%, rgb(110, 184, 241) 50%, rgb(117, 188, 242) 100%)',
+	                    color: 'white'
+	                },
+	        activeStyle: {
+	            // background: 'rgb(118, 181, 231)',
+	            //-6 lightness from overStyle
+	            background: ' linear-gradient(to bottom, rgb(106,182,240) 0%,rgb(91,175,239) 50%,rgb(96,178,240) 100%)',
+	            color: 'white'
+	        },
+	        expandedStyle: {
+	            // background: 'rgb(215, 231, 255)',
+	            background: 'linear-gradient(to bottom, rgb(162,210,246) 0%,rgb(151,204,245) 50%,rgb(154,206,246) 100%)',
+	            color: 'white'
+	        },
+	        disabledStyle: {
+	            color : 'gray',
+	            cursor: 'default'
+	        }
+	    }
+	}
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
+
+	function objectToString(o) {
+	  return Object.prototype.toString.call(o);
+	}
+
+	// shim for Node's 'util' package
+	// DO NOT REMOVE THIS! It is required for compatibility with EnderJS (http://enderjs.com/).
+	var util = {
+	  isArray: function (ar) {
+	    return Array.isArray(ar) || (typeof ar === 'object' && objectToString(ar) === '[object Array]');
+	  },
+	  isDate: function (d) {
+	    return typeof d === 'object' && objectToString(d) === '[object Date]';
+	  },
+	  isRegExp: function (re) {
+	    return typeof re === 'object' && objectToString(re) === '[object RegExp]';
+	  },
+	  getRegExpFlags: function (re) {
+	    var flags = '';
+	    re.global && (flags += 'g');
+	    re.ignoreCase && (flags += 'i');
+	    re.multiline && (flags += 'm');
+	    return flags;
+	  }
+	};
+
+
+	if (true)
+	  module.exports = clone;
+
+	/**
+	 * Clones (copies) an Object using deep copying.
+	 *
+	 * This function supports circular references by default, but if you are certain
+	 * there are no circular references in your object, you can save some CPU time
+	 * by calling clone(obj, false).
+	 *
+	 * Caution: if `circular` is false and `parent` contains circular references,
+	 * your program may enter an infinite loop and crash.
+	 *
+	 * @param `parent` - the object to be cloned
+	 * @param `circular` - set to true if the object to be cloned may contain
+	 *    circular references. (optional - true by default)
+	 * @param `depth` - set to a number if the object is only to be cloned to
+	 *    a particular depth. (optional - defaults to Infinity)
+	 * @param `prototype` - sets the prototype to be used when cloning an object.
+	 *    (optional - defaults to parent prototype).
+	*/
+
+	function clone(parent, circular, depth, prototype) {
+	  // maintain two arrays for circular references, where corresponding parents
+	  // and children have the same index
+	  var allParents = [];
+	  var allChildren = [];
+
+	  var useBuffer = typeof Buffer != 'undefined';
+
+	  if (typeof circular == 'undefined')
+	    circular = true;
+
+	  if (typeof depth == 'undefined')
+	    depth = Infinity;
+
+	  // recurse this function so we don't reset allParents and allChildren
+	  function _clone(parent, depth) {
+	    // cloning null always returns null
+	    if (parent === null)
+	      return null;
+
+	    if (depth == 0)
+	      return parent;
+
+	    var child;
+	    var proto;
+	    if (typeof parent != 'object') {
+	      return parent;
+	    }
+
+	    if (util.isArray(parent)) {
+	      child = [];
+	    } else if (util.isRegExp(parent)) {
+	      child = new RegExp(parent.source, util.getRegExpFlags(parent));
+	      if (parent.lastIndex) child.lastIndex = parent.lastIndex;
+	    } else if (util.isDate(parent)) {
+	      child = new Date(parent.getTime());
+	    } else if (useBuffer && Buffer.isBuffer(parent)) {
+	      child = new Buffer(parent.length);
+	      parent.copy(child);
+	      return child;
+	    } else {
+	      if (typeof prototype == 'undefined') {
+	        proto = Object.getPrototypeOf(parent);
+	        child = Object.create(proto);
+	      }
+	      else {
+	        child = Object.create(prototype);
+	        proto = prototype;
+	      }
+	    }
+
+	    if (circular) {
+	      var index = allParents.indexOf(parent);
+
+	      if (index != -1) {
+	        return allChildren[index];
+	      }
+	      allParents.push(parent);
+	      allChildren.push(child);
+	    }
+
+	    for (var i in parent) {
+	      var attrs;
+	      if (proto) {
+	        attrs = Object.getOwnPropertyDescriptor(proto, i);
+	      }
+	      
+	      if (attrs && attrs.set == null) {
+	        continue;
+	      }
+	      child[i] = _clone(parent[i], depth - 1);
+	    }
+
+	    return child;
+	  }
+
+	  return _clone(parent, depth);
+	}
+
+	/**
+	 * Simple flat clone using prototype, accepts only objects, usefull for property
+	 * override on FLAT configuration object (no nested props).
+	 *
+	 * USE WITH CAUTION! This may not behave as you wish if you do not know how this
+	 * works.
+	 */
+	clone.clonePrototype = function(parent) {
+	  if (parent === null)
+	    return null;
+
+	  var c = function () {};
+	  c.prototype = parent;
+	  return new c();
+	};
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(127).Buffer))
+
+/***/ },
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/*!
@@ -9892,16 +11697,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @license  MIT
 	 */
 
-	var base64 = __webpack_require__(108)
-	var ieee754 = __webpack_require__(100)
-	var isArray = __webpack_require__(101)
+	var base64 = __webpack_require__(128)
+	var ieee754 = __webpack_require__(129)
+	var isArray = __webpack_require__(130)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
 	exports.INSPECT_MAX_BYTES = 50
 	Buffer.poolSize = 8192 // not used by this implementation
 
-	var kMaxLength = 0x3fffffff
 	var rootParent = {}
 
 	/**
@@ -9938,6 +11742,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return false
 	  }
 	})()
+
+	function kMaxLength () {
+	  return Buffer.TYPED_ARRAY_SUPPORT
+	    ? 0x7fffffff
+	    : 0x3fffffff
+	}
 
 	/**
 	 * Class: Buffer
@@ -10089,9 +11899,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	function checked (length) {
 	  // Note: cannot use `length < kMaxLength` here because that fails when
 	  // length is NaN (which is otherwise coerced to zero.)
-	  if (length >= kMaxLength) {
+	  if (length >= kMaxLength()) {
 	    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
-	                         'size: 0x' + kMaxLength.toString(16) + ' bytes')
+	                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
 	  }
 	  return length | 0
 	}
@@ -10183,29 +11993,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function byteLength (string, encoding) {
-	  if (typeof string !== 'string') string = String(string)
+	  if (typeof string !== 'string') string = '' + string
 
-	  if (string.length === 0) return 0
+	  var len = string.length
+	  if (len === 0) return 0
 
-	  switch (encoding || 'utf8') {
-	    case 'ascii':
-	    case 'binary':
-	    case 'raw':
-	      return string.length
-	    case 'ucs2':
-	    case 'ucs-2':
-	    case 'utf16le':
-	    case 'utf-16le':
-	      return string.length * 2
-	    case 'hex':
-	      return string.length >>> 1
-	    case 'utf8':
-	    case 'utf-8':
-	      return utf8ToBytes(string).length
-	    case 'base64':
-	      return base64ToBytes(string).length
-	    default:
-	      return string.length
+	  // Use a for loop to avoid recursion
+	  var loweredCase = false
+	  for (;;) {
+	    switch (encoding) {
+	      case 'ascii':
+	      case 'binary':
+	      // Deprecated
+	      case 'raw':
+	      case 'raws':
+	        return len
+	      case 'utf8':
+	      case 'utf-8':
+	        return utf8ToBytes(string).length
+	      case 'ucs2':
+	      case 'ucs-2':
+	      case 'utf16le':
+	      case 'utf-16le':
+	        return len * 2
+	      case 'hex':
+	        return len >>> 1
+	      case 'base64':
+	        return base64ToBytes(string).length
+	      default:
+	        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+	        encoding = ('' + encoding).toLowerCase()
+	        loweredCase = true
+	    }
 	  }
 	}
 	Buffer.byteLength = byteLength
@@ -10214,8 +12033,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Buffer.prototype.length = undefined
 	Buffer.prototype.parent = undefined
 
-	// toString(encoding, start=0, end=buffer.length)
-	Buffer.prototype.toString = function toString (encoding, start, end) {
+	function slowToString (encoding, start, end) {
 	  var loweredCase = false
 
 	  start = start | 0
@@ -10256,6 +12074,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        loweredCase = true
 	    }
 	  }
+	}
+
+	Buffer.prototype.toString = function toString () {
+	  var length = this.length | 0
+	  if (length === 0) return ''
+	  if (arguments.length === 0) return utf8Slice(this, 0, length)
+	  return slowToString.apply(this, arguments)
 	}
 
 	Buffer.prototype.equals = function equals (b) {
@@ -11300,2407 +13125,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(127).Buffer))
 
 /***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = /[-\s]+(.)?/g
-
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var React    = __webpack_require__(1)
-	  , hasOwn   = Object.prototype.hasOwnProperty
-	  , version  = React.version.split('.').map(parseFloat)
-	  , RESERVED = {
-	      className:  resolve(joinClasses),
-	      children:   function(){},
-	      key:        function(){},
-	      ref:        function(){},
-	      style:      resolve(extend)
-	    };
-
-	module.exports = function cloneWithProps(child, props) {
-	  var newProps = mergeProps(props, child.props);
-
-	  if (!hasOwn.call(newProps, 'children') && hasOwn.call(child.props, 'children'))
-	    newProps.children = child.props.children;
-
-	  // < 0.11
-	  if (version[0] === 0 && version[1] < 11)
-	    return child.constructor.ConvenienceConstructor(newProps);
-	  
-	  // 0.11
-	  if (version[0] === 0 && version[1] === 11)
-	    return child.constructor(newProps);
-
-	  // 0.12
-	  else if (version[0] === 0 && version[1] === 12){
-	    MockLegacyFactory.isReactLegacyFactory = true
-	    MockLegacyFactory.type = child.type
-	    return React.createElement(MockLegacyFactory, newProps);
-	  }
-
-	  // 0.13+
-	  return React.createElement(child.type, newProps);
-
-	  function MockLegacyFactory(){}
-	}
-
-	function mergeProps(currentProps, childProps) {
-	  var newProps = extend(currentProps), key
-
-	  for (key in childProps) {
-	    if (hasOwn.call(RESERVED, key) )
-	      RESERVED[key](newProps, childProps[key], key)
-
-	    else if ( !hasOwn.call(newProps, key) )
-	      newProps[key] = childProps[key];
-	  }
-	  return newProps
-	}
-
-	function resolve(fn){
-	  return function(src, value, key){
-	    if( !hasOwn.call(src, key)) src[key] = value
-	    else src[key] = fn(src[key], value)
-	  }
-	}
-
-	function joinClasses(a, b){
-	  if ( !a ) return b || ''
-	  return a + (b ? ' ' + b : '')
-	}
-
-	function extend() {
-	  var target = {};
-	  for (var i = 0; i < arguments.length; i++) 
-	    for (var key in arguments[i]) if (hasOwn.call(arguments[i], key)) 
-	      target[key] = arguments[i][key]   
-	  return target
-	}
-
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = __webpack_require__(76)(/^[a-zA-Z0-9]+$/)
-
-/***/ },
-/* 76 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var F = __webpack_require__(103)
-
-	module.exports = F.curry(function(re, value){
-	    return !!re.test(value)
-	})
-
-/***/ },
-/* 77 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var regex = /^[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}$/i
-	var regex2 = /^\{[A-F0-9]{8}(?:-?[A-F0-9]{4}){3}-?[A-F0-9]{12}\}$/i
-
-	module.exports = function(value){
-	    return regex.test(value) || regex2.test(value)
-	}
-
-
-
-/***/ },
-/* 78 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = __webpack_require__(102).numeric
-
-/***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(98)
-	var getPrefix    = __webpack_require__(95)
-	var el           = __webpack_require__(97)
-
-	var MEMORY = {}
-	var STYLE
-	var ELEMENT
-
-	var PREFIX
-
-	module.exports = function(key, value){
-
-	    ELEMENT = ELEMENT || el()
-	    STYLE   = STYLE   || ELEMENT.style
-
-	    var k = key// + ': ' + value
-
-	    if (MEMORY[k]){
-	        return MEMORY[k]
-	    }
-
-	    var prefix
-	    var prefixed
-
-	    if (!(key in STYLE)){//we have to prefix
-
-	        // if (PREFIX){
-	        //     prefix = PREFIX
-	        // } else {
-	            prefix = getPrefix('appearance')
-
-	        //     if (prefix){
-	        //         prefix = PREFIX = prefix.toLowerCase()
-	        //     }
-	        // }
-
-	        if (prefix){
-	            prefixed = prefix + toUpperFirst(key)
-
-	            if (prefixed in STYLE){
-	                key = prefixed
-	            }
-	        }
-	    }
-
-	    MEMORY[k] = key
-
-	    return key
-	}
-
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = {
-	  'alignItems': 1,
-	  'justifyContent': 1,
-	  'flex': 1,
-	  'flexFlow': 1,
-	  'flexGrow': 1,
-
-	  'userSelect': 1,
-	  'transform': 1,
-	  'transition': 1,
-	  'transformOrigin': 1,
-	  'transformStyle': 1,
-	  'transitionProperty': 1,
-	  'transitionDuration': 1,
-	  'transitionTimingFunction': 1,
-	  'transitionDelay': 1,
-	  'borderImage': 1,
-	  'borderImageSlice': 1,
-	  'boxShadow': 1,
-	  'backgroundClip': 1,
-	  'backfaceVisibility': 1,
-	  'perspective': 1,
-	  'perspectiveOrigin': 1,
-	  'animation': 1,
-	  'animationDuration': 1,
-	  'animationName': 1,
-	  'animationDelay': 1,
-	  'animationDirection': 1,
-	  'animationIterationCount': 1,
-	  'animationTimingFunction': 1,
-	  'animationPlayState': 1,
-	  'animationFillMode': 1,
-	  'appearance': 1
-	}
-
-/***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var getPrefix     = __webpack_require__(95)
-	var forcePrefixed = __webpack_require__(96)
-	var el            = __webpack_require__(97)
-
-	var MEMORY = {}
-	var STYLE
-	var ELEMENT
-
-	module.exports = function(key, value, force){
-
-	    ELEMENT = ELEMENT || el()
-	    STYLE   = STYLE   ||  ELEMENT.style
-
-	    var k = key + ': ' + value
-
-	    if (MEMORY[k]){
-	        return MEMORY[k]
-	    }
-
-	    var prefix
-	    var prefixed
-	    var prefixedValue
-
-	    if (force || !(key in STYLE)){
-
-	        prefix = getPrefix('appearance')
-
-	        if (prefix){
-	            prefixed = forcePrefixed(key, value)
-
-	            prefixedValue = '-' + prefix.toLowerCase() + '-' + value
-
-	            if (prefixed in STYLE){
-	                ELEMENT.style[prefixed] = ''
-	                ELEMENT.style[prefixed] = prefixedValue
-
-	                if (ELEMENT.style[prefixed] !== ''){
-	                    value = prefixedValue
-	                }
-	            }
-	        }
-	    }
-
-	    MEMORY[k] = value
-
-	    return value
-	}
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use once'
-
-	module.exports = function once(fn, scope){
-
-	    var called
-	    var result
-
-	    return function(){
-	        if (called){
-	            return result
-	        }
-
-	        called = true
-
-	        return result = fn.apply(scope || this, arguments)
-	    }
-	}
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(){
-
-	    'use strict';
-
-	    var fns = {}
-
-	    return function(len){
-
-	        if ( ! fns [len ] ) {
-
-	            var args = []
-	            var i    = 0
-
-	            for (; i < len; i++ ) {
-	                args.push( 'a[' + i + ']')
-	            }
-
-	            fns[len] = new Function(
-	                            'c',
-	                            'a',
-	                            'return new c(' + args.join(',') + ')'
-	                        )
-	        }
-
-	        return fns[len]
-	    }
-
-	}()
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region       = __webpack_require__(94)
-	var selectParent = __webpack_require__(112)
-
-	module.exports = function(domNode){
-
-	    var menuRegion = Region.from(selectParent('.z-menu', domNode))
-	    var thisRegion = Region.from(domNode)
-
-	    return {
-	        // pageX : thisRegion.left,
-	        // pageY : thisRegion.top,
-
-	        left  : thisRegion.left - menuRegion.left,
-	        top   : thisRegion.top  - menuRegion.top,
-	        width : thisRegion.width,
-	        height: thisRegion.height
-	    }
-	}
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React        = __webpack_require__(1)
-	var Menu         = __webpack_require__(66)
-	var MenuItemCell = __webpack_require__(67)
-	var renderCell   = __webpack_require__(107)
-	var cloneWithProps = __webpack_require__(113)
-
-	module.exports = function(props) {
-
-	    var children = []
-	    var menu
-
-	    React.Children.forEach(props.children, function(child){
-	        if (child){
-	            if (child.props && child.props.isMenu){
-	                menu = cloneWithProps(child, {
-	                    ref: 'subMenu'
-	                })
-	                menu.props.subMenu = true
-	                return
-	            }
-
-	            if (typeof child != 'string'){
-	                child = cloneWithProps(child, {
-	                    style    : props.cellStyle,
-	                    itemIndex: props.itemIndex,
-	                    itemCount: props.itemCount
-	                })
-	            }
-
-	            children.push(child)
-	        }
-	    })
-
-	    if (menu){
-	        props.menu = menu
-	        var expander = props.expander || true
-	        var expanderProps = {}
-
-	        if (expander){
-	            expanderProps.onClick = props.onExpanderClick
-	        }
-	        children.push(React.createElement(MenuItemCell, React.__spread({expander: expander},  expanderProps)))
-	    }
-
-	    return children
-	}
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(94)
-	var selectParent = __webpack_require__(112)
-
-	module.exports = function(constrainTo){
-	    var constrainRegion
-
-	    if (constrainTo === true){
-	        constrainRegion = Region.getDocRegion()
-	    }
-
-	    if (!constrainRegion && typeof constrainTo === 'string'){
-	        var parent = selectParent(constrainTo, this.getDOMNode())
-	        constrainRegion = Region.from(parent)
-	    }
-
-	    if (!constrainRegion && typeof constrainTo === 'function'){
-	        constrainRegion = Region.from(constrainTo())
-	    }
-
-	    return constrainRegion
-	}
-
-/***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var assign = __webpack_require__(18)
-
-	module.exports = function(props, state){
-
-	    var itemStyle         = assign({}, props.defaultItemStyle, props.itemStyle)
-	    var itemOverStyle     = assign({}, props.defaultItemOverStyle, props.itemOverStyle)
-	    var itemActiveStyle   = assign({}, props.defaultItemActiveStyle, props.itemActiveStyle)
-	    var itemDisabledStyle = assign({}, props.defaultItemDisabledStyle, props.itemDisabledStyle)
-	    var itemExpandedStyle = assign({}, props.defaultItemExpandedStyle, props.itemExpandedStyle)
-	    var cellStyle     = assign({}, props.defaultCellStyle, props.cellStyle)
-
-	    return {
-	        itemStyle        : itemStyle,
-	        itemOverStyle    : itemOverStyle,
-	        itemActiveStyle  : itemActiveStyle,
-	        itemDisabledStyle: itemDisabledStyle,
-	        itemExpandedStyle: itemExpandedStyle,
-	        cellStyle        : cellStyle
-	    }
-	}
-
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region           = __webpack_require__(94)
-	var assign           = __webpack_require__(18)
-	var cloneWithProps   = __webpack_require__(113)
-	var getPositionStyle = __webpack_require__(105)
-
-	module.exports = function(props, state) {
-	    var menu = state.menu
-
-	    if (menu && this.didMount){
-
-	        var style = getPositionStyle.call(this, props, state)
-
-	        menu = cloneWithProps(menu, assign({
-	            ref          : 'subMenu',
-	            subMenu      : true,
-	            parentMenu   : this,
-	            maxHeight    : state.subMenuMaxHeight,
-	            onActivate   : this.onSubMenuActivate,
-	            onInactivate : this.onSubMenuInactivate,
-	            scrollerProps: props.scrollerProps,
-	            constrainTo  : props.constrainTo,
-	            expander     : props.expander,
-	            theme        : props.theme,
-	            themes       : props.themes || this.constructor.themes
-	        }, props.itemStyleProps))
-
-	        return React.createElement("div", {ref: "subMenuWrap", style: style, 
-	                onMouseEnter: this.handleSubMenuMouseEnter, 
-	                onMouseLeave: this.handleSubMenuMouseLeave
-	            }, menu)
-	    }
-	}
-
-/***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1)
-	var MenuItemCell = __webpack_require__(67)
-
-	var cloneWithProps = __webpack_require__(113)
-	var assign         = __webpack_require__(18)
-
-	function emptyFn(){}
-
-	module.exports = function(props, state) {
-
-	    var expandedIndex  = state.itemProps?
-	                            state.itemProps.index:
-	                            -1
-
-	    var children     = props.children
-	    var maxCellCount = 1
-	    var menuItems    = []
-
-	    React.Children.map(children, function(item){
-	        var itemProps = item.props
-
-	        menuItems.push(item)
-
-	        if (!itemProps || !itemProps.isMenuItem){
-	            return
-	        }
-
-	        var count = React.Children.count(itemProps.children)
-
-	        maxCellCount = Math.max(maxCellCount, count)
-	    })
-
-	    var itemStyleProps = props.itemStyleProps
-	    var i = -1
-	    var result = menuItems.map(function(item, index){
-	        var itemProps = item.props
-
-	        if (itemProps && itemProps.isMenuItem){
-	            i++
-
-	            itemProps.onMenuItemMouseOver = this.onMenuItemMouseOver
-	            itemProps.onMenuItemMouseOut  = this.onMenuItemMouseOut
-	        }
-
-	        var children = React.Children.map(itemProps.children, function(c){ return c })
-	        var count    = React.Children.count(children)
-
-	        if (count < maxCellCount){
-	            children = children? [children]: []
-	        }
-
-	        while (count < maxCellCount){
-	            count++
-	            children.push(React.createElement(MenuItemCell, null))
-	        }
-
-	        var onClick = itemProps.onClick || emptyFn
-
-	        var cloned = cloneWithProps(item, assign({
-	            interactionStyles: props.interactionStyles,
-	            itemIndex: i,
-	            itemCount: menuItems.length,
-	            key      : index,
-	            index    : index,
-	            expanded : expandedIndex == index,
-	            children : children,
-	            expander : props.expander,
-	            applyDefaultTheme: props.applyDefaultTheme,
-	            theme    : props.theme,
-	            themes   : props.themes || this.constructor.themes,
-	            onExpanderClick: this.onMenuItemExpanderClick,
-	            onClick  : function(event, props, index){
-	                onClick.apply(null, arguments)
-	                this.onMenuItemClick(event, props, index)
-	            }.bind(this)
-	        }, {
-	            style        : itemStyleProps.itemStyle,
-	            overStyle    : itemStyleProps.itemOverStyle,
-	            activeStyle  : itemStyleProps.itemActiveStyle,
-	            disabledStyle: itemStyleProps.itemDisabledStyle,
-	            expandedStyle: itemStyleProps.itemExpandedStyle,
-	            cellStyle    : itemStyleProps.cellStyle
-	        }))
-
-	        return cloned
-
-	    }, this)
-
-	    return result
-	}
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React  = __webpack_require__(1)
-	var assign = __webpack_require__(18)
-
-	var renderCells     = __webpack_require__(104)
-	var MenuItem        = __webpack_require__(71)
-	var MenuItemFactory = React.createFactory(MenuItem)
-	var MenuSeparator   = __webpack_require__(68)
-
-	module.exports = function(props, state, item, index) {
-
-	    var expandedIndex = state.itemProps?
-	                            state.itemProps.index:
-	                            -1
-
-	    if (item === '-'){
-	        return React.createElement(MenuSeparator, {key: index})
-	    }
-
-	    var className   = [props.itemClassName, item.cls, item.className]
-	                        .filter(function(x)  {return !!x;})
-	                        .join(' ')
-
-	    var itemProps = assign({
-	        className  : className,
-	        key        : index,
-	        data       : item,
-	        columns    : props.columns,
-	        expanded   : index === expandedIndex,
-	        disabled   : item.disabled,
-	        onClick    : item.onClick || item.fn
-	    }, props.itemStyleProps)
-
-	    itemProps.children = renderCells(itemProps)
-
-	    if (item.items){
-	        var Menu = __webpack_require__(66)
-	        itemProps.children.push(React.createElement(Menu, {items: item.items}))
-	    }
-
-	    return (props.itemFactory || MenuItemFactory)(itemProps)
-	}
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1)
-
-	module.exports = {
-	    items      : React.PropTypes.array,
-	    columns    : React.PropTypes.array,
-	    onMount    : React.PropTypes.func,
-
-	    defaultRowActiveStyle: React.PropTypes.object,
-	    defaultRowOverStyle  : React.PropTypes.object,
-	    defaultRowStyle      : React.PropTypes.object,
-
-	    rowActiveStyle: React.PropTypes.object,
-	    rowOverStyle  : React.PropTypes.object,
-	    rowStyle      : React.PropTypes.object,
-
-	    cellStyle  : React.PropTypes.object
-	}
-
-/***/ },
-/* 92 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var React    = __webpack_require__(1)
-	var assign   = __webpack_require__(18)
-	var buffer   = __webpack_require__(114)
-
-	var Scroller = __webpack_require__(106)
-
-	function stop(event){
-	    event.preventDefault()
-	    event.stopPropagation()
-	}
-
-	module.exports = React.createClass({
-
-	    displayName: 'ReactMenuScrollContainer',
-
-	    getInitialState: function(){
-	        return {
-	            adjustScroll: true,
-	            scrollPos: 0
-	        }
-	    },
-
-	    getDefaultProps: function() {
-	        return {
-	            scrollStep : 5,
-	            scrollSpeed: 50
-	        }
-	    },
-
-	    componentWillUnmount: function(){
-	        if (this.props.enableScroll){
-	            window.removeEventListener('resize', this.onResizeListener)
-	        }
-	    },
-
-	    componentDidMount: function(){
-	        if (this.props.enableScroll){
-	            setTimeout(function(){
-	                if (!this.isMounted()){
-	                    return
-	                }
-
-	                this.adjustScroll()
-
-	                window.addEventListener('resize', this.onResizeListener = buffer(this.onWindowResize, this.props.onWindowResizeBuffer, this))
-	            }.bind(this), 0)
-	        }
-	    },
-
-	    componentDidUpdate: function(){
-	        this.props.enableScroll && this.adjustScroll()
-	    },
-
-	    onWindowResize: function(){
-	        this.adjustScroll()
-	        this.doScroll(0)
-	    },
-
-	    render: function(){
-
-	        var props = this.props
-	        var children = props.children
-
-	        if (!props.enableScroll){
-	            return children
-	        }
-
-	        var scrollStyle = {
-	            position: 'relative'
-	        }
-
-	        if (this.state.scrollPos){
-	            scrollStyle.top = -this.state.scrollPos
-	        }
-
-	        var containerStyle = {
-	            position: 'relative',
-	            overflow: 'hidden'
-	        }
-
-	        if (props.maxHeight){
-	            containerStyle.maxHeight = props.maxHeight
-	        }
-
-	        return React.createElement("div", {
-	            onMouseEnter: props.onMouseEnter, 
-	            onMouseLeave: props.onMouseLeave, 
-	            className: "z-menu-scroll-container", 
-	            style: containerStyle
-	        }, 
-	            React.createElement("div", {ref: "tableWrap", style: scrollStyle}, 
-	                children
-	            ), 
-	            this.renderScroller(props, -1), 
-	            this.renderScroller(props, 1)
-	        )
-	    },
-
-	    renderScroller: function(props, direction) {
-
-	        var onMouseDown = direction == -1?
-	                            this.handleScrollTop:
-	                            this.handleScrollBottom
-
-	        var onDoubleClick = direction == -1?
-	                                this.handleScrollTopMax:
-	                                this.handleScrollBottomMax
-
-	        var visible = direction == -1?
-	                            this.state.hasTopScroll:
-	                            this.state.hasBottomScroll
-
-	        var scrollerProps = assign({}, props.scrollerProps, {
-	            visible    : visible,
-	            side       : direction == -1? 'top': 'bottom',
-	            onMouseDown: onMouseDown,
-	            onDoubleClick: onDoubleClick
-	        })
-
-	        return React.createElement(Scroller, React.__spread({},  scrollerProps))
-	    },
-
-	    adjustScroll: function(){
-	        if (!this.props.enableScroll){
-	            return
-	        }
-
-	        if (!this.state.adjustScroll){
-	            this.state.adjustScroll = true
-	            return
-	        }
-
-	        var availableHeight = this.getAvailableHeight()
-	        var tableHeight      = this.getCurrentTableHeight()
-
-	        var state = {
-	            adjustScroll  : false,
-	            hasTopScroll : false,
-	            hasBottomScroll: false
-	        }
-
-	        if (tableHeight > availableHeight){
-	            state.maxScrollPos    = tableHeight - availableHeight
-	            state.hasTopScroll    = this.state.scrollPos !== 0
-	            state.hasBottomScroll = this.state.scrollPos != state.maxScrollPos
-	        } else {
-	            state.maxScrollPos = 0
-	            state.scrollPos    = 0
-	        }
-
-	        this.setState(state)
-	    },
-
-	    getAvailableHeight: function() {
-	        return this.getAvailableSizeDOM().clientHeight
-	    },
-
-	    getAvailableSizeDOM: function() {
-	        return this.getDOMNode()
-	    },
-
-	    getCurrentTableHeight: function() {
-	        return this.getCurrentSizeDOM().clientHeight
-	    },
-
-	    getCurrentSizeDOM: function() {
-	        return this.refs.tableWrap.getDOMNode()
-	    },
-
-	    handleScrollTop: function(event){
-	        event.preventDefault()
-	        this.handleScroll(-1)
-	    },
-
-	    handleScrollBottom: function(event){
-	        event.preventDefault()
-	        this.handleScroll(1)
-	    },
-
-	    handleScrollTopMax: function(event){
-	        stop(event)
-	        this.handleScrollMax(-1)
-	    },
-
-	    handleScrollBottomMax: function(event){
-	        stop(event)
-	        this.handleScrollMax(1)
-	    },
-
-	    handleScrollMax: function(direction){
-	        var maxPos = direction == -1?
-	                        0:
-	                        this.state.maxScrollPos
-
-	        this.setScrollPosition(maxPos)
-	    },
-
-	    handleScroll: function(direction /*1 to bottom, -1 to up*/){
-	        var mouseUpListener = function(){
-	            this.stopScroll()
-	            window.removeEventListener('mouseup', mouseUpListener)
-	        }.bind(this)
-
-	        window.addEventListener('mouseup', mouseUpListener)
-
-	        this.scrollInterval = setInterval(this.doScroll.bind(this, direction), this.props.scrollSpeed)
-	    },
-
-	    doScroll: function(direction){
-	        this.setState({
-	            scrollDirection: direction
-	        })
-
-	        var newScrollPos = this.state.scrollPos + direction * this.props.scrollStep
-
-	        this.setScrollPosition(newScrollPos)
-	    },
-
-	    setScrollPosition: function(scrollPos){
-	        if (scrollPos > this.state.maxScrollPos){
-	            scrollPos = this.state.maxScrollPos
-	        }
-
-	        if (scrollPos < 0){
-	            scrollPos = 0
-	        }
-
-	        this.setState({
-	            scrollPos: scrollPos,
-	            scrolling : true
-	        })
-	    },
-
-	    stopScroll: function(){
-	        clearInterval(this.scrollInterval)
-
-	        this.setState({
-	            scrolling: false
-	        })
-	    }
-	})
-
-/***/ },
-/* 93 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = {
-	    default: {
-	        // overStyle: {
-	        //     background: 'rgb(202, 223, 255)'
-	        // },
-	        overStyle: {
-	                    background: 'linear-gradient(to bottom, rgb(125, 191, 242) 0%, rgb(110, 184, 241) 50%, rgb(117, 188, 242) 100%)',
-	                    color: 'white'
-	                },
-	        activeStyle: {
-	            // background: 'rgb(118, 181, 231)',
-	            //-6 lightness from overStyle
-	            background: ' linear-gradient(to bottom, rgb(106,182,240) 0%,rgb(91,175,239) 50%,rgb(96,178,240) 100%)',
-	            color: 'white'
-	        },
-	        expandedStyle: {
-	            // background: 'rgb(215, 231, 255)',
-	            background: 'linear-gradient(to bottom, rgb(162,210,246) 0%,rgb(151,204,245) 50%,rgb(154,206,246) 100%)',
-	            color: 'white'
-	        },
-	        disabledStyle: {
-	            color : 'gray',
-	            cursor: 'default'
-	        }
-	    }
-	}
-
-/***/ },
-/* 94 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(19)
-
-	__webpack_require__(109)
-	__webpack_require__(110)
-
-	var COMPUTE_ALIGN_REGION = __webpack_require__(111)
-
-	/**
-	 * region-align module exposes methods for aligning {@link Element} and {@link Region} instances
-	 *
-	 * The #alignTo method aligns this to the target element/region using the specified positions. See #alignTo for a graphical example.
-	 *
-	 *
-	 *      var div = Element.select('div.first')
-	 *
-	 *      div.alignTo(Element.select('body') , 'br-br')
-	 *
-	 *      //aligns the div to be in the bottom-right corner of the body
-	 *
-	 * Other useful methods
-	 *
-	 *  * {@link #alignRegions} - aligns a given source region to a target region
-	 *  * {@link #COMPUTE_ALIGN_REGION} - given a source region and a target region, and alignment positions, returns a clone of the source region, but aligned to satisfy the given alignments
-	 */
-
-
-	/**
-	 * Aligns sourceRegion to targetRegion. It modifies the sourceRegion in order to perform the correct alignment.
-	 * See #COMPUTE_ALIGN_REGION for details and examples.
-	 *
-	 * This method calls #COMPUTE_ALIGN_REGION passing to it all its arguments. The #COMPUTE_ALIGN_REGION method returns a region that is properly aligned.
-	 * If this returned region position/size differs from sourceRegion, then the sourceRegion is modified to be an exact copy of the aligned region.
-	 *
-	 * @inheritdoc #COMPUTE_ALIGN_REGION
-	 * @return {String} the position used for alignment
-	 */
-	Region.alignRegions = function(sourceRegion, targetRegion, positions, config){
-
-	    var result        = COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config)
-	    var alignedRegion = result.region
-
-	    if ( !alignedRegion.equals(sourceRegion) ) {
-	        sourceRegion.setRegion(alignedRegion)
-	    }
-
-	    return result.position
-
-	}
-
-	    /**
-	     *
-	     * The #alignTo method aligns this to the given target region, using the specified alignment position(s).
-	     * You can also specify a constrain for the alignment.
-	     *
-	     * Example
-	     *
-	     *      BIG
-	     *      ________________________
-	     *      |  _______              |
-	     *      | |       |             |
-	     *      | |   A   |             |
-	     *      | |       |      _____  |
-	     *      | |_______|     |     | |
-	     *      |               |  B  | |
-	     *      |               |     | |
-	     *      |_______________|_____|_|
-	     *
-	     * Assume the *BIG* outside rectangle is our constrain region, and you want to align the *A* rectangle
-	     * to the *B* rectangle. Ideally, you'll want their tops to be aligned, and *A* to be placed at the right side of *B*
-	     *
-	     *
-	     *      //so we would align them using
-	     *
-	     *      A.alignTo(B, 'tl-tr', { constrain: BIG })
-	     *
-	     * But this would result in
-	     *
-	     *       BIG
-	     *      ________________________
-	     *      |                       |
-	     *      |                       |
-	     *      |                       |
-	     *      |                _____ _|_____
-	     *      |               |     | .     |
-	     *      |               |  B  | . A   |
-	     *      |               |     | .     |
-	     *      |_______________|_____|_._____|
-	     *
-	     *
-	     * Which is not what we want. So we specify an array of options to try
-	     *
-	     *      A.alignTo(B, ['tl-tr', 'tr-tl'], { constrain: BIG })
-	     *
-	     * So by this we mean: try to align A(top,left) with B(top,right) and stick to the BIG constrain. If this is not possible,
-	     * try the next option: align A(top,right) with B(top,left)
-	     *
-	     * So this is what we end up with
-	     *
-	     *      BIG
-	     *      ________________________
-	     *      |                       |
-	     *      |                       |
-	     *      |                       |
-	     *      |        _______ _____  |
-	     *      |       |       |     | |
-	     *      |       |   A   |  B  | |
-	     *      |       |       |     | |
-	     *      |_______|_______|_____|_|
-	     *
-	     *
-	     * Which is a lot better!
-	     *
-	     * @param {Element/Region} target The target to which to align this alignable.
-	     *
-	     * @param {String[]/String} positions The positions for the alignment.
-	     *
-	     * Example:
-	     *
-	     *      'br-tl'
-	     *      ['br-tl','br-tr','cx-tc']
-	     *
-	     * This method will try to align using the first position. But if there is a constrain region, that position might not satisfy the constrain.
-	     * If this is the case, the next positions will be tried. If one of them satifies the constrain, it will be used for aligning and it will be returned from this method.
-	     *
-	     * If no position matches the contrain, the one with the largest intersection of the source region with the constrain will be used, and this alignable will be resized to fit the constrain region.
-	     *
-	     * @param {Object} config A config object with other configuration for this method
-	     *
-	     * @param {Array[]/Object[]/Object} config.offset The offset to use for aligning. If more that one offset is specified, then offset at a given index is used with the position at the same index.
-	     *
-	     * An offset can have the following form:
-	     *
-	     *      [left_offset, top_offset]
-	     *      {left: left_offset, top: top_offset}
-	     *      {x: left_offset, y: top_offset}
-	     *
-	     * You can pass one offset or an array of offsets. In case you pass just one offset,
-	     * it cannot have the array form, so you cannot call
-	     *
-	     *      this.alignTo(target, positions, [10, 20])
-	     *
-	     * If you do, it will not be considered. Instead, please use
-	     *
-	     *      this.alignTo(target, positions, {x: 10, y: 20})
-	     *
-	     * Or
-	     *
-	     *      this.alignTo(target, positions, [[10, 20]] )
-	     *
-	     * @param {Boolean/Element/Region} config.constrain If boolean, target will be constrained to the document region, otherwise,
-	     * getRegion will be called on this argument to determine the region we need to constrain to.
-	     *
-	     * @param {Boolean/Object} config.sync Either boolean or an object with {width, height}. If it is boolean,
-	     * both width and height will be synced. If directions are specified, will only sync the direction which is specified as true
-	     *
-	     * @return {String}
-	     *
-	     */
-	Region.prototype.alignTo = function(target, positions, config){
-
-	    config = config || {}
-
-	    var sourceRegion = this
-	    var targetRegion = Region.from(target)
-
-	    var result = COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config)
-	    var resultRegion = result.region
-
-	    if (!resultRegion.equalsSize(sourceRegion)){
-	        this.setSize(resultRegion.getSize())
-	    }
-	    if (!resultRegion.equalsPosition(sourceRegion)){
-	        this.setPosition(resultRegion.getPosition(), { absolute: !!config.absolute })
-	    }
-
-	    return result.position
-	}
-
-	module.exports = Region
-
-/***/ },
-/* 95 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(98)
-	var prefixes     = ["ms", "Moz", "Webkit", "O"]
-
-	var el = __webpack_require__(97)
-
-	var ELEMENT
-	var PREFIX
-
-	module.exports = function(key){
-
-		if (PREFIX !== undefined){
-			return PREFIX
-		}
-
-		ELEMENT = ELEMENT || el()
-
-		var i = 0
-		var len = prefixes.length
-		var tmp
-		var prefix
-
-		for (; i < len; i++){
-			prefix = prefixes[i]
-			tmp = prefix + toUpperFirst(key)
-
-			if (typeof ELEMENT.style[tmp] != 'undefined'){
-				return PREFIX = prefix
-			}
-		}
-
-		return PREFIX
-	}
-
-/***/ },
-/* 96 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(98)
-	var getPrefix    = __webpack_require__(95)
-	var properties   = __webpack_require__(80)
-
-	/**
-	 * Returns the given key prefixed, if the property is found in the prefixProps map.
-	 *
-	 * Does not test if the property supports the given value unprefixed.
-	 * If you need this, use './getPrefixed' instead
-	 */
-	module.exports = function(key, value){
-
-		if (!properties[key]){
-			return key
-		}
-
-		var prefix = getPrefix(key)
-
-		return prefix?
-					prefix + toUpperFirst(key):
-					key
-	}
-
-/***/ },
-/* 97 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	var el
-
-	module.exports = function(){
-
-		if(!el && !!global.document){
-		  	el = global.document.createElement('div')
-		}
-
-		if (!el){
-			el = {style: {}}
-		}
-
-		return el
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 98 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function(str){
-		return str?
-				str.charAt(0).toUpperCase() + str.slice(1):
-				''
-	}
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	//http://www.blackpawn.com/texts/pointinpoly/
-	module.exports = function pointInTriangle(point, triangle) {
-	    //compute vectors & dot products
-	    var cx = point[0], cy = point[1],
-	        t0 = triangle[0], t1 = triangle[1], t2 = triangle[2],
-	        v0x = t2[0]-t0[0], v0y = t2[1]-t0[1],
-	        v1x = t1[0]-t0[0], v1y = t1[1]-t0[1],
-	        v2x = cx-t0[0], v2y = cy-t0[1],
-	        dot00 = v0x*v0x + v0y*v0y,
-	        dot01 = v0x*v1x + v0y*v1y,
-	        dot02 = v0x*v2x + v0y*v2y,
-	        dot11 = v1x*v1x + v1y*v1y,
-	        dot12 = v1x*v2x + v1y*v2y
-
-	    // Compute barycentric coordinates
-	    var b = (dot00 * dot11 - dot01 * dot01),
-	        inv = b === 0 ? 0 : (1 / b),
-	        u = (dot11*dot02 - dot01*dot12) * inv,
-	        v = (dot00*dot12 - dot01*dot02) * inv
-	    return u>=0 && v>=0 && (u+v < 1)
-	}
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
-	  var e, m,
-	      eLen = nBytes * 8 - mLen - 1,
-	      eMax = (1 << eLen) - 1,
-	      eBias = eMax >> 1,
-	      nBits = -7,
-	      i = isLE ? (nBytes - 1) : 0,
-	      d = isLE ? -1 : 1,
-	      s = buffer[offset + i];
-
-	  i += d;
-
-	  e = s & ((1 << (-nBits)) - 1);
-	  s >>= (-nBits);
-	  nBits += eLen;
-	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8);
-
-	  m = e & ((1 << (-nBits)) - 1);
-	  e >>= (-nBits);
-	  nBits += mLen;
-	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8);
-
-	  if (e === 0) {
-	    e = 1 - eBias;
-	  } else if (e === eMax) {
-	    return m ? NaN : ((s ? -1 : 1) * Infinity);
-	  } else {
-	    m = m + Math.pow(2, mLen);
-	    e = e - eBias;
-	  }
-	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
-	};
-
-	exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
-	  var e, m, c,
-	      eLen = nBytes * 8 - mLen - 1,
-	      eMax = (1 << eLen) - 1,
-	      eBias = eMax >> 1,
-	      rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0),
-	      i = isLE ? 0 : (nBytes - 1),
-	      d = isLE ? 1 : -1,
-	      s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0;
-
-	  value = Math.abs(value);
-
-	  if (isNaN(value) || value === Infinity) {
-	    m = isNaN(value) ? 1 : 0;
-	    e = eMax;
-	  } else {
-	    e = Math.floor(Math.log(value) / Math.LN2);
-	    if (value * (c = Math.pow(2, -e)) < 1) {
-	      e--;
-	      c *= 2;
-	    }
-	    if (e + eBias >= 1) {
-	      value += rt / c;
-	    } else {
-	      value += rt * Math.pow(2, 1 - eBias);
-	    }
-	    if (value * c >= 2) {
-	      e++;
-	      c /= 2;
-	    }
-
-	    if (e + eBias >= eMax) {
-	      m = 0;
-	      e = eMax;
-	    } else if (e + eBias >= 1) {
-	      m = (value * c - 1) * Math.pow(2, mLen);
-	      e = e + eBias;
-	    } else {
-	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
-	      e = 0;
-	    }
-	  }
-
-	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8);
-
-	  e = (e << mLen) | m;
-	  eLen += mLen;
-	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
-
-	  buffer[offset + i - d] |= s * 128;
-	};
-
-
-/***/ },
-/* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * isArray
-	 */
-
-	var isArray = Array.isArray;
-
-	/**
-	 * toString
-	 */
-
-	var str = Object.prototype.toString;
-
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
-	};
-
-
-/***/ },
-/* 102 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(116)
-
-/***/ },
-/* 103 */
-/***/ function(module, exports, __webpack_require__) {
-
-	    var setImmediate = function(fn){
-	        setTimeout(fn, 0)
-	    }
-	    var clearImmediate = clearTimeout
-	    /**
-	     * Utility methods for working with functions.
-	     * These methods augment the Function prototype.
-	     *
-	     * Using {@link #before}
-	     *
-	     *      function log(m){
-	     *          console.log(m)
-	     *      }
-	     *
-	     *      var doLog = function (m){
-	     *          console.log('LOG ')
-	     *      }.before(log)
-	     *
-	     *      doLog('test')
-	     *      //will log
-	     *      //"LOG "
-	     *      //and then
-	     *      //"test"
-	     *
-	     *
-	     *
-	     * Using {@link #bindArgs}:
-	     *
-	     *      //returns the sum of all arguments
-	     *      function add(){
-	     *          var sum = 0
-	     *          [].from(arguments).forEach(function(n){
-	     *              sum += n
-	     *          })
-	     *
-	     *          return sum
-	     *      }
-	     *
-	     *      var add1 = add.bindArgs(1)
-	     *
-	     *      add1(2, 3) == 6
-	     *
-	     * Using {@link #lockArgs}:
-	     *
-	     *      function add(){
-	     *          var sum = 0
-	     *          [].from(arguments).forEach(function(n){
-	     *              sum += n
-	     *          })
-	     *
-	     *          return sum
-	     *      }
-	     *
-	     *      var add1_2   = add.lockArgs(1,2)
-	     *      var add1_2_3 = add.lockArgs(1,2,3)
-	     *
-	     *      add1_2(3,4)  == 3 //args are locked to only be 1 and 2
-	     *      add1_2_3(6)  == 6 //args are locked to only be 1, 2 and 3
-	     *
-	     *
-	     *
-	     * Using {@link #compose}:
-	     *
-	     *      function multiply(a,b){
-	     *          return a* b
-	     *      }
-	     *
-	     *      var multiply2 = multiply.curry()(2)
-	     *
-	     *      Function.compose(multiply2( add(5,6) )) == multiply2( add(5,6) )
-	     *
-	     *
-	     * @class Function
-	     */
-
-	    var SLICE = Array.prototype.slice
-
-	    var curry = __webpack_require__(117),
-
-	        findFn = function(fn, target, onFound){
-	            // if (typeof target.find == 'function'){
-	            //     return target.find(fn)
-	            // }
-
-	            onFound = typeof onFound == 'function'?
-	                        onFound:
-	                        function(found, key, target){
-	                            return found
-	                        }
-
-	            if (Array.isArray(target)){
-	                var i   = 0
-	                var len = target.length
-	                var it
-
-	                for(; i < len; i++){
-	                    it = target[i]
-	                    if (fn(it, i, target)){
-	                        return onFound(it, i, target)
-	                    }
-	                }
-
-	                return
-	            }
-
-	            if (typeof target == 'object'){
-	                var keys = Object.keys(target)
-	                var i = 0
-	                var len = keys.length
-	                var k
-	                var it
-
-	                for( ; i < len; i++){
-	                    k  = keys[i]
-	                    it = target[k]
-
-	                    if (fn(it, k, target)){
-	                        return onFound(it, k, target)
-	                    }
-	                }
-	            }
-	        },
-
-	        find = curry(findFn, 2),
-
-	        findIndex = curry(function(fn, target){
-	            return findFn(fn, target, function(it, i){
-	                return i
-	            })
-	        }),
-
-	        bindFunctionsOf = function(obj) {
-	            Object.keys(obj).forEach(function(k){
-	                if (typeof obj[k] == 'function'){
-	                    obj[k] = obj[k].bind(obj)
-	                }
-	            })
-
-	            return obj
-	        },
-
-	        /*
-	         * @param {Function...} an enumeration of functions, each consuming the result of the following function.
-	         *
-	         * For example: compose(c, b, a)(1,4) == c(b(a(1,4)))
-	         *
-	         * @return the result of the first function in the enumeration
-	         */
-	        compose = __webpack_require__(118),
-
-	        chain = __webpack_require__(119),
-
-	        once = __webpack_require__(120),
-
-	        bindArgsArray = __webpack_require__(121),
-
-	        bindArgs = __webpack_require__(122),
-
-	        lockArgsArray = __webpack_require__(123),
-
-	        lockArgs = __webpack_require__(124),
-
-	        skipArgs = function(fn, count){
-	            return function(){
-	                var args = SLICE.call(arguments, count || 0)
-
-	                return fn.apply(this, args)
-	            }
-	        },
-
-	        intercept = function(interceptedFn, interceptingFn, withStopArg){
-
-	            return function(){
-	                var args    = [].from(arguments),
-	                    stopArg = { stop: false }
-
-	                if (withStopArg){
-	                    args.push(stopArg)
-	                }
-
-	                var result = interceptingFn.apply(this, args)
-
-	                if (withStopArg){
-	                    if (stopArg.stop === true){
-	                        return result
-	                    }
-
-	                } else {
-	                    if (result === false){
-	                        return result
-	                    }
-	                }
-
-	                //the interception was not stopped
-	                return interceptedFn.apply(this, arguments)
-	            }
-
-	        },
-
-	        delay = function(fn, delay, scope){
-
-	            var delayIsNumber = delay * 1 == delay
-
-	            if (arguments.length == 2 && !delayIsNumber){
-	                scope = delay
-	                delay = 0
-	            } else {
-	                if (!delayIsNumber){
-	                    delay = 0
-	                }
-	            }
-
-	            return function(){
-	                var self = scope || this,
-	                    args = arguments
-
-	                if (delay < 0){
-	                    fn.apply(self, args)
-	                    return
-	                }
-
-	                if (delay || !setImmediate){
-	                    setTimeout(function(){
-	                        fn.apply(self, args)
-	                    }, delay)
-
-	                } else {
-	                    setImmediate(function(){
-	                        fn.apply(self, args)
-	                    })
-	                }
-	            }
-	        },
-
-	        defer = function(fn, scope){
-	            return delay(fn, 0, scope)
-	        },
-
-	        buffer = function(fn, delay, scope){
-
-	            var timeoutId = -1
-
-	            return function(){
-
-	                var self = scope || this,
-	                    args = arguments
-
-	                if (delay < 0){
-	                    fn.apply(self, args)
-	                    return
-	                }
-
-	                var withTimeout = delay || !setImmediate,
-	                    clearFn = withTimeout?
-	                                clearTimeout:
-	                                clearImmediate,
-	                    setFn   = withTimeout?
-	                                setTimeout:
-	                                setImmediate
-
-	                if (timeoutId !== -1){
-	                    clearFn(timeoutId)
-	                }
-
-	                timeoutId = setFn(function(){
-	                    fn.apply(self, args)
-	                    self = null
-	                }, delay)
-
-	            }
-
-	        },
-
-	        throttle = function(fn, delay, scope) {
-	            var timeoutId = -1,
-	                self,
-	                args
-
-	            return function () {
-
-	                self = scope || this
-	                args = arguments
-
-	                if (timeoutId !== -1) {
-	                    //the function was called once again in the delay interval
-	                } else {
-	                    timeoutId = setTimeout(function () {
-	                        fn.apply(self, args)
-
-	                        self = null
-	                        timeoutId = -1
-	                    }, delay)
-	                }
-
-	            }
-
-	        },
-
-	        spread = function(fn, delay, scope){
-
-	            var timeoutId       = -1
-	            var callCount       = 0
-	            var executeCount    = 0
-	            var nextArgs        = {}
-	            var increaseCounter = true
-	            var resultingFnUnbound
-	            var resultingFn
-
-	            resultingFn = resultingFnUnbound = function(){
-
-	                var args = arguments,
-	                    self = scope || this
-
-	                if (increaseCounter){
-	                    nextArgs[callCount++] = {args: args, scope: self}
-	                }
-
-	                if (timeoutId !== -1){
-	                    //the function was called once again in the delay interval
-	                } else {
-	                    timeoutId = setTimeout(function(){
-	                        fn.apply(self, args)
-
-	                        timeoutId = -1
-	                        executeCount++
-
-	                        if (callCount !== executeCount){
-	                            resultingFn = bindArgsArray(resultingFnUnbound, nextArgs[executeCount].args).bind(nextArgs[executeCount].scope)
-	                            delete nextArgs[executeCount]
-
-	                            increaseCounter = false
-	                            resultingFn.apply(self)
-	                            increaseCounter = true
-	                        } else {
-	                            nextArgs = {}
-	                        }
-	                    }, delay)
-	                }
-
-	            }
-
-	            return resultingFn
-	        },
-
-	        /*
-	         * @param {Array} args the array for which to create a cache key
-	         * @param {Number} [cacheParamNumber] the number of args to use for the cache key. Use this to limit the args that area actually used for the cache key
-	         */
-	        getCacheKey = function(args, cacheParamNumber){
-	            if (cacheParamNumber == null){
-	                cacheParamNumber = -1
-	            }
-
-	            var i        = 0,
-	                len      = Math.min(args.length, cacheParamNumber),
-	                cacheKey = [],
-	                it
-
-	            for ( ; i < len; i++){
-	                it = args[i]
-
-	                if (root.check.isPlainObject(it) || Array.isArray(it)){
-	                    cacheKey.push(JSON.stringify(it))
-	                } else {
-	                    cacheKey.push(String(it))
-	                }
-	            }
-
-	            return cacheKey.join(', ')
-	        },
-
-	        /*
-	         * @param {Function} fn - the function to cache results for
-	         * @param {Number} skipCacheParamNumber - the index of the boolean parameter that makes this function skip the caching and
-	         * actually return computed results.
-	         * @param {Function|String} cacheBucketMethod - a function or the name of a method on this object which makes caching distributed across multiple buckets.
-	         * If given, cached results will be searched into the cache corresponding to this bucket. If no result found, return computed result.
-	         *
-	         * For example this param is very useful when a function from a prototype is cached,
-	         * but we want to return the same cached results only for one object that inherits that proto, not for all objects. Thus, for example for Wes.Element,
-	         * we use the 'getId' cacheBucketMethod to indicate cached results for one object only.
-	         * @param {Function} [cacheKeyBuilder] A function to be used to compose the cache key
-	         *
-	         * @return {Function} a new function, which returns results from cache, if they are available, otherwise uses the given fn to compute the results.
-	         * This returned function has a 'clearCache' function attached, which clears the caching. If a parameter ( a bucket id) is  provided,
-	         * only clears the cache in the specified cache bucket.
-	         */
-	        cache = function(fn, config){
-	            config = config || {}
-
-	            var bucketCache = {},
-	                cache       = {},
-	                skipCacheParamNumber = config.skipCacheIndex,
-	                cacheBucketMethod    = config.cacheBucket,
-	                cacheKeyBuilder      = config.cacheKey,
-	                cacheArgsLength      = skipCacheParamNumber == null?
-	                                            fn.length:
-	                                            skipCacheParamNumber,
-	                cachingFn
-
-	            cachingFn = function(){
-	                var result,
-	                    skipCache = skipCacheParamNumber != null?
-	                                                arguments[skipCacheParamNumber] === true:
-	                                                false,
-	                    args = skipCache?
-	                                    SLICE.call(arguments, 0, cacheArgsLength):
-	                                    SLICE.call(arguments),
-
-	                    cacheBucketId = cacheBucketMethod != null?
-	                                        typeof cacheBucketMethod == 'function'?
-	                                            cacheBucketMethod():
-	                                            typeof this[cacheBucketMethod] == 'function'?
-	                                                this[cacheBucketMethod]():
-	                                                null
-	                                        :
-	                                        null,
-
-
-	                    cacheObject = cacheBucketId?
-	                                        bucketCache[cacheBucketId]:
-	                                        cache,
-
-	                    cacheKey = (cacheKeyBuilder || getCacheKey)(args, cacheArgsLength)
-
-	                if (cacheBucketId && !cacheObject){
-	                    cacheObject = bucketCache[cacheBucketId] = {}
-	                }
-
-	                if (skipCache || cacheObject[cacheKey] == null){
-	                    cacheObject[cacheKey] = result = fn.apply(this, args)
-	                } else {
-	                    result = cacheObject[cacheKey]
-	                }
-
-	                return result
-	            }
-
-	            /*
-	             * @param {String|Object|Number} [bucketId] the bucket for which to clear the cache. If none given, clears all the cache for this function.
-	             */
-	            cachingFn.clearCache = function(bucketId){
-	                if (bucketId){
-	                    delete bucketCache[String(bucketId)]
-	                } else {
-	                    cache = {}
-	                    bucketCache = {}
-	                }
-	            }
-
-	            /*
-	             *
-	             * @param {Array} cacheArgs The array of objects from which to create the cache key
-	             * @param {Number} [cacheParamNumber] A limit for the cache args that are actually used to compute the cache key.
-	             * @param {Function} [cacheKeyBuilder] The function to be used to compute the cache key from the given cacheArgs and cacheParamNumber
-	             */
-	            cachingFn.getCache = function(cacheArgs, cacheParamNumber, cacheKeyBuilder){
-	                return cachingFn.getBucketCache(null, cacheArgs, cacheParamNumber, cacheKeyBuilder)
-	            }
-
-	            /*
-	             *
-	             * @param {String} bucketId The id of the cache bucket from which to retrieve the cached value
-	             * @param {Array} cacheArgs The array of objects from which to create the cache key
-	             * @param {Number} [cacheParamNumber] A limit for the cache args that are actually used to compute the cache key.
-	             * @param {Function} [cacheKeyBuilder] The function to be used to compute the cache key from the given cacheArgs and cacheParamNumber
-	             */
-	            cachingFn.getBucketCache = function(bucketId, cacheArgs, cacheParamNumber, cacheKeyBuilder){
-	                var cacheObject = cache,
-	                    cacheKey = (cacheKeyBuilder || getCacheKey)(cacheArgs, cacheParamNumber)
-
-	                if (bucketId){
-	                    bucketId = String(bucketId);
-
-	                    cacheObject = bucketCache[bucketId] = bucketCache[bucketId] || {}
-	                }
-
-	                return cacheObject[cacheKey]
-	            }
-
-	            /*
-	             *
-	             * @param {Object} value The value to set in the cache
-	             * @param {Array} cacheArgs The array of objects from which to create the cache key
-	             * @param {Number} [cacheParamNumber] A limit for the cache args that are actually used to compute the cache key.
-	             * @param {Function} [cacheKeyBuilder] The function to be used to compute the cache key from the given cacheArgs and cacheParamNumber
-	             */
-	            cachingFn.setCache = function(value, cacheArgs, cacheParamNumber, cacheKeyBuilder){
-	                return cachingFn.setBucketCache(null, value, cacheArgs, cacheParamNumber, cacheKeyBuilder)
-	            }
-
-	            /*
-	             *
-	             * @param {String} bucketId The id of the cache bucket for which to set the cache value
-	             * @param {Object} value The value to set in the cache
-	             * @param {Array} cacheArgs The array of objects from which to create the cache key
-	             * @param {Number} [cacheParamNumber] A limit for the cache args that are actually used to compute the cache key.
-	             * @param {Function} [cacheKeyBuilder] The function to be used to compute the cache key from the given cacheArgs and cacheParamNumber
-	             */
-	            cachingFn.setBucketCache = function(bucketId, value, cacheArgs, cacheParamNumber, cacheKeyBuilder){
-
-	                var cacheObject = cache,
-	                    cacheKey = (cacheKeyBuilder || getCacheKey)(cacheArgs, cacheParamNumber)
-
-	                if (bucketId){
-	                    bucketId = String(bucketId)
-
-	                    cacheObject = bucketCache[bucketId] = bucketCache[bucketId] || {};
-	                }
-
-	                return cacheObject[cacheKey] = value
-	            }
-
-	            return cachingFn
-	        }
-
-	module.exports = {
-
-	    map: __webpack_require__(125),
-
-	    dot: __webpack_require__(126),
-
-	    maxArgs: __webpack_require__(127),
-
-	    /**
-	     * @method compose
-	     *
-	     * Example:
-	     *
-	     *      zippy.Function.compose(c, b, a)
-	     *
-	     * See {@link Function#compose}
-	     */
-	    compose: compose,
-
-	    /**
-	     * See {@link Function#self}
-	     */
-	    self: function(fn){
-	        return fn
-	    },
-
-	    /**
-	     * See {@link Function#buffer}
-	     */
-	    buffer: buffer,
-
-	    /**
-	     * See {@link Function#delay}
-	     */
-	    delay: delay,
-
-	    /**
-	     * See {@link Function#defer}
-	     * @param {Function} fn
-	     * @param {Object} scope
-	     */
-	    defer:defer,
-
-	    /**
-	     * See {@link Function#skipArgs}
-	     * @param {Function} fn
-	     * @param {Number} [count=0] how many args to skip when calling the resulting function
-	     * @return {Function} The function that will call the original fn without the first count args.
-	     */
-	    skipArgs: skipArgs,
-
-	    /**
-	     * See {@link Function#intercept}
-	     */
-	    intercept: function(fn, interceptedFn, withStopArgs){
-	        return intercept(interceptedFn, fn, withStopArgs)
-	    },
-
-	    /**
-	     * See {@link Function#throttle}
-	     */
-	    throttle: throttle,
-
-	    /**
-	     * See {@link Function#spread}
-	     */
-	    spread: spread,
-
-	    /**
-	     * See {@link Function#chain}
-	     */
-	    chain: function(fn, where, mainFn){
-	        return chain(where, mainFn, fn)
-	    },
-
-	    /**
-	     * See {@link Function#before}
-	     */
-	    before: function(fn, otherFn){
-	        return chain('before', otherFn, fn)
-	    },
-
-	    /**
-	     * See {@link Function#after}
-	     */
-	    after: function(fn, otherFn){
-	        return chain('after', otherFn, fn)
-	    },
-
-	    /**
-	     * See {@link Function#curry}
-	     */
-	    curry: curry,
-
-	    /**
-	     * See {@link Function#once}
-	     */
-	    once: once,
-
-	    /**
-	     * See {@link Function#bindArgs}
-	     */
-	    bindArgs: bindArgs,
-
-	    /**
-	     * See {@link Function#bindArgsArray}
-	     */
-	    bindArgsArray: bindArgsArray,
-
-	    /**
-	     * See {@link Function#lockArgs}
-	     */
-	    lockArgs: lockArgs,
-
-	    /**
-	     * See {@link Function#lockArgsArray}
-	     */
-	    lockArgsArray: lockArgsArray,
-
-	    bindFunctionsOf: bindFunctionsOf,
-
-	    find: find,
-
-	    findIndex: findIndex,
-
-	    newify: __webpack_require__(128)
-	}
-
-/***/ },
-/* 104 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var renderCell = __webpack_require__(107)
-
-	module.exports = function(props) {
-	    return props.columns.map(renderCell.bind(null, props))
-	}
-
-/***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(94)
-	var assign = __webpack_require__(18)
-	var align  = __webpack_require__(115)
-
-	module.exports = function getPositionStyle(props, state){
-	    if (!state.menu || !this.didMount){
-	        this.prevMenuIndex = -1
-	        return
-	    }
-
-	    var offset = state.menuOffset
-	    var left   = offset.left + offset.width
-	    var top    = offset.top
-
-	    var menuIndex = state.itemProps.index
-	    var sameMenu = this.prevMenuIndex == menuIndex
-
-	    if (this.aligning && !sameMenu){
-	        this.aligning = false
-	    }
-
-	    this.prevMenuIndex = menuIndex
-
-	    var style = {
-	        position     : 'absolute',
-	        visibility   : 'hidden',
-	        overflow     : 'hidden',
-	        pointerEvents: 'none',
-	        left         : left,
-	        top          : top,
-	        zIndex       : 1
-	    }
-
-	    if (!this.aligning && !sameMenu){
-	        setTimeout(function(){
-
-	            if (!this.didMount){
-	                return
-	            }
-
-	            var thisRegion = Region.from(this.getDOMNode())
-	            var menuItemRegion = Region.from({
-	                left  : thisRegion.left,
-	                top   : thisRegion.top + offset.top,
-	                width : offset.width,
-	                height: offset.height
-	            })
-
-	            var subMenuMounted = this.refs.subMenu && this.refs.subMenu.isMounted()
-	            if (!subMenuMounted){
-	                return
-	            }
-
-	            var subMenuRegion = Region.from(this.refs.subMenu.refs.scrollContainer.getCurrentSizeDOM())
-
-	            var initialHeight = subMenuRegion.height
-
-	            var alignPos = align(props, subMenuRegion, /* alignTo */ menuItemRegion, props.constrainTo)
-
-	            var newHeight = subMenuRegion.height
-	            var maxHeight
-
-	            if (newHeight < initialHeight){
-	                maxHeight = newHeight - props.subMenuConstrainMargin
-	            }
-
-	            if (maxHeight && alignPos == -1 /* upwards*/){
-	                subMenuRegion.top = subMenuRegion.bottom - maxHeight
-	            }
-
-	            var newLeft = subMenuRegion.left - thisRegion.left
-	            var newTop  = subMenuRegion.top  - thisRegion.top
-
-	            if (Math.abs(newLeft - left) < 5){
-	                newLeft = left
-	            }
-
-	            if (Math.abs(newTop - top) < 5){
-	                newTop = top
-	            }
-
-	            this.subMenuPosition = newLeft < 0? 'left': 'right'
-
-	            this.alignOffset = {
-	                left: newLeft,
-	                top : newTop
-	            }
-	            this.aligning = true
-
-	            this.setState({
-	                subMenuMaxHeight: maxHeight
-	            })
-
-	        }.bind(this), 0)
-	    }
-
-	    if (sameMenu || (this.aligning && this.alignOffset)){
-	        assign(style, this.alignOffset)
-	        style.visibility = 'visible'
-	        delete style.pointerEvents
-	        delete style.overflow
-	    }
-
-	    this.aligning = false
-
-	    return style
-	}
-
-/***/ },
-/* 106 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React         = __webpack_require__(1)
-	var assign        = __webpack_require__(18)
-	var getArrowStyle = __webpack_require__(132)
-
-	function emptyFn(){}
-
-	var SCROLLER_STYLE = {
-	    left      : 0,
-	    right     : 0,
-	    position  : 'absolute',
-	    cursor    : 'pointer',
-	    zIndex    : 1
-	}
-
-	function generateArrowStyle(props, state, overrideStyle){
-	    var style = assign({}, overrideStyle)
-
-	    var arrowConfig = {
-	        color: style.color || props.arrowColor
-	    }
-
-	    var offset = 4
-	    var width  = style.width  || props.arrowWidth  || props.arrowSize || (props.style.height - offset)
-	    var height = style.height || props.arrowHeight || props.arrowSize || (props.style.height - offset)
-
-	    arrowConfig.width  = width
-	    arrowConfig.height = height
-
-	    assign(style, getArrowStyle(props.side == 'top'? 'up':'down', arrowConfig))
-
-	    style.display = 'inline-block'
-	    style.position = 'absolute'
-
-	    style.left = '50%'
-	    style.marginLeft = -width
-
-	    style.top = '50%'
-	    style.marginTop = -height/2
-
-	    if (state.active){
-	        style.marginTop += props.side == 'top'? -1: 1
-	    }
-
-	    return style
-	}
-
-	var Scroller = React.createClass({displayName: "Scroller",
-
-	    display: 'ReactMenuScroller',
-
-	    getInitialState: function() {
-	        return {}
-	    },
-
-	    getDefaultProps: function(){
-	        return {
-	            height: 10,
-	            defaultStyle: {
-	                background : 'white'
-	            },
-	            defaultOverStyle: {},
-	            overStyle: {},
-
-	            defaultTopStyle: {
-	                borderBottom: '1px solid gray'
-	            },
-	            topStyle: {},
-	            defaultBottomStyle: {
-	                borderTop: '1px solid gray'
-	            },
-	            bottomStyle: {},
-
-	            arrowColor: 'gray',
-
-	            arrowStyle: {},
-	            defaultArrowStyle: {},
-	            defaultArrowOverStyle: {
-	                color: 'rgb(74, 74, 74)'
-	            },
-	            arrowOverStyle: {}
-	        }
-	    },
-
-	    handleMouseEnter: function() {
-	        this.setState({
-	            mouseOver: true
-	        })
-	    },
-
-	    handleMouseLeave: function() {
-	        this.setState({
-	            mouseOver: false
-	        })
-	    },
-
-	    handleMouseDown: function(event) {
-	        this.setState({
-	            active: true
-	        })
-
-	        ;(this.props.onMouseDown || emptyFn)(event)
-	    },
-
-	    handleMouseUp: function(event) {
-	        this.setState({
-	            active: false
-	        })
-
-	        ;(this.props.onMouseUp || emptyFn)(event)
-	    },
-
-	    render: function(){
-	        var props = assign({}, this.props, {
-	            onMouseEnter: this.handleMouseEnter,
-	            onMouseLeave: this.handleMouseLeave,
-
-	            onMouseDown: this.handleMouseDown,
-	            onMouseUp  : this.handleMouseUp
-	        })
-
-	        var state = this.state
-	        var side  = props.side
-
-	        props.className = this.prepareClassName(props, state)
-
-	        props.style = this.prepareStyle(props, state)
-
-	        var arrowStyle = this.prepareArrowStyle(props, state)
-
-	        return props.factory?
-	                    props.factory(props, side):
-	                    React.createElement("div", React.__spread({},  props), 
-	                        React.createElement("div", {style: arrowStyle})
-	                    )
-	    },
-
-	    prepareStyle: function(props, state) {
-	        var defaultOverStyle
-	        var overStyle
-
-	        if (state.mouseOver){
-	            overStyle        = props.overStyle
-	            defaultOverStyle = props.defaultOverStyle
-	        }
-
-	        var defaultSideStyle = props.side == 'top'?
-	                                props.defaultTopStyle:
-	                                props.defaultBottomStyle
-	        var sideStyle = props.side == 'top'?
-	                            props.topStyle:
-	                            props.bottomStyle
-
-	        var style = assign({}, SCROLLER_STYLE,
-	                            props.defaultStyle, defaultSideStyle, defaultOverStyle,
-	                            props.style, sideStyle, overStyle)
-
-	        style.height = style.height || props.height
-	        style[props.side] = 0
-	        if (!props.visible){
-	            style.display = 'none'
-	        }
-
-	        return style
-	    },
-
-	    prepareClassName: function(props, state) {
-	        //className
-	        var className = props.className || ''
-	        className += ' z-menu-scroller ' + props.side
-
-	        if (props.active && props.visible){
-	            className += ' active'
-	        }
-
-	        return className
-	    },
-
-	    prepareArrowStyle: function(props, state) {
-
-	        var defaultArrowOverStyle
-	        var arrowOverStyle
-
-	        if (state.mouseOver){
-	            defaultArrowOverStyle = props.defaultArrowOverStyle
-	            arrowOverStyle        = props.arrowOverStyle
-	        }
-
-	        var arrowStyle = assign({}, props.defaultArrowStyle, defaultArrowOverStyle, props.arrowStyle, arrowOverStyle)
-
-	        return generateArrowStyle(props, state, arrowStyle)
-	    },
-
-	    handleClick: function(event){
-	        event.stopPropagation
-	    }
-	})
-
-	module.exports = Scroller
-
-/***/ },
-/* 107 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React        = __webpack_require__(1)
-	var assign       = __webpack_require__(18)
-	var MenuItemCell = __webpack_require__(67)
-
-	module.exports = function(props, column) {
-	    var style = assign({}, props.defaultCellStyle, props.cellStyle)
-
-	    return React.createElement(MenuItemCell, {style: style}, props.data[column])
-	}
-
-/***/ },
-/* 108 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -13830,1148 +13258,2065 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 109 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var Region = __webpack_require__(19)
-
-	/**
-	 * @static
-	 * Aligns the source region to the target region, so as to correspond to the given alignment.
-	 *
-	 * NOTE that this method makes changes on the sourceRegion in order for it to be aligned as specified.
-	 *
-	 * @param {Region} sourceRegion
-	 * @param {Region} targetRegion
-	 *
-	 * @param {String} align A string with 2 valid align positions, eg: 'tr-bl'.
-	 * For valid positions, see {@link Region#getPoint}
-	 *
-	 * Having 2 regions, we need to be able to align them as we wish:
-	 *
-	 * for example, if we have
-	 *
-	 *       source    target
-	 *       ________________
-	 *       ____
-	 *      |    |     ________
-	 *      |____|    |        |
-	 *                |        |
-	 *                |________|
-	 *
-	 * and we align 't-t', we get:
-	 *
-	 *       source    target
-	 *       _________________
-	 *
-	 *       ____      ________
-	 *      |    |    |        |
-	 *      |____|    |        |
-	 *                |________|
-	 *
-	 *  In this case, the source was moved down to be aligned to the top of the target
-	 *
-	 *
-	 * and if we align 'tc-tc' we get
-	 *
-	 *       source     target
-	 *       __________________
-	 *
-	 *                 ________
-	 *                | |    | |
-	 *                | |____| |
-	 *                |________|
-	 *
-	 *  Since the source was moved to have the top-center point to be the same with target top-center
-	 *
-	 *
-	 *
-	 * @return {RegionClass} The Region class
-	 */
-	Region.align = function(sourceRegion, targetRegion, align){
-
-	    targetRegion = Region.from(targetRegion)
-
-	    align = (align || 'c-c').split('-')
-
-	    //<debug>
-	    if (align.length != 2){
-	        console.warn('Incorrect region alignment! The align parameter need to be in the form \'br-c\', that is, a - separated string!', align)
-	    }
-	    //</debug>
-
-	    return Region.alignToPoint(sourceRegion, targetRegion.getPoint(align[1]), align[0])
-	}
-
-	/**
-	 * Modifies the given region to be aligned to the point, as specified by anchor
-	 *
-	 * @param {Region} region The region to align to the point
-	 * @param {Object} point The point to be used as a reference
-	 * @param {Number} point.x
-	 * @param {Number} point.y
-	 * @param {String} anchor The position where to anchor the region to the point. See {@link #getPoint} for available options/
-	 *
-	 * @return {Region} the given region
-	 */
-	Region.alignToPoint = function(region, point, anchor){
-
-	    region = Region.from(region)
-
-	    var sourcePoint = region.getPoint(anchor)
-	    var count       = 0
-	    var shiftObj    = {}
-
-	    if (
-	            sourcePoint.x != null &&
-	            point.x != null
-	        ){
-
-	            count++
-	            shiftObj.left = point.x - sourcePoint.x
-	    }
-
-	    if (
-	            sourcePoint.y != null &&
-	            point.y != null
-	        ){
-	            count++
-	            shiftObj.top = point.y - sourcePoint.y
-	    }
-
-	    if (count){
-
-	        region.shift(shiftObj)
-
-	    }
-
-	    return region
-	}
-
-/***/ },
-/* 110 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(19)
-
-	/**
-	 *
-	 * Aligns this region to the given region
-	 * @param {Region} region
-	 * @param {String} alignPositions For available positions, see {@link #getPoint}
-	 *
-	 *     eg: 'tr-bl'
-	 *
-	 * @return this
-	 */
-	Region.prototype.alignToRegion = function(region, alignPositions){
-	    Region.align(this, region, alignPositions)
-
-	    return this
-	}
-
-	/**
-	 * Aligns this region to the given point, in the anchor position
-	 * @param {Object} point eg: {x: 20, y: 600}
-	 * @param {Number} point.x
-	 * @param {Number} point.y
-	 *
-	 * @param {String} anchor For available positions, see {@link #getPoint}
-	 *
-	 *     eg: 'bl'
-	 *
-	 * @return this
-	 */
-	 Region.prototype.alignToPoint = function(point, anchor){
-	    Region.alignToPoint(this, point, anchor)
-
-	    return this
-	}
-
-/***/ },
-/* 111 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var ALIGN_TO_NORMALIZED = __webpack_require__(129)
-
-	var Region = __webpack_require__(19)
-
-	/**
-	 * @localdoc Given source and target regions, and the given alignments required, returns a region that is the resulting allignment.
-	 * Does not modify the sourceRegion.
-	 *
-	 * Example
-	 *
-	 *      var sourceRegion = zippy.getInstance({
-	 *          alias  : 'z.region',
-	 *          top    : 10,
-	 *          left   : 10,
-	 *          bottom : 40,
-	 *          right  : 100
-	 *      })
-	 *
-	 *      var targetRegion = zippy.getInstance({
-	 *          alias  : 'z.region',
-	 *          top    : 10,
-	 *          left   : 10,
-	 *          bottom : 40,
-	 *          right  : 100
-	 *      })
-	 *      //has top-left at (10,10)
-	 *      //and bottom-right at (40, 100)
-	 *
-	 *      var alignRegion = alignable.COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, 'tl-br')
-	 *
-	 *      //alignRegion will be a clone of sourceRegion, but will have the
-	 *      //top-left corner aligned with bottom-right of targetRegion
-	 *
-	 *      alignRegion.get() // => { top: 40, left: 100, bottom: 70, right: 190 }
-	 *
-	 * @param  {Region} sourceRegion The source region to align to targetRegion
-	 * @param  {Region} targetRegion The target region to which to align the sourceRegion
-	 * @param  {String/String[]} positions    A string ( delimited by "-" characters ) or an array of strings with the position to try, in the order of their priority.
-	 * See Region#getPoint for a list of available positions. They can be combined in any way.
-	 * @param  {Object} config      A config object with other configuration for the alignment
-	 * @param  {Object/Object[]} config.offset      Optional offsets. Either an object or an array with a different offset for each position
-	 * @param  {Element/Region/Boolean} config.constrain  The constrain to region or element. If the boolean true, Region.getDocRegion() will be used
-	 * @param  {Object/Boolean} config.sync   A boolean object that indicates whether to sync sourceRegion and targetRegion sizes (width/height or both). Can be
-	 *
-	 *  * true - in order to sync both width and height
-	 *  * { width: true }  - to only sync width
-	 *  * { height: true } - to only sync height
-	 *  * { size: true }   - to sync both width and height
-	 *
-	 * @return {Object} an object with the following keys:
-	 *
-	 *  * position - the position where the alignment was made. One of the given positions
-	 *  * region   - the region where the alignment is in place
-	 *  * positionChanged - boolean value indicating if the position of the returned region is different from the position of sourceRegion
-	 *  * widthChanged    - boolean value indicating if the width of the returned region is different from the width of sourceRegion
-	 *  * heightChanged   - boolean value indicating if the height of the returned region is different from the height of sourceRegion
-	 */
-	function COMPUTE_ALIGN_REGION(sourceRegion, targetRegion, positions, config){
-	    sourceRegion = Region.from(sourceRegion)
-
-	    var sourceClone = sourceRegion.clone()
-	    var position    = ALIGN_TO_NORMALIZED(sourceClone, targetRegion, positions, config)
-
-	    return {
-	        position        : position,
-	        region          : sourceClone,
-	        widthChanged    : sourceClone.getWidth() != sourceRegion.getWidth(),
-	        heightChanged   : sourceClone.getHeight() != sourceRegion.getHeight(),
-	        positionChanged : sourceClone.equalsPosition(sourceRegion)
-	    }
-	}
-
-
-	module.exports = COMPUTE_ALIGN_REGION
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var curry   = __webpack_require__(130)
-	var matches
-
-	module.exports = curry(function(selector, node){
-
-		matches = matches || __webpack_require__(131)
-
-	    while (node = node.parentElement){
-	        if (matches.call(node, selector)){
-	            return node
-	        }
-	    }
-	})
-
-/***/ },
-/* 113 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var React    = __webpack_require__(1)
-	  , hasOwn   = Object.prototype.hasOwnProperty
-	  , version  = React.version.split('.').map(parseFloat)
-	  , RESERVED = {
-	      className:  resolve(joinClasses),
-	      children:   function(){},
-	      key:        function(){},
-	      ref:        function(){},
-	      style:      resolve(extend)
-	    };
-
-	module.exports = function cloneWithProps(child, props) {
-	  var newProps = mergeProps(props, child.props);
-
-	  if (!hasOwn.call(newProps, 'children') && hasOwn.call(child.props, 'children'))
-	    newProps.children = child.props.children;
-
-	  // < 0.11
-	  if (version[0] === 0 && version[1] < 11)
-	    return child.constructor.ConvenienceConstructor(newProps);
-	  
-	  // 0.11
-	  if (version[0] === 0 && version[1] === 11)
-	    return child.constructor(newProps);
-
-	  // 0.12
-	  else if (version[0] === 0 && version[1] === 12){
-	    MockLegacyFactory.isReactLegacyFactory = true
-	    MockLegacyFactory.type = child.type
-	    return React.createElement(MockLegacyFactory, newProps);
-	  }
-
-	  // 0.13+
-	  return React.createElement(child.type, newProps);
-
-	  function MockLegacyFactory(){}
-	}
-
-	function mergeProps(currentProps, childProps) {
-	  var newProps = extend(currentProps), key
-
-	  for (key in childProps) {
-	    if (hasOwn.call(RESERVED, key) )
-	      RESERVED[key](newProps, childProps[key], key)
-
-	    else if ( !hasOwn.call(newProps, key) )
-	      newProps[key] = childProps[key];
-	  }
-	  return newProps
-	}
-
-	function resolve(fn){
-	  return function(src, value, key){
-	    if( !hasOwn.call(src, key)) src[key] = value
-	    else src[key] = fn(src[key], value)
-	  }
-	}
-
-	function joinClasses(a, b){
-	  if ( !a ) return b || ''
-	  return a + (b ? ' ' + b : '')
-	}
-
-	function extend() {
-	  var target = {};
-	  for (var i = 0; i < arguments.length; i++) 
-	    for (var key in arguments[i]) if (hasOwn.call(arguments[i], key)) 
-	      target[key] = arguments[i][key]   
-	  return target
-	}
-
-/***/ },
-/* 114 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	var setImmediate   = global.setImmediate
-	var clearImmediate = global.clearImmediate
-
-	module.exports = function(fn, delay, scope){
-
-	    var timeoutId = -1
-
-	    return function(){
-
-	        var self = scope || this
-	        var args = arguments
-
-	        if (delay < 0){
-	            fn.apply(self, args)
-	            return
-	        }
-
-	        var withTimeout = delay || !setImmediate
-	        var clearFn = withTimeout?
-	                        clearTimeout:
-	                        clearImmediate
-	        var setFn   = withTimeout?
-	                        setTimeout:
-	                        setImmediate
-
-	        if (timeoutId !== -1){
-	            clearFn(timeoutId)
-	        }
-
-	        timeoutId = setFn(function(){
-	            fn.apply(self, args)
-	            self = null
-	        }, delay)
-	    }
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 115 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Region = __webpack_require__(94)
-	var getConstrainRegion = __webpack_require__(86)
-
-	module.exports = function(props, subMenuRegion, targetAlignRegion, constrainTo){
-	    var constrainRegion = getConstrainRegion.call(this, constrainTo)
-
-	    if (!constrainRegion){
-	        return
-	    }
-
-
-
-	    if (typeof props.alignSubMenu === 'function'){
-	        props.alignSubMenu(subMenuRegion, targetAlignRegion, constrainRegion)
-	    } else {
-	        var pos = subMenuRegion.alignTo(targetAlignRegion, [
-	            //align to right
-	            'tl-tr','bl-br',
-
-	            //align to left
-	            'tr-tl', 'br-bl'
-	        ], { constrain: constrainRegion })
-
-	        return (pos == 'tl-tr' || pos == 'tr-tl')?
-	                    //align downwards
-	                    1:
-
-	                    //align upwards
-	                    -1
-	    }
-	}
-
-/***/ },
-/* 116 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	module.exports = {
-	    'numeric'  : __webpack_require__(133),
-	    'number'   : __webpack_require__(134),
-	    'int'      : __webpack_require__(135),
-	    'float'    : __webpack_require__(136),
-	    'string'   : __webpack_require__(137),
-	    'function' : __webpack_require__(138),
-	    'object'   : __webpack_require__(139),
-	    'arguments': __webpack_require__(140),
-	    'boolean'  : __webpack_require__(141),
-	    'date'     : __webpack_require__(142),
-	    'regexp'   : __webpack_require__(143),
-	    'array'    : __webpack_require__(144)
-	}
-
-/***/ },
-/* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	function curry(fn, n){
-
-	    if (typeof n !== 'number'){
-	        n = fn.length
-	    }
-
-	    function getCurryClosure(prevArgs){
-
-	        function curryClosure() {
-
-	            var len  = arguments.length
-	            var args = [].concat(prevArgs)
-
-	            if (len){
-	                args.push.apply(args, arguments)
-	            }
-
-	            if (args.length < n){
-	                return getCurryClosure(args)
-	            }
-
-	            return fn.apply(this, args)
-	        }
-
-	        return curryClosure
-	    }
-
-	    return getCurryClosure([])
-	}
-
-	module.exports = curry
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	function composeTwo(f, g) {
-	    return function () {
-	        return f(g.apply(this, arguments))
-	    }
-	}
-
-	/*
-	 * @param {Function...} an enumeration of functions, each consuming the result of the following function.
-	 *
-	 * For example: compose(c, b, a)(1,4) == c(b(a(1,4)))
-	 *
-	 * @return the result of the first function in the enumeration
-	 */
-	module.exports = function(){
-
-	    var args = arguments
-	    var len  = args.length
-	    var i    = 0
-	    var f    = args[0]
-
-	    while (++i < len) {
-	        f = composeTwo(f, args[i])
-	    }
-
-	    return f
-	}
-
-/***/ },
-/* 119 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	function chain(where, fn, secondFn){
-
-	    return function(){
-	        if (where === 'before'){
-	            secondFn.apply(this, arguments)
-	        }
-
-	        var result = fn.apply(this, arguments)
-
-	        if (where !== 'before'){
-	            secondFn.apply(this, arguments)
-	        }
-
-	        return result
-	    }
-	}
-
-	module.exports = chain
-
-/***/ },
-/* 120 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use once'
-
-	function once(fn, scope){
-
-	    var called
-	    var result
-
-	    return function(){
-	        if (called){
-	            return result
-	        }
-
-	        called = true
-
-	        return result = fn.apply(scope || this, arguments)
-	    }
-	}
-
-	module.exports = once
-
-/***/ },
-/* 121 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-
-	module.exports = function(fn, args){
-	    return function(){
-	        var thisArgs = SLICE.call(args || [])
-
-	        if (arguments.length){
-	            thisArgs.push.apply(thisArgs, arguments)
-	        }
-
-	        return fn.apply(this, thisArgs)
-	    }
-	}
-
-/***/ },
-/* 122 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var bindArgsArray = __webpack_require__(121)
-
-	module.exports = function(fn){
-	    return bindArgsArray(fn, SLICE.call(arguments,1))
-	}
-
-/***/ },
-/* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-
-	module.exports = function(fn, args){
-
-	    return function(){
-	        if (!Array.isArray(args)){
-	            args = SLICE.call(args || [])
-	        }
-
-	        return fn.apply(this, args)
-	    }
-	}
-
-/***/ },
-/* 124 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var lockArgsArray = __webpack_require__(123)
-
-	module.exports = function(fn){
-	    return lockArgsArray(fn, SLICE.call(arguments, 1))
-	}
-
-/***/ },
-/* 125 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var curry = __webpack_require__(117)
-
-	module.exports = curry(function(fn, value){
-	    return value != undefined && typeof value.map?
-	            value.map(fn):
-	            fn(value)
-	})
-
-/***/ },
-/* 126 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var curry = __webpack_require__(117)
-
-	module.exports = curry(function(prop, value){
-	    return value != undefined? value[prop]: undefined
-	})
-
-/***/ },
-/* 127 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var SLICE = Array.prototype.slice
-	var curry = __webpack_require__(117)
-
-	module.exports = function(fn, count){
-	    return function(){
-	        return fn.apply(this, SLICE.call(arguments, 0, count))
-	    }
-	}
-
-/***/ },
-/* 128 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var newify = __webpack_require__(145)
-	var curry  = __webpack_require__(117)
-
-	module.exports = curry(newify)
-
-/***/ },
 /* 129 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict'
+	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+	  var e, m
+	  var eLen = nBytes * 8 - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var nBits = -7
+	  var i = isLE ? (nBytes - 1) : 0
+	  var d = isLE ? -1 : 1
+	  var s = buffer[offset + i]
 
-	var Region = __webpack_require__(19)
+	  i += d
 
-	/**
-	 *
-	 * This method is trying to align the sourceRegion to the targetRegion, given the alignment positions
-	 * and the offsets. It only modifies the sourceRegion
-	 *
-	 * This is all well and easy, but if there is a constrainTo region, the algorithm has to take it into account.
-	 * In this case, it works as follows.
-	 *
-	 *  * start with the first alignment position. Aligns the region, adds the offset and then check for the constraint.
-	 *  * if the constraint condition is ok, return the position.
-	 *  * otherwise, remember the intersection area, if the regions are intersecting.
-	 *  * then go to the next specified align position, and so on, computing the maximum intersection area.
-	 *
-	 * If no alignment fits the constrainRegion, the sourceRegion will be resized to match it,
-	 * using the position with the maximum intersection area.
-	 *
-	 * Since we have computed the index of the position with the max intersection area, take that position,
-	 * and align the sourceRegion accordingly. Then resize the sourceRegion to the intersection, and reposition
-	 * it again, since resizing it might have destroyed the alignment.
-	 *
-	 * Return the position.
-	 *
-	 * @param {Region} sourceRegion
-	 * @param {Region} targetRegion
-	 * @param {String[]} positions
-	 * @param {Object} config
-	 * @param {Array} config.offset
-	 * @param {Region} config.constrain
-	 * @param {Boolean/Object} config.sync
-	 *
-	 * @return {String/Undefined} the chosen position for the alignment, or undefined if no position found
-	 */
-	function ALIGN_TO_NORMALIZED(sourceRegion, targetRegion, positions, config){
+	  e = s & ((1 << (-nBits)) - 1)
+	  s >>= (-nBits)
+	  nBits += eLen
+	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
 
-	    targetRegion = Region.from(targetRegion)
+	  m = e & ((1 << (-nBits)) - 1)
+	  e >>= (-nBits)
+	  nBits += mLen
+	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
 
-	    config = config  || {}
-
-	    var constrainTo = config.constrain,
-	        syncOption  = config.sync,
-	        offsets     = config.offset || [],
-	        syncWidth   = false,
-	        syncHeight  = false,
-	        sourceClone = sourceRegion.clone()
-
-	    /*
-	     * Prepare the method arguments: positions, offsets, constrain and sync options
-	     */
-	    if (!Array.isArray(positions)){
-	        positions = positions? [positions]: []
-	    }
-
-	    if (!Array.isArray(offsets)){
-	        offsets = offsets? [offsets]: []
-	    }
-
-	    if (constrainTo){
-	        constrainTo = constrainTo === true?
-	                                Region.getDocRegion():
-	                                constrainTo.getRegion()
-	    }
-
-	    if (syncOption){
-
-	        if (syncOption.size){
-	            syncWidth  = true
-	            syncHeight = true
-	        } else {
-	            syncWidth  = syncOption === true?
-	                            true:
-	                            syncOption.width || false
-
-	            syncHeight = syncOption === true?
-	                            true:
-	                            syncOption.height || false
-	        }
-	    }
-
-	    if (syncWidth){
-	        sourceClone.setWidth(targetRegion.getWidth())
-	    }
-	    if (syncHeight){
-	        sourceClone.setHeight(targetRegion.getHeight())
-
-	    }
-
-	    var offset,
-	        i = 0,
-	        len = positions.length,
-	        pos,
-	        intersection,
-	        itArea,
-	        maxArea = -1,
-	        maxAreaIndex = -1
-
-	    for (; i < len; i++){
-	        pos     = positions[i]
-	        offset  = offsets[i]
-
-	        sourceClone.alignToRegion(targetRegion, pos)
-
-	        if (offset){
-	            if (!Array.isArray(offset)){
-	                offset = offsets[i] = [offset.x || offset.left, offset.y || offset.top]
-	            }
-
-	            sourceClone.shift({
-	                left: offset[0],
-	                top : offset[1]
-	            })
-	        }
-
-	        //the source region is already aligned in the correct position
-
-	        if (constrainTo){
-	            //if we have a constrain region, test for the constrain
-	            intersection = sourceClone.getIntersection(constrainTo)
-
-	            if ( intersection && intersection.equals(sourceClone) ) {
-	                //constrain respected, so return (the aligned position)
-
-	                sourceRegion.set(sourceClone)
-	                return pos
-	            } else {
-
-	                //the constrain was not respected, so continue trying
-	                if (intersection && ((itArea = intersection.getArea()) > maxArea)){
-	                    maxArea      = itArea
-	                    maxAreaIndex = i
-	                }
-	            }
-
-	        } else {
-	            sourceRegion.set(sourceClone)
-	            return pos
-	        }
-	    }
-
-	    //no alignment respected the constraints
-	    if (~maxAreaIndex){
-	        pos     = positions[maxAreaIndex]
-	        offset  = offsets[maxAreaIndex]
-
-	        sourceClone.alignToRegion(targetRegion, pos)
-
-	        if (offset){
-	            sourceClone.shift({
-	                left: offset[0],
-	                top : offset[1]
-	            })
-	        }
-
-	        //we are sure an intersection exists, because of the way the maxAreaIndex was computed
-	        intersection = sourceClone.getIntersection(constrainTo)
-
-	        sourceClone.setRegion(intersection)
-	        sourceClone.alignToRegion(targetRegion, pos)
-
-	        if (offset){
-	            sourceClone.shift({
-	                left: offset[0],
-	                top : offset[1]
-	            })
-	        }
-
-	        sourceRegion.set(sourceClone)
-
-	        return pos
-	    }
-
+	  if (e === 0) {
+	    e = 1 - eBias
+	  } else if (e === eMax) {
+	    return m ? NaN : ((s ? -1 : 1) * Infinity)
+	  } else {
+	    m = m + Math.pow(2, mLen)
+	    e = e - eBias
+	  }
+	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
 	}
 
-	module.exports = ALIGN_TO_NORMALIZED
+	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+	  var e, m, c
+	  var eLen = nBytes * 8 - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+	  var i = isLE ? 0 : (nBytes - 1)
+	  var d = isLE ? 1 : -1
+	  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+	  value = Math.abs(value)
+
+	  if (isNaN(value) || value === Infinity) {
+	    m = isNaN(value) ? 1 : 0
+	    e = eMax
+	  } else {
+	    e = Math.floor(Math.log(value) / Math.LN2)
+	    if (value * (c = Math.pow(2, -e)) < 1) {
+	      e--
+	      c *= 2
+	    }
+	    if (e + eBias >= 1) {
+	      value += rt / c
+	    } else {
+	      value += rt * Math.pow(2, 1 - eBias)
+	    }
+	    if (value * c >= 2) {
+	      e++
+	      c /= 2
+	    }
+
+	    if (e + eBias >= eMax) {
+	      m = 0
+	      e = eMax
+	    } else if (e + eBias >= 1) {
+	      m = (value * c - 1) * Math.pow(2, mLen)
+	      e = e + eBias
+	    } else {
+	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+	      e = 0
+	    }
+	  }
+
+	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+	  e = (e << mLen) | m
+	  eLen += mLen
+	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+	  buffer[offset + i - d] |= s * 128
+	}
+
 
 /***/ },
 /* 130 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
+	
+	/**
+	 * isArray
+	 */
 
-	function curry(fn, n){
+	var isArray = Array.isArray;
 
-	    if (typeof n !== 'number'){
-	        n = fn.length
-	    }
+	/**
+	 * toString
+	 */
 
-	    function getCurryClosure(prevArgs){
+	var str = Object.prototype.toString;
 
-	        function curryClosure() {
+	/**
+	 * Whether or not the given `val`
+	 * is an array.
+	 *
+	 * example:
+	 *
+	 *        isArray([]);
+	 *        // > true
+	 *        isArray(arguments);
+	 *        // > false
+	 *        isArray('');
+	 *        // > false
+	 *
+	 * @param {mixed} val
+	 * @return {bool}
+	 */
 
-	            var len  = arguments.length
-	            var args = [].concat(prevArgs)
+	module.exports = isArray || function (val) {
+	  return !! val && '[object Array]' == str.call(val);
+	};
 
-	            if (len){
-	                args.push.apply(args, arguments)
-	            }
-
-	            if (args.length < n){
-	                return getCurryClosure(args)
-	            }
-
-	            return fn.apply(this, args)
-	        }
-
-	        return curryClosure
-	    }
-
-	    return getCurryClosure([])
-	}
-
-	module.exports = curry
 
 /***/ },
 /* 131 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 
-	var proto = Element.prototype
+	module.exports = function asArray(x) {
+	    if (!x) {
+	        x = [];
+	    }
 
-	var nativeMatches = proto.matches ||
-	  proto.mozMatchesSelector ||
-	  proto.msMatchesSelector ||
-	  proto.oMatchesSelector ||
-	  proto.webkitMatchesSelector
+	    if (!Array.isArray(x)) {
+	        x = [x];
+	    }
 
-	module.exports = nativeMatches
-
+	    return x;
+	};
 
 /***/ },
 /* 132 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 
-	module.exports = function arrowStyle(side, config){
+	function findIndexBy(arr, fn) {
 
-	    var arrowSize   = config.size   || 8
-	    var arrowWidth  = config.width  || arrowSize
-	    var arrowHeight = config.height || arrowSize
-	    var arrowColor  = config.color  || 'black'
-	    var includePosition = config.includePosition
+	    var i = 0;
+	    var len = arr.length;
 
-	    var style
-
-	    if (side == 'up' || side == 'down'){
-
-	        style = {
-	            borderLeft : arrowWidth + 'px solid transparent',
-	            borderRight: arrowWidth + 'px solid transparent'
+	    for (; i < len; i++) {
+	        if (fn(arr[i]) === true) {
+	            return i;
 	        }
-
-	        if (includePosition){
-	            style.marginTop = -Math.round(arrowHeight/2) + 'px'
-	            style.position  = 'relative'
-	            style.top       = '50%'
-	        }
-
-	        style[side === 'up'? 'borderBottom': 'borderTop'] = arrowHeight + 'px solid ' + arrowColor
 	    }
 
-	    if (side == 'left' || side == 'right'){
-
-	        style = {
-	            borderTop : arrowHeight + 'px solid transparent',
-	            borderBottom: arrowHeight + 'px solid transparent'
-	        }
-
-	        if (includePosition){
-	            style.marginLeft = -Math.round(arrowWidth/2) + 'px'
-	            style.position   = 'relative'
-	            style.left       = '50%'
-	        }
-
-	        style[side === 'left'? 'borderRight': 'borderLeft'] = arrowWidth + 'px solid ' + arrowColor
-	    }
-
-	    return style
+	    return -1;
 	}
+
+	module.exports = findIndexBy;
 
 /***/ },
 /* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	module.exports = function(value){
-	    return !isNaN( parseFloat( value ) ) && isFinite( value )
+	var findIndexBy = __webpack_require__(132);
+
+	function findIndexByName(arr, name) {
+	    return findIndexBy(arr, function (info) {
+	        return info.name === name;
+	    });
 	}
+
+	module.exports = findIndexByName;
 
 /***/ },
 /* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	module.exports = function(value){
-	    return typeof value === 'number' && isFinite(value)
+	var React = __webpack_require__(6);
+	var assign = __webpack_require__(7);
+	var normalize = __webpack_require__(21);
+
+	var EVENT_NAMES = __webpack_require__(114);
+
+	var TEXT_ALIGN_2_JUSTIFY = {
+	    right: 'flex-end',
+	    center: 'center'
+	};
+
+	function copyProps(target, source, list) {
+
+	    list.forEach(function (name) {
+	        if (name in source) {
+	            target[name] = source[name];
+	        }
+	    });
 	}
+
+	var PropTypes = React.PropTypes;
+
+	var Cell = React.createClass({
+
+	    displayName: 'ReactDataGrid.Cell',
+
+	    propTypes: {
+	        className: PropTypes.string,
+	        firstClassName: PropTypes.string,
+	        lastClassName: PropTypes.string,
+
+	        contentPadding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+	        column: PropTypes.object,
+	        columns: PropTypes.array,
+	        index: PropTypes.number,
+
+	        style: PropTypes.object,
+	        text: PropTypes.any,
+	        rowIndex: PropTypes.number
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            text: '',
+
+	            firstClassName: 'z-first',
+	            lastClassName: 'z-last',
+
+	            defaultStyle: {}
+	        };
+	    },
+
+	    prepareClassName: function prepareClassName(props) {
+	        var index = props.index;
+	        var columns = props.columns;
+	        var column = props.column;
+
+	        var textAlign = column && column.textAlign;
+
+	        var className = props.className || '';
+
+	        className += ' ' + Cell.className;
+
+	        if (columns) {
+	            if (!index && props.firstClassName) {
+	                className += ' ' + props.firstClassName;
+	            }
+
+	            if (index == columns.length - 1 && props.lastClassName) {
+	                className += ' ' + props.lastClassName;
+	            }
+	        }
+
+	        if (textAlign) {
+	            className += ' z-align-' + textAlign;
+	        }
+
+	        return className;
+	    },
+
+	    prepareStyle: function prepareStyle(props) {
+	        var column = props.column;
+	        var sizeStyle = column && column.sizeStyle;
+
+	        var alignStyle;
+	        var textAlign = column && column.textAlign || (props.style || {}).textAlign;
+
+	        if (textAlign) {
+	            alignStyle = { justifyContent: TEXT_ALIGN_2_JUSTIFY[textAlign] };
+	        }
+
+	        var style = assign({}, props.defaultStyle, sizeStyle, alignStyle, props.style);
+
+	        return normalize(style);
+	    },
+
+	    prepareProps: function prepareProps(thisProps) {
+
+	        var props = assign({}, thisProps);
+
+	        if (!props.column && props.columns) {
+	            props.column = props.columns[props.index];
+	        }
+
+	        props.className = this.prepareClassName(props);
+	        props.style = this.prepareStyle(props);
+
+	        return props;
+	    },
+
+	    render: function render() {
+	        var props = this.p = this.prepareProps(this.props);
+
+	        var column = props.column;
+	        var textAlign = column && column.textAlign;
+	        var text = props.renderText ? props.renderText(props.text, column, props.rowIndex) : props.text;
+
+	        var contentProps = {
+	            className: 'z-content',
+	            style: {
+	                padding: props.contentPadding
+	            }
+	        };
+
+	        var content = props.renderCell ? props.renderCell(contentProps, text, props) : React.DOM.div(contentProps, text);
+
+	        var renderProps = assign({}, props);
+
+	        delete renderProps.data;
+
+	        return React.createElement(
+	            'div',
+	            renderProps,
+	            content,
+	            props.children
+	        );
+	    }
+	});
+
+	Cell.className = 'z-cell';
+
+	module.exports = Cell;
 
 /***/ },
 /* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	var number = __webpack_require__(134)
+	var Region = __webpack_require__(10);
+	var DragHelper = __webpack_require__(86);
 
-	module.exports = function(value){
-	    return number(value) && (value === parseInt(value, 10))
+	function range(start, end) {
+	    var res = [];
+
+	    for (; start <= end; start++) {
+	        res.push(start);
+	    }
+
+	    return res;
 	}
+
+	function buildIndexes(direction, index, dragIndex) {
+	    var indexes = direction < 0 ? range(index, dragIndex) : range(dragIndex, index);
+
+	    var result = {};
+
+	    indexes.forEach(function (value) {
+	        result[value] = true;
+	    });
+
+	    return result;
+	}
+
+	module.exports = function (header, props, column, event) {
+
+	    event.preventDefault();
+
+	    var headerNode = header.getDOMNode();
+	    var headerRegion = Region.from(headerNode);
+	    var dragColumn = column;
+	    var dragColumnIndex;
+	    var columnData;
+	    var shiftRegion;
+
+	    DragHelper(event, {
+
+	        constrainTo: headerRegion.expand({ top: true, bottom: true }),
+
+	        onDragStart: function onDragStart(event, config) {
+
+	            var columnHeaders = headerNode.querySelectorAll('.' + props.cellClassName);
+
+	            columnData = props.columns.map(function (column, i) {
+	                var region = Region.from(columnHeaders[i]);
+
+	                if (column === dragColumn) {
+	                    dragColumnIndex = i;
+	                    shiftRegion = region.clone();
+	                }
+
+	                return {
+	                    column: column,
+	                    index: i,
+	                    region: region
+	                };
+	            });
+
+	            header.setState({
+	                dragColumn: column,
+	                dragging: true
+	            });
+
+	            config.columnData = columnData;
+	        },
+	        onDrag: function onDrag(event, config) {
+	            var diff = config.diff.left;
+	            var directionSign = diff < 0 ? -1 : 1;
+	            var state = {
+	                dragColumnIndex: dragColumnIndex,
+	                dragColumn: dragColumn,
+	                dragLeft: diff,
+	                dropIndex: null,
+	                shiftIndexes: null,
+	                shiftSize: null
+	            };
+
+	            var shift;
+	            var shiftSize;
+	            var newLeft = shiftRegion.left + diff;
+	            var newRight = newLeft + shiftRegion.width;
+	            var shiftZone = { left: newLeft, right: newRight };
+
+	            config.columnData.forEach(function (columnData, index, arr) {
+
+	                var itColumn = columnData.column;
+	                var itRegion = columnData.region;
+
+	                if (shift || itColumn === dragColumn) {
+	                    return;
+	                }
+
+	                var itLeft = itRegion.left;
+	                var itRight = itRegion.right;
+	                var itZone = directionSign == -1 ? { left: itLeft, right: itLeft + itRegion.width } : { left: itRight - itRegion.width, right: itRight };
+
+	                if (shiftRegion.width < itRegion.width) {
+	                    //shift region is smaller than itRegion
+	                    shift = Region.getIntersectionWidth(itZone, shiftZone) >= Math.min(itRegion.width, shiftRegion.width) / 2;
+	                } else {
+	                    //shift region is bigger than itRegion
+	                    shift = Region.getIntersectionWidth(itRegion, shiftZone) >= itRegion.width / 2;
+	                }
+
+	                if (shift) {
+	                    shiftSize = -directionSign * shiftRegion.width;
+	                    state.dropIndex = index;
+	                    state.shiftIndexes = buildIndexes(directionSign, index, dragColumnIndex);
+	                    state.shiftSize = shiftSize;
+	                }
+	            });
+
+	            header.setState(state);
+	        },
+
+	        onDrop: function onDrop(event) {
+	            header.onDrop(event);
+	        }
+	    });
+	};
 
 /***/ },
 /* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	var number = __webpack_require__(134)
+	var Region = __webpack_require__(10);
+	var DragHelper = __webpack_require__(86);
 
-	module.exports = function(value){
-	    return number(value) && (value === parseFloat(value, 10)) && !(value === parseInt(value, 10))
-	}
+	var findIndexByName = __webpack_require__(133);
+
+	module.exports = function (header, props, column, event) {
+
+	    event.preventDefault();
+
+	    var columns = props.columns;
+	    var index = findIndexByName(columns, column.name);
+	    var proxyLeft = Region.from(event.target).right;
+
+	    var headerNode = header.getDOMNode();
+
+	    var constrainTo = Region.from(headerNode);
+
+	    DragHelper(event, {
+	        constrainTo: constrainTo,
+
+	        onDragStart: function onDragStart(event, config) {
+
+	            header.onResizeDragStart({
+	                resizing: true,
+	                resizeColumn: column,
+	                resizeProxyLeft: proxyLeft
+	            });
+	        },
+
+	        onDrag: function onDrag(event, config) {
+	            var diff = config.diff.left;
+
+	            header.onResizeDrag({
+	                resizeProxyDiff: diff
+	            });
+	        },
+
+	        onDrop: function onDrop(event, config) {
+
+	            var diff = config.diff.left;
+	            var columnHeaders = headerNode.querySelectorAll('.' + props.cellClassName);
+	            var nextColumn = diff > 0 ? null : columns[index + 1];
+
+	            var columnSize = Region.from(columnHeaders[index]).width;
+	            var nextColumnSize;
+	            var firstSize = columnSize + diff;
+	            var secondSize = 0;
+
+	            // if (firstSize < column.minWidth){
+	            //     firstSize = column.minWidth
+	            //     diff = firstSize - columnSize
+	            // }
+
+	            if (nextColumn) {
+	                nextColumnSize = nextColumn ? Region.from(columnHeaders[index + 1]).width : 0;
+
+	                secondSize = nextColumnSize - diff;
+	            }
+
+	            // if (nextColumn && secondSize < nextColumn.minWidth){
+	            //     secondSize = nextColumn.minWidth
+	            //     diff = nextColumnSize - secondSize
+	            //     firstSize = columnSize + diff
+	            // }
+
+	            var resizeInfo = [{
+	                name: column.name,
+	                size: firstSize,
+	                diff: diff
+	            }];
+
+	            if (nextColumn) {
+	                resizeInfo.push({
+	                    name: nextColumn.name,
+	                    size: secondSize,
+	                    diff: -diff
+	                });
+	            }
+
+	            header.onResizeDrop({
+	                resizing: false,
+	                resizeColumn: null,
+	                resizeProxyLeft: null
+	            }, resizeInfo, event);
+	        }
+	    });
+	};
 
 /***/ },
 /* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	module.exports = function(value){
-	    return typeof value == 'string'
-	}
+	var React = __webpack_require__(6);
+	var assign = __webpack_require__(7);
+
+	module.exports = React.createClass({
+
+	    displayName: 'ReactDataGrid.ResizeProxy',
+
+	    propTypes: {
+	        active: React.PropTypes.bool
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            offset: 0
+	        };
+	    },
+
+	    render: function render() {
+
+	        var props = assign({}, this.props);
+	        var state = this.state;
+
+	        var style = {};
+	        var active = props.active;
+
+	        if (active) {
+	            style.display = 'block';
+	            style.left = state.offset;
+	        }
+
+	        return React.createElement('div', { className: 'z-resize-proxy', style: style });
+	    }
+	});
 
 /***/ },
 /* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	var objectToString = Object.prototype.toString
+	var hasown = __webpack_require__(12);
 
-	module.exports = function(value){
-	    return objectToString.apply(value) === '[object Function]'
+	function copyIf(source, target) {
+	    var hasOwn = hasown(target);
+
+	    Object.keys(source).forEach(function (key) {
+	        if (!hasOwn(key)) {
+	            target[key] = source[key];
+	        }
+	    });
 	}
+
+	function groupByFields(data, fields, path, names, fieldIndex) {
+	    data = data || [];
+	    fieldIndex = fieldIndex || 0;
+
+	    var field = fields[fieldIndex];
+
+	    if (!field) {
+	        return data;
+	    }
+
+	    var group = groupArrayByField(data, field);
+	    var fieldName = typeof field == 'string' ? field : field.name;
+
+	    if (!fieldIndex) {
+	        group.namePath = [];
+	        group.valuePath = [];
+	        group.depth = 0;
+	        delete group.name;
+	    }
+
+	    var groupsCount = group.length;
+
+	    if (group.keys && group.keys.length) {
+
+	        group.leaf = false;
+	        group.keys.forEach(function (key) {
+
+	            var groupPath = (path || []).concat(key);
+	            var fieldNames = (names || []).concat(fieldName);
+	            var data = groupByFields(group.data[key], fields, groupPath, fieldNames, fieldIndex + 1);
+
+	            if (Array.isArray(data)) {
+	                data = {
+	                    data: data,
+	                    leaf: true
+	                };
+	            }
+
+	            data.name = fieldName;
+	            data.value = key;
+	            data.valuePath = groupPath;
+	            data.namePath = fieldNames;
+	            data.depth = fieldIndex + 1;
+
+	            if (typeof field != 'string') {
+
+	                copyIf(field, data);
+	            }
+
+	            group.data[key] = data;
+
+	            if (!data.leaf) {
+	                groupsCount += data.groupsCount;
+	            }
+	        });
+	    }
+
+	    if (!group.leaf) {
+	        group.groupsCount = groupsCount;
+	    }
+
+	    return group;
+	}
+
+	function groupArrayByField(data, field) {
+
+	    var groupKeys = {};
+	    var groupKeysArray = [];
+
+	    var fieldName = typeof field == 'string' ? field : field.name;(data || []).forEach(function (item) {
+	        var itemKey = item[fieldName];
+
+	        if (groupKeys[itemKey]) {
+	            groupKeys[itemKey].push(item);
+	        } else {
+	            groupKeys[itemKey] = [item];
+	            groupKeysArray.push(itemKey);
+	        }
+	    });
+
+	    var result = {
+	        keys: groupKeysArray,
+	        data: groupKeys,
+	        childName: fieldName,
+	        length: groupKeysArray.length,
+	        leaf: true
+	    };
+
+	    return result;
+	}
+
+	module.exports = groupByFields;
 
 /***/ },
 /* 139 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict'
+	'use strict';
 
-	var objectToString = Object.prototype.toString
+	function slice(data, props) {
 
-	module.exports = function(value){
-	    return objectToString.apply(value) === '[object Object]'
+	    if (!props.virtualRendering) {
+	        return data;
+	    }
+
+	    return data.slice(props.startIndex, props.startIndex + props.renderCount);
 	}
+
+	module.exports = slice;
 
 /***/ },
 /* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	var objectToString = Object.prototype.toString
+	var React = __webpack_require__(6);
+	var renderMenu = __webpack_require__(142);
+	var renderRow = __webpack_require__(143);
+	var tableStyle = __webpack_require__(141);
+	var slice = __webpack_require__(139);
+	var LoadMask = __webpack_require__(8);
 
-	module.exports = function(value){
-	    return objectToString.apply(value) === '[object Arguments]' || !!value.callee
+	function getData(props) {
+
+	    if (!props.virtualRendering) {
+	        return props.data;
+	    }
+
+	    return slice(props.data, props);
 	}
+
+	module.exports = function (props, rows) {
+
+	    rows = rows || getData(props).map(function (data, index) {
+	        return renderRow.call(this, props, data, index + props.startIndex);
+	    }, this);
+
+	    // if (props.topLoader && props.scrollTop < (2 * props.rowHeight)){
+	    // rows.unshift(props.topLoader)
+	    // }
+
+	    return {
+	        className: 'z-table',
+	        style: tableStyle(props),
+	        children: rows
+	    };
+	};
 
 /***/ },
 /* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	module.exports = function(value){
-	    return typeof value == 'boolean'
-	}
+	var normalize = __webpack_require__(21);
+
+	var colors = ['blue', 'red', 'magenta'];
+	module.exports = function (props) {
+	    var scrollTop = props.virtualRendering ? -(props.topOffset || 0) : props.scrollTop;
+
+	    return normalize({
+	        transform: 'translate3d(' + -props.scrollLeft + 'px, ' + -scrollTop + 'px, 0px)'
+	    });
+	};
 
 /***/ },
 /* 142 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict'
+	'use strict';
 
-	var objectToString = Object.prototype.toString
+	module.exports = function renderMenu(props) {
+	    if (!props.menu) {
+	        return;
+	    }
 
-	module.exports = function(value){
-	    return objectToString.apply(value) === '[object Date]'
-	}
+	    return props.menu({
+	        className: 'z-header-menu-column',
+	        gridColumns: props.columns
+	    });
+	};
 
 /***/ },
 /* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	var objectToString = Object.prototype.toString
+	var assign = __webpack_require__(7);
+	var React = __webpack_require__(6);
 
-	module.exports = function(value){
-	    return objectToString.apply(value) === '[object RegExp]'
-	}
+	var Row = __webpack_require__(144);
+	var RowFactory = React.createFactory(Row);
+
+	var renderCell = Row.prototype.renderCell;
+
+	/**
+	 * Render a datagrid row
+	 *
+	 * @param  {Object}   props The props from which to build row props
+	 * @param  {Object}   data The data object that backs this row
+	 * @param  {Number}   index The index in the grid of the row to be rendered
+	 * @param  {Function} [fn] A function that can be used to modify built row props
+	 *
+	 * If props.rowFactory is specified, it will be used to build the ReactElement
+	 * corresponding to this row. In case it returns undefined, the default RowFactory will be used
+	 * (this case occurs when the rowFactory was specified just to modify the row props)
+	 *
+	 * @return {ReactElement}
+	 */
+	module.exports = function renderRow(props, data, index, fn) {
+	    var factory = props.rowFactory || RowFactory;
+	    var key = data[props.idProperty];
+	    var selectedKey = key;
+	    var renderKey = key;
+
+	    if (!props.groupBy) {
+	        renderKey = index - props.startIndex;
+	    }
+
+	    var selected = false;
+
+	    if (typeof props.selected == 'object' && props.selected) {
+	        selected = !!props.selected[selectedKey];
+	    } else if (props.selected) {
+	        selected = selectedKey === props.selected;
+	    }
+
+	    var config = assign({}, props.rowProps, {
+	        selected: selected,
+
+	        key: renderKey,
+	        data: data,
+	        index: index,
+
+	        cellFactory: props.cellFactory,
+	        renderCell: props.renderCell,
+	        renderText: props.renderText,
+	        cellPadding: props.cellPadding,
+	        rowHeight: props.rowHeight,
+	        minWidth: props.minRowWidth - props.scrollbarSize,
+	        columns: props.columns,
+
+	        rowContextMenu: props.rowContextMenu,
+	        showMenu: props.showMenu,
+
+	        _onClick: this ? this.handleRowClick : null
+	    });
+
+	    var style;
+	    var rowStyle = props.rowStyle;
+
+	    if (rowStyle) {
+	        style = {};
+
+	        if (typeof rowStyle == 'function') {
+	            style = rowStyle(data, config);
+	        } else {
+	            assign(style, rowStyle);
+	        }
+
+	        config.style = style;
+	    }
+
+	    var className = props.rowClassName;
+
+	    if (typeof className == 'function') {
+	        className = className(data, config);
+	    }
+
+	    if (className) {
+	        config.className = className;
+	    }
+
+	    if (typeof fn == 'function') {
+	        config = fn(config);
+	    }
+
+	    var row = factory(config);
+
+	    if (row === undefined) {
+	        row = RowFactory(config);
+	    }
+
+	    if (config.selected && this) {
+	        this.selIndex = index;
+	    }
+
+	    // var cached = this.rowCache && this.rowCache[renderKey]
+
+	    // if (cached){
+	    // return React.cloneElement(cached, {
+	    //     children: config.columns.map(function(col, index){
+	    //         return renderCell(config, col, index)
+	    //     })
+	    // })
+	    // }
+
+	    // if (this.rowCache){
+	    //     this.rowCache[renderKey] = row
+	    // }
+
+	    return row;
+	};
 
 /***/ },
 /* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict'
+	'use strict';
 
-	module.exports = function(value){
-	    return Array.isArray(value)
-	}
+	var React = __webpack_require__(6);
+	var Region = __webpack_require__(10);
+	var assign = __webpack_require__(7);
+	var normalize = __webpack_require__(21);
+	var Cell = __webpack_require__(134);
+	var CellFactory = React.createFactory(Cell);
+	var ReactMenu = __webpack_require__(96);
+	var ReactMenuFactory = React.createFactory(ReactMenu);
+
+	module.exports = React.createClass({
+
+	    displayName: 'ReactDataGrid.Row',
+
+	    propTypes: {
+	        data: React.PropTypes.object,
+	        columns: React.PropTypes.array,
+	        index: React.PropTypes.number
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+
+	        return {
+	            defaultStyle: normalize({
+	                userSelect: 'none'
+	            })
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            mouseOver: false
+	        };
+	    },
+
+	    render: function render() {
+	        var props = this.prepareProps(this.props);
+	        var cells = props.children || props.columns.map(this.renderCell.bind(this, this.props));
+
+	        return React.createElement(
+	            'div',
+	            props,
+	            cells
+	        );
+	    },
+
+	    prepareProps: function prepareProps(thisProps) {
+	        var props = assign({}, thisProps);
+
+	        props.className = this.prepareClassName(props, this.state);
+	        props.style = this.prepareStyle(props);
+
+	        props.onMouseEnter = this.handleMouseEnter;
+	        props.onMouseLeave = this.handleMouseLeave;
+	        props.onContextMenu = this.handleContextMenu;
+	        props.onClick = this.handleRowClick;
+
+	        delete props.data;
+	        delete props.cellPadding;
+
+	        return props;
+	    },
+
+	    handleRowClick: function handleRowClick(event) {
+
+	        if (this.props.onClick) {
+	            this.props.onClick(event);
+	        }
+
+	        if (this.props._onClick) {
+	            this.props._onClick(this.props, event);
+	        }
+	    },
+
+	    handleContextMenu: function handleContextMenu(event) {
+
+	        if (this.props.rowContextMenu) {
+	            this.showMenu(event);
+	        }
+
+	        if (this.props.onContextMenu) {
+	            this.props.onContextMenu(event);
+	        }
+	    },
+
+	    showMenu: function showMenu(event) {
+	        var factory = this.props.rowContextMenu;
+	        var alignTo = Region.from(event);
+
+	        var props = {
+	            style: {
+	                position: 'absolute'
+	            },
+	            rowProps: this.props,
+	            data: this.props.data,
+	            alignTo: alignTo,
+	            alignPositions: ['tl-bl', 'tr-br', 'bl-tl', 'br-tr'],
+	            items: [{
+	                label: 'stop'
+	            }]
+	        };
+
+	        var menu = factory(props);
+
+	        if (menu === undefined) {
+	            menu = ReactMenuFactory(props);
+	        }
+
+	        event.preventDefault();
+
+	        this.props.showMenu(function () {
+	            return menu;
+	        });
+	    },
+
+	    handleMouseLeave: function handleMouseLeave(event) {
+	        this.setState({
+	            mouseOver: false
+	        });
+
+	        if (this.props.onMouseLeave) {
+	            this.props.onMouseLeave(event);
+	        }
+	    },
+
+	    handleMouseEnter: function handleMouseEnter(event) {
+	        this.setState({
+	            mouseOver: true
+	        });
+
+	        if (this.props.onMouseEnter) {
+	            this.props.onMouseEnter(event);
+	        }
+	    },
+
+	    renderCell: function renderCell(props, column, index) {
+
+	        var text = props.data[column.name];
+	        var columns = props.columns;
+
+	        var cellProps = {
+	            style: column.style,
+	            className: column.className,
+
+	            key: column.name,
+	            name: column.name,
+
+	            data: props.data,
+	            columns: columns,
+	            index: index,
+	            rowIndex: props.index,
+	            textPadding: props.cellPadding,
+	            renderCell: props.renderCell,
+	            renderText: props.renderText
+	        };
+
+	        if (typeof column.render == 'function') {
+	            text = column.render(text, props.data, cellProps);
+	        }
+
+	        cellProps.text = text;
+
+	        var result;
+
+	        if (props.cellFactory) {
+	            result = props.cellFactory(cellProps);
+	        }
+
+	        if (result === undefined) {
+	            result = CellFactory(cellProps);
+	        }
+
+	        return result;
+	    },
+
+	    prepareClassName: function prepareClassName(props, state) {
+	        var className = props.className || '';
+
+	        className += ' z-row ';
+
+	        if (props.index % 2 === 0) {
+	            className += ' z-even ' + (props.evenClassName || '');
+	        } else {
+	            className += ' z-odd ' + (props.oddClassName || '');
+	        }
+
+	        if (state.mouseOver) {
+	            className += ' z-over ' + (props.overClassName || '');
+	        }
+
+	        if (props.selected) {
+	            className += ' z-selected ' + (props.selectedClassName || '');
+	        }
+
+	        return className;
+	    },
+
+	    prepareStyle: function prepareStyle(props) {
+
+	        var style = assign({}, props.defaultStyle, props.style);
+
+	        style.height = props.rowHeight;
+	        style.width = props.minWidth;
+
+	        return style;
+	    }
+	});
 
 /***/ },
 /* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getInstantiatorFunction = __webpack_require__(146)
+	'use strict';
 
-	module.exports = function(fn, args){
-		return getInstantiatorFunction(args.length)(fn, args)
+	var React = __webpack_require__(6);
+
+	var Row = __webpack_require__(144);
+	var Cell = __webpack_require__(134);
+	var CellFactory = React.createFactory(Cell);
+
+	var renderRow = __webpack_require__(143);
+
+	function renderData(props, data, depth) {
+
+	    return data.map(function (data, index) {
+
+	        return renderRow(props, data, index, function (config) {
+	            config.cellFactory = function (cellProps) {
+	                if (cellProps.index === 0) {
+	                    cellProps.style.paddingLeft = depth * props.groupNestingWidth;
+	                }
+
+	                return CellFactory(cellProps);
+	            };
+
+	            config.className += ' z-grouped';
+
+	            return config;
+	        });
+	    });
 	}
+
+	function renderGroupRow(props, groupData) {
+
+	    var cellStyle = {
+	        minWidth: props.totalColumnWidth,
+	        paddingLeft: (groupData.depth - 1) * props.groupNestingWidth
+	    };
+
+	    return React.createElement(
+	        Row,
+	        { className: 'z-group-row', key: 'group-' + groupData.valuePath, rowHeight: props.rowHeight },
+	        React.createElement(Cell, {
+	            className: 'z-group-cell',
+	            contentPadding: props.cellPadding,
+	            text: groupData.value,
+	            style: cellStyle
+	        })
+	    );
+	}
+
+	function renderGroup(props, groupData) {
+
+	    var result = [renderGroupRow(props, groupData)];
+
+	    if (groupData && groupData.leaf) {
+	        result.push.apply(result, renderData(props, groupData.data, groupData.depth));
+	    } else {
+	        groupData.keys.forEach(function (key) {
+	            var items = renderGroup(props, groupData.data[key]);
+	            result.push.apply(result, items);
+	        });
+	    }
+
+	    return result;
+	}
+
+	function renderGroups(props, groupsData) {
+	    var result = [];
+
+	    groupsData.keys.map(function (key) {
+	        result.push.apply(result, renderGroup(props, groupsData.data[key]));
+	    });
+
+	    return result;
+	}
+
+	module.exports = function (props, groupData) {
+	    return renderGroups(props, groupData);
+	};
 
 /***/ },
 /* 146 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = function preventDefault(event) {
+	    event.preventDefault();
+	};
+
+/***/ },
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(){
+	'use strict';
 
-	    'use strict';
+	var assign = __webpack_require__(7);
+	var getSelected = __webpack_require__(148);
 
-	    var fns = {}
+	var hasOwn = function hasOwn(obj, prop) {
+	    return Object.prototype.hasOwnProperty.call(obj, prop);
+	};
 
-	    return function(len){
+	/**
+	 * Here is how multi selection is implemented - trying to emulate behavior in OSX Finder
+	 *
+	 * When there is no selection, and an initial click for selection is done, keep that index (SELINDEX)
+	 *
+	 * Next, if we shift+click, we mark as selected the items from initial index to current click index.
+	 *
+	 * Now, if we ctrl+click elsewhere, keep the selection, but also add the selected file,
+	 * and set SELINDEX to the new index. Now on any subsequent clicks, have the same behavior,
+	 * selecting/deselecting items starting from SELINDEX to the new click index
+	 */
 
-	        if ( ! fns [len ] ) {
+	module.exports = {
 
-	            var args = []
-	            var i    = 0
+	    findInitialSelectionIndex: function findInitialSelectionIndex() {
+	        var selected = getSelected(this.p, this.state);
+	        var index = undefined;
 
-	            for (; i < len; i++ ) {
-	                args.push( 'a[' + i + ']')
-	            }
-
-	            fns[len] = new Function(
-	                            'c',
-	                            'a',
-	                            'return new c(' + args.join(',') + ')'
-	                        )
+	        if (!Object.keys(selected).length) {
+	            return index;
 	        }
 
-	        return fns[len]
+	        var i = 0;
+	        var data = this.p.data;
+	        var len = data.length;
+	        var id;
+	        var idProperty = this.props.idProperty;
+
+	        for (; i < len; i++) {
+	            id = data[i][idProperty];
+
+	            if (selected[id]) {
+	                index = i;
+	            }
+	        }
+
+	        return index;
+	    },
+
+	    notifySelection: function notifySelection(selected, data) {
+	        if (typeof this.props.onSelectionChange == 'function') {
+	            this.props.onSelectionChange(selected, data);
+	        }
+
+	        if (!hasOwn(this.props, 'selected')) {
+	            this.cleanCache();
+	            this.setState({
+	                defaultSelected: selected
+	            });
+	        }
+	    },
+
+	    handleSingleSelection: function handleSingleSelection(data, event) {
+	        var props = this.p;
+
+	        var rowSelected = this.isRowSelected(data);
+	        var newSelected = !rowSelected;
+
+	        var ctrlKey = event.metaKey || event.ctrlKey;
+	        if (rowSelected && event && !ctrlKey) {
+	            //if already selected and not ctrl, keep selected
+	            newSelected = true;
+	        }
+
+	        var selectedId = newSelected ? data[props.idProperty] : null;
+
+	        this.notifySelection(selectedId, data);
+	    },
+
+	    handleMultiSelection: function handleMultiSelection(data, event, config) {
+
+	        var selIndex = config.selIndex;
+	        var prevShiftKeyIndex = config.prevShiftKeyIndex;
+
+	        var props = this.p;
+	        var map = selIndex == null ? {} : assign({}, getSelected(props, this.state));
+
+	        if (prevShiftKeyIndex != null && selIndex != null) {
+	            var min = Math.min(prevShiftKeyIndex, selIndex);
+	            var max = Math.max(prevShiftKeyIndex, selIndex);
+
+	            var removeArray = props.data.slice(min, max + 1) || [];
+
+	            removeArray.forEach(function (item) {
+	                if (item) {
+	                    var id = item[props.idProperty];
+	                    delete map[id];
+	                }
+	            });
+	        }
+
+	        data.forEach(function (item) {
+	            if (item) {
+	                var id = item[props.idProperty];
+	                map[id] = item;
+	            }
+	        });
+
+	        this.notifySelection(map, data);
+	    },
+
+	    handleMultiSelectionRowToggle: function handleMultiSelectionRowToggle(data, event) {
+
+	        var selected = getSelected(this.p, this.state);
+	        var isSelected = this.isRowSelected(data);
+
+	        var clone = assign({}, selected);
+	        var id = data[this.p.idProperty];
+
+	        if (isSelected) {
+	            delete clone[id];
+	        } else {
+	            clone[id] = data;
+	        }
+
+	        this.notifySelection(clone, data);
+
+	        return isSelected;
+	    },
+
+	    handleSelection: function handleSelection(rowProps, event) {
+
+	        var props = this.p;
+
+	        if (!hasOwn(props, 'selected') && !hasOwn(props, 'defaultSelected')) {
+	            return;
+	        }
+
+	        var isSelected = this.isRowSelected(rowProps.data);
+	        var multiSelect = this.isMultiSelect();
+
+	        if (!multiSelect) {
+	            this.handleSingleSelection(rowProps.data, event);
+	            return;
+	        }
+
+	        if (this.selIndex === undefined) {
+	            this.selIndex = this.findInitialSelectionIndex();
+	        }
+
+	        var selIndex = this.selIndex;
+
+	        //multi selection
+	        var index = rowProps.index;
+	        var prevShiftKeyIndex = this.shiftKeyIndex;
+	        var start;
+	        var end;
+	        var data;
+
+	        if (event.metaKey || event.ctrlKey) {
+	            this.selIndex = index;
+	            this.shiftKeyIndex = null;
+
+	            var unselect = this.handleMultiSelectionRowToggle(props.data[index], event);
+
+	            if (unselect) {
+	                this.selIndex++;
+	                this.shiftKeyIndex = prevShiftKeyIndex;
+	            }
+
+	            return;
+	        }
+
+	        if (!event.shiftKey) {
+	            //set selIndex, for future use
+	            this.selIndex = index;
+	            this.shiftKeyIndex = null;
+
+	            //should not select many, so make selIndex null
+	            selIndex = null;
+	        } else {
+	            this.shiftKeyIndex = index;
+	        }
+
+	        if (selIndex == null) {
+	            data = [props.data[index]];
+	        } else {
+	            start = Math.min(index, selIndex);
+	            end = Math.max(index, selIndex) + 1;
+	            data = props.data.slice(start, end);
+	        }
+
+	        this.handleMultiSelection(data, event, {
+	            selIndex: selIndex,
+	            prevShiftKeyIndex: prevShiftKeyIndex
+	        });
+	    },
+
+	    isRowSelected: function isRowSelected(data) {
+	        var selectedMap = this.getSelectedMap();
+	        var id = data[this.props.idProperty];
+
+	        return selectedMap[id];
+	    },
+
+	    isMultiSelect: function isMultiSelect() {
+	        var selected = getSelected(this.p, this.state);
+
+	        return selected && typeof selected == 'object';
+	    },
+
+	    getSelectedMap: function getSelectedMap() {
+	        var selected = getSelected(this.p, this.state);
+	        var multiSelect = selected && typeof selected == 'object';
+	        var map;
+
+	        if (multiSelect) {
+	            map = selected;
+	        } else {
+	            map = {};
+	            map[selected] = true;
+	        }
+
+	        return map;
+	    }
+	};
+
+/***/ },
+/* 148 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function (props, state) {
+	                    var selected = props.selected == null ? state.defaultSelected : props.selected;
+
+	                    return selected;
+	};
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(6);
+	var assign = __webpack_require__(7);
+	var ReactMenu = __webpack_require__(96);
+
+	function stopPropagation(event) {
+	    event.stopPropagation();
+	}
+
+	function emptyFn() {}
+
+	var FILTER_FIELDS = {};
+
+	module.exports = {
+
+	    getColumnFilterFieldFactory: function getColumnFilterFieldFactory(column) {
+
+	        var type = column.type || 'string';
+
+	        return FILTER_FIELDS[type] || React.DOM.input;
+	    },
+
+	    getFilterField: function getFilterField(props) {
+	        var column = props.column;
+	        var filterValue = this.filterValues ? this.filterValues[column.name] : '';
+
+	        var fieldProps = {
+	            autoFocus: true,
+	            defaultValue: filterValue,
+	            column: column,
+	            onChange: this.onFilterChange.bind(this, column),
+	            onKeyUp: this.onFilterKeyUp.bind(this, column)
+	        };
+
+	        var fieldFactory = column.renderFilterField || this.props.renderFilterField;
+	        var field;
+
+	        if (fieldFactory) {
+	            field = fieldFactory(fieldProps);
+	        }
+
+	        if (field === undefined) {
+	            field = this.getColumnFilterFieldFactory(column)(fieldProps);
+	        }
+
+	        return field;
+	    },
+
+	    onFilterKeyUp: function onFilterKeyUp(column, event) {
+	        if (event.key == 'Enter') {
+	            this.onFilterClick(column, event);
+	        }
+	    },
+
+	    onFilterChange: function onFilterChange(column, eventOrValue) {
+
+	        var value = eventOrValue;
+
+	        if (eventOrValue && eventOrValue.target) {
+	            value = eventOrValue.target.value;
+	        }
+
+	        this.filterValues = this.filterValues || {};
+	        this.filterValues[column.name] = value;
+
+	        if (this.props.liveFilter) {
+	            this.filterBy(column, value);
+	        }
+	    },
+
+	    filterBy: function filterBy(column, value, event) {
+	        ;(this.props.onFilter || emptyFn)(column, value, this.filterValues, event);
+	    },
+
+	    onFilterClick: function onFilterClick(column, event) {
+	        this.showMenu(null);
+
+	        var value = this.filterValues ? this.filterValues[column.name] : '';
+
+	        this.filterBy(column, value, event);
+	    },
+
+	    onFilterClear: function onFilterClear(column) {
+	        this.showMenu(null);
+
+	        if (this.filterValues) {
+	            this.filterValues[column.name] = '';
+	        }
+
+	        this.filterBy(column, '');(this.props.onClearFilter || emptyFn).apply(null, arguments);
+	    },
+
+	    getFilterButtons: function getFilterButtons(props) {
+
+	        var column = props.column;
+	        var factory = column.renderFilterButtons || this.props.renderFilterButtons;
+
+	        var result;
+
+	        if (factory) {
+	            result = factory(props);
+	        }
+
+	        if (result !== undefined) {
+	            return result;
+	        }
+
+	        var doFilter = this.onFilterClick.bind(this, column);
+	        var doClear = this.onFilterClear.bind(this, column);
+
+	        return React.createElement(
+	            'div',
+	            { style: { textAlign: 'center' } },
+	            React.createElement(
+	                'button',
+	                { onClick: doFilter },
+	                'Filter'
+	            ),
+	            React.createElement(
+	                'button',
+	                { onClick: doClear, style: { marginLeft: 5 } },
+	                'Clear'
+	            )
+	        );
+	    },
+
+	    filterMenuFactory: function filterMenuFactory(props) {
+
+	        var overStyle = {
+	            background: 'white',
+	            color: 'auto'
+	        };
+
+	        var column = props.column;
+	        var field = this.getFilterField(props);
+	        var buttons = this.getFilterButtons({
+	            column: column
+	        });
+
+	        var children = [field, buttons].map(function (x, index) {
+	            return React.createElement(
+	                ReactMenu.Item,
+	                { key: index },
+	                React.createElement(
+	                    ReactMenu.Item.Cell,
+	                    null,
+	                    x
+	                )
+	            );
+	        });
+
+	        props.itemOverStyle = props.itemOverStyle || overStyle;
+	        props.itemActiveStyle = props.itemActiveStyle || overStyle;
+	        props.onClick = props.onClick || stopPropagation;
+
+	        var factory = this.props.filterMenuFactory;
+	        var result;
+
+	        if (factory) {
+	            result = factory(props);
+
+	            if (result !== undefined) {
+	                return result;
+	            }
+	        }
+
+	        props.onMount = this.onFilterMenuMount;
+
+	        return React.createElement(
+	            ReactMenu,
+	            props,
+	            children
+	        );
+	    },
+
+	    onFilterMenuMount: function onFilterMenuMount(menu) {
+	        var dom = menu.getDOMNode();
+
+	        if (dom) {
+	            var input = dom.querySelector('input');
+
+	            if (input) {
+	                setTimeout(function () {
+	                    input.focus();
+	                }, 10);
+	            }
+	        }
+	    }
+	};
+
+/***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	if (!global.fetch && global.window) {
+	    __webpack_require__(151);
+	}
+
+	var fetch = global.fetch;
+
+	module.exports = function () {
+	    return {
+	        fetch: fetch,
+	        defaultPageSize: 20,
+	        defaultPage: 1,
+
+	        appendDataSourceQueryParams: true,
+	        pagination: null,
+	        // virtualPagination: false,
+
+	        loading: null,
+	        showLoadMask: true,
+	        columnMinWidth: 50,
+	        cellPadding: '0px 5px',
+	        headerPadding: '10px 5px',
+	        filterIconColor: '#6EB8F1',
+	        menuIconColor: '#6EB8F1',
+	        scrollbarSize: 20,
+
+	        scrollBy: undefined,
+	        virtualRendering: true,
+
+	        styleAlternateRowsCls: 'z-style-alternate',
+	        withColumnMenuCls: 'z-with-column-menu',
+	        cellEllipsisCls: 'z-cell-ellipsis',
+	        defaultClassName: 'react-datagrid',
+
+	        withColumnMenu: true,
+	        sortable: true,
+
+	        filterable: null,
+	        resizableColumns: null,
+	        reorderColumns: null,
+
+	        emptyCls: 'z-empty',
+	        emptyTextStyle: null,
+	        emptyWrapperStyle: null,
+
+	        loadMaskOverHeader: true,
+
+	        showCellBordersCls: 'z-cell-borders',
+	        showCellBorders: false,
+	        styleAlternateRows: true,
+	        cellEllipsis: true,
+	        rowHeight: 31,
+
+	        groupNestingWidth: 20,
+
+	        defaultStyle: {
+	            position: 'relative'
+	        }
+	    };
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 151 */
+/***/ function(module, exports) {
+
+	(function() {
+	  'use strict';
+
+	  if (self.fetch) {
+	    return
+	  }
+
+	  function Headers(headers) {
+	    this.map = {}
+
+	    var self = this
+	    if (headers instanceof Headers) {
+	      headers.forEach(function(name, values) {
+	        values.forEach(function(value) {
+	          self.append(name, value)
+	        })
+	      })
+
+	    } else if (headers) {
+	      Object.getOwnPropertyNames(headers).forEach(function(name) {
+	        self.append(name, headers[name])
+	      })
+	    }
+	  }
+
+	  Headers.prototype.append = function(name, value) {
+	    name = name.toLowerCase()
+	    var list = this.map[name]
+	    if (!list) {
+	      list = []
+	      this.map[name] = list
+	    }
+	    list.push(value)
+	  }
+
+	  Headers.prototype['delete'] = function(name) {
+	    delete this.map[name.toLowerCase()]
+	  }
+
+	  Headers.prototype.get = function(name) {
+	    var values = this.map[name.toLowerCase()]
+	    return values ? values[0] : null
+	  }
+
+	  Headers.prototype.getAll = function(name) {
+	    return this.map[name.toLowerCase()] || []
+	  }
+
+	  Headers.prototype.has = function(name) {
+	    return this.map.hasOwnProperty(name.toLowerCase())
+	  }
+
+	  Headers.prototype.set = function(name, value) {
+	    this.map[name.toLowerCase()] = [value]
+	  }
+
+	  // Instead of iterable for now.
+	  Headers.prototype.forEach = function(callback) {
+	    var self = this
+	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
+	      callback(name, self.map[name])
+	    })
+	  }
+
+	  function consumed(body) {
+	    if (body.bodyUsed) {
+	      return Promise.reject(new TypeError('Already read'))
+	    }
+	    body.bodyUsed = true
+	  }
+
+	  function fileReaderReady(reader) {
+	    return new Promise(function(resolve, reject) {
+	      reader.onload = function() {
+	        resolve(reader.result)
+	      }
+	      reader.onerror = function() {
+	        reject(reader.error)
+	      }
+	    })
+	  }
+
+	  function readBlobAsArrayBuffer(blob) {
+	    var reader = new FileReader()
+	    reader.readAsArrayBuffer(blob)
+	    return fileReaderReady(reader)
+	  }
+
+	  function readBlobAsText(blob) {
+	    var reader = new FileReader()
+	    reader.readAsText(blob)
+	    return fileReaderReady(reader)
+	  }
+
+	  var support = {
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob();
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self
+	  }
+
+	  function Body() {
+	    this.bodyUsed = false
+
+	    if (support.blob) {
+	      this._initBody = function(body) {
+	        this._bodyInit = body
+	        if (typeof body === 'string') {
+	          this._bodyText = body
+	        } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+	          this._bodyBlob = body
+	        } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+	          this._bodyFormData = body
+	        } else if (!body) {
+	          this._bodyText = ''
+	        } else {
+	          throw new Error('unsupported BodyInit type')
+	        }
+	      }
+
+	      this.blob = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+
+	        if (this._bodyBlob) {
+	          return Promise.resolve(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as blob')
+	        } else {
+	          return Promise.resolve(new Blob([this._bodyText]))
+	        }
+	      }
+
+	      this.arrayBuffer = function() {
+	        return this.blob().then(readBlobAsArrayBuffer)
+	      }
+
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+
+	        if (this._bodyBlob) {
+	          return readBlobAsText(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as text')
+	        } else {
+	          return Promise.resolve(this._bodyText)
+	        }
+	      }
+	    } else {
+	      this._initBody = function(body) {
+	        this._bodyInit = body
+	        if (typeof body === 'string') {
+	          this._bodyText = body
+	        } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+	          this._bodyFormData = body
+	        } else if (!body) {
+	          this._bodyText = ''
+	        } else {
+	          throw new Error('unsupported BodyInit type')
+	        }
+	      }
+
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        return rejected ? rejected : Promise.resolve(this._bodyText)
+	      }
 	    }
 
-	}()
+	    if (support.formData) {
+	      this.formData = function() {
+	        return this.text().then(decode)
+	      }
+	    }
+
+	    this.json = function() {
+	      return this.text().then(JSON.parse)
+	    }
+
+	    return this
+	  }
+
+	  // HTTP methods whose capitalization should be normalized
+	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+	  function normalizeMethod(method) {
+	    var upcased = method.toUpperCase()
+	    return (methods.indexOf(upcased) > -1) ? upcased : method
+	  }
+
+	  function Request(url, options) {
+	    options = options || {}
+	    this.url = url
+
+	    this.credentials = options.credentials || 'omit'
+	    this.headers = new Headers(options.headers)
+	    this.method = normalizeMethod(options.method || 'GET')
+	    this.mode = options.mode || null
+	    this.referrer = null
+
+	    if ((this.method === 'GET' || this.method === 'HEAD') && options.body) {
+	      throw new TypeError('Body not allowed for GET or HEAD requests')
+	    }
+	    this._initBody(options.body)
+	  }
+
+	  function decode(body) {
+	    var form = new FormData()
+	    body.trim().split('&').forEach(function(bytes) {
+	      if (bytes) {
+	        var split = bytes.split('=')
+	        var name = split.shift().replace(/\+/g, ' ')
+	        var value = split.join('=').replace(/\+/g, ' ')
+	        form.append(decodeURIComponent(name), decodeURIComponent(value))
+	      }
+	    })
+	    return form
+	  }
+
+	  function headers(xhr) {
+	    var head = new Headers()
+	    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
+	    pairs.forEach(function(header) {
+	      var split = header.trim().split(':')
+	      var key = split.shift().trim()
+	      var value = split.join(':').trim()
+	      head.append(key, value)
+	    })
+	    return head
+	  }
+
+	  Request.prototype.fetch = function() {
+	    var self = this
+
+	    return new Promise(function(resolve, reject) {
+	      var xhr = new XMLHttpRequest()
+	      if (self.credentials === 'cors') {
+	        xhr.withCredentials = true;
+	      }
+
+	      function responseURL() {
+	        if ('responseURL' in xhr) {
+	          return xhr.responseURL
+	        }
+
+	        // Avoid security warnings on getResponseHeader when not allowed by CORS
+	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+	          return xhr.getResponseHeader('X-Request-URL')
+	        }
+
+	        return;
+	      }
+
+	      xhr.onload = function() {
+	        var status = (xhr.status === 1223) ? 204 : xhr.status
+	        if (status < 100 || status > 599) {
+	          reject(new TypeError('Network request failed'))
+	          return
+	        }
+	        var options = {
+	          status: status,
+	          statusText: xhr.statusText,
+	          headers: headers(xhr),
+	          url: responseURL()
+	        }
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+	        resolve(new Response(body, options))
+	      }
+
+	      xhr.onerror = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+
+	      xhr.open(self.method, self.url, true)
+	      if ('responseType' in xhr && support.blob) {
+	        xhr.responseType = 'blob'
+	      }
+
+	      self.headers.forEach(function(name, values) {
+	        values.forEach(function(value) {
+	          xhr.setRequestHeader(name, value)
+	        })
+	      })
+
+	      xhr.send(typeof self._bodyInit === 'undefined' ? null : self._bodyInit)
+	    })
+	  }
+
+	  Body.call(Request.prototype)
+
+	  function Response(bodyInit, options) {
+	    if (!options) {
+	      options = {}
+	    }
+
+	    this._initBody(bodyInit)
+	    this.type = 'default'
+	    this.url = null
+	    this.status = options.status
+	    this.statusText = options.statusText
+	    this.headers = options.headers
+	    this.url = options.url || ''
+	  }
+
+	  Body.call(Response.prototype)
+
+	  self.Headers = Headers;
+	  self.Request = Request;
+	  self.Response = Response;
+
+	  self.fetch = function (url, options) {
+	    return new Request(url, options).fetch()
+	  }
+	  self.fetch.polyfill = true
+	})();
+
 
 /***/ }
 /******/ ])

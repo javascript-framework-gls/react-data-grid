@@ -11,7 +11,7 @@ externals.react = 'React'
 module.exports = {
   entry: './src/index.jsx',
   output: {
-    path         : __dirname + '/dist',
+    path         : __dirname + '/../dist',
     libraryTarget: 'umd',
     library      : 'DataGrid',
     filename     : 'react-datagrid.min.js'
