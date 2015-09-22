@@ -1,6 +1,9 @@
 react-datagrid
 =================
 
+### 1.2.14
+ * Fix groupBy bug preventing display of all data in grid (issue #62, fixed in #97)
+
 ### 1.2.12
  * move userSelect: none from row inline style to row class
 
