@@ -56,7 +56,7 @@ var columns = [
 
 var ROW_HEIGHT = 31
 var LEN = 2000
-var SORT_INFO = []//[ { name: 'id', dir: 'asc'} ]
+var SORT_INFO = [{name: 'country', dir: 'asc'}]//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN);
 
@@ -70,10 +70,17 @@ var App = React.createClass({
             ref="dataGrid"
             idProperty='id'
             dataSource={data}
+            sortInfo={SORT_INFO}
+            onSortChange={this.handleSortChange}
             columns={columns}
             style={{height: 400}}
             onColumnResize={this.onColumnResize}
         />
+    },
+    handleSortChange: function(sortInfo){
+        SORT_INFO = sortInfo
+        data = sort(data)
+        this.setState({})
     }
 })
 
