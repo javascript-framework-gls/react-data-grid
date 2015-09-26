@@ -1,6 +1,9 @@
 react-datagrid
 =================
 
+### 1.2.15
+ * Fix sorting grid when column header is touched on touch devices - https://github.com/zippyui/react-datagrid/pull/99
+
 ### 1.2.14
  * Fix groupBy bug preventing display of all data in grid (issue #62, fixed in #97)
 
