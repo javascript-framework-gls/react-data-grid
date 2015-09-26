@@ -68,7 +68,6 @@
     "hasown": "^1.0.1",
     "normalize.css": "^3.0.3",
     "object-assign": "^2.0.0",
-    "react-event-names": "^1.0.0",
     "react-load-mask": "^1.0.1",
     "react-menus": "^1.1.1",
     "react-simple-toolbar": "^1.0.5",
