@@ -136,6 +136,38 @@
   -ms-animation-delay: -10.0833s;
   animation-delay: -10.0833s;
 }
+@-moz-keyframes loader-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
+@-webkit-keyframes loader-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
+@-o-keyframes loader-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
+@keyframes loader-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
 .u-flex {
   display: -webkit-box;
   display: -moz-box;
@@ -359,6 +391,14 @@ html.u-app body {
 }
 .u-relative {
   position: relative;
+}
+.u-absolute-centering {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 html.u-app,
 html.u-app body {
@@ -910,36 +950,4 @@ html.u-app body * {
 }
 .react-datagrid .z-summary .z-cell:not(.z-first) {
   border-left: 1px solid #a8a8a8;
-}
-@-moz-keyframes loader-fade {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.25;
-  }
-}
-@-webkit-keyframes loader-fade {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.25;
-  }
-}
-@-o-keyframes loader-fade {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.25;
-  }
-}
-@keyframes loader-fade {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.25;
-  }
 }
