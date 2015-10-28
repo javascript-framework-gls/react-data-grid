@@ -23,57 +23,57 @@ var generateMockData = testUtils.generateMockData
 
 describe('DataGrid Test Suite - Columns', function(){
 
-    // it('check column visibility by options',function(done) {
-    //
-    //     var data = generateMockData({type : 'local', len : 1})
-    //
-    //     // defaultVisible : true
-    //     var columns1 = [
-    //         { name: 'index', title: '#', width: 50 },
-    //         { name: 'firstName', defaultVisible : true },
-    //         { name: 'lastName'  },
-    //         { name: 'city' },
-    //         { name: 'email' }
-    //     ];
-    //
-    //     // defaultVisible : false
-    //     var columns2 = [
-    //         { name: 'index', title: '#', width: 50 },
-    //         { name: 'firstName', defaultVisible : false },
-    //         { name: 'lastName'  },
-    //         { name: 'city' },
-    //         { name: 'email' }
-    //     ];
-    //
-    //     // visible : true
-    //     var columns3 = [
-    //         { name: 'index', title: '#', width: 50 },
-    //         { name: 'firstName', visible : true },
-    //         { name: 'lastName'  },
-    //         { name: 'city' },
-    //         { name: 'email' }
-    //     ];
-    //
-    //     // visible : false
-    //     var columns4 = [
-    //         { name: 'index', title: '#', width: 50 },
-    //         { name: 'firstName', visible : false },
-    //         { name: 'lastName'  },
-    //         { name: 'city' },
-    //         { name: 'email' }
-    //     ];
-    //
-    //
-    //     // check for column visibility
-    //     var expectedHeadersNotVisible = ['#','Last name','City','Email']
-    //     var expectedHeadersVisible    = ['#','First name','Last name','City','Email']
-    //
-    //     checkColVisibility(data, columns1, expectedHeadersVisible, true)
-    //     checkColVisibility(data, columns2, expectedHeadersNotVisible, false)
-    //     checkColVisibility(data, columns3, expectedHeadersVisible, true)
-    //     checkColVisibility(data, columns4, expectedHeadersNotVisible, false)
-    //     done()
-    // })
+    it('check column visibility by options',function(done) {
+
+        var data = generateMockData({type : 'local', len : 1})
+
+        // defaultVisible : true
+        var columns1 = [
+            { name: 'index', title: '#', width: 50 },
+            { name: 'firstName', defaultVisible : true },
+            { name: 'lastName'  },
+            { name: 'city' },
+            { name: 'email' }
+        ];
+
+        // defaultVisible : false
+        var columns2 = [
+            { name: 'index', title: '#', width: 50 },
+            { name: 'firstName', defaultVisible : false },
+            { name: 'lastName'  },
+            { name: 'city' },
+            { name: 'email' }
+        ];
+
+        // visible : true
+        var columns3 = [
+            { name: 'index', title: '#', width: 50 },
+            { name: 'firstName', visible : true },
+            { name: 'lastName'  },
+            { name: 'city' },
+            { name: 'email' }
+        ];
+
+        // visible : false
+        var columns4 = [
+            { name: 'index', title: '#', width: 50 },
+            { name: 'firstName', visible : false },
+            { name: 'lastName'  },
+            { name: 'city' },
+            { name: 'email' }
+        ];
+
+
+        // check for column visibility
+        var expectedHeadersNotVisible = ['#','Last name','City','Email']
+        var expectedHeadersVisible    = ['#','First name','Last name','City','Email']
+
+        checkColVisibility(data, columns1, expectedHeadersVisible, true)
+        checkColVisibility(data, columns2, expectedHeadersNotVisible, false)
+        checkColVisibility(data, columns3, expectedHeadersVisible, true)
+        checkColVisibility(data, columns4, expectedHeadersNotVisible, false)
+        done()
+    })
 
     it('check column menu accessibility by options',function(done) {
 
@@ -115,40 +115,40 @@ describe('DataGrid Test Suite - Columns', function(){
         done()
     })
 
-    // it('check column width set by props',function(done) {
-    //
-    //     var data = generateMockData({type : 'local', len : 1})
-    //     var columns = [
-    //         { name: 'index', title: '#', width: 50 },
-    //         { name: 'firstName'},
-    //         { name: 'lastName'  },
-    //         { name: 'city' },
-    //         { name: 'email' }
-    //     ];
-    //
-    //     // table with column menu
-    //     var table = render(
-    //         DataGrid({
-    //             idProperty: 'id',
-    //             dataSource: data,
-    //             columns   : columns
-    //         })
-    //     )
-    //
-    //     var columnHeaderArray = tryWithClass(table,COLUMN_HEADER_CLASS)
-    //     columnHeaderArray.should.not.be.empty
-    //
-    //     // check header width of first row first element
-    //     var header = columnHeaderArray[0]
-    //
-    //     ;(header.getDOMNode().style._values.width).should.equal('50px') // hack, should be replaced with a better api
-    //
-    //     // check cell width of first row first element
-    //     var rowNode = tryWithClass(table,ROW_CLASS)
-    //     var rowCells = tryWithClass(rowNode[0],CELL_CLASS)
-    //     ;(rowCells[0].getDOMNode().style._values.width).should.equal('50px')
-    //     done()
-    // })
+    it('check column width set by props',function(done) {
+
+        var data = generateMockData({type : 'local', len : 1})
+        var columns = [
+            { name: 'index', title: '#', width: 50 },
+            { name: 'firstName'},
+            { name: 'lastName'  },
+            { name: 'city' },
+            { name: 'email' }
+        ];
+
+        // table with column menu
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns
+            })
+        )
+
+        var columnHeaderArray = tryWithClass(table,COLUMN_HEADER_CLASS)
+        columnHeaderArray.should.not.be.empty
+
+        // check header width of first row first element
+        var header = columnHeaderArray[0]
+
+        ;(header.getDOMNode().style._values.width).should.equal('50px') // hack, should be replaced with a better api
+
+        // check cell width of first row first element
+        var rowNode = tryWithClass(table,ROW_CLASS)
+        var rowCells = tryWithClass(rowNode[0],CELL_CLASS)
+        ;(rowCells[0].getDOMNode().style._values.width).should.equal('50px')
+        done()
+    })
 
     it('check dynamic column visibility by options',function(done) {
 
@@ -198,34 +198,34 @@ describe('DataGrid Test Suite - Columns', function(){
 
     })
 
-    // it('check custom column rendering function works',function() {
-    //
-    //     var data = generateMockData({type : 'local', len : 10})
-    //     var columns = [
-    //         { name: 'index', render: function(v){return 'Index ' + v} },
-    //         { name: 'firstName', visible: true},
-    //         { name: 'lastName'  },
-    //         { name: 'city' },
-    //         { name: 'email' }
-    //     ];
-    //
-    //     // table with column menu
-    //     var table = render(
-    //         DataGrid({
-    //             idProperty: 'id',
-    //             dataSource: data,
-    //             columns   : columns,
-    //             style     : {height: 400}
-    //         })
-    //     )
-    //
-    //     var rows = tryWithClass(table,ROW_CLASS)
-    //     rows.map(function(row,index) {
-    //         var cells = tryWithClass(row,CELL_CLASS)
-    //         React.findDOMNode(cells[0]).textContent.should.equal('Index ' + (index + 1))
-    //     })
-    //
-    // })
+    it('check custom column rendering function works',function() {
+
+        var data = generateMockData({type : 'local', len : 10})
+        var columns = [
+            { name: 'index', render: function(v){return 'Index ' + v} },
+            { name: 'firstName', visible: true},
+            { name: 'lastName'  },
+            { name: 'city' },
+            { name: 'email' }
+        ];
+
+        // table with column menu
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns,
+                style     : {height: 400}
+            })
+        )
+
+        var rows = tryWithClass(table,ROW_CLASS)
+        rows.map(function(row,index) {
+            var cells = tryWithClass(row,CELL_CLASS)
+            React.findDOMNode(cells[0]).textContent.should.equal('Index ' + (index + 1))
+        })
+
+    })
 
 })
 

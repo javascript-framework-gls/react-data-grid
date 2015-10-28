@@ -124,110 +124,110 @@ describe('DataGrid Test Suite -  Row Style',function() {
 
 	})
 
-	// it('check column style works',function() {
-  //
-	// 	var COL_COLOR = 'blue'
-	// 	var COL_COLOR_INDEX = 4
-	// 	var data = generateMockData({type : 'local', len : 10})
-  //
-	// 	columns = [
-	// 	    { name: 'index', title: '#', width: 50 },
-	// 	    { name: 'firstName'},
-	// 	    { name: 'lastName'  },
-	// 	    { name: 'city' },
-	// 	    { name: 'email', style : { color : COL_COLOR } }
-	// 	]
-  //
-	// 	// table
-  //       var table = render(
-  //           DataGrid({
-  //               idProperty: 'id',
-  //               dataSource: data,
-  //               columns   : columns,
-  //               style     : {height:400}
-  //           })
-  //       );
-  //
-  //       var rows = tryWithClass(table,ROW_CLASS)
-	// 	rows.forEach(function(row) {
-	// 		var cells = tryWithClass(row,CELL_CLASS)
-	// 		cells.forEach(function(cell,index) {
-	// 			if(index == COL_COLOR_INDEX)
-	// 				window.getComputedStyle(cell.getDOMNode()).getPropertyValue('color').should.equal(COL_COLOR)
-	// 		})
-  //       })
-  //
-	// })
+	it('check column style works',function() {
 
-	// it('check column textAlign works',function() {
-  //
-	// 	var TEXT_ALIGN = 'right'
-	// 	var COL_ALIGN_INDEX = 2
-	// 	var data = generateMockData({type : 'local', len : 10})
-  //
-	// 	columns = [
-	// 	    { name: 'index', title: '#', width: 50 },
-	// 	    { name: 'firstName'},
-	// 	    { name: 'lastName' , textAlign : TEXT_ALIGN },
-	// 	    { name: 'city' },
-	// 	    { name: 'email'}
-	// 	]
-  //
-	// 	// table
-  //       var table = render(
-  //           DataGrid({
-  //               idProperty: 'id',
-  //               dataSource: data,
-  //               columns   : columns,
-  //               style     : {height:400}
-  //           })
-  //       );
-  //
-	// 	var rows = tryWithClass(table,ROW_CLASS)
-	// 	rows.forEach(function(row) {
-	// 		var cells = tryWithClass(row,CELL_CLASS)
-	// 		cells.forEach(function(cell,index) {
-	// 			if(index == COL_ALIGN_INDEX)
-	// 				cell.props.className.should.containEql(ALIGN_RIGHT_CLASS)
-	// 		})
-  //       })
-  //
-	// })
+		var COL_COLOR = 'blue'
+		var COL_COLOR_INDEX = 4
+		var data = generateMockData({type : 'local', len : 10})
 
-	// it('check column.className is applied to column cells', function(){
-  //
-	// 	var data = generateMockData({type : 'local', len : 10})
-  //
-	// 	columns = [
-	// 	    { name: 'index', title: '#', width: 50 },
-	// 	    { name: 'firstName', className: 'custom-class'},
-	// 	    { name: 'lastName'  },
-	// 	    { name: 'city' }
-	// 	]
-  //
-	// 	// table
-  //       var table = render(
-  //           DataGrid({
-  //               idProperty: 'id',
-  //               dataSource: data,
-  //               columns   : columns,
-  //               style     : {height:400}
-  //           })
-  //       );
-  //
-  //       var rows = tryWithClass(table,ROW_CLASS)
-  //
-  //
-	// 	rows.forEach(function(row, i) {
-  //
-	// 		var cells     = tryWithClass(row, CELL_CLASS)
-	// 		var className = React.findDOMNode(cells[1]).className
-  //
-	// 		className.indexOf('custom-class')
-	// 			.should
-	// 			.not.equal(-1)
-  //       })
-	// })
+		columns = [
+		    { name: 'index', title: '#', width: 50 },
+		    { name: 'firstName'},
+		    { name: 'lastName'  },
+		    { name: 'city' },
+		    { name: 'email', style : { color : COL_COLOR } }
+		]
+
+		// table
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns,
+                style     : {height:400}
+            })
+        );
+
+        var rows = tryWithClass(table,ROW_CLASS)
+		rows.forEach(function(row) {
+			var cells = tryWithClass(row,CELL_CLASS)
+			cells.forEach(function(cell,index) {
+				if(index == COL_COLOR_INDEX)
+					window.getComputedStyle(cell.getDOMNode()).getPropertyValue('color').should.equal(COL_COLOR)
+			})
+        })
+
+	})
+
+	it('check column textAlign works',function() {
+
+		var TEXT_ALIGN = 'right'
+		var COL_ALIGN_INDEX = 2
+		var data = generateMockData({type : 'local', len : 10})
+
+		columns = [
+		    { name: 'index', title: '#', width: 50 },
+		    { name: 'firstName'},
+		    { name: 'lastName' , textAlign : TEXT_ALIGN },
+		    { name: 'city' },
+		    { name: 'email'}
+		]
+
+		// table
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns,
+                style     : {height:400}
+            })
+        );
+
+		var rows = tryWithClass(table,ROW_CLASS)
+		rows.forEach(function(row) {
+			var cells = tryWithClass(row,CELL_CLASS)
+			cells.forEach(function(cell,index) {
+				if(index == COL_ALIGN_INDEX)
+					cell.props.className.should.containEql(ALIGN_RIGHT_CLASS)
+			})
+        })
+
+	})
+
+	it('check column.className is applied to column cells', function(){
+
+		var data = generateMockData({type : 'local', len : 10})
+
+		columns = [
+		    { name: 'index', title: '#', width: 50 },
+		    { name: 'firstName', className: 'custom-class'},
+		    { name: 'lastName'  },
+		    { name: 'city' }
+		]
+
+		// table
+        var table = render(
+            DataGrid({
+                idProperty: 'id',
+                dataSource: data,
+                columns   : columns,
+                style     : {height:400}
+            })
+        );
+
+        var rows = tryWithClass(table,ROW_CLASS)
+
+
+		rows.forEach(function(row, i) {
+
+			var cells     = tryWithClass(row, CELL_CLASS)
+			var className = React.findDOMNode(cells[1]).className
+
+			className.indexOf('custom-class')
+				.should
+				.not.equal(-1)
+        })
+	})
 
 	it('check showCellBorders prop works',function() {
 
