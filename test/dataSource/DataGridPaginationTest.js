@@ -218,46 +218,46 @@ describe('DataGrid Test Suite - Pagination', function(){
 
     })
 
-    it('check pageSizeChanged prop ',function(done) {
-
-        var PAGE_SIZE = 3
-        var CHANGED_PAGE_SIZE = 20
-
-        // create dataSource
-        var dataSource = function(request) {
-
-            var data = generateMockData({type : 'remote', len : 4, request : request});
-
-            var promise = new Promise(function(resolve,reject) {
-                resolve(data)
-            })
-            return promise;
-        };
-
-        var onPageSizeChangeHandler = function(pageSize,props) {
-            pageSize.should.equal(CHANGED_PAGE_SIZE)
-        }
-
-        // table first page render
-        var table = render(
-            DataGrid({
-                idProperty      : 'id',
-                dataSource      : dataSource,
-                columns         : columns,
-                style           : {height:200},
-                pageSize        : PAGE_SIZE,
-                onPageSizeChange: onPageSizeChangeHandler
-            })
-        );
-
-        setTimeout(function() {
-            var paginationToolbar = findWithClass(table,PAGINATION_TOOLBAR)
-            var selectPages =  TestUtils.findRenderedDOMComponentWithTag(paginationToolbar, 'select')
-            TestUtils.Simulate.change(selectPages,{target : {value : CHANGED_PAGE_SIZE}})
-            done()
-        },0)
-
-    })
+    // it('check pageSizeChanged prop ',function(done) {
+    //
+    //     var PAGE_SIZE = 3
+    //     var CHANGED_PAGE_SIZE = 20
+    //
+    //     // create dataSource
+    //     var dataSource = function(request) {
+    //
+    //         var data = generateMockData({type : 'remote', len : 4, request : request});
+    //
+    //         var promise = new Promise(function(resolve,reject) {
+    //             resolve(data)
+    //         })
+    //         return promise;
+    //     };
+    //
+    //     var onPageSizeChangeHandler = function(pageSize,props) {
+    //         pageSize.should.equal(CHANGED_PAGE_SIZE)
+    //     }
+    //
+    //     // table first page render
+    //     var table = render(
+    //         DataGrid({
+    //             idProperty      : 'id',
+    //             dataSource      : dataSource,
+    //             columns         : columns,
+    //             style           : {height:200},
+    //             pageSize        : PAGE_SIZE,
+    //             onPageSizeChange: onPageSizeChangeHandler
+    //         })
+    //     );
+    //
+    //     setTimeout(function() {
+    //         var paginationToolbar = findWithClass(table,PAGINATION_TOOLBAR)
+    //         var selectPages =  TestUtils.findRenderedDOMComponentWithTag(paginationToolbar, 'select')
+    //         TestUtils.Simulate.change(selectPages,{target : {value : CHANGED_PAGE_SIZE}})
+    //         done()
+    //     },0)
+    //
+    // })
 
     it('check page and onPageChange work',function(done) {
 
