@@ -4,13 +4,13 @@
 @import './constants.styl'
 
 .z-unselectable
-    touch-callout none
-    user-select none
+  touch-callout none
+  user-select none
 
 .react-datagrid
-    &
-    & *
-        box-sizing border-box
+  &
+  & *
+    box-sizing border-box
 
 datagrid-cell()
     display flex
@@ -36,7 +36,7 @@ datagrid-cell()
     .z-header-menu-column
         z-index 100
 
-    @extend .u-flex-column
+    flex-flow column
     align-items stretch
 
     & > .z-inner
@@ -86,7 +86,7 @@ datagrid-cell()
         display flex
 
     .z-table-wrapper
-        @extend .u-flex-column
+        flex-flow column
         justify-content center
         align-items center
 

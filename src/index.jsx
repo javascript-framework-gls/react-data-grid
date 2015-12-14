@@ -2,7 +2,9 @@
 
 require('es6-promise').polyfill()
 
-var React    = require('react')
+import { findDOMNode } from 'react-dom'
+import React from 'react'
+
 var assign   = require('object-assign')
 var LoadMask = require('react-load-mask')
 var Region   = require('region')
@@ -1126,7 +1128,7 @@ module.exports = React.createClass({
             setTimeout(function(){
                 //FF needs this, since it does not trigger scroll event when scrollbar dissapears
                 //so we might end up with grid content not visible (to the left)
-                var domNode = React.findDOMNode(horizScrollbar)
+                var domNode = findDOMNode(horizScrollbar)
                 if (domNode && !domNode.scrollLeft){
                     this.handleScrollLeft(0)
                 }

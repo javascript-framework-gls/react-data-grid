@@ -1,5 +1,6 @@
 'use strict';
 
+import { findDOMNode } from 'react-dom';
 var React     = require('react')
 var assign    = require('object-assign')
 var Toolbar   = require('react-simple-toolbar')
@@ -255,7 +256,7 @@ module.exports = React.createClass({
 		this.setState({
 			inputFocused: true
 		}, function(){
-			var domNode = React.findDOMNode(this.refs.input)
+			var domNode = findDOMNode(this.refs.input)
 			domNode.value = page
 		}.bind(this))
 	},
