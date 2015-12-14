@@ -1,10 +1,8 @@
 'use strict';
 
 require('./index.styl')
-require('react');
-require('react-dom');
 
-var Guid = require('node-uuid')
+//var Guid = require('node-uuid')
 var sorty = require('sorty')
 var React = require('react')
 var ReactDOM = require('react-dom')

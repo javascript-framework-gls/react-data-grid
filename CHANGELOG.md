@@ -1,6 +1,9 @@
 react-datagrid
 =================
 
+### 2.0.0
+ * Update to React `0.14` - this is the reason of the major version bump
+
 ### 1.2.15
  * Fix sorting grid when column header is touched on touch devices - https://github.com/zippyui/react-datagrid/pull/99
 

@@ -20,10 +20,6 @@ $ npm install react-datagrid --save
 
 See [changelog](./CHANGELOG.md)
 
-## Roadmap
-
-See [roadmap](./ROADMAP.md)
-
 ## Features
 
  * renders huge amounts of data
