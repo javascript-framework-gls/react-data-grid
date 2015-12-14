@@ -535,6 +535,22 @@ th {
   -webkit-animation-delay: -10.0833s;
   animation-delay: -10.0833s;
 }
+@-webkit-keyframes loader-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
+@keyframes loader-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
 .u-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -796,6 +812,14 @@ html.u-app body {
 }
 .u-relative {
   position: relative;
+}
+.u-absolute-centering {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 html.u-app,
 html.u-app body {
@@ -1182,10 +1206,10 @@ html.u-app body * {
   background: #d7e7ff;
 }
 .react-datagrid .z-header {
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -webkit-box-align: stretch /* for vertical aligning text in header */;
+  -webkit-align-items: stretch /* for vertical aligning text in header */;
+      -ms-flex-align: stretch /* for vertical aligning text in header */;
+          align-items: stretch /* for vertical aligning text in header */;
 }
 .react-datagrid.z-with-column-menu .z-column-header .z-show-filter,
 .react-datagrid.z-with-column-menu .z-column-header .z-show-menu {
@@ -1383,10 +1407,10 @@ html.u-app body * {
 }
 .react-datagrid .z-summary {
   border-top: 1px solid #a8a8a8;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -webkit-box-align: stretch /* for vertical aligning text in header */;
+  -webkit-align-items: stretch /* for vertical aligning text in header */;
+      -ms-flex-align: stretch /* for vertical aligning text in header */;
+          align-items: stretch /* for vertical aligning text in header */;
 }
 .react-datagrid .z-summary .z-cell {
   position: relative;
@@ -1429,20 +1453,4 @@ html.u-app body * {
 }
 .react-datagrid .z-summary .z-cell:not(.z-first) {
   border-left: 1px solid #a8a8a8;
-}
-@-webkit-keyframes loader-fade {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.25;
-  }
-}
-@keyframes loader-fade {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.25;
-  }
 }

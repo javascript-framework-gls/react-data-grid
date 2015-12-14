@@ -1,6 +1,10 @@
 react-datagrid
 =================
 
+
+### 2.0.1
+ * Update `react-menus` dependency to version supporting React `0.14`
+
 ### 2.0.0
  * Update to React `0.14` - this is the reason of the major version bump
 

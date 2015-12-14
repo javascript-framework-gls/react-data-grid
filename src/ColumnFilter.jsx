@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react')
-var assign = require('object-assign')
+var assign = require('object-assign');
 var ReactMenu = require('react-menus')
 
 function stopPropagation(event){
