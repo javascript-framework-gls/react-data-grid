@@ -2,10 +2,12 @@
 
 require('./index.styl')
 require('react');
+require('react-dom');
 
-var Guid = require('guid')
+var Guid = require('node-uuid')
 var sorty = require('sorty')
 var React = require('react')
+var ReactDOM = require('react-dom')
 var DataGrid = require('./src')
 var faker = window.faker = require('faker');
 var preventDefault = require('./src/utils/preventDefault')
@@ -60,12 +62,19 @@ var SORT_INFO = [{name: 'country', dir: 'asc'}]//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN);
 
-var App = React.createClass({
-    onColumnResize: function(firstCol, firstSize, secondCol, secondSize){
+class App extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.handleSortChange = this.handleSortChange.bind(this);
+        this.onColumnResize = this.onColumnResize.bind(this);
+    }
+
+    onColumnResize(firstCol, firstSize, secondCol, secondSize) {
         firstCol.width = firstSize
         this.setState({})
-    },
-    render: function(){
+    }
+
+    render() {
         return <DataGrid
             ref="dataGrid"
             idProperty='id'
@@ -76,14 +85,15 @@ var App = React.createClass({
             style={{height: 400}}
             onColumnResize={this.onColumnResize}
         />
-    },
-    handleSortChange: function(sortInfo){
+    }
+
+    handleSortChange(sortInfo) {
         SORT_INFO = sortInfo
         data = sort(data)
         this.setState({})
     }
-})
+}
 
-React.render((
+ReactDOM.render((
     <App />
 ), document.getElementById('content'))
