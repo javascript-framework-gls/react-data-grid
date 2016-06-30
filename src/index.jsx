@@ -7,7 +7,7 @@ import { findDOMNode } from 'react-dom'
 import React from 'react'
 
 var assign   = require('object-assign')
-var LoadMask = require('react-load-mask')
+import LoadMask from 'react-load-mask'
 var Region   = require('region')
 
 var PaginationToolbar = React.createFactory(require('./PaginationToolbar'))

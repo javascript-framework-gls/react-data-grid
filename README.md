@@ -6,11 +6,14 @@ react-datagrid
 
 > A carefully crafted DataGrid for React
 
+
 See demo at [zippyui.github.io/react-datagrid](http://zippyui.github.io/react-datagrid)
 
 <a href="http://zippyui.github.io/react-datagrid/#/examples/basic"><img src="./react-datagrid.png" height="400" width="739" /></a>
 
 ## Coming soon - commercial version!
+
+## Supports both React 0.14 & 15
 
 ## Install
 
