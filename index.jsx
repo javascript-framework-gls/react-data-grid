@@ -59,12 +59,14 @@ var LEN = 2000
 var SORT_INFO = [{name: 'country', dir: 'asc'}]//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN);
+var originalData = data.slice();
 
 class App extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.handleSortChange = this.handleSortChange.bind(this);
         this.onColumnResize = this.onColumnResize.bind(this);
+        this.handleFilter = this.handleFilter.bind(this);
     }
 
     onColumnResize(firstCol, firstSize, secondCol, secondSize) {
@@ -82,6 +84,8 @@ class App extends React.Component {
             columns={columns}
             style={{height: 400}}
             onColumnResize={this.onColumnResize}
+            liveFilter={true}
+            onFilter={this.handleFilter}
         />
     }
 
@@ -90,6 +94,25 @@ class App extends React.Component {
         data = sort(data)
         this.setState({})
     }
+
+    handleFilter(column, value, allFilterValues) {
+      data = originalData.slice();
+  	  Object.keys(allFilterValues).forEach((name) => {
+    		const columnFilter = (allFilterValues[name] + '').toUpperCase().trim();
+    		if (columnFilter === '') {
+    			return;
+    		}
+
+        data = data.filter((item) => {
+  		    if ((item[name] + '').toUpperCase().indexOf(columnFilter) === 0) {
+            return true;
+  		    }
+    		});
+    	});
+
+      data = sort(data);
+      this.forceUpdate();
+	  }
 }
 
 ReactDOM.render((
