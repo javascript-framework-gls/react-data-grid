@@ -31,14 +31,14 @@ module.exports = React.createClass({
     var props = this.prepareProps(this.props)
     var cells = props.columns
                       .map(this.renderCell.bind(this, this.props));
-    
+
     var headerStyle = normalize({
       paddingRight: this.props.scrollbarSize
     });
 
     return (
-      <div className="z-table" style={headerStyle}>
-        <div {...props} style={{ background: 'linear-gradient(to bottom, #f7f7f7 0%,#efefef 13%,#e6e6e6 100%)' }}>
+      <div className="z-filter" style={headerStyle}>
+        <div className="z-filter-row">
           {cells}
         </div>
       </div>
@@ -48,7 +48,6 @@ module.exports = React.createClass({
   prepareProps: function(thisProps){
     var props = assign({}, thisProps)
 
-    props.className = this.prepareClassName(props, this.state)
     props.style = this.prepareStyle(props)
 
     delete props.data
@@ -63,7 +62,7 @@ module.exports = React.createClass({
 
     return (
       <div
-        className="z-cell"
+        className="z-filter-cell"
         style={this.prepareColumnStyle(column)}
       >
         <input
@@ -97,12 +96,6 @@ module.exports = React.createClass({
       if (this.props.liveFilter){
           this.filterBy(column, value)
       }
-  },
-
-  prepareClassName: function(props, state){
-      var className = props.className || ''
-      className += ' z-row'
-      return className
   },
 
   prepareStyle: function(props) {

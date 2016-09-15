@@ -1,0 +1,25 @@
+.react-datagrid
+
+    .z-filter
+        display block
+        flex 1
+        /** 2 RULES FOR SAFARI VERTICAL SCROLLBAR */
+        transform translate3d(0px, 0px, 0px)
+        position relative
+        z-index 10
+
+      .z-filter-row
+          border-bottom 1px solid $datagrid-header-border-color
+          display flex
+          flex-flow row
+          z-index 1
+          background $datagrid-header-background
+
+          .z-filter-cell
+              datagrid-cell()
+
+              &:not(:first-child)
+                border-left 1px solid $datagrid-header-border-color
+
+              &:last-child
+                border-right 1px solid $datagrid-header-border-color
