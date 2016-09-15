@@ -145,7 +145,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    displayName: 'ReactDataGrid',
 
-	    mixins: [__webpack_require__(303), __webpack_require__(305)],
+	    mixins: [__webpack_require__(303)],
 
 	    propTypes: {
 	        loading: _react2.default.PropTypes.bool,
@@ -185,35 +185,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    },
 
-	    getDefaultProps: __webpack_require__(306),
+	    getDefaultProps: __webpack_require__(305),
 
 	    componentDidMount: function componentDidMount() {
 	        window.addEventListener('click', this.windowClickListener = this.onWindowClick);
-	        // this.checkRowHeight(this.props)
 	    },
 
 	    componentWillUnmount: function componentWillUnmount() {
 	        this.scroller = null;
 	        window.removeEventListener('click', this.windowClickListener);
 	    },
-
-	    // checkRowHeight: function(props) {
-	    //     if (this.isVirtualRendering(props)){
-
-	    //         //if virtual rendering and no rowHeight specifed, we use
-	    //         var row = this.findRowById(SIZING_ID)
-	    //         var config = {}
-
-	    //         if (row){
-	    //             this.setState({
-	    //                 rowHeight: config.rowHeight = row.offsetHeight
-	    //             })
-	    //         }
-
-	    //         //this ensures rows are kept in view
-	    //         this.updateStartIndex(props, undefined, config)
-	    //     }
-	    // },
 
 	    onWindowClick: function onWindowClick(event) {
 	        if (this.state.menu) {
@@ -229,6 +210,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var props = this.props;
 	        var defaultSelected = props.defaultSelected;
 
+	        var filters = {};
+	        if (props.dataSource.length > 0) {
+	            filters = assign({}, props.dataSource[0]);
+	            for (var key in filters) {
+	                filters[key] = '';
+	            }
+	        }
+
 	        return {
 	            startIndex: 0,
 	            scrollLeft: 0,
@@ -237,7 +226,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            defaultSelected: defaultSelected,
 	            visibility: {},
 	            defaultPageSize: props.defaultPageSize,
-	            defaultPage: props.defaultPage
+	            defaultPage: props.defaultPage,
+	            filters: filters
 	        };
 	    },
 
@@ -264,7 +254,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.scrollTop = scrollTop;
 
 	        if (props.virtualRendering) {
-
 	            var prevIndex = this.state.startIndex || 0;
 	            var renderStartIndex = Math.ceil(scrollTop / props.rowHeight);
 	            state.startIndex = renderStartIndex;
@@ -408,18 +397,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    prepareFilterRow: function prepareFilterRow(props, state) {
-	        if (props.data.length === 0) {
-	            this.filterData = {};
-	        } else {
-	            this.filterData = assign({}, props.data[0]);
-	            for (var key in this.filterData) {
-	                this.filterData[key] = '';
-	            }
-	        }
-
 	        return FilterRowFactory({
-	            data: this.filterData,
+	            data: this.state.filters,
 	            columns: getVisibleColumns(props, state),
+	            onFilter: this.handleFilterChange,
 	            scrollbarSize: props.scrollbarSize
 	        });
 	    },
@@ -545,8 +526,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 
 	        table = _getTableProps.call(this, props, rows);
-
 	        return table;
+	    },
+
+	    handleFilterChange: function handleFilterChange(column, value, event) {
+	        this.state.filters[column.name] = value;
+	        this.props.onFilter(column, value, this.state.filters, event);
 	    },
 
 	    handleVerticalScrollOverflow: function handleVerticalScrollOverflow(sign, scrollTop) {
@@ -587,27 +572,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            scrollTop = startIndex * props.rowHeight;
 	        }
 
-	        // var topLoader
-	        // var bottomLoader
-	        // var loadersSize = 0
-
-	        // if (props.virtualPagination){
-
-	        //     if (props.page < props.maxPage){
-	        //         loadersSize += 2 * props.rowHeight
-	        //         bottomLoader = <div style={{height: 2 * props.rowHeight, position: 'relative', width: props.columnFlexCount? 'calc(100% - ' + props.scrollbarSize + ')': props.minRowWidth - props.scrollbarSize}}>
-	        //             <LoadMask visible={true} style={{background: 'rgba(128, 128, 128, 0.17)'}}/>
-	        //         </div>
-	        //     }
-
-	        //     if (props.page > props.minPage){
-	        //         loadersSize += 2 * props.rowHeight
-	        //         topLoader = <div style={{height: 2 * props.rowHeight, position: 'relative', width: props.columnFlexCount? 'calc(100% - ' + props.scrollbarSize + ')': props.minRowWidth - props.scrollbarSize}}>
-	        //             <LoadMask visible={true} style={{background: 'rgba(128, 128, 128, 0.17)'}}/>
-	        //         </div>
-	        //     }
-	        // }
-
 	        var wrapperProps = assign({
 	            ref: 'wrapper',
 	            onMount: this.onWrapperMount,
@@ -628,17 +592,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            menu: state.menu,
 	            menuColumn: state.menuColumn,
 	            showMenu: this.showMenu,
-
-	            // cellFactory     : props.cellFactory,
-	            // rowStyle        : props.rowStyle,
-	            // rowClassName    : props.rowClassName,
-	            // rowContextMenu  : props.rowContextMenu,
-
-	            // topLoader: topLoader,
-	            // bottomLoader: bottomLoader,
-	            // loadersSize: loadersSize,
-
-	            // onRowClick: this.handleRowClick,
 	            selected: props.selected == null ? state.defaultSelected : props.selected
 	        }, props);
 
@@ -715,13 +668,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    preparePage: function preparePage(props) {
 	        return props.page == null ? this.state.defaultPage : props.page;
 	    },
-	    /**
-	     * Returns true if in the current configuration,
-	     * the datagrid should load its data remotely.
-	     *
-	     * @param  {Object}  [props] Optional. If not given, this.props will be used
-	     * @return {Boolean}
-	     */
+
 	    isRemoteDataSource: function isRemoteDataSource(props) {
 	        props = props || this.props;
 
@@ -29625,11 +29572,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            React.createElement('polygon', { points: '0,0 1,2 1,4 2,4 2,2 3,0 ', style: { fill: props.filterIconColor, strokeWidth: 0, fillRule: 'nonZero' } })
 	        );
 
-	        var filter = column.filterable ? React.createElement(
-	            'div',
-	            { className: 'z-show-filter', onMouseUp: this.handleFilterMouseUp.bind(this, column) },
-	            filterIcon
-	        ) : null;
+	        var filter = null;
+
+	        // column.filterable?
+	        //                 <div className="z-show-filter" onMouseUp={this.handleFilterMouseUp.bind(this, column)}>
+	        //                     {filterIcon}
+	        //                 </div>
+	        //                 :
+	        //                 null
 
 	        var resizer = column.resizable ? React.createElement('span', { className: 'z-column-resize', onMouseDown: this.handleResizeMouseDown.bind(this, column) }) : null;
 
@@ -34862,33 +34812,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      React.createElement('input', {
 	        type: 'text',
 	        style: { width: '95%', margin: 'auto', height: '80%' },
-	        defaultValue: text,
-	        onChange: this.onFilterChange.bind(this, column),
-	        onKeyUp: this.onFilterKeyUp.bind(this, column)
+	        value: text,
+	        onChange: this.onFilterChange.bind(this, column)
 	      })
 	    );
 	  },
 
-	  onFilterKeyUp: function onFilterKeyUp(column, event) {
-	    if (event.key == 'Enter') {
-	      this.onFilterClick(column, event);
-	    }
-	  },
-
-	  onFilterChange: function onFilterChange(column, eventOrValue) {
-
-	    var value = eventOrValue;
-
-	    if (eventOrValue && eventOrValue.target) {
-	      value = eventOrValue.target.value;
-	    }
-
-	    this.filterValues = this.filterValues || {};
-	    this.filterValues[column.name] = value;
-
-	    if (this.props.liveFilter) {
-	      this.filterBy(column, value);
-	    }
+	  onFilterChange: function onFilterChange(column, event) {
+	    this.props.onFilter(column, event.target.value, event);
 	  },
 
 	  prepareStyle: function prepareStyle(props) {
@@ -35821,206 +35752,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var React = __webpack_require__(166);
-	var assign = __webpack_require__(24);
-	var ReactMenu = __webpack_require__(254);
-	var findDOMNode = __webpack_require__(1).findDOMNode;
-
-	function stopPropagation(event) {
-	    event.stopPropagation();
-	}
-
-	function emptyFn() {}
-
-	var FILTER_FIELDS = {};
-
-	module.exports = {
-
-	    getColumnFilterFieldFactory: function getColumnFilterFieldFactory(column) {
-
-	        var type = column.type || 'string';
-
-	        return FILTER_FIELDS[type] || React.DOM.input;
-	    },
-
-	    getFilterField: function getFilterField(props) {
-	        var column = props.column;
-	        var filterValue = this.filterValues ? this.filterValues[column.name] : '';
-
-	        var fieldProps = {
-	            autoFocus: true,
-	            defaultValue: filterValue,
-	            column: column,
-	            onChange: this.onFilterChange.bind(this, column),
-	            onKeyUp: this.onFilterKeyUp.bind(this, column)
-	        };
-
-	        var fieldFactory = column.renderFilterField || this.props.renderFilterField;
-	        var field;
-
-	        if (fieldFactory) {
-	            field = fieldFactory(fieldProps);
-	        }
-
-	        if (field === undefined) {
-	            field = this.getColumnFilterFieldFactory(column)(fieldProps);
-	        }
-
-	        return field;
-	    },
-
-	    onFilterKeyUp: function onFilterKeyUp(column, event) {
-	        if (event.key == 'Enter') {
-	            this.onFilterClick(column, event);
-	        }
-	    },
-
-	    onFilterChange: function onFilterChange(column, eventOrValue) {
-
-	        var value = eventOrValue;
-
-	        if (eventOrValue && eventOrValue.target) {
-	            value = eventOrValue.target.value;
-	        }
-
-	        this.filterValues = this.filterValues || {};
-	        this.filterValues[column.name] = value;
-
-	        if (this.props.liveFilter) {
-	            this.filterBy(column, value);
-	        }
-	    },
-
-	    filterBy: function filterBy(column, value, event) {
-	        ;(this.props.onFilter || emptyFn)(column, value, this.filterValues, event);
-	    },
-
-	    onFilterClick: function onFilterClick(column, event) {
-	        this.showMenu(null);
-
-	        var value = this.filterValues ? this.filterValues[column.name] : '';
-
-	        this.filterBy(column, value, event);
-	    },
-
-	    onFilterClear: function onFilterClear(column) {
-	        this.showMenu(null);
-
-	        if (this.filterValues) {
-	            this.filterValues[column.name] = '';
-	        }
-
-	        this.filterBy(column, '');(this.props.onClearFilter || emptyFn).apply(null, arguments);
-	    },
-
-	    getFilterButtons: function getFilterButtons(props) {
-
-	        var column = props.column;
-	        var factory = column.renderFilterButtons || this.props.renderFilterButtons;
-
-	        var result;
-
-	        if (factory) {
-	            result = factory(props);
-	        }
-
-	        if (result !== undefined) {
-	            return result;
-	        }
-
-	        var doFilter = this.onFilterClick.bind(this, column);
-	        var doClear = this.onFilterClear.bind(this, column);
-
-	        return React.createElement(
-	            'div',
-	            { style: { textAlign: 'center' } },
-	            React.createElement(
-	                'button',
-	                { onClick: doFilter },
-	                'Filter'
-	            ),
-	            React.createElement(
-	                'button',
-	                { onClick: doClear, style: { marginLeft: 5 } },
-	                'Clear'
-	            )
-	        );
-	    },
-
-	    filterMenuFactory: function filterMenuFactory(props) {
-
-	        var overStyle = {
-	            background: 'white',
-	            color: 'auto'
-	        };
-
-	        var column = props.column;
-	        var field = this.getFilterField(props);
-	        var buttons = this.getFilterButtons({
-	            column: column
-	        });
-
-	        var children = [field, buttons].map(function (x, index) {
-	            return React.createElement(
-	                ReactMenu.Item,
-	                { key: index },
-	                React.createElement(
-	                    ReactMenu.Item.Cell,
-	                    null,
-	                    x
-	                )
-	            );
-	        });
-
-	        props.itemOverStyle = props.itemOverStyle || overStyle;
-	        props.itemActiveStyle = props.itemActiveStyle || overStyle;
-	        props.onClick = props.onClick || stopPropagation;
-
-	        var factory = this.props.filterMenuFactory;
-	        var result;
-
-	        if (factory) {
-	            result = factory(props);
-
-	            if (result !== undefined) {
-	                return result;
-	            }
-	        }
-
-	        props.onMount = this.onFilterMenuMount;
-
-	        return React.createElement(
-	            ReactMenu,
-	            props,
-	            children
-	        );
-	    },
-
-	    onFilterMenuMount: function onFilterMenuMount(menu) {
-	        var dom = findDOMNode(menu);
-
-	        if (dom) {
-	            var input = dom.querySelector('input');
-
-	            if (input) {
-	                setTimeout(function () {
-	                    input.focus();
-	                }, 10);
-	            }
-	        }
-	    }
-	};
-
-/***/ },
-/* 306 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
 	if (!global.fetch && global.window) {
-	    __webpack_require__(307);
+	    __webpack_require__(306);
 	}
 
 	var fetch = global.fetch;
@@ -36081,7 +35816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 307 */
+/* 306 */
 /***/ function(module, exports) {
 
 	(function() {
