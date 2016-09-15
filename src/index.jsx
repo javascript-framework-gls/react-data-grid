@@ -210,32 +210,7 @@ module.exports = React.createClass({
 
             var prevIndex        = this.state.startIndex || 0
             var renderStartIndex = Math.ceil(scrollTop / props.rowHeight)
-
             state.startIndex = renderStartIndex
-
-            // var data = this.prepareData(props)
-
-            // if (renderStartIndex >= data.length){
-            //     renderStartIndex = 0
-            // }
-
-            // state.renderStartIndex = renderStartIndex
-
-            // var endIndex = this.getRenderEndIndex(props, state)
-
-            // if (endIndex > data.length){
-            //     renderStartIndex -= data.length - endIndex
-            //     renderStartIndex = Math.max(0, renderStartIndex)
-
-            //     state.renderStartIndex = renderStartIndex
-            // }
-
-            // // console.log('scroll!');
-            // var sign = signum(renderStartIndex - prevIndex)
-
-            // state.topOffset = -sign * Math.ceil(scrollTop - state.renderStartIndex * this.props.rowHeight)
-
-            // console.log(scrollTop, sign);
         } else {
             state.scrollTop = scrollTop
         }
@@ -389,7 +364,8 @@ module.exports = React.createClass({
 
       return FilterRowFactory({
         data: this.filterData,
-        columns: getVisibleColumns(props, state)
+        columns: getVisibleColumns(props, state),
+        scrollbarSize: props.scrollbarSize,
       });
     },
 

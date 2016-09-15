@@ -30,11 +30,16 @@ module.exports = React.createClass({
   render: function() {
     var props = this.prepareProps(this.props)
     var cells = props.columns
-                      .map(this.renderCell.bind(this, this.props))
+                      .map(this.renderCell.bind(this, this.props));
+    console.log(this.props.scrollbarSize);
+
+    var headerStyle = normalize({
+      paddingRight: this.props.scrollbarSize
+    });
 
     return (
-      <div className="z-table">
-        <div {...props}>
+      <div className="z-table" style={headerStyle}>
+        <div {...props} style={{ background: 'linear-gradient(to bottom, #f7f7f7 0%,#efefef 13%,#e6e6e6 100%)' }}>
           {cells}
         </div>
       </div>
@@ -62,14 +67,13 @@ module.exports = React.createClass({
         className="z-cell"
         style={this.prepareColumnStyle(column)}
       >
-        {column.name}
-        {/* <input
+        <input
           type="text"
-          style={{ width: '90%' }}
+          style={{ width: '95%', margin: 'auto', height: '80%' }}
           defaultValue={text}
           onChange={this.onFilterChange.bind(this, column)}
           onKeyUp={this.onFilterKeyUp.bind(this, column)}
-        /> */}
+        />
       </div>
     );
   },
@@ -110,9 +114,6 @@ module.exports = React.createClass({
   },
 
   prepareColumnStyle: function(column) {
-    return {
-      minWidth: column.minWidth,
-      width: column.width
-    };
+    return assign({}, column.sizeStyle, { height: 40 });
   }
 })
