@@ -34792,8 +34792,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var React = __webpack_require__(166);
 	var Region = __webpack_require__(170);
 	var assign = __webpack_require__(24);
@@ -34831,10 +34829,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      'div',
-	      { className: 'z-table', style: headerStyle },
+	      { className: 'z-filter', style: headerStyle },
 	      React.createElement(
 	        'div',
-	        _extends({}, props, { style: { background: 'linear-gradient(to bottom, #f7f7f7 0%,#efefef 13%,#e6e6e6 100%)' } }),
+	        { className: 'z-filter-row' },
 	        cells
 	      )
 	    );
@@ -34843,7 +34841,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  prepareProps: function prepareProps(thisProps) {
 	    var props = assign({}, thisProps);
 
-	    props.className = this.prepareClassName(props, this.state);
 	    props.style = this.prepareStyle(props);
 
 	    delete props.data;
@@ -34859,7 +34856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      'div',
 	      {
-	        className: 'z-cell',
+	        className: 'z-filter-cell',
 	        style: this.prepareColumnStyle(column)
 	      },
 	      React.createElement('input', {
@@ -34892,12 +34889,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.liveFilter) {
 	      this.filterBy(column, value);
 	    }
-	  },
-
-	  prepareClassName: function prepareClassName(props, state) {
-	    var className = props.className || '';
-	    className += ' z-row';
-	    return className;
 	  },
 
 	  prepareStyle: function prepareStyle(props) {
