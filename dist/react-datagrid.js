@@ -80,19 +80,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	var PropTypes = __webpack_require__(241);
 	var Wrapper = __webpack_require__(242);
 	var Header = __webpack_require__(253);
+	var FilterRow = __webpack_require__(292);
 	var WrapperFactory = _react2.default.createFactory(Wrapper);
 	var HeaderFactory = _react2.default.createFactory(Header);
-	var ResizeProxy = __webpack_require__(292);
+	var FilterRowFactory = _react2.default.createFactory(FilterRow);
+	var ResizeProxy = __webpack_require__(293);
 
 	var findIndexByName = __webpack_require__(288);
-	var group = __webpack_require__(293);
+	var group = __webpack_require__(294);
 
-	var slice = __webpack_require__(294);
-	var _getTableProps = __webpack_require__(295);
-	var getGroupedRows = __webpack_require__(300);
-	var renderMenu = __webpack_require__(296);
+	var slice = __webpack_require__(295);
+	var _getTableProps = __webpack_require__(296);
+	var getGroupedRows = __webpack_require__(301);
+	var renderMenu = __webpack_require__(297);
 
-	var preventDefault = __webpack_require__(301);
+	var preventDefault = __webpack_require__(302);
 
 	var isArray = Array.isArray;
 
@@ -143,7 +145,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    displayName: 'ReactDataGrid',
 
-	    mixins: [__webpack_require__(302), __webpack_require__(304)],
+	    mixins: [__webpack_require__(303), __webpack_require__(305)],
 
 	    propTypes: {
 	        loading: _react2.default.PropTypes.bool,
@@ -183,7 +185,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    },
 
-	    getDefaultProps: __webpack_require__(305),
+	    getDefaultProps: __webpack_require__(306),
 
 	    componentDidMount: function componentDidMount() {
 	        window.addEventListener('click', this.windowClickListener = this.onWindowClick);
@@ -265,32 +267,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var prevIndex = this.state.startIndex || 0;
 	            var renderStartIndex = Math.ceil(scrollTop / props.rowHeight);
-
 	            state.startIndex = renderStartIndex;
-
-	            // var data = this.prepareData(props)
-
-	            // if (renderStartIndex >= data.length){
-	            //     renderStartIndex = 0
-	            // }
-
-	            // state.renderStartIndex = renderStartIndex
-
-	            // var endIndex = this.getRenderEndIndex(props, state)
-
-	            // if (endIndex > data.length){
-	            //     renderStartIndex -= data.length - endIndex
-	            //     renderStartIndex = Math.max(0, renderStartIndex)
-
-	            //     state.renderStartIndex = renderStartIndex
-	            // }
-
-	            // // console.log('scroll!');
-	            // var sign = signum(renderStartIndex - prevIndex)
-
-	            // state.topOffset = -sign * Math.ceil(scrollTop - state.renderStartIndex * this.props.rowHeight)
-
-	            // console.log(scrollTop, sign);
 	        } else {
 	            state.scrollTop = scrollTop;
 	        }
@@ -430,6 +407,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	    },
 
+	    prepareFilterRow: function prepareFilterRow(props, state) {
+	        if (props.data.length === 0) {
+	            this.filterData = {};
+	        } else {
+	            this.filterData = assign({}, props.data[0]);
+	            for (var key in this.filterData) {
+	                this.filterData[key] = '';
+	            }
+	        }
+
+	        return FilterRowFactory({
+	            data: this.filterData,
+	            columns: getVisibleColumns(props, state),
+	            scrollbarSize: props.scrollbarSize
+	        });
+	    },
+
 	    prepareFooter: function prepareFooter(props, state) {
 	        return (props.footerFactory || _react2.default.DOM.div)({
 	            className: 'z-footer-wrapper'
@@ -464,6 +458,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.dataSource = props.dataSource;
 
 	        var header = this.prepareHeader(props, this.state);
+	        var filterRow = this.prepareFilterRow(props, this.state);
 	        var wrapper = this.prepareWrapper(props, this.state);
 	        var footer = this.prepareFooter(props, this.state);
 	        var resizeProxy = this.prepareResizeProxy(props, this.state);
@@ -527,6 +522,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'div',
 	                { className: 'z-inner' },
 	                header,
+	                filterRow,
 	                wrapper,
 	                footer,
 	                resizeProxy
@@ -34796,6 +34792,132 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var React = __webpack_require__(166);
+	var Region = __webpack_require__(170);
+	var assign = __webpack_require__(24);
+	var normalize = __webpack_require__(182);
+
+	module.exports = React.createClass({
+
+	  displayName: 'ReactDataGrid.FilterRow',
+
+	  propTypes: {
+	    data: React.PropTypes.object,
+	    columns: React.PropTypes.array,
+	    index: React.PropTypes.number
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      defaultStyle: {}
+	    };
+	  },
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      mouseOver: false
+	    };
+	  },
+
+	  render: function render() {
+	    var props = this.prepareProps(this.props);
+	    var cells = props.columns.map(this.renderCell.bind(this, this.props));
+
+	    var headerStyle = normalize({
+	      paddingRight: this.props.scrollbarSize
+	    });
+
+	    return React.createElement(
+	      'div',
+	      { className: 'z-table', style: headerStyle },
+	      React.createElement(
+	        'div',
+	        _extends({}, props, { style: { background: 'linear-gradient(to bottom, #f7f7f7 0%,#efefef 13%,#e6e6e6 100%)' } }),
+	        cells
+	      )
+	    );
+	  },
+
+	  prepareProps: function prepareProps(thisProps) {
+	    var props = assign({}, thisProps);
+
+	    props.className = this.prepareClassName(props, this.state);
+	    props.style = this.prepareStyle(props);
+
+	    delete props.data;
+	    delete props.cellPadding;
+
+	    return props;
+	  },
+
+	  renderCell: function renderCell(props, column, index) {
+
+	    var text = props.data[column.name];
+
+	    return React.createElement(
+	      'div',
+	      {
+	        className: 'z-cell',
+	        style: this.prepareColumnStyle(column)
+	      },
+	      React.createElement('input', {
+	        type: 'text',
+	        style: { width: '95%', margin: 'auto', height: '80%' },
+	        defaultValue: text,
+	        onChange: this.onFilterChange.bind(this, column),
+	        onKeyUp: this.onFilterKeyUp.bind(this, column)
+	      })
+	    );
+	  },
+
+	  onFilterKeyUp: function onFilterKeyUp(column, event) {
+	    if (event.key == 'Enter') {
+	      this.onFilterClick(column, event);
+	    }
+	  },
+
+	  onFilterChange: function onFilterChange(column, eventOrValue) {
+
+	    var value = eventOrValue;
+
+	    if (eventOrValue && eventOrValue.target) {
+	      value = eventOrValue.target.value;
+	    }
+
+	    this.filterValues = this.filterValues || {};
+	    this.filterValues[column.name] = value;
+
+	    if (this.props.liveFilter) {
+	      this.filterBy(column, value);
+	    }
+	  },
+
+	  prepareClassName: function prepareClassName(props, state) {
+	    var className = props.className || '';
+	    className += ' z-row';
+	    return className;
+	  },
+
+	  prepareStyle: function prepareStyle(props) {
+	    var style = assign({}, props.defaultStyle, props.style);
+	    style.height = props.rowHeight;
+	    style.minWidth = props.minWidth;
+	    return style;
+	  },
+
+	  prepareColumnStyle: function prepareColumnStyle(column) {
+	    return assign({}, column.sizeStyle, { height: 40 });
+	  }
+	});
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var React = __webpack_require__(166);
 	var assign = __webpack_require__(24);
 
@@ -34831,7 +34953,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34942,7 +35064,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = groupByFields;
 
 /***/ },
-/* 294 */
+/* 295 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34959,16 +35081,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = slice;
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(166);
-	var renderMenu = __webpack_require__(296);
-	var renderRow = __webpack_require__(297);
-	var tableStyle = __webpack_require__(299);
-	var slice = __webpack_require__(294);
+	var renderMenu = __webpack_require__(297);
+	var renderRow = __webpack_require__(298);
+	var tableStyle = __webpack_require__(300);
+	var slice = __webpack_require__(295);
 	var LoadMask = __webpack_require__(167);
 
 	function getData(props) {
@@ -34998,7 +35120,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35015,7 +35137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35025,7 +35147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var assign = __webpack_require__(24);
 	var React = __webpack_require__(166);
 
-	var Row = __webpack_require__(298);
+	var Row = __webpack_require__(299);
 	var RowFactory = React.createFactory(Row);
 
 	var renderCell = Row.prototype.renderCell;
@@ -35140,7 +35262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35351,7 +35473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35368,18 +35490,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(166);
 
-	var Row = __webpack_require__(298);
+	var Row = __webpack_require__(299);
 	var Cell = __webpack_require__(289);
 	var CellFactory = React.createFactory(Cell);
 
-	var renderRow = __webpack_require__(297);
+	var renderRow = __webpack_require__(298);
 
 	function renderData(props, data, depth) {
 
@@ -35451,7 +35573,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35461,7 +35583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35469,7 +35591,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	var assign = __webpack_require__(24);
-	var getSelected = __webpack_require__(303);
+	var getSelected = __webpack_require__(304);
 
 	var hasOwn = function hasOwn(obj, prop) {
 	    return Object.prototype.hasOwnProperty.call(obj, prop);
@@ -35693,7 +35815,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35705,7 +35827,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35901,13 +36023,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
 	if (!global.fetch && global.window) {
-	    __webpack_require__(306);
+	    __webpack_require__(307);
 	}
 
 	var fetch = global.fetch;
@@ -35968,7 +36090,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports) {
 
 	(function() {

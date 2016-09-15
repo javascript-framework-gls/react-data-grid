@@ -31,8 +31,7 @@ module.exports = React.createClass({
     var props = this.prepareProps(this.props)
     var cells = props.columns
                       .map(this.renderCell.bind(this, this.props));
-    console.log(this.props.scrollbarSize);
-
+    
     var headerStyle = normalize({
       paddingRight: this.props.scrollbarSize
     });
