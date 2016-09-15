@@ -32,7 +32,13 @@ module.exports = React.createClass({
     var cells = props.columns
                       .map(this.renderCell.bind(this, this.props))
 
-    return <div {...props}>{cells}</div>
+    return (
+      <div className="z-table">
+        <div {...props}>
+          {cells}
+        </div>
+      </div>
+    )
   },
 
   prepareProps: function(thisProps){
@@ -56,13 +62,14 @@ module.exports = React.createClass({
         className="z-cell"
         style={this.prepareColumnStyle(column)}
       >
-        <input
+        {column.name}
+        {/* <input
           type="text"
           style={{ width: '90%' }}
           defaultValue={text}
           onChange={this.onFilterChange.bind(this, column)}
           onKeyUp={this.onFilterKeyUp.bind(this, column)}
-        />
+        /> */}
       </div>
     );
   },
