@@ -16,8 +16,10 @@ var Column = require('./models/Column')
 var PropTypes      = require('./PropTypes')
 var Wrapper        = require('./Wrapper')
 var Header         = require('./Header')
+var FilterRow      = require('./FilterRow')
 var WrapperFactory = React.createFactory(Wrapper)
 var HeaderFactory  = React.createFactory(Header)
+var FilterRowFactory = React.createFactory(FilterRow)
 var ResizeProxy = require('./ResizeProxy')
 
 var findIndexByName = require('./utils/findIndexByName')
@@ -375,6 +377,22 @@ module.exports = React.createClass({
         })
     },
 
+    prepareFilterRow: function(props, state) {
+      if (props.data.length === 0) {
+        this.filterData = {};
+      } else {
+        this.filterData = assign({}, props.data[0]);
+        for(var key in this.filterData) {
+          this.filterData[key] = '';
+        }
+      }
+
+      return FilterRowFactory({
+        data: this.filterData,
+        columns: getVisibleColumns(props, state)
+      });
+    },
+
     prepareFooter: function(props, state){
         return (props.footerFactory || React.DOM.div)({
             className: 'z-footer-wrapper'
@@ -409,6 +427,7 @@ module.exports = React.createClass({
         this.dataSource = props.dataSource
 
         var header      = this.prepareHeader(props, this.state)
+        var filterRow   = this.prepareFilterRow(props, this.state)
         var wrapper     = this.prepareWrapper(props, this.state)
         var footer      = this.prepareFooter(props, this.state)
         var resizeProxy = this.prepareResizeProxy(props, this.state)
@@ -469,6 +488,7 @@ module.exports = React.createClass({
                 {topToolbar}
                 <div className="z-inner">
                     {header}
+                    {filterRow}
                     {wrapper}
                     {footer}
                     {resizeProxy}

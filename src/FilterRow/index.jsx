@@ -4,10 +4,6 @@ var React       = require('react')
 var Region      = require('region')
 var assign      = require('object-assign')
 var normalize = require('react-style-normalizer')
-var Cell        = require('../Cell')
-var CellFactory = React.createFactory(Cell)
-var ReactMenu = require('react-menus')
-var ReactMenuFactory = React.createFactory(ReactMenu)
 
 module.exports = React.createClass({
 
@@ -51,49 +47,51 @@ module.exports = React.createClass({
     return props
   },
 
-  renderCell: function(props, column, index){
+  renderCell: function(props, column, index) {
 
     var text = props.data[column.name]
-    var columns = props.columns
 
-    var cellProps = {
-      style      : column.style,
-      className  : column.className,
+    return (
+      <div
+        className="z-cell"
+        style={this.prepareColumnStyle(column)}
+      >
+        <input
+          type="text"
+          style={{ width: '90%' }}
+          defaultValue={text}
+          onChange={this.onFilterChange.bind(this, column)}
+          onKeyUp={this.onFilterKeyUp.bind(this, column)}
+        />
+      </div>
+    );
+  },
 
-      key        : column.name,
-      name       : column.name,
+  onFilterKeyUp: function(column, event){
+      if (event.key == 'Enter'){
+          this.onFilterClick(column, event)
+      }
+  },
 
-      data       : props.data,
-      columns    : columns,
-      index      : index,
-      rowIndex   : props.index,
-      textPadding: props.cellPadding,
-      renderCell : props.renderCell,
-      renderText : props.renderText
-    }
+  onFilterChange: function(column, eventOrValue){
 
-    if (typeof column.render == 'function'){
-        text = column.render(text, props.data, cellProps)
-    }
+      var value = eventOrValue
 
-    cellProps.text = text
+      if (eventOrValue && eventOrValue.target){
+          value = eventOrValue.target.value
+      }
 
-    var result
+      this.filterValues = this.filterValues || {}
+      this.filterValues[column.name] = value
 
-    if (props.cellFactory){
-      result = props.cellFactory(cellProps)
-    }
-
-    if (result === undefined){
-      result = CellFactory(cellProps)
-    }
-
-    return result
+      if (this.props.liveFilter){
+          this.filterBy(column, value)
+      }
   },
 
   prepareClassName: function(props, state){
       var className = props.className || ''
-      className += ' z-filter-row'
+      className += ' z-row'
       return className
   },
 
@@ -102,5 +100,12 @@ module.exports = React.createClass({
     style.height   = props.rowHeight
     style.minWidth = props.minWidth
     return style
+  },
+
+  prepareColumnStyle: function(column) {
+    return {
+      minWidth: column.minWidth,
+      width: column.width
+    };
   }
 })
