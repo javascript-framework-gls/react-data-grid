@@ -130,33 +130,14 @@ module.exports = React.createClass({
 
     getDefaultProps: require('./getDefaultProps'),
 
-    componentDidMount: function(){
+    componentDidMount: function() {
         window.addEventListener('click', this.windowClickListener = this.onWindowClick)
-        // this.checkRowHeight(this.props)
     },
 
     componentWillUnmount: function(){
         this.scroller = null
         window.removeEventListener('click', this.windowClickListener)
     },
-
-    // checkRowHeight: function(props) {
-    //     if (this.isVirtualRendering(props)){
-
-    //         //if virtual rendering and no rowHeight specifed, we use
-    //         var row = this.findRowById(SIZING_ID)
-    //         var config = {}
-
-    //         if (row){
-    //             this.setState({
-    //                 rowHeight: config.rowHeight = row.offsetHeight
-    //             })
-    //         }
-
-    //         //this ensures rows are kept in view
-    //         this.updateStartIndex(props, undefined, config)
-    //     }
-    // },
 
     onWindowClick: function(event){
         if (this.state.menu){
@@ -365,6 +346,7 @@ module.exports = React.createClass({
       return FilterRowFactory({
         data: this.filterData,
         columns: getVisibleColumns(props, state),
+        onFilter: props.onFilter,
         scrollbarSize: props.scrollbarSize,
       });
     },
@@ -537,27 +519,6 @@ module.exports = React.createClass({
             scrollTop = startIndex * props.rowHeight
         }
 
-        // var topLoader
-        // var bottomLoader
-        // var loadersSize = 0
-
-        // if (props.virtualPagination){
-
-        //     if (props.page < props.maxPage){
-        //         loadersSize += 2 * props.rowHeight
-        //         bottomLoader = <div style={{height: 2 * props.rowHeight, position: 'relative', width: props.columnFlexCount? 'calc(100% - ' + props.scrollbarSize + ')': props.minRowWidth - props.scrollbarSize}}>
-        //             <LoadMask visible={true} style={{background: 'rgba(128, 128, 128, 0.17)'}}/>
-        //         </div>
-        //     }
-
-        //     if (props.page > props.minPage){
-        //         loadersSize += 2 * props.rowHeight
-        //         topLoader = <div style={{height: 2 * props.rowHeight, position: 'relative', width: props.columnFlexCount? 'calc(100% - ' + props.scrollbarSize + ')': props.minRowWidth - props.scrollbarSize}}>
-        //             <LoadMask visible={true} style={{background: 'rgba(128, 128, 128, 0.17)'}}/>
-        //         </div>
-        //     }
-        // }
-
         var wrapperProps = assign({
             ref             : 'wrapper',
             onMount         : this.onWrapperMount,
@@ -578,17 +539,6 @@ module.exports = React.createClass({
             menu            : state.menu,
             menuColumn      : state.menuColumn,
             showMenu        : this.showMenu,
-
-            // cellFactory     : props.cellFactory,
-            // rowStyle        : props.rowStyle,
-            // rowClassName    : props.rowClassName,
-            // rowContextMenu  : props.rowContextMenu,
-
-            // topLoader: topLoader,
-            // bottomLoader: bottomLoader,
-            // loadersSize: loadersSize,
-
-            // onRowClick: this.handleRowClick,
             selected        : props.selected == null?
                 state.defaultSelected:
                 props.selected

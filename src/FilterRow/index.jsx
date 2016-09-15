@@ -70,32 +70,19 @@ module.exports = React.createClass({
           style={{ width: '95%', margin: 'auto', height: '80%' }}
           defaultValue={text}
           onChange={this.onFilterChange.bind(this, column)}
-          onKeyUp={this.onFilterKeyUp.bind(this, column)}
         />
       </div>
     );
   },
 
-  onFilterKeyUp: function(column, event){
-      if (event.key == 'Enter'){
-          this.onFilterClick(column, event)
-      }
+  onFilterChange: function(column, event) {
+      this.filterValues = this.filterValues || {};
+      this.filterValues[column.name] = event.target.value;
+      this.filterBy(column, event.target.value);
   },
 
-  onFilterChange: function(column, eventOrValue){
-
-      var value = eventOrValue
-
-      if (eventOrValue && eventOrValue.target){
-          value = eventOrValue.target.value
-      }
-
-      this.filterValues = this.filterValues || {}
-      this.filterValues[column.name] = value
-
-      if (this.props.liveFilter){
-          this.filterBy(column, value)
-      }
+  filterBy: function(column, value, event) {
+      this.props.onFilter(column, value, this.filterValues, event)
   },
 
   prepareStyle: function(props) {
