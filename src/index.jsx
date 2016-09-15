@@ -86,8 +86,7 @@ module.exports = React.createClass({
     displayName: 'ReactDataGrid',
 
     mixins: [
-        require('./RowSelect'),
-        require('./ColumnFilter')
+        require('./RowSelect')
     ],
 
     propTypes: {
@@ -150,8 +149,16 @@ module.exports = React.createClass({
 
     getInitialState: function(){
 
-        var props = this.props
-        var defaultSelected = props.defaultSelected
+        var props = this.props;
+        var defaultSelected = props.defaultSelected;
+
+        var filters = {};
+        if (props.dataSource.length > 0) {
+          filters = assign({}, props.dataSource[0]);
+          for(var key in filters) {
+            filters[key] = '';
+          }
+        }
 
         return {
             startIndex: 0,
@@ -161,8 +168,9 @@ module.exports = React.createClass({
             defaultSelected: defaultSelected,
             visibility: {},
             defaultPageSize: props.defaultPageSize,
-            defaultPage : props.defaultPage
-        }
+            defaultPage : props.defaultPage,
+            filters: filters,
+        };
     },
 
     updateStartIndex: function() {
@@ -187,8 +195,7 @@ module.exports = React.createClass({
 
         this.scrollTop = scrollTop
 
-        if (props.virtualRendering){
-
+        if (props.virtualRendering) {
             var prevIndex        = this.state.startIndex || 0
             var renderStartIndex = Math.ceil(scrollTop / props.rowHeight)
             state.startIndex = renderStartIndex
@@ -199,7 +206,7 @@ module.exports = React.createClass({
         this.setState(state)
     },
 
-    getRenderEndIndex: function(props, state){
+    getRenderEndIndex: function(props, state) {
         var startIndex = state.startIndex
         var rowCount   = props.rowCountBuffer
         var length     = props.data.length
@@ -334,19 +341,10 @@ module.exports = React.createClass({
     },
 
     prepareFilterRow: function(props, state) {
-      if (props.data.length === 0) {
-        this.filterData = {};
-      } else {
-        this.filterData = assign({}, props.data[0]);
-        for(var key in this.filterData) {
-          this.filterData[key] = '';
-        }
-      }
-
       return FilterRowFactory({
-        data: this.filterData,
+        data: this.state.filters,
         columns: getVisibleColumns(props, state),
-        onFilter: props.onFilter,
+        onFilter: this.handleFilterChange,
         scrollbarSize: props.scrollbarSize,
       });
     },
@@ -471,8 +469,12 @@ module.exports = React.createClass({
         }
 
         table = getTableProps.call(this, props, rows)
-
         return table
+    },
+
+    handleFilterChange: function(column, value, event) {
+      this.state.filters[column.name] = value;
+      this.props.onFilter(column, value, this.state.filters, event);
     },
 
     handleVerticalScrollOverflow: function(sign, scrollTop) {
@@ -622,13 +624,7 @@ module.exports = React.createClass({
             this.state.defaultPage:
             props.page
     },
-    /**
-     * Returns true if in the current configuration,
-     * the datagrid should load its data remotely.
-     *
-     * @param  {Object}  [props] Optional. If not given, this.props will be used
-     * @return {Boolean}
-     */
+
     isRemoteDataSource: function(props) {
         props = props || this.props
 

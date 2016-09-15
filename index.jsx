@@ -56,7 +56,7 @@ var columns = [
 
 var ROW_HEIGHT = 31
 var LEN = 2000
-var SORT_INFO = [{name: 'country', dir: 'asc'}]//[ { name: 'id', dir: 'asc'} ]
+var SORT_INFO = [{name: 'country', dir: 'asc'}]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN);
 var originalData = data.slice();

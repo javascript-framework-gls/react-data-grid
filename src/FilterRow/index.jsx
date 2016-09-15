@@ -68,7 +68,7 @@ module.exports = React.createClass({
         <input
           type="text"
           style={{ width: '95%', margin: 'auto', height: '80%' }}
-          defaultValue={text}
+          value={text}
           onChange={this.onFilterChange.bind(this, column)}
         />
       </div>
@@ -76,13 +76,7 @@ module.exports = React.createClass({
   },
 
   onFilterChange: function(column, event) {
-      this.filterValues = this.filterValues || {};
-      this.filterValues[column.name] = event.target.value;
-      this.filterBy(column, event.target.value);
-  },
-
-  filterBy: function(column, value, event) {
-      this.props.onFilter(column, value, this.filterValues, event)
+      this.props.onFilter(column, event.target.value, event);
   },
 
   prepareStyle: function(props) {

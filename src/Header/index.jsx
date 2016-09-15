@@ -185,12 +185,14 @@ module.exports = React.createClass({
                                 <polygon points="0,0 1,2 1,4 2,4 2,2 3,0 " style={{fill: props.filterIconColor,strokeWidth:0, fillRule: 'nonZero'}} />
                             </svg>
 
-        var filter  = column.filterable?
-                        <div className="z-show-filter" onMouseUp={this.handleFilterMouseUp.bind(this, column)}>
-                            {filterIcon}
-                        </div>
-                        :
-                        null
+        var filter  = null;
+
+        // column.filterable?
+        //                 <div className="z-show-filter" onMouseUp={this.handleFilterMouseUp.bind(this, column)}>
+        //                     {filterIcon}
+        //                 </div>
+        //                 :
+        //                 null
 
         var resizer = column.resizable?
                         <span className="z-column-resize" onMouseDown={this.handleResizeMouseDown.bind(this, column)} />:
