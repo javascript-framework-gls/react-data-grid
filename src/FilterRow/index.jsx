@@ -62,6 +62,7 @@ module.exports = React.createClass({
 
     return (
       <div
+        key={column.name}
         className="z-filter-cell"
         style={this.prepareColumnStyle(column)}
       >
