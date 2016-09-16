@@ -34806,6 +34806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      'div',
 	      {
+	        key: column.name,
 	        className: 'z-filter-cell',
 	        style: this.prepareColumnStyle(column)
 	      },
